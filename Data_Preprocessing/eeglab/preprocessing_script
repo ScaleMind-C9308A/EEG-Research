@@ -1,0 +1,21 @@
+#!/bin/bash
+preprocessed_dir=/d/Data/CVPR2021-02785/CVPR2021-02785/preprocessed/
+
+mkdir -p $preprocessed_dir
+for subject in 1; do
+    mkdir -p $preprocessed_dir/imagenet40-1000-$subject
+done
+
+# cd /d/Data/CVPR2021-02785/CVPR2021-02785/code/TeamX_code
+
+matlab -nosplash -nodesktop -r "run('D:\Data\CVPR2021-02785\CVPR2021-02785\code\TeamX_code\preprocessing.m');"
+# for subject in 1; do
+#     python split_even.py\
+#            -iv image\ # str:image/video
+# 	   -s big\ # str: size(small/big)
+# 	   -p $name-$subject\ #str: dataset-path
+# 	   -n $dir-$subject.pth\ #str: name
+#            -stimuli image.txt\ #str: stimuli
+# 	   -f 5
+# done
+# rm -rf /tmp/imagenet40-1000
