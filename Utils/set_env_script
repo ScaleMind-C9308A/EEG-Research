@@ -1,0 +1,2 @@
+#!/bin/bash
+EEG_SEGMENTS_DIR=/d/Data/CVPR2021-02785/CVPR2021-02785/preprocessed/eeg_segments_matlab
