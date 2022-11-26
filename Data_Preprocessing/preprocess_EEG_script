@@ -1,0 +1,12 @@
+#!/bin/bash
+source ../Utils/set_env_script
+preprocessed_dir=/d/Data/CVPR2021-02785/CVPR2021-02785/preprocessed/
+
+mkdir -p $preprocessed_dir
+for subject in 1; do
+    mkdir -p $preprocessed_dir/imagenet40-1000-$subject
+done
+
+# cd /d/Data/CVPR2021-02785/CVPR2021-02785/code/TeamX_code
+
+matlab -nosplash -nodesktop -r "run('D:\Data\CVPR2021-02785\CVPR2021-02785\code\TeamX_code\preprocessing.m');"
