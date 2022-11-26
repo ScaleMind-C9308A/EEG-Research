@@ -1,2 +1,5 @@
 #!/bin/bash
-EEG_SEGMENTS_DIR=/d/Data/CVPR2021-02785/CVPR2021-02785/preprocessed/eeg_segments_matlab
+EEG_SEGMENTS_DIR=/d/Data/CVPR2021-02785/CVPR2021-02785/preprocessed/eeg_segments_matlab/
+STIMULI_DIR=/d/Data/CVPR2021-02785/CVPR2021-02785/stimuli/
+STIMULI_TEXT=../Data_Preprocessing/image.txt
+TORCH_MODEL_DIR=/d/Data/CVPR2021-02785/CVPR2021-02785/preprocessed/torch_models/
