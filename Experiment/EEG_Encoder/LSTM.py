@@ -34,7 +34,8 @@ class classifier_LSTM(nn.Module):
             self.output2 = nn.Linear(lstm_size, output2_size)
 
     def forward(self, x):
-        print(x.size())
+        # Change order of axis from (n, 96, 512) to (n, 512, 96)
+        x = torch.permute(x, (0, 2, 1))
         batch_size = x.size(0)
         lstm_init = (torch.zeros(self.lstm_layers, batch_size, self.lstm_size),
                      torch.zeros(self.lstm_layers, batch_size, self.lstm_size))
