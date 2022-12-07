@@ -72,6 +72,10 @@ def net_trainer(
                         optimizer.zero_grad()
                         loss.backward()
                         optimizer.step()
+                        # print statistics
+                        if (i+1) % 1000 == 0:
+                            print(f"Epoch {epoch}, batch {i+1}: Loss={losses[split]:.3f}")
+                            losses["split"] = 0
                     else:
                         with torch.no_grad():
                             # Forward
