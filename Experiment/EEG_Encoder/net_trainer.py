@@ -73,8 +73,10 @@ def net_trainer(
                         loss.backward()
                         optimizer.step()
 
+
                         if ((i+1)%1000 ==0):
                             print(f"Batch {i+1}: Loss={loss.item()}; accuracy={corrects[split]/counts[split]}")
+
                     else:
                         with torch.no_grad():
                             # Forward
