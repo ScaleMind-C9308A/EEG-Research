@@ -1,5 +1,7 @@
 #!/bin/bash
-EEG_SEGMENTS_DIR=/d/Data/CVPR2021-02785/CVPR2021-02785/preprocessed/eeg_segments_matlab/
-STIMULI_DIR=/d/Data/CVPR2021-02785/CVPR2021-02785/stimuli/
-STIMULI_TEXT=../Data_Preprocessing/image.txt
-TORCH_MODEL_DIR=/d/Data/CVPR2021-02785/CVPR2021-02785/preprocessed/torch_models/
+CVPR_DIR="/media/titan/AI Research/Data/CVPR2021-02785/CVPR2021-02785"
+EEG_SEGMENTS_DIR=$CVPR_DIR/preprocessed/eeg_segments_matlab/imagenet40-1000-1
+STIMULI_DIR=$CVPR_DIR/stimuli/
+STIMULI_TEXT=image.txt
+TORCH_MODEL_DIR=$CVPR_DIR/preprocessed/torch_models/
+TORCH_MODEL_FILE=$TORCH_MODEL_DIR/imagenet40-1000-1.pth

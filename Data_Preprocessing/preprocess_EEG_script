@@ -1,12 +1,13 @@
 #!/bin/bash
 source ../Utils/set_env_script
-preprocessed_dir=/d/Data/CVPR2021-02785/CVPR2021-02785/preprocessed/
 
-mkdir -p $preprocessed_dir
-for subject in 1; do
-    mkdir -p $preprocessed_dir/imagenet40-1000-$subject
-done
+# mkdir -p $preprocessed_dir
+# for subject in 1; do
+#     mkdir -p $preprocessed_dir/imagenet40-1000-$subject
+# done
 
 # cd /d/Data/CVPR2021-02785/CVPR2021-02785/code/TeamX_code
 
-matlab -nosplash -nodesktop -r "run('D:\Data\CVPR2021-02785\CVPR2021-02785\code\TeamX_code\preprocessing.m');"
+# matlab -nosplash -nodesktop -r "run('D:\Data\CVPR2021-02785\CVPR2021-02785\code\TeamX_code\preprocessing.m');"
+
+python split_even_without_load_eeg.py -iv image -s big -in "$EEG_SEGMENTS_DIR" -out "$TORCH_MODEL_FILE" -stimuli "$STIMULI_TEXT" -f 5
