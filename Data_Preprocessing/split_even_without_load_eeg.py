@@ -123,27 +123,28 @@ for f in fileList:
     if args.iv=="video":
         c = f.split("-")[0]
     name = f.split(".")[0]
-    tmpdata = sio.loadmat(input_path+"/"+f)
-    tmpdata = tmpdata["eeg"]
-    # size(tmpdata.eeg) = (channels, sampling_rate*0.5)
-    # convert eeg data into pytorch FloatTensor
-    tmpdata = torch.from_numpy(tmpdata).type(torch.FloatTensor)
-    if args.size=="small":
-        tmplabel = int(label[name])
-    if args.size=="big":
-        tmplabel = class_to_idx[name.split("_")[0]]
-    LabelCVPR.append(tmplabel)
-    tmpDic = {"eeg": tmpdata, "label": tmplabel, "image": stimuli.index(name)}
-    DataCVPR.append(tmpDic)
+    # tmpdata = sio.loadmat(input_path+"/"+f)
+    # tmpdata = tmpdata["eeg"]
+    # # size(tmpdata.eeg) = (channels, sampling_rate*0.5)
+    # # convert eeg data into pytorch FloatTensor
+    # tmpdata = torch.from_numpy(tmpdata).type(torch.FloatTensor)
+    # if args.size=="small":
+    #     tmplabel = int(label[name])
+    # if args.size=="big":
+    #     tmplabel = class_to_idx[name.split("_")[0]]
+    # LabelCVPR.append(tmplabel)
+    # tmpDic = {"eeg": tmpdata, "label": tmplabel, "image": stimuli.index(name)}
+    # DataCVPR.append(tmpDic)
     if c not in classes_dict:
         classes_dict[c] = [count]
     else:
         classes_dict[c].append(count)
     count += 1
 
-mydict = {"dataset": DataCVPR, "labels": LabelCVPR, "images": stimuli}
-output_path = args.output_path
-torch.save(mydict, output_path)
+# mydict = {"dataset": DataCVPR, "labels": LabelCVPR, "images": stimuli}
+# output_path = args.output_path
+# torch.save(mydict, output_path)
+
 
 ###################################################
 # (2) torch model of 5-fold cross-validation splits
@@ -151,7 +152,6 @@ torch.save(mydict, output_path)
 split = []
 
 length = len(fileList)
-print("Length: ", length)
 fold_num = args.fold
 
 if args.iv=="image":
@@ -160,13 +160,18 @@ if args.iv=="image":
 if args.iv=="video":
     number_of_classes = 12
 
+print("Classes dict length: ", len(classes_dict))
 for k, v in classes_dict.items():    
-    classes_dict[k] = random.shuffle(v)
+    random.shuffle(v) # Shuffle v in-place, return None
+    classes_dict[k] = v
 
-s = length/number_of_classes # samples_per_class
+s = int(length/number_of_classes) # samples_per_class
+s_fold = int(s/fold_num) # samples_per_class_per_fold
+half_s_fold = int(s_fold/2)
+print("Length of file list: ", length)
+print('Number of folds: ', fold_num)
 print('Sample per class: ', s)
-s_fold = s/fold_num # samples_per_class_per_fold
-half_s_fold = s_fold/2
+print('Sample per class per fold: ', s_fold)
 
 for i in range(fold_num):
     # Example: 5 folds => s_fold = 200
@@ -181,6 +186,7 @@ for i in range(fold_num):
     subsample2_idx =  [k for k
                    in range(i*s_fold+half_s_fold, (i+1)*s_fold)]
     for k, v in classes_dict.items():
+        print(f"Length of elements in class {k} is: {len(v)}")
         for j in sample_idx:
             if j in subsample1_idx:
                 spliti["val"].append(v[j]) # length=4000
