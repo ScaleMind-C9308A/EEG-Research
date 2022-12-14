@@ -8,13 +8,14 @@ class EEGDataset:
         # Load EEG signals
         loaded = torch.load(input_path)
         self.data = loaded["dataset"]
+        self.labels = loaded["labels"]
         self.classifier = classifier
         self.size = len(self.data) # 40000
     def __getitem__(self, i):
         # Get EEG 
         eeg = self.data[i]["eeg"]
         # Get label
-        label = self.data[i]["label"]
+        label = self.labels[i]
         return eeg, label
     def __len__(self):
         return self.size

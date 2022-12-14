@@ -131,9 +131,9 @@ for f in fileList:
     if args.size=="small":
         tmplabel = int(label[name])
     if args.size=="big":
-        tmplabel = class_to_idx[name.split("_")[0]]
+        tmplabel = class_to_idx[c]
     LabelCVPR.append(tmplabel)
-    tmpDic = {"eeg": tmpdata, "label": tmplabel, "image": stimuli.index(name)}
+    tmpDic = {"eeg": tmpdata, "class": c, "label": tmplabel, "image": stimuli.index(name)}
     DataCVPR.append(tmpDic)
     if c not in classes_dict:
         classes_dict[c] = [count]
@@ -151,7 +151,6 @@ torch.save(mydict, output_path)
 split = []
 
 length = len(fileList)
-print("Length: ", length)
 fold_num = args.fold
 
 if args.iv=="image":
@@ -160,13 +159,18 @@ if args.iv=="image":
 if args.iv=="video":
     number_of_classes = 12
 
+print("Classes dict length: ", len(classes_dict))
 for k, v in classes_dict.items():    
-    classes_dict[k] = random.shuffle(v)
+    random.shuffle(v) # Shuffle v in-place, return None
+    classes_dict[k] = v
 
-s = length/number_of_classes # samples_per_class
+s = int(length/number_of_classes) # samples_per_class
+s_fold = int(s/fold_num) # samples_per_class_per_fold
+half_s_fold = int(s_fold/2)
+print("Length of file list: ", length)
+print('Number of folds: ', fold_num)
 print('Sample per class: ', s)
-s_fold = s/fold_num # samples_per_class_per_fold
-half_s_fold = s_fold/2
+print('Sample per class per fold: ', s_fold)
 
 for i in range(fold_num):
     # Example: 5 folds => s_fold = 200
@@ -181,6 +185,7 @@ for i in range(fold_num):
     subsample2_idx =  [k for k
                    in range(i*s_fold+half_s_fold, (i+1)*s_fold)]
     for k, v in classes_dict.items():
+        print(f"Class {k}, label of class: {class_to_idx[k]}") if i==0 else None
         for j in sample_idx:
             if j in subsample1_idx:
                 spliti["val"].append(v[j]) # length=4000
@@ -190,6 +195,12 @@ for i in range(fold_num):
                 spliti["train"].append(v[j]) #length=32000
     split.append(spliti)
 
+print("Indexes of the 10 first index of val, fold 0")
+for i in range(10):
+    idx = split[0]["val"][i]
+    print("Index: ", idx)
+    print("Corresponding label: ", LabelCVPR[idx])
+
 mydict = {"splits": split}
-dataset_name = args.output_path.split(".")[0]+"_split.pth"
+dataset_name = args.output_path.split(".")[0]+"_splits.pth"
 torch.save(mydict, dataset_name)

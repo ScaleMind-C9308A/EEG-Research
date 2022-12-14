@@ -130,9 +130,9 @@ for f in fileList:
     # tmpdata = torch.from_numpy(tmpdata).type(torch.FloatTensor)
     # if args.size=="small":
     #     tmplabel = int(label[name])
-    # if args.size=="big":
-    #     tmplabel = class_to_idx[name.split("_")[0]]
-    # LabelCVPR.append(tmplabel)
+    if args.size=="big":
+        tmplabel = class_to_idx[name.split("_")[0]]
+    LabelCVPR.append(tmplabel)
     # tmpDic = {"eeg": tmpdata, "label": tmplabel, "image": stimuli.index(name)}
     # DataCVPR.append(tmpDic)
     if c not in classes_dict:
@@ -174,6 +174,7 @@ print('Sample per class: ', s)
 print('Sample per class per fold: ', s_fold)
 
 for i in range(fold_num):
+    print("FOLD ", i+1)
     # Example: 5 folds => s_fold = 200
     # Fold 0: 
     # subsample1_idx = range(0,100)
@@ -186,7 +187,7 @@ for i in range(fold_num):
     subsample2_idx =  [k for k
                    in range(i*s_fold+half_s_fold, (i+1)*s_fold)]
     for k, v in classes_dict.items():
-        print(f"Length of elements in class {k} is: {len(v)}")
+        print(f"Class {k}, label of class: {class_to_idx[k]}") if i==0 else None
         for j in sample_idx:
             if j in subsample1_idx:
                 spliti["val"].append(v[j]) # length=4000
@@ -194,8 +195,17 @@ for i in range(fold_num):
                 spliti["test"].append(v[j]) #length=4000
             else:
                 spliti["train"].append(v[j]) #length=32000
+    random.shuffle(spliti["val"])
+    random.shuffle(spliti["test"])
+    random.shuffle(spliti["train"])
     split.append(spliti)
 
+print("Indexes of the 10 first index of val, fold 0")
+for i in range(10):
+    idx = split[0]["val"][i]
+    print("Index: ", idx)
+    print("Corresponding label: ", LabelCVPR[idx])
+
 mydict = {"splits": split}
-dataset_name = args.output_path.split(".")[0]+"_split.pth"
+dataset_name = args.output_path.split(".")[0]+"_splits_shuffled.pth"
 torch.save(mydict, dataset_name)
