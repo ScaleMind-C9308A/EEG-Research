@@ -23,12 +23,13 @@ def net_trainer(
         net.cuda(opt.GPUindex)
     # Start training
     if train:
+        loss_history = []
         for epoch in range(1, opt.epochs+1):
             print("epoch", epoch)
             # Initialize loss/accuracy variables
-            losses = {"train": 0.0, "val": 0.0, "test": 0.0}
-            corrects = {"train": 0.0, "val": 0.0, "test": 0.0}
-            counts = {"train": 0.0, "val": 0.0, "test": 0.0}
+            losses = {"train": 0.0, "val": 0.0}
+            corrects = {"train": 0.0, "val": 0.0}
+            counts = {"train": 0.0, "val": 0.0}
             # Adjust learning rate for SGD
             if opt.optim=="SGD":
                 lr = opt.learning_rate*(opt.learning_rate_decay_by**
@@ -36,7 +37,7 @@ def net_trainer(
                 for param_group in optimizer.param_groups:
                     param_group["lr"] = lr
             # Process each split
-            for split in ("train", "val", "test"):
+            for split in ("train", "val"):
                 # Set network mode
                 if split=="train":
                     net.train()
@@ -75,6 +76,7 @@ def net_trainer(
 
 
                         if ((i+1)%1000 ==0):
+                            loss_history.append(loss.item())
                             print(f"Batch {i+1}: Loss={loss.item()}; accuracy={corrects[split]/counts[split]}")
 
                     else:
@@ -89,9 +91,14 @@ def net_trainer(
                             corrects[split] += (
                                 pred.eq(target.data).sum().float())
                             counts[split] += input.data.size(0)
+                            if ((i+1) == 250):
+                                print(f"Validation accuracy: {corrects[split]/counts[split]}")
         if save is not None:
             torch.save(net.state_dict(), save+".pth")
+        val_accuracy = (corrects["val"]/counts["val"]).data.cpu().item()
+        test_accuracy = 0
     else:
+        loss_history = None
         # Initialize loss/accuracy variables
         losses = {"val": 0.0, "test": 0.0}
         corrects = {"val": 0.0, "test": 0.0}
@@ -122,7 +129,8 @@ def net_trainer(
                     corrects[split] += (
                         pred.eq(target.data).sum().float())
                     counts[split] += input.data.size(0)
-    return ((corrects["val"]/counts["val"]).data.cpu().item(),
-            (corrects["test"]/counts["test"]).data.cpu().item(),
-            int(counts["val"]),
-            int(counts["test"]))
+        val_accuracy = (corrects["val"]/counts["val"]).data.cpu().item()
+        test_accuracy = (corrects["test"]/counts["test"]).data.cpu().item()
+    return (loss_history, 
+            val_accuracy,
+            test_accuracy)
