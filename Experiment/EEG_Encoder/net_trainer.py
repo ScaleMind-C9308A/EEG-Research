@@ -62,6 +62,10 @@ def net_trainer(
                         target = Variable(target)
                         # Forward
                         output = net(input)
+                        if i==0:
+                            print("Size of input: ", input.size())
+                            print("Size of target: ", target.size())
+                            print("Size of output: ", output.size())
                         loss = F.cross_entropy(output, target)
                         losses[split] += loss.item()
                         # Compute accuracy

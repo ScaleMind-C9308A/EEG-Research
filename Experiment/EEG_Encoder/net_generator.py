@@ -1,4 +1,5 @@
 from EEG_Encoder.LSTM import classifier_LSTM
+from EEG_Encoder.LSTM_per_channel import classifier_LSTM_per_channel
 from EEG_Encoder.CNN import classifier_CNN
 from EEG_Encoder.EEGNet import classifier_EEGNet
 from EEG_Encoder.SyncNet import classifier_SyncNet
@@ -88,6 +89,20 @@ def Classifier(
             output1_size = 128,
             output2_size = output_size,
             GPUindex = GPUindex)        
+    elif classifier=="LSTM_per_channel":
+        if kind=="from-scratch":
+            output_size = len(classes)
+        if kind=="incremental":
+            output_size = n_classes
+        if kind=="no-model-file":
+            output_size = len(classes)
+        net = classifier_LSTM_per_channel(
+            channels_num = channel,
+            lstm_layers = 1,
+            lstm_full1_size = 128,
+            lstm_full2_size= 64,
+            output_size= output_size,
+            GPUindex = GPUindex)
     elif classifier=="CNN":
         if length<min_CNN:
             return
