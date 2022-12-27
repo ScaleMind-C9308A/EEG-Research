@@ -26,7 +26,7 @@ class classifier_LSTM(nn.Module):
         self.GPUindex = GPUindex
         self.lstm = nn.LSTM(
             input_size, lstm_size, num_layers = 1, batch_first = True)
-        self.output1 = nn.Linear(lstm_size, output1_size)
+        self.output1 = nn.Linear(lstm_size, s)
         self.relu = nn.ReLU()
         if output2_size is None:
             self.output2 = None
@@ -43,7 +43,7 @@ class classifier_LSTM(nn.Module):
             lstm_init = (lstm_init[0].cuda(self.GPUindex),
                          lstm_init[0].cuda(self.GPUindex))
         lstm_init = (Variable(lstm_init[0]), Variable(lstm_init[1]))
-        x = self.lstm(x, lstm_init)[0][:, -1, :]
+        x = self.lstm(x, lstm_init)[0][:, -1, :] #(1, 1, 96)
         x = self.output1(x)
         if self.relup:
             x = self.relu(x)
