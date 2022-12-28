@@ -41,36 +41,36 @@ class classifier_CNN(nn.Module):
 
     def forward(self, x):
         batch_size = x.data.shape[0]
-        print("Input size: ", x.size())
+        # print("Input size: ", x.size())
         #Input size x: (batch, 96, 512)
         x = torch.unsqueeze(x, 2) #(batch, 96, 1, 512)
-        print("After unsquueze: ", x.size())
+        # print("After unsquueze: ", x.size())
         x = x.contiguous().view(-1, 1, x.data.shape[-1]) #(batch*96,1, 512)
-        print("After view: ", x.size())
+        # print("After view: ", x.size())
         x = self.conv1(x) #(batch*96, 8, 481)
-        print("After conv1: ", x.size())
+        # print("After conv1: ", x.size())
         x = self.activation(x)
         x = x.view(batch_size,
                    self.channel,
                    self.conv1_out_channels,
                    self.conv1_out) #(batch, 96, 8, 481)
-        print("After view 2: ", x.size())
+        # print("After view 2: ", x.size())
         x = x.permute(0, 3, 1, 2) #(batch, 481, 96, 8)
-        print("After permute 2: ", x.size())
+        # print("After permute 2: ", x.size())
         x = x.contiguous().view(batch_size,
                                 self.conv1_out,
                                 self.channel*self.conv1_out_channels) #(batch, 481, 96*8)
-        print("After view 3: ", x.size())
+        # print("After view 3: ", x.size())
         x = self.dropout(x)
         x = self.fc1(x) #(batch, 481, 40)
-        print("After fc1: ", x.size())
+        # print("After fc1: ", x.size())
         x = self.dropout(x)
         x = x.permute(0, 2, 1) #(batch, 40, 481)
-        print("After permute 3: ", x.size())
+        # print("After permute 3: ", x.size())
         x = self.pool1(x)
-        print("After pool1: ", x.size())
+        # print("After pool1: ", x.size())
         x = x.contiguous().view(batch_size, -1)
-        print("After view 4: ", x.size())
+        # print("After view 4: ", x.size())
         x = self.fc2(x)
-        print("After fc2: ", x.size())
+        # print("After fc2: ", x.size())
         return x
