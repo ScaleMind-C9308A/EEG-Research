@@ -79,7 +79,7 @@ def net_trainer(
                         optimizer.step()
 
 
-                        if ((i+1)%1000 ==0):
+                        if ((i+1)%100 ==0):
                             loss_history.append(loss.item())
                             print(f"Batch {i+1}: Loss={loss.item()}; accuracy={corrects[split]/counts[split]}")
 
@@ -95,7 +95,7 @@ def net_trainer(
                             corrects[split] += (
                                 pred.eq(target.data).sum().float())
                             counts[split] += input.data.size(0)
-                            if ((i+1) == 250):
+                            if ((i+1) == 32):
                                 print(f"Validation accuracy: {corrects[split]/counts[split]}")
         if save is not None:
             torch.save(net.state_dict(), save+".pth")

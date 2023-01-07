@@ -10,4 +10,4 @@ source ../Utils/set_env_script
 
 # matlab -nosplash -nodesktop -r "run('D:\Data\CVPR2021-02785\CVPR2021-02785\code\TeamX_code\preprocessing.m');"
 
-python split_even_without_load_eeg.py -iv image -s big -in "$EEG_SEGMENTS_DIR" -out "$TORCH_MODEL_FILE" -stimuli "$STIMULI_TEXT" -f 5
+python split_even_index_60_percent.py -iv image -s big -in "$EEG_SEGMENTS_DIR" -out "$TORCH_MODEL_FILE" -stimuli "$STIMULI_TEXT" -f 5

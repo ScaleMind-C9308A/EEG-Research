@@ -100,7 +100,7 @@ def Classifier(
         net = classifier_Stacked_BiLSTM(
             True,
             input_size = channel,
-            lstm_layers = 2,
+            lstm_layers =4,
             lstm_size = 128,
             output1_size = 128,
             output2_size = output_size,
