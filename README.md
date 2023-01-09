@@ -1,6 +1,9 @@
 # EEG-Research
 
-## Setup Guideline
+Use the dataset from 2 sources:
+- S. Palazzo, C. Spampinato, I. Kavasidis, D. Giordano, J. Schmidt, M. Shah, Decoding Brain Representations by Multimodal Learning of Neural Activity and Visual Features, IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE, 2020, doi: 10.1109/TPAMI.2020.2995909
+[https://github.com/perceivelab/eeg_visual_classification](https://github.com/perceivelab/eeg_visual_classification)
+## Setup Guideline: 
 
 - Follow the commands in Git Bash (Windows) or Terminal (Linux/Mac)
 
