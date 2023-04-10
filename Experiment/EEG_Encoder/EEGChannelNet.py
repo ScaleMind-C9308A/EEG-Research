@@ -9,219 +9,223 @@ from scipy.stats import mode
 #############################################################################
 # EEG-ChannelNet classifier
 #############################################################################
-
-class classifier_EEGChannelNet(nn.Module):
-
-    def __init__(self, spatial, temporal):
-        super(classifier_EEGChannelNet, self).__init__()
-        self.temporal_layers = []
-        self.temporal_layers.append(nn.Sequential(nn.Conv2d(in_channels = 1,
-                                    out_channels = 10,
-                                    kernel_size = (1, 33),
-                                    stride = (1, 2),
-                                    dilation = (1, 1),
-                                    padding = (0, 16)),
-                                    nn.BatchNorm2d(10),
-                                    nn.ReLU()))
-        self.temporal_layers.append(nn.Sequential(nn.Conv2d(in_channels = 1,
-                                    out_channels = 10,
-                                    kernel_size = (1, 33),
-                                    stride = (1, 2),
-                                    dilation = (1, 2),
-                                    padding = (0, 32)),
-                                    nn.BatchNorm2d(10),
-                                    nn.ReLU()))
-        self.temporal_layers.append(nn.Sequential(nn.Conv1d(in_channels = 1,
-                                    out_channels = 10,
-                                    kernel_size = (1, 33),
-                                    stride = (1, 2),
-                                    dilation = (1, 4),
-                                    padding = (0, 64)),
-                                    nn.BatchNorm2d(10),
-                                    nn.ReLU()))
-        self.temporal_layers.append(nn.Sequential(nn.Conv1d(in_channels = 1,
-                                    out_channels = 10,
-                                    kernel_size = (1, 33),
-                                    stride = (1, 2),
-                                    dilation = (1, 8),
-                                    padding = (0, 128)),
-                                    nn.BatchNorm2d(10),
-                                    nn.ReLU()))
-        self.temporal_layers.append(nn.Sequential(nn.Conv1d(in_channels = 1,
-                                    out_channels = 10,
-                                    kernel_size = (1, 33),
-                                    stride = (1, 2),
-                                    dilation = (1, 16),
-                                    padding = (0, 256)),
-                                    nn.BatchNorm2d(10),
-                                    nn.ReLU()))
-        self.spatial_layers = []
-        self.spatial_layers.append(nn.Sequential(nn.Conv2d(in_channels = 50,
-                                   out_channels = 50,
-                                   kernel_size = (128, 1),
-                                   stride = (2, 1),
-                                   padding = (63, 0)),
-                                   nn.BatchNorm2d(50),
-                                   nn.ReLU()))
-        self.spatial_layers.append(nn.Sequential(nn.Conv2d(in_channels = 50,
-                                   out_channels = 50,
-                                   kernel_size = (64, 1),
-                                   stride = (2, 1),
-                                   padding = (31, 0)),
-                                   nn.BatchNorm2d(50),
-                                   nn.ReLU()))
-        self.spatial_layers.append(nn.Sequential(nn.Conv2d(in_channels = 50,
-                                   out_channels = 50,
-                                   kernel_size = (32, 1),
-                                   stride = (2, 1),
-                                   padding = (15, 0)),
-                                   nn.BatchNorm2d(50),
-                                   nn.ReLU()))
-        self.spatial_layers.append(nn.Sequential(nn.Conv2d(in_channels = 50,
-                                   out_channels = 50,
-                                   kernel_size = (16, 1),
-                                   stride = (2, 1),
-                                   padding = (7, 0)),
-                                   nn.BatchNorm2d(50),
-                                   nn.ReLU()))
-        self.residual_layers = []
-        self.residual_layers.append(nn.Sequential(nn.Conv2d(in_channels = 200,
-                                    out_channels = 200,
-                                    kernel_size = 3,
-                                    stride = 2,
-                                    padding = 1),
-                                    nn.BatchNorm2d(200),
-                                    nn.ReLU(),
-                                    nn.Conv2d(in_channels = 200,
-                                    out_channels = 200,
-                                    kernel_size = 3,
-                                    stride = 1,
-                                    padding = 1),
-                                    nn.BatchNorm2d(200)))
-        self.residual_layers.append(nn.Sequential(nn.Conv2d(in_channels = 200,
-                                    out_channels = 200,
-                                    kernel_size = 3,
-                                    stride = 2,
-                                    padding = 1),
-                                    nn.BatchNorm2d(200),
-                                    nn.ReLU(),
-                                    nn.Conv2d(in_channels = 200,
-                                    out_channels = 200,
-                                    kernel_size = 3,
-                                    stride = 1,
-                                    padding = 1),
-                                    nn.BatchNorm2d(200)))
-        self.residual_layers.append(nn.Sequential(nn.Conv2d(in_channels = 200,
-                                    out_channels = 200,
-                                    kernel_size = 3,
-                                    stride = 2,
-                                    padding = 1),
-                                    nn.BatchNorm2d(200),
-                                    nn.ReLU(),
-                                    nn.Conv2d(in_channels = 200,
-                                    out_channels = 200,
-                                    kernel_size = 3,
-                                    stride = 1,
-                                    padding = 1),
-                                    nn.BatchNorm2d(200)))
-        self.residual_layers.append(nn.Sequential(nn.Conv2d(in_channels = 200,
-                                    out_channels = 200,
-                                    kernel_size = 3,
-                                    stride = 2,
-                                    padding = 1),
-                                    nn.BatchNorm2d(200),
-                                    nn.ReLU(),
-                                    nn.Conv2d(in_channels = 200,
-                                    out_channels = 200,
-                                    kernel_size = 3,
-                                    stride = 1,
-                                    padding = 1),
-                                    nn.BatchNorm2d(200)))
-        self.shortcuts = []
-        self.shortcuts.append(nn.Sequential(nn.Conv2d(in_channels = 200,
-                              out_channels = 200,
-                              kernel_size = 1,
-                              stride = 2),
-                              nn.BatchNorm2d(200)))
-        self.shortcuts.append(nn.Sequential(nn.Conv2d(in_channels = 200,
-                              out_channels = 200,
-                              kernel_size = 1,
-                              stride = 2),
-                              nn.BatchNorm2d(200)))
-        self.shortcuts.append(nn.Sequential(nn.Conv2d(in_channels = 200,
-                              out_channels = 200,
-                              kernel_size = 1,
-                              stride = 2),
-                              nn.BatchNorm2d(200)))
-        self.shortcuts.append(nn.Sequential(nn.Conv2d(in_channels = 200,
-                              out_channels = 200,
-                              kernel_size = 1,
-                              stride = 2),
-                              nn.BatchNorm2d(200)))
-        spatial_kernel = 3
-        temporal_kernel = 3
-        if spatial == 128:
-            spatial_kernel = 3
-        elif spatial==96:
-            spatial_kernel = 3
-        elif spatial==64:
-            spatial_kernel = 2
-        else:
-            spatial_kernel = 1
-        if temporal == 1024:
-            temporal_kernel = 3
-        elif temporal == 512:
-            temporal_kernel = 3
-        elif temporal == 440:
-            temporal_kernel = 3
-        elif temporal == 50:
-            temporal_kernel = 2
-        self.final_conv = nn.Conv2d(in_channels = 200,
-                                    out_channels = 50,
-                                    kernel_size = (spatial_kernel,
-                                                   temporal_kernel),
-                                    stride = 1,
-                                    dilation = 1,
-                                    padding = 0)
-        spatial_sizes = [128, 96, 64, 32, 16, 8]
-        spatial_outs = [2, 1, 1, 1, 1, 1]
-        temporal_sizes = [1024, 512, 440, 256, 200, 128, 100, 50]
-        temporal_outs = [30, 14, 12, 6, 5, 2, 2, 1]
-        inp_size = (50*
-                    spatial_outs[spatial_sizes.index(spatial)]*
-                    temporal_outs[temporal_sizes.index(temporal)])
-        self.fc1 = nn.Linear(inp_size, 1000)
-        self.fc2 = nn.Linear(1000, 40)
+class ConvLayer2D(nn.Sequential):
+    def __init__(self, in_channels, out_channels, kernel, stride, padding, dilation):
+        super().__init__()
+        self.add_module('norm', nn.BatchNorm2d(in_channels))
+        self.add_module('relu', nn.ReLU(True))
+        self.add_module('conv', nn.Conv2d(in_channels, out_channels, kernel_size=kernel,
+                                          stride=stride, padding=padding, dilation=dilation, bias=True))
+        self.add_module('drop', nn.Dropout2d(0.2))
 
     def forward(self, x):
-        x = x.unsqueeze(0).permute(1, 0, 3, 2)
-        y = []
-        for i in range(5):
-            y.append(self.temporal_layers[i](x))
-        x = torch.cat(y, 1)
-        y=[]
-        for i in range(4):
-            y.append(self. spatial_layers[i](x))
-        x = torch.cat(y, 1)
-        for i in range(4):
-            x = F.relu(self.shortcuts[i](x)+self.residual_layers[i](x))
-        x = self.final_conv(x)
-        x = x.view(x.size()[0], -1)
-        x = self.fc1(x)
-        x = F.relu(x)
-        x = self.fc2(x)
-        return x
+        return super().forward(x)
 
+class TemporalBlock(nn.Module):
+    def __init__(self, in_channels, out_channels, n_layers, kernel_size, stride, dilation_list, in_size):
+        super().__init__()
+        if len(dilation_list) < n_layers:
+            dilation_list = dilation_list + [dilation_list[-1]] * (n_layers - len(dilation_list))
+
+        padding = []
+        # Compute padding for each temporal layer to have a fixed size output
+        # Output size is controlled by striding to be 1 / 'striding' of the original size
+        for dilation in dilation_list:
+            filter_size = kernel_size[1] * dilation[1] - 1
+            temp_pad = math.floor((filter_size - 1) / 2) - 1 * (dilation[1] // 2 - 1)
+            padding.append((0, temp_pad))
+
+        self.layers = nn.ModuleList([
+            ConvLayer2D(
+                in_channels, out_channels, kernel_size, stride, padding[i], dilation_list[i]
+            ) for i in range(n_layers)
+        ])
+
+    def forward(self, x):
+        features = []
+
+        for layer in self.layers:
+            out = layer(x)
+            features.append(out)
+
+        out = torch.cat(features, 1)
+        return out
+
+class SpatialBlock(nn.Module):
+    def __init__(self, in_channels, out_channels, num_spatial_layers, stride, input_height):
+        super().__init__()
+       
+        kernel_list = []
+        for i in range(num_spatial_layers):
+            kernel_list.append(((input_height // (i + 1)), 1))
+
+        padding = []
+        for kernel in kernel_list:
+            temp_pad = math.floor((kernel[0] - 1) / 2)# - 1 * (kernel[1] // 2 - 1)
+            padding.append((temp_pad, 0))
+
+        feature_height = input_height // stride[0]
+
+        self.layers = nn.ModuleList([
+            ConvLayer2D(
+                in_channels, out_channels, kernel_list[i], stride, padding[i], 1
+            ) for i in range(num_spatial_layers)
+        ])
+    
+    def forward(self, x):
+        features = []
+
+        for layer in self.layers:
+            out = layer(x)
+            features.append(out)
+
+        out = torch.cat(features, 1)
+
+        return out
+
+# Residual block
+class ResidualBlock(nn.Module):
+    def __init__(self, in_channels, out_channels, stride=1, downsample=None):
+        super(ResidualBlock, self).__init__()
+        self.conv1 = conv3x3(in_channels, out_channels, stride)
+        self.bn1 = nn.BatchNorm2d(out_channels)
+        self.relu = nn.ReLU(inplace=True)
+        self.conv2 = conv3x3(out_channels, out_channels)
+        self.bn2 = nn.BatchNorm2d(out_channels)
+        self.downsample = downsample
+        
+    def forward(self, x):
+        residual = x
+        out = self.conv1(x)
+        out = self.bn1(out)
+        out = self.relu(out)
+        out = self.conv2(out)
+        out = self.bn2(out)
+        if self.downsample:
+            residual = self.downsample(x)
+        out += residual
+        out = self.relu(out)
+        return out
+
+def conv3x3(in_channels, out_channels, stride=1):
+    return nn.Conv2d(in_channels, out_channels, kernel_size=3, 
+                     stride=stride, padding=1, bias=False)
+    
+class FeaturesExtractor(nn.Module):
+    def __init__(self, in_channels, temp_channels, out_channels, input_width, in_height,
+                 temporal_kernel, temporal_stride, temporal_dilation_list, num_temporal_layers,
+                 num_spatial_layers, spatial_stride, num_residual_blocks, down_kernel, down_stride):
+        super().__init__()
+
+        self.temporal_block = TemporalBlock(
+            in_channels, temp_channels, num_temporal_layers, temporal_kernel, temporal_stride, temporal_dilation_list, input_width
+        )
+
+        self.spatial_block = SpatialBlock(
+            temp_channels * num_temporal_layers, out_channels, num_spatial_layers, spatial_stride, in_height
+        )
+
+        self.res_blocks = nn.ModuleList([
+            nn.Sequential(
+                ResidualBlock(
+                    out_channels * num_spatial_layers, out_channels * num_spatial_layers
+                ),
+                ConvLayer2D(
+                    out_channels * num_spatial_layers, out_channels * num_spatial_layers, down_kernel, down_stride, 0, 1
+                )
+            ) for i in range(num_residual_blocks)
+        ])
+
+        self.final_conv = ConvLayer2D(
+            out_channels * num_spatial_layers, out_channels, down_kernel, 1, 0, 1
+        )
+
+    def forward(self, x):
+        out = self.temporal_block(x)
+
+        out = self.spatial_block(out)
+
+        if len(self.res_blocks) > 0:
+            for res_block in self.res_blocks:
+                out = res_block(out)
+
+        out = self.final_conv(out)
+        
+        return out
+
+
+class classifier_EEGChannelNet(nn.Module):
+    '''The model for EEG classification.
+    The imput is a tensor where each row is a channel the recorded signal and each colums is a time sample.
+    The model performs different 2D to extract temporal e spatial information.
+    The output is a vector of classes where the maximum value is the predicted class.
+    Args:
+        in_channels: number of input channels
+        temp_channels: number of features of temporal block
+        out_channels: number of features before classification
+        num_classes: number possible classes
+        embedding_size: size of the embedding vector
+        input_width: width of the input tensor (necessary to compute classifier input size)
+        input_height: height of the input tensor (necessary to compute classifier input size)
+        temporal_dilation_list: list of dilations for temporal convolutions, second term must be even
+        temporal_kernel: size of the temporal kernel, second term must be even (default: (1, 32))
+        temporal_stride: size of the temporal stride, control temporal output size (default: (1, 2))
+        num_temp_layers: number of temporal block layers
+        num_spatial_layers: number of spatial layers
+        spatial_stride: size of the spatial stride
+        num_residual_blocks: the number of residual blocks
+        down_kernel: size of the bottleneck kernel
+        down_stride: size of the bottleneck stride
+        '''
+    def __init__(self, in_channels=1, temp_channels=10, out_channels=50, num_classes=40, embedding_size=1000,
+                 input_width=440, input_height=128, temporal_dilation_list=[(1,1),(1,2),(1,4),(1,8),(1,16)],
+                 temporal_kernel=(1,33), temporal_stride=(1,2),
+                 num_temp_layers=4,
+                 num_spatial_layers=4, spatial_stride=(2,1), num_residual_blocks=4, down_kernel=3, down_stride=2):
+        super().__init__()
+
+        self.encoder = FeaturesExtractor(in_channels, temp_channels, out_channels, input_width, input_height,
+                                     temporal_kernel, temporal_stride,
+                                     temporal_dilation_list, num_temp_layers,
+                                     num_spatial_layers, spatial_stride, num_residual_blocks, down_kernel, down_stride
+                                     )
+
+        encoding_size = self.encoder(torch.zeros(1, in_channels, input_height, input_width)).contiguous().view(-1).size()[0]
+        
+
+        self.classifier = nn.Sequential(
+#             nn.Dropout(p=0.2, inplace=False),
+            nn.Linear(encoding_size, embedding_size),
+            nn.ReLU(True),
+            nn.Linear(embedding_size,num_classes),
+        )
+
+    def forward(self, x):
+        x = x.unsqueeze(0).permute(1, 0, 2, 3)
+        
+        out = self.encoder(x)
+        
+        out = torch.mean(out.view(out.size(0), out.size(-1)*out.size(1), -1),dim=2)
+        
+        
+#         out = out.view(x.size(0), -1)
+#         print(out.size())
+        
+        out = self.classifier(out)
+
+        return out
     def cuda(self, gpuIndex):
-        for i in range(len(self.temporal_layers)):
-            self.temporal_layers[i] = self.temporal_layers[i].cuda(gpuIndex)
-        for i in range(len(self.spatial_layers)):
-            self.spatial_layers[i] = self.spatial_layers[i].cuda(gpuIndex)
-        for i in range(len(self.residual_layers)):
-            self.residual_layers[i] = self.residual_layers[i].cuda(gpuIndex)
-        for i in range(len(self.shortcuts)):
-            self.shortcuts[i] = self.shortcuts[i].cuda(gpuIndex)
-        self.final_conv = self.final_conv.cuda(gpuIndex)
-        self.fc1 = self.fc1.cuda(gpuIndex)
-        self.fc2 = self.fc2.cuda(gpuIndex)
+#         for i in range(len(self.num_temporal_layers)):
+#             self.num_temporal_layers[i] = self.num_temporal_layers[i].cuda(gpuIndex)
+#         for i in range(len(self.spatial_layers)):
+#             self.spatial_layers[i] = self.spatial_layers[i].cuda(gpuIndex)
+#         for i in range(len(self.residual_layers)):
+#             self.residual_layers[i] = self.residual_layers[i].cuda(gpuIndex)
+#         for i in range(len(self.shortcuts)):
+#             self.shortcuts[i] = self.shortcuts[i].cuda(gpuIndex)
+#         self.final_conv = self.final_conv.cuda(gpuIndex)
+#         self.fc1 = self.fc1.cuda(gpuIndex)
+#         self.fc2 = self.fc2.cuda(gpuIndex)
+        self.encoder = self.encoder.cuda(gpuIndex)
+        self.classifier = self.classifier.cuda(gpuIndex)
         return self

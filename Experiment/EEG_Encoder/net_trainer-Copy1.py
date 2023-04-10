@@ -95,8 +95,7 @@ def net_trainer(
                             corrects[split] += (
                                 pred.eq(target.data).sum().float())
                             counts[split] += input.data.size(0)
-                            if ((i+1) % print_every_val == 0):
-                                
+                            if ((i+1) % print_every_val == 0):                            
                                 print(f"Validation Batch (every {print_every_val} batch): Loss={loss.item()}; accuracy= {corrects[split]/counts[split]}")
         if save is not None:
             torch.save(net, save+".pth")

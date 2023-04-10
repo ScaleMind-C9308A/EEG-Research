@@ -100,7 +100,7 @@ def Classifier(
         net = classifier_Stacked_BiLSTM(
             True,
             input_size = channel,
-            lstm_layers =4,
+            lstm_layers = 2,
             lstm_size = 128,
             output1_size = 128,
             output2_size = output_size,
@@ -141,7 +141,7 @@ def Classifier(
             output_size = n_classes
         if kind=="no-model-file":
             output_size = len(classes)
-        net = classifier_EEGNet(channel, length)
+        net = classifier_EEGNet(channel, length).cuda(GPUindex)
     elif classifier=="SyncNet":
         if length<min_CNN:
             return 
@@ -161,7 +161,8 @@ def Classifier(
             output_size = n_classes
         if kind=="no-model-file":
             output_size = len(classes)
-        net = classifier_EEGChannelNet(channel, length)
+        net = classifier_EEGChannelNet().cuda(GPUindex)
+    
     print("DONE: CREATE TORCH CLASSIFIER")
     print(net)
     nonclasses = [i for i in range(output_size) if i not in classes]
