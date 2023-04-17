@@ -18,8 +18,6 @@ class Application(tk.Tk):
         self.current_slide.pack()
         self.duration_ms = 500
 
-        self.paused = False
-
     def center(self):
         """Center the slide window on the screen"""
         self.update_idletasks()
