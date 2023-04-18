@@ -16,11 +16,19 @@ class Application(tk.Tk):
         self.after_id = None
         self.cur_img = 0
         self.paused = True
-        self.image_folder = Path("C:\\Dataset\\imagenet")
+        pwd = os.getcwd()
+        image_folder_path = os.path.abspath(os.path.join(pwd, os.pardir, os.pardir, 'Dataset/imagenet'))
+        self.image_folder = Path(image_folder_path)
+        print(image_folder_path)
+        print('Total image found: ')
+        print(sum(1 for x in self.image_folder.glob('*.JPEG') if x.is_file()))        
         self.slides = [ImageTk.PhotoImage(Image.open(filename))
-            for filename in self.image_folder.glob('*.jpeg')]
-        self.lbl = tk.Label(image=self.slides[self.cur_img])
+            for filename in self.image_folder.glob('*.JPEG')]
+        frame_img = tk.Frame(master=self, width=200, height=200, bg="black")
+        self.lbl = tk.Label(image=self.slides[self.cur_img], master = frame_img)
         self.lbl.pack()
+        frame_img.pack(fill=tk.BOTH, expand=True)
+       
        
         
     def center(self):
@@ -32,6 +40,21 @@ class Application(tk.Tk):
         x = w / 2 - size[0] / 2
         y = h / 2 - size[1] / 2
         self.geometry("+%d+%d" % (x, y))
+        
+    # def center(self):
+    #     """Center the slide window on the screen"""
+    #     self.update_idletasks()
+    #     # get the screen dimension
+    #     screen_width = self.winfo_screenwidth()
+    #     screen_height = self.winfo_screenheight()
+    #     window_width = 800
+    #     window_height = 500
+    #     # find the center point
+    #     center_x = int(screen_width/2 - window_width / 2)
+    #     center_y = int(screen_height/2 - window_height / 2)
+
+    #     # set the position of the window to the center of the screen
+    #     self.geometry(f'{screen_width}x{screen_height}+{center_x}+{center_y}')
     def slide_show(self):
         if not self.paused:
             # Get the class name of the current image
