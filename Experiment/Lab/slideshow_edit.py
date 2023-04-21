@@ -27,8 +27,7 @@ class Application(tk.Tk):
         frame_img = tk.Frame(master=self, width=200, height=200, bg="black")
         self.lbl = tk.Label(image=self.slides[self.cur_img], master = frame_img)
         self.lbl.pack()
-        frame_img.pack(fill=tk.BOTH, expand=True)
-       
+        frame_img.pack(fill=tk.BOTH, expand=True)  
         
     def center(self):
         """Center the slide window on the screen"""
