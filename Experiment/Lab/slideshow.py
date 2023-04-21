@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 from PIL import Image, ImageTk
 from itertools import cycle
+import tkinter.font as font
 
 
 
@@ -14,19 +15,37 @@ class Application(tk.Tk):
         self.title("Slideshow")
         self.geometry("+0+0")
         self.resizable(width=True, height=True)
-        self.current_slide = tk.Label(self)
-        self.current_slide.pack()
         self.duration_ms = 500
 
+        self.columnconfigure(0, weight=1, minsize=75)
+        self.rowconfigure([0, 1], weight=1, minsize=50)
+
+        frame_img = tk.Frame(master=self, bg="black")
+        frame_img.grid(row=0, column=0)
+        frame_btn = tk.Frame(self)
+        frame_btn.grid(row=1, column=0)
+        btn = tk.Button(frame_btn, height = 2, width = 10, text="Start", command=self.start)
+        btn['font'] = font.Font(size=12)
+        btn.pack()
+        self.current_slide = tk.Label(master=frame_img)
+
+        self.current_slide.pack()
+        # frame_img.pack(fill=tk.BOTH, expand=True)
+        # frame_btn.pack()
     def center(self):
         """Center the slide window on the screen"""
         self.update_idletasks()
-        w = self.winfo_screenwidth()
-        h = self.winfo_screenheight()
-        size = tuple(int(_) for _ in self.geometry().split('+')[0].split('x'))
-        x = w / 2 - size[0] / 2
-        y = h / 2 - size[1] / 2
-        self.geometry("+%d+%d" % (x, y))
+        # get the screen dimension
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+        # window_width = 800
+        # window_height = 500
+        # # find the center point
+        # center_x = int(screen_width/2 - window_width / 2)
+        # center_y = int(screen_height/2 - window_height / 2)
+
+        # set the position of the window to the center of the screen
+        self.geometry(f'{screen_width}x{screen_height}+0+20')
     def get_jpeg_files(self, directory):
         jpeg_files = []
         for filename in os.listdir(directory):
@@ -65,7 +84,7 @@ def main():
     print(imagenet_dir)
     application = Application()
     application.set_image_directory(imagenet_dir)
-    application.start()
+    # application.start()
     application.mainloop()
 
 
