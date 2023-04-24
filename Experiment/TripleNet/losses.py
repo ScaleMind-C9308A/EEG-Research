@@ -46,8 +46,8 @@ class OnlineTripletLoss(nn.Module):
         if embeddings.is_cuda:
             triplets = triplets.cuda()
 
-        pos_sim = self.F
-        an_distances = (embeddings[triplets[:, 0]] - embeddings[triplets[:, 2]]).pow(2).sum(1)  # .pow(.5)
-        losses = F.relu(ap_distances - an_distances + self.margin)
+        pos_sim = self.F(embeddings[triplets[0]], embeddings[triplets[1]])
+        neg_sim = self.F(embeddings[triplets[0]], embeddings[triplets[2]])
+        losses = F.relu(neg_sim - pos_sim + self.margin)
 
         return losses.mean(), len(triplets)

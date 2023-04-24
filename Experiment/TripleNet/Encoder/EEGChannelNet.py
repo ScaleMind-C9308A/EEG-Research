@@ -154,7 +154,7 @@ class FeaturesExtractor(nn.Module):
         return out
 
 
-class classifier_EEGChannelNet(nn.Module):
+class EEGChannelNet(nn.Module):
     '''The model for EEG classification.
     The imput is a tensor where each row is a channel the recorded signal and each colums is a time sample.
     The model performs different 2D to extract temporal e spatial information.
