@@ -11,33 +11,7 @@ minus_infinity = float("-Inf")
 ##############################################################
 # Network trainer
 ##############################################################
-# define the compatibility function
-def F(eeg_repr, img_repr):
-    # compute the dot product between EEG and image representations
-    similarity = torch.sum(eeg_repr * img_repr, dim=-1)
-    return similarity
 
-# define the triplet loss function
-def triplet_loss(e1, v1, v2, margin=0.2):
-    # compute the similarity scores between anchor-positive and anchor-negative pairs
-    pos_similarity = F(e1, v1)
-    neg_similarity = F(e1, v2)
-    # compute the triplet loss
-    loss = torch.max(torch.tensor(0.0), neg_similarity - pos_similarity + margin)
-    return loss.mean()
-
-# define the optimizer
-optimizer = torch.optim.Adam(params, lr=learning_rate)
-
-# iterate over batches of anchor-positive-negative triplets
-for e1_batch, v1_batch, v2_batch in dataloader:
-    # compute the triplet loss
-    loss = triplet_loss(e1_batch, v1_batch, v2_batch)
-    # compute the gradients of the loss w.r.t. the encoders
-    optimizer.zero_grad()
-    loss.backward()
-    # apply the gradients using the optimizer
-    optimizer.step()
 def train_step(model, dataloader, loss_fn, optimizer, device, print_every):
     # Put model in train mode
     model.train()
@@ -106,11 +80,7 @@ def test_step(model, dataloader, loss_fn, device, print_every):
     test_acc = test_acc / len(dataloader)
     return test_loss, test_acc
 
-def net_trainer(
-        net, loaders, opt, channel_idx, nonclasses, pretrain, train, save, print_every_train=100, print_every_val=125):
-    optimizer = getattr(torch.optim,
-                        opt.optim)(net.parameters(),
-                                   lr = opt.learning_rate)
+def net_trainer(net, loaders, loss_fn, optimizer, scheduler, n_epochs, device, opt, nonclasses, pretrain, is_train, save_path, log_interval):
     if pretrain is not None:
         net.load_state_dict(torch.load(pretrain+".pth", map_location = "cpu"))
     # Setup CUDA
@@ -118,30 +88,31 @@ def net_trainer(
         net.cuda(opt.GPUindex)
     
     # Start training
-    if train:
+    if is_train:
         # Create empty results dictionary
         results = {"train_loss": [], "train_acc": [],"val_loss": [],"val_acc": []}
-        for epoch in range(1, opt.epochs+1):
+        for epoch in range(1, n_epochs+1):
             print("Epoch", epoch)         
-            # Adjust learning rate for SGD
-            if opt.optim=="SGD":
-                lr = opt.learning_rate*(opt.learning_rate_decay_by**
-                                        (epoch//opt.learning_rate_decay_every))
-                for param_group in optimizer.param_groups:
-                    param_group["lr"] = lr
+            # # Adjust learning rate for SGD
+            # if opt.optim=="SGD":
+            #     lr = opt.learning_rate*(opt.learning_rate_decay_by**
+            #                             (epoch//opt.learning_rate_decay_every))
+            #     for param_group in optimizer.param_groups:
+            #         param_group["lr"] = lr
+            scheduler.step()
             # Process each split
             train_loss, train_acc = train_step(model=net,
                                       dataloader=loaders['train'],
-                                      loss_fn=nn.CrossEntropyLoss(),
+                                      loss_fn=loss_fn,
                                       optimizer=optimizer,
-                                      device='cuda',
-                                      print_every=print_every_train)
+                                      device=device,
+                                      print_every=log_interval)
 
             val_loss, val_acc = test_step(model=net,
                                           dataloader=loaders['val'],
-                                          loss_fn=nn.CrossEntropyLoss(),
-                                          device='cuda',
-                                          print_every=print_every_val)
+                                          loss_fn=loss_fn,
+                                          device=device,
+                                          print_every=log_interval)
                       
             # Summarize the training process
             print(f"Epoch {epoch} summary: train_loss: {train_loss:.4f} | train_acc: {train_acc:.4f} | val_loss: {val_loss:.4f} | val_acc: {val_acc:.4f}")
@@ -150,21 +121,21 @@ def net_trainer(
             results["train_acc"].append(train_acc)
             results["val_loss"].append(val_loss)
             results["val_acc"].append(val_acc)
-        if save is not None:
-            torch.save(net, save+".pth")
+        if save_path is not None:
+            torch.save(net, save_path+".pth")
         
     else:
         results = {"val_acc": None, "test_acc": None}
         val_loss, val_acc = test_step(model=net,
                                           dataloader=loaders['val'],
-                                          loss_fn=nn.CrossEntropyLoss(),
+                                          loss_fn=loss_fn,
                                           optimizer=optimizer,
-                                          device='cuda')
+                                          device=device)
         test_loss, test_acc = test_step(model=net,
                                           dataloader=loaders['test'],
-                                          loss_fn=nn.CrossEntropyLoss(),
+                                          loss_fn=loss_fn,
                                           optimizer=optimizer,
-                                          device='cuda')
+                                          device=device)
         results["val_acc"] = val_acc
         results["test_acc"] = test_acc
             
