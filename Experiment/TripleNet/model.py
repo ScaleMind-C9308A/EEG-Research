@@ -20,6 +20,8 @@ class TripleNet(nn.Module):
     def get_img_embedding(self, img):
         return self.img_encoder(img)
     
-def load_model(eeg_encoder_name, img_encoder_name):
+def load_model():
     eeg_encoder = load_eeg_encoder()
     img_encoder = load_image_encoder('inception_v3', True)
+    model = TripleNet(eeg_encoder, img_encoder)
+    return model
