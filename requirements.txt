@@ -71,8 +71,8 @@ soupsieve==2.3.2.post1
 stack-data==0.6.2
 terminado==0.17.0
 tinycss2==1.2.1
-torch==1.13.0
-torchvision==0.14.0
+torch
+torchvision
 tornado==6.2
 tqdm==4.64.1
 traitlets==5.5.0
