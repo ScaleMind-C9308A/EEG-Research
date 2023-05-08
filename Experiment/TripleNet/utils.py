@@ -3,7 +3,7 @@ import torch
 from itertools import combinations
 
 def similarity_matrix(eeg_embeds, img_embeds):
-    # Compute the similarity matrix using the compatibility function
+    """Compute the similarity matrix using the compatibility function"""
     sim_matrix = torch.zeros(eeg_embeds.shape[0], img_embeds.shape[0])
     for i, eeg in enumerate(eeg_embeds):
         for j, image in enumerate(img_embeds):
