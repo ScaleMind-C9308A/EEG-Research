@@ -6,15 +6,32 @@ import numpy as np
 from PIL import Image
 import os
 
+def load_data(eeg_path, img_path, splits_path):
+    loaded_eeg = torch.load(eeg_path)
+    loaded_splits = torch.load(splits_path)
+    train_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits, mode="train")
+    val_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits, mode="val")
+    test_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits, mode="test")
+
+
+    train_batch_sampler = BalancedBatchSampler(train_dataset.train_labels, n_classes=10, n_samples=25)
+    val_batch_sampler = BalancedBatchSampler(train_dataset.train_labels, n_classes=10, n_samples=25)
+    test_batch_sampler = BalancedBatchSampler(test_dataset.test_labels, n_classes=10, n_samples=25)
+
+    kwargs = {'num_workers': 1, 'pin_memory': True} if cuda else {}
+    train_dataloader = DataLoader(train_dataset, batch_sampler=train_batch_sampler, **kwargs)
+    val_dataloader = DataLoader(val_dataset, batch_sampler=val_batch_sampler, **kwargs)
+    test_dataloader = DataLoader(test_dataset, batch_sampler=test_batch_sampler, **kwargs)
+    return train_dataloader, val_dataloader, test_dataloader
 class EEGDataset(Dataset):
     """
     Train: For each sample (anchor) randomly chooses a positive and negative samples
     Test: Creates fixed triplets for testing
     """
-    def __init__(self, root, loaded_eeg, loaded_splits):
+    def __init__(self, img_dir_path, loaded_eeg, loaded_splits, mode="train"):
         """
         Args:
-            root: root directory path of dataset,
+            img_dir_path: directory path of imagenet images,
             loaded_eeg: eeg dataset loaded from torch.load(),
             loaded_splits: cross-validation splits loaded from torch.load(),
             opt: {
@@ -29,7 +46,7 @@ class EEGDataset(Dataset):
         # loaded_eeg = torch.load(eeg_signals_path)
         # # Load splits file
         # loaded_splits = torch.load(block_splits_path)
-        self.root = root
+        self.img_dir_path = img_dir_path
         self.splits = loaded_splits
         dataset, classes, img_filenames = [loaded_eeg[k] for k in ['dataset', 'labels', 'images']]
         self.classes = classes
@@ -92,8 +109,8 @@ class EEGDataset(Dataset):
         img_negative_idx = np.random.choice(self.label_to_indices[img_negative_label])
         img_positive_filename, img_positive_classname = self.img_filenames[img_positive_idx], self.classes[img_positive_label]
         img_negative_filename, img_negative_classname = self.img_filenames[img_negative_idx], self.classes[img_negative_label]
-        img_positive = Image.open(os.path.join(self.root, img_positive_filename+'.JPEG' )).convert('RGB')
-        img_negative = Image.open(os.path.join(self.root, img_negative_filename+'.JPEG' )).convert('RGB')
+        img_positive = Image.open(os.path.join(self.img_dir_path, img_positive_filename+'.JPEG' )).convert('RGB')
+        img_negative = Image.open(os.path.join(self.img_dir_path, img_negative_filename+'.JPEG' )).convert('RGB')
         # else:
         #     img1 = self.test_data[self.test_triplets[index][0]]
         #     img2 = self.test_data[self.test_triplets[index][1]]
