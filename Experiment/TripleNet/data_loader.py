@@ -6,19 +6,18 @@ import numpy as np
 from PIL import Image
 import os
 
-def load_data(eeg_path, img_path, splits_path):
+def load_data(eeg_path, img_path, splits_path, device):
     loaded_eeg = torch.load(eeg_path)
     loaded_splits = torch.load(splits_path)
     train_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits, mode="train")
     val_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits, mode="val")
     test_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits, mode="test")
 
+    train_batch_sampler = BalancedBatchSampler(train_dataset.labels, n_classes=10, n_samples=25)
+    val_batch_sampler = BalancedBatchSampler(val_dataset.labels, n_classes=10, n_samples=25)
+    test_batch_sampler = BalancedBatchSampler(test_dataset.labels, n_classes=10, n_samples=25)
 
-    train_batch_sampler = BalancedBatchSampler(train_dataset.train_labels, n_classes=10, n_samples=25)
-    val_batch_sampler = BalancedBatchSampler(train_dataset.train_labels, n_classes=10, n_samples=25)
-    test_batch_sampler = BalancedBatchSampler(test_dataset.test_labels, n_classes=10, n_samples=25)
-
-    kwargs = {'num_workers': 1, 'pin_memory': True} if cuda else {}
+    kwargs = {'num_workers': 1, 'pin_memory': True} if device else {}
     train_dataloader = DataLoader(train_dataset, batch_sampler=train_batch_sampler, **kwargs)
     val_dataloader = DataLoader(val_dataset, batch_sampler=val_batch_sampler, **kwargs)
     test_dataloader = DataLoader(test_dataset, batch_sampler=test_batch_sampler, **kwargs)
@@ -46,6 +45,7 @@ class EEGDataset(Dataset):
         # loaded_eeg = torch.load(eeg_signals_path)
         # # Load splits file
         # loaded_splits = torch.load(block_splits_path)
+        self.mode = mode
         self.img_dir_path = img_dir_path
         self.splits = loaded_splits
         dataset, classes, img_filenames = [loaded_eeg[k] for k in ['dataset', 'labels', 'images']]
@@ -89,7 +89,6 @@ class EEGDataset(Dataset):
 
     def __getitem__(self, index):
         """
-        Call Data[i] will return a tuple that contain the triplets
         ds = EEGDataset()
         ds[i] will return by what we define __getitem__ magic methods
         """
@@ -137,7 +136,7 @@ class EEGDataset(Dataset):
 class BalancedBatchSampler(BatchSampler):
     """
     BatchSampler - samples n_classes and within these classes samples n_samples.
-    Returns batches of size n_classes * n_samples
+    Each iter will return a batch of indices of size n_classes * n_samples
     """
 
     def __init__(self, labels, n_classes, n_samples):
