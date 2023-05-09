@@ -25,12 +25,7 @@ def run():
     Step 5: Put all to net_trainer()
     """
     # We'll create mini batches by sampling labels that will be present in the mini batch and number of examples from each class
-    train_batch_sampler = BalancedBatchSampler(train_dataset.train_labels, n_classes=10, n_samples=25)
-    test_batch_sampler = BalancedBatchSampler(test_dataset.test_labels, n_classes=10, n_samples=25)
-
-    kwargs = {'num_workers': 1, 'pin_memory': True} if cuda else {}
-    online_train_loader = torch.utils.data.DataLoader(train_dataset, batch_sampler=train_batch_sampler, **kwargs)
-    online_test_loader = torch.utils.data.DataLoader(test_dataset, batch_sampler=test_batch_sampler, **kwargs)
+    
 
     margin = 1.
     embedding_net = EmbeddingNet()
