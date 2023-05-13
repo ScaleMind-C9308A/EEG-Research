@@ -12,7 +12,7 @@ from data_loader import load_data
 from model import load_model
 from losses import OnlineTripletLoss
 from trainer import fit
-from utils import AllTripletSelector,HardestNegativeTripletSelector, RandomNegativeTripletSelector, SemihardNegativeTripletSelector # Strategies for selecting triplets within a minibatch
+from utils import HardestNegativeTripletSelector, RandomNegativeTripletSelector, SemihardNegativeTripletSelector # Strategies for selecting triplets within a minibatch
 from metrics import AverageNonzeroTripletsMetric
 
 def seed_everything(seed):
@@ -76,11 +76,11 @@ def load_config():
     parser = argparse.ArgumentParser(description='Online Triplet Training of EEG and image')
     parser.add_argument('--dataset',
                         help='Dataset name.')
-    parser.add_argument('--eeg_path',
+    parser.add_argument('--eeg-path',
                         help='Path of eeg dataset')
-    parser.add_argument('--img_path',
+    parser.add_argument('--img-path',
                         help='Path of image dataset')
-    parser.add_argument('--splits_path',
+    parser.add_argument('--splits-path',
                         help='Path of splits dataset')
     parser.add_argument('--log-path', 
                         help="Directory path to save log files during training")
