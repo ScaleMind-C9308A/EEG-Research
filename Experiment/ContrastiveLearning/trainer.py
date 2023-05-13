@@ -2,7 +2,7 @@ import torch
 import numpy as np
 
 
-def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs, cuda, log_interval, metrics=[],
+def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs, device, log_interval, metrics=[],
         start_epoch=0):
     """
     Loaders, model, loss function and metrics should work together for a given task,
@@ -20,13 +20,13 @@ def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs
         scheduler.step()
 
         # Train stage
-        train_loss, metrics = train_epoch(train_loader, model, loss_fn, optimizer, cuda, log_interval, metrics)
+        train_loss, metrics = train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, metrics)
 
         message = 'Epoch: {}/{}. Train set: Average loss: {:.4f}'.format(epoch + 1, n_epochs, train_loss)
         for metric in metrics:
             message += '\t{}: {}'.format(metric.name(), metric.value())
 
-        val_loss, metrics = test_epoch(val_loader, model, loss_fn, cuda, metrics)
+        val_loss, metrics = test_epoch(val_loader, model, loss_fn, device, metrics)
         val_loss /= len(val_loader)
 
         message += '\nEpoch: {}/{}. Validation set: Average loss: {:.4f}'.format(epoch + 1, n_epochs,
@@ -37,7 +37,7 @@ def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs
         print(message)
 
 
-def train_epoch(train_loader, model, loss_fn, optimizer, cuda, log_interval, metrics):
+def train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, metrics):
     for metric in metrics:
         metric.reset()
 
@@ -49,10 +49,10 @@ def train_epoch(train_loader, model, loss_fn, optimizer, cuda, log_interval, met
         target = target if len(target) > 0 else None
         if not type(data) in (tuple, list):
             data = (data,)
-        if cuda:
-            data = tuple(d.cuda() for d in data)
+        if device:
+            data = tuple(d.to(device) for d in data)
             if target is not None:
-                target = target.cuda()
+                target = target.to(device)
 
 
         optimizer.zero_grad()
@@ -90,7 +90,7 @@ def train_epoch(train_loader, model, loss_fn, optimizer, cuda, log_interval, met
     return total_loss, metrics
 
 
-def test_epoch(val_loader, model, loss_fn, cuda, metrics):
+def test_epoch(val_loader, model, loss_fn, device, metrics):
     with torch.no_grad():
         for metric in metrics:
             metric.reset()
@@ -100,10 +100,10 @@ def test_epoch(val_loader, model, loss_fn, cuda, metrics):
             target = target if len(target) > 0 else None
             if not type(data) in (tuple, list):
                 data = (data,)
-            if cuda:
-                data = tuple(d.cuda() for d in data)
+            if device:
+                data = tuple(d.to(device) for d in data)
                 if target is not None:
-                    target = target.cuda()
+                    target = target.to(device)
 
             outputs = model(*data)
 

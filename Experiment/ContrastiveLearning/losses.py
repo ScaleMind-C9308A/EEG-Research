@@ -2,6 +2,11 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+### TripletLoss takes in (anchor, positive, negative) embeddings and compute directly the loss value
+### OnlineTripletLoss takes in (embeddings, labels) 
+# => Use a triplet_selector to mine hard negative triplets
+# -> Then finally it will calculate the loss based on the formed triplets
+
 class TripletLoss(nn.Module):
     """
     Triplet loss
@@ -31,23 +36,26 @@ class OnlineTripletLoss(nn.Module):
     triplets
     """
 
-    def __init__(self, margin, triplet_selector):
+    def __init__(self, margin, device, triplet_selector):
+        """
+        device: 
+        """
         super(OnlineTripletLoss, self).__init__()
         self.margin = margin
+        self.device = device
         self.triplet_selector = triplet_selector
     def F(self, eeg_embed, image_embed):
         """Compability func F for compute the dot product between EEG and image representations"""
         return torch.sum(eeg_embed*image_embed, dim=-1)
 
-    def forward(self, embeddings, target):
+    def forward(self, eeg_embeddings, img_embeddings, target):
 
-        triplets = self.triplet_selector.get_triplets(embeddings, target)
+        triplets = self.triplet_selector.get_triplets(eeg_embeddings, img_embeddings, target)
 
-        if embeddings.is_cuda:
-            triplets = triplets.cuda()
+        triplets.to(self.device)
 
-        pos_sim = self.F(embeddings[triplets[0]], embeddings[triplets[1]])
-        neg_sim = self.F(embeddings[triplets[0]], embeddings[triplets[2]])
+        pos_sim = self.F(eeg_embeddings[triplets[0]], img_embeddings[triplets[1]])
+        neg_sim = self.F(eeg_embeddings[triplets[0]], img_embeddings[triplets[2]])
         losses = F.relu(neg_sim - pos_sim + self.margin)
 
         return losses.mean(), len(triplets)
