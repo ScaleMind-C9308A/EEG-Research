@@ -6,13 +6,20 @@ import numpy as np
 from PIL import Image
 import os
 
-def load_data(eeg_path, img_path, splits_path, device):
+def load_data(eeg_path, img_path, splits_path, device, mode="triple"):
+    """
+    mode: "triple" | "online_triplet"
+    """
     loaded_eeg = torch.load(eeg_path)
     loaded_splits = torch.load(splits_path)
-    train_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits, mode="train")
-    val_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits, mode="val")
-    test_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits, mode="test")
-
+    if (mode== "triple"):
+        train_dataset = EEGDataset_Triple(img_path, loaded_eeg, loaded_splits, mode="train")
+        val_dataset = EEGDataset_Triple(img_path, loaded_eeg, loaded_splits, mode="val")
+        test_dataset = EEGDataset_Triple(img_path, loaded_eeg, loaded_splits, mode="test")
+    elif (mode=="online_triplet"):
+        train_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits, mode="train")
+        val_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits, mode="val")
+        test_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits, mode="test")
     train_batch_sampler = BalancedBatchSampler(train_dataset.labels, n_classes=10, n_samples=25)
     val_batch_sampler = BalancedBatchSampler(val_dataset.labels, n_classes=10, n_samples=25)
     test_batch_sampler = BalancedBatchSampler(test_dataset.labels, n_classes=10, n_samples=25)
@@ -22,7 +29,79 @@ def load_data(eeg_path, img_path, splits_path, device):
     val_dataloader = DataLoader(val_dataset, batch_sampler=val_batch_sampler, **kwargs)
     test_dataloader = DataLoader(test_dataset, batch_sampler=test_batch_sampler, **kwargs)
     return train_dataloader, val_dataloader, test_dataloader
+
 class EEGDataset(Dataset):
+    """
+    Train: For each sample (anchor) randomly chooses a positive and negative samples
+    Test: Creates fixed triplets for testing
+    """
+    def __init__(self, img_dir_path, loaded_eeg, loaded_splits, mode="train"):
+        """
+        Args:
+            img_dir_path: directory path of imagenet images,
+            loaded_eeg: eeg dataset loaded from torch.load(),
+            loaded_splits: cross-validation splits loaded from torch.load(),
+            opt: {
+                subject:,
+                time_low:,
+                time_high:,
+                model_type:
+            }
+        """
+        self.mode = mode
+        self.img_dir_path = img_dir_path
+        self.splits = loaded_splits
+        dataset, classes, img_filenames = [loaded_eeg[k] for k in ['dataset', 'labels', 'images']]
+        self.classes = classes
+        self.img_filenames = img_filenames
+        self.eeg_dataset = dataset
+        """We use only split 0, no cross-validation"""
+        self.split_chosen = loaded_splits[0]
+        self.split_train = self.split_chosen['train']
+        self.split_val = self.split_chosen['val']
+        self.split_test = self.split_chosen['test']
+
+        if self.mode == "train":
+            self.labels = [self.eeg_dataset[sample_idx]['label'] for sample_idx in self.split_train]
+        elif self.mode == "val":
+            self.labels = [self.eeg_dataset[sample_idx]['label'] for sample_idx in self.split_val]
+        elif self.mode == "test":
+            self.labels = [self.eeg_dataset[sample_idx]['label'] for sample_idx in self.split_test]
+        else:
+            raise ValueError()
+
+    def __getitem__(self, index):
+        """
+        ds = EEGDataset()
+        ds[i] will return by what we define __getitem__ magic methods
+        """
+        if self.mode == "train":
+            dataset_idx = self.split_train[index]
+        elif self.mode == "val":
+            dataset_idx = self.split_val[index]
+        elif self.mode == "test":
+            dataset_idx = self.split_test[index]
+        else:
+            raise ValueError()
+        eeg, img_positive_idx, img_positive_label = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
+        img_positive_filename, img_positive_classname = self.img_filenames[img_positive_idx], self.classes[img_positive_label]
+        img_positive = Image.open(os.path.join(self.img_dir_path, img_positive_filename+'.JPEG' )).convert('RGB')
+
+        if self.transform is not None:
+            img_positive = self.transform(img_positive)
+        return (eeg, img_positive), []
+
+    def __len__(self):
+        if self.mode == "train":
+            return len(self.split_train)
+        elif self.mode == "val":
+            return len(self.split_val)
+        elif self.mode == "test":
+            return len(self.split_test)
+        else:
+            raise ValueError()
+        
+class EEGDataset_Triple(Dataset):
     """
     Train: For each sample (anchor) randomly chooses a positive and negative samples
     Test: Creates fixed triplets for testing
@@ -57,10 +136,6 @@ class EEGDataset(Dataset):
         self.split_train = self.split_chosen['train']
         self.split_val = self.split_chosen['val']
         self.split_test = self.split_chosen['test']
-
-        # self.mnist_dataset = mnist_dataset
-        # self.train = self.mnist_dataset.train
-        # self.transform = self.mnist_dataset.transform
 
         if self.mode == "train":
             self.labels = [self.eeg_dataset[sample_idx]['label'] for sample_idx in self.split_train]

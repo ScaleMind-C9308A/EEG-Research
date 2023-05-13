@@ -58,10 +58,11 @@ class FunctionNegativeTripletSelector(TripletSelector):
         self.margin = margin
         self.negative_selection_fn = negative_selection_fn
 
-    def get_triplets(self, embeddings, labels):
+    def get_triplets(self, eeg_embeddings, img_embeddings, labels):
         if self.cpu:
-            embeddings = embeddings.cpu()
-        sim_matrix = similarity_matrix(embeddings)
+            eeg_embeddings = eeg_embeddings.cpu()
+            img_embeddings = img_embeddings.cpu()
+        sim_matrix = similarity_matrix(eeg_embeddings, img_embeddings)
         sim_matrix = sim_matrix.cpu()
 
         labels = labels.cpu().data.numpy()
@@ -73,54 +74,22 @@ class FunctionNegativeTripletSelector(TripletSelector):
             if len(label_indices) < 2:
                 continue
             negative_indices = np.where(np.logical_not(label_mask))[0]
-            anchor_positives = list(combinations(label_indices, 2))  # All anchor-positive pairs
-            anchor_positives = np.array(anchor_positives)
+            # # All anchor-positive pairs => (n_label_indices, 2)
+            # anchor_positives = list(combinations(label_indices, 2))  
+            # anchor_positives = np.array(anchor_positives)
+            label_indices_shuffled = np.random.permutation(label_indices)
 
-            ap_distances = sim_matrix[anchor_positives[:, 0], anchor_positives[:, 1]]
-            for anchor_positive, ap_distance in zip(anchor_positives, ap_distances):
-                loss_values = ap_distance - sim_matrix[torch.LongTensor(np.array([anchor_positive[0]])), torch.LongTensor(negative_indices)] + self.margin
+            ap_distances = sim_matrix[label_indices, label_indices_shuffled]
+            for anchor_idx, pos_idx, ap_distance in zip(label_indices, label_indices_shuffled, ap_distances):
+                loss_values = ap_distance - sim_matrix[torch.LongTensor(np.array([anchor_idx])), torch.LongTensor(negative_indices)] + self.margin
                 loss_values = loss_values.data.cpu().numpy()
                 hard_negative = self.negative_selection_fn(loss_values)
                 if hard_negative is not None:
                     hard_negative = negative_indices[hard_negative]
-                    triplets.append([anchor_positive[0], anchor_positive[1], hard_negative])
+                    triplets.append([anchor_idx,pos_idx, hard_negative])
 
         if len(triplets) == 0:
-            triplets.append([anchor_positive[0], anchor_positive[1], negative_indices[0]])
-
-        triplets = np.array(triplets)
-
-        return torch.LongTensor(triplets)
-    
-    def get_triplets_modified(self, embeddings, labels):
-        if self.cpu:
-            embeddings = embeddings.cpu()
-        sim_matrix = similarity_matrix(embeddings)
-        sim_matrix = sim_matrix.cpu()
-
-        labels = labels.cpu().data.numpy()
-        triplets = []
-
-        for label in set(labels):
-            label_mask = (labels == label)
-            label_indices = np.where(label_mask)[0]
-            if len(label_indices) < 2:
-                continue
-            negative_indices = np.where(np.logical_not(label_mask))[0]
-            anchor_positives = list(combinations(label_indices, 2))  # All anchor-positive pairs
-            anchor_positives = np.array(anchor_positives)
-
-            ap_distances = sim_matrix[anchor_positives[:, 0], anchor_positives[:, 1]]
-            for anchor_positive, ap_distance in zip(anchor_positives, ap_distances):
-                loss_values = ap_distance - sim_matrix[torch.LongTensor(np.array([anchor_positive[0]])), torch.LongTensor(negative_indices)] + self.margin
-                loss_values = loss_values.data.cpu().numpy()
-                hard_negative = self.negative_selection_fn(loss_values)
-                if hard_negative is not None:
-                    hard_negative = negative_indices[hard_negative]
-                    triplets.append([anchor_positive[0], anchor_positive[1], hard_negative])
-
-        if len(triplets) == 0:
-            triplets.append([anchor_positive[0], anchor_positive[1], negative_indices[0]])
+            triplets.append([anchor_idx, pos_idx, negative_indices[0]])
 
         triplets = np.array(triplets)
 

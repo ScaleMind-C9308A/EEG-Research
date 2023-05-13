@@ -1,10 +1,6 @@
 import torch
-from losses import OnlineTripletLoss
-from utils import AllTripletSelector,HardestNegativeTripletSelector, RandomNegativeTripletSelector, SemihardNegativeTripletSelector # Strategies for selecting triplets within a minibatch
-from metrics import AverageNonzeroTripletsMetric
 import torch.optim as optim
 import torch.optim.lr_scheduler as lr_scheduler
-from trainer import net_trainer
 # Added pkgs for configurations
 import argparse
 from loguru import logger
@@ -13,6 +9,11 @@ import numpy as np
 import random
 # Import modules
 from data_loader import load_data
+from model import load_model
+from losses import OnlineTripletLoss
+from trainer import fit
+from utils import AllTripletSelector,HardestNegativeTripletSelector, RandomNegativeTripletSelector, SemihardNegativeTripletSelector # Strategies for selecting triplets within a minibatch
+from metrics import AverageNonzeroTripletsMetric
 
 def seed_everything(seed):
     random.seed(seed)
@@ -48,18 +49,19 @@ def run_online_triplet():
         logger.info(args)
 
     # Step 1: Set DataLoaders
-    train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path, args.img_path, args.splits_path, args.device)
+    train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path, args.img_path, args.splits_path, args.device, mode='online_triplet')
     # Step 2: Set model
-    
-    margin = 1.
-    loss_fn = OnlineTripletLoss(margin, RandomNegativeTripletSelector(margin))
+    model = load_model(model="embedding_net")
+    # Step 3: Set loss_fn
+    margin = 0.
+    loss_fn = OnlineTripletLoss(margin, args.device, RandomNegativeTripletSelector(margin))
+    # Step 4: Set optimizer
     lr = 1e-3
     optimizer = optim.Adam(model.parameters(), lr=lr, weight_decay=1e-4)
     scheduler = lr_scheduler.StepLR(optimizer, 8, gamma=0.1, last_epoch=-1)
-    n_epochs = 20
-    log_interval = 150
-
-    net_trainer(online_train_loader, online_test_loader, model, loss_fn, optimizer, scheduler, n_epochs, cuda, log_interval, metrics=[AverageNonzeroTripletsMetric()])
+    #Step 5: Put all to net_trainer()/fit()
+    fit(train_dataloader, val_dataloader, model, loss_fn, optimizer, scheduler, args.max_epoch, args.device, args.log_interval, [AverageNonzeroTripletsMetric])
+    # net_trainer(train_dataloader, val_dataloader, model, loss_fn, optimizer, scheduler, args.max_epoch, args.device, args.log_interval, metrics=[AverageNonzeroTripletsMetric()])
 
 def load_config():
     """
@@ -93,10 +95,12 @@ def load_config():
                         help='Weight Decay.(default: 1e-4)')
     parser.add_argument('--optim', default='SGD', type=str,
                         help='Optimizer')
-    parser.add_argument('--max-iter', default=40, type=int,
-                        help='Number of iterations.(default: 40)')
-    parser.add_argument('--max-epoch', default=30, type=int,
+    # parser.add_argument('--max-iter', default=40, type=int,
+    #                     help='Number of iterations.(default: 40)')
+    parser.add_argument('--max-epoch', default=100, type=int,
                         help='Number of epochs.(default: 30)')
+    parser.add_argument('--log-interval', default=10, type=int,
+                        help='Log interval during training.(default: 10)')
     # GPU training settings
     parser.add_argument('--num-workers', default=2, type=int,
                         help='Number of loading data threads.(default: 4)')
