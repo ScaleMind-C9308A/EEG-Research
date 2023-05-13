@@ -11,7 +11,7 @@ def load_data(eeg_path, img_path, splits_path, device, mode="triple"):
     mode: "triple" | "online_triplet"
     """
     loaded_eeg = torch.load(eeg_path)
-    loaded_splits = torch.load(splits_path)
+    loaded_splits = torch.load(splits_path)['splits']
     if (mode== "triple"):
         train_dataset = EEGDataset_Triple(img_path, loaded_eeg, loaded_splits, mode="train")
         val_dataset = EEGDataset_Triple(img_path, loaded_eeg, loaded_splits, mode="val")
