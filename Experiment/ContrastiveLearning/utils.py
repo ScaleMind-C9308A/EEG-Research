@@ -5,13 +5,13 @@ from itertools import combinations
 def similarity_matrix(eeg_embeds, img_embeds):
     """Compute the similarity matrix using the compatibility function
     Input:
-        - eeg_embeds: (eeg_num_samples, eeg_dim)
-        - img_embeds: (img_num_samples, img_dim)
+        - eeg_embeds: (eeg_num_samples, eeg_dim) => tensor
+        - img_embeds: (img_num_samples, img_dim) => tensor
         Assume eeg_dim == img_dim
     return:
         - sim_matrix: (eeg_num_samples, img_num_samples)
     """
-    sim_matrix = torch.zeros(eeg_embeds.shape[0], img_embeds.shape[0])
+    sim_matrix = torch.zeros(eeg_embeds.size()[0], img_embeds.size()[0])
     for i, eeg in enumerate(eeg_embeds):
         for j, image in enumerate(img_embeds):
             sim_matrix[i, j] = torch.sum(eeg*image, dim=-1)
@@ -59,6 +59,8 @@ class FunctionNegativeTripletSelector(TripletSelector):
         self.negative_selection_fn = negative_selection_fn
 
     def get_triplets(self, eeg_embeddings, img_embeddings, labels):
+        # print(f"EEG embeddings: {eeg_embeddings.size()}")
+        # print(f"Image embeddings: {img_embeddings.size()}")
         if self.cpu:
             eeg_embeddings = eeg_embeddings.cpu()
             img_embeddings = img_embeddings.cpu()

@@ -18,7 +18,9 @@ from metrics import AverageNonzeroTripletsMetric
 def seed_everything(seed):
     random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
+    # os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "max_split_size_mb:512"
     np.random.seed(seed)
+    torch.cuda.empty_cache()
     torch.manual_seed(seed)
     torch.cuda.manual_seed(seed)
     torch.backends.cudnn.deterministic = True
@@ -43,15 +45,17 @@ def run_online_triplet():
     seed_everything(271)
     args = load_config()
     if args.arch != 'test':
-        if not os.path.exists(args.log_path + args.info):
-            os.makedirs(args.log_path + args.info)
-        logger.add(args.log_path + args.info  + '/' + 'train.log')
+        log_path_dir = os.path.join(args.log_path, args.info)
+        if not os.path.exists(log_path_dir):
+            os.makedirs(log_path_dir)
+        logger.add(os.path.join(log_path_dir, 'train.log'))
         logger.info(args)
 
     # Step 1: Set DataLoaders
-    train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path, args.img_path, args.splits_path, args.device, mode='online_triplet')
+    train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path, args.img_path, args.splits_path, args.time_low, args.time_high, args.device, mode='online_triplet', img_encoder=args.img_encoder)
     # Step 2: Set model
-    model = load_model(model="embedding_net")
+    model = load_model(model="embedding_net", eeg_encoder=args.eeg_encoder, img_encoder=args.img_encoder)
+    model.to(args.device)
     # Step 3: Set loss_fn
     margin = 0.
     loss_fn = OnlineTripletLoss(margin, args.device, RandomNegativeTripletSelector(margin))
@@ -60,7 +64,7 @@ def run_online_triplet():
     optimizer = optim.Adam(model.parameters(), lr=lr, weight_decay=1e-4)
     scheduler = lr_scheduler.StepLR(optimizer, 8, gamma=0.1, last_epoch=-1)
     #Step 5: Put all to net_trainer()/fit()
-    fit(train_dataloader, val_dataloader, model, loss_fn, optimizer, scheduler, args.max_epoch, args.device, args.log_interval, [AverageNonzeroTripletsMetric])
+    fit(train_dataloader, val_dataloader, model, loss_fn, optimizer, scheduler, args.max_epoch, args.device, args.log_interval, [AverageNonzeroTripletsMetric()])
     # net_trainer(train_dataloader, val_dataloader, model, loss_fn, optimizer, scheduler, args.max_epoch, args.device, args.log_interval, metrics=[AverageNonzeroTripletsMetric()])
 
 def load_config():
@@ -78,6 +82,10 @@ def load_config():
                         help='Dataset name.')
     parser.add_argument('--eeg-path',
                         help='Path of eeg dataset')
+    parser.add_argument('--time-low', type=float, default=20,
+                        help='Lowest time value of eeg segment')
+    parser.add_argument('--time-high', type=float, default=460,
+                        help='highest time value of eeg segment')
     parser.add_argument('--img-path',
                         help='Path of image dataset')
     parser.add_argument('--splits-path',
@@ -86,6 +94,11 @@ def load_config():
                         help="Directory path to save log files during training")
     parser.add_argument('--info', default='Trivial',
                         help='Train info')
+    parser.add_argument('--img-encoder', default="inception_v3", type=str,
+                        help='inception_v3 | resnet50')
+    parser.add_argument('--eeg-encoder', default="EEGChannelNet", type=str,
+                        help='inception_v3 | resnet50')
+    
     # Model training configurations
     parser.add_argument('--batch-size', default=128, type=int,
                         help='Batch size.(default: 128)')
@@ -101,6 +114,7 @@ def load_config():
                         help='Number of epochs.(default: 30)')
     parser.add_argument('--log-interval', default=10, type=int,
                         help='Log interval during training.(default: 10)')
+    
     # GPU training settings
     parser.add_argument('--num-workers', default=2, type=int,
                         help='Number of loading data threads.(default: 4)')

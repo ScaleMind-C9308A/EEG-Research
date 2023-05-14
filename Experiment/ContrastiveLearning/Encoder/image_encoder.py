@@ -1,20 +1,39 @@
 from torchvision import models
+import torch.nn as nn
 
-def load_image_encoder(model_name, pretrained):
+def load_image_encoder(backbone, output_dim, pretrained):
     """
     Load image encoder as CNN models
 
     Args:
-        model_name: resnet50 | inception_v3
+        backbone: "inception_v3" | "resnet50"
+        output_dim: (default: 40) 
         pretrained: True | False
     """
-    if pretrained:
-        if (model_name == "resnet50"):
-            return models.resnet50(models.ResNet50_Weights)
-        if (model_name == "inception_v3"):
-            return models.inception_v3(models.Inception_V3_Weights)
-    else:
-        if (model_name == "resnet50"):
-            return models.resnet50()
-        if (model_name == "inception_v3"):
-            return models.inception_v3()
+    return ImageEncoder(backbone, output_dim, pretrained)
+    
+        
+class ImageEncoder(nn.Module):
+    def __init__(self, backbone="inception_v3", output_dim=40, pretrained=True):
+        """
+        backbone: "inception_v3" | "resnet50"
+        output_dim: (default: 40) 
+        pretrained: True | False
+        """
+        super().__init__()
+        if pretrained:
+            if (backbone == "resnet50"):
+                self.backbone = models.resnet50(models.ResNet50_Weights.DEFAULT)
+            if (backbone == "inception_v3"):
+                self.backbone = models.inception_v3(models.Inception_V3_Weights.DEFAULT)
+        else:
+            if (backbone == "resnet50"):
+                self.backbone = models.resnet50()
+            if (backbone == "inception_v3"):
+                self.backbone = models.inception_v3()
+        self.backbone.fc = nn.Sequential(
+            nn.Linear(2048, output_dim),
+            nn.ReLU()
+        )
+    def forward(self, x):
+        return self.backbone(x)
