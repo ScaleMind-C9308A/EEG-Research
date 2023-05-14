@@ -4,9 +4,10 @@ python3 run_online_triplet.py --dataset CVPR2017 \
 --splits-path /media/exx/HDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth \
 --log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/ContrastiveLearning \
 --info contrastive_online_triplet \
---batch-size 64 --lr 2e-4  \
 --max-epoch 50 \
 --log-interval 10 \
 --gpu 1 \
---num-classes 40
+--num-classes 40 \
+--eeg-encoder EEGChannelNet \
+--img-encoder inception_v3
 

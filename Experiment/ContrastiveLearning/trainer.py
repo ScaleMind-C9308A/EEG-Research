@@ -1,6 +1,6 @@
 import torch
 import numpy as np
-
+from loguru import logger
 
 def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs, device, log_interval, metrics=[],
         start_epoch=0):
@@ -17,10 +17,10 @@ def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs
         scheduler.step()
 
     for epoch in range(start_epoch, n_epochs):
-        scheduler.step()
 
         # Train stage
         train_loss, metrics = train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, metrics)
+        scheduler.step()
 
         message = 'Epoch: {}/{}. Train set: Average loss: {:.4f}'.format(epoch + 1, n_epochs, train_loss)
         for metric in metrics:
@@ -34,7 +34,7 @@ def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs
         for metric in metrics:
             message += '\t{}: {}'.format(metric.name(), metric.value())
 
-        print(message)
+        logger.info(message)
 
 
 def train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, metrics):
@@ -46,6 +46,11 @@ def train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, m
     total_loss = 0
 
     for batch_idx, (data, target) in enumerate(train_loader):
+        # print(f"Device: {device}")
+        # print(f"Batch {batch_idx}, batch_size: {len(target)}")
+        # print(f"EEG size: {data[0].size()}")
+        # print(f"Image size: {data[1].size()}")
+        # print(target)
         target = target if len(target) > 0 else None
         if not type(data) in (tuple, list):
             data = (data,)
@@ -83,7 +88,7 @@ def train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, m
             for metric in metrics:
                 message += '\t{}: {}'.format(metric.name(), metric.value())
 
-            print(message)
+            logger.info(message)
             losses = []
 
     total_loss /= (batch_idx + 1)
