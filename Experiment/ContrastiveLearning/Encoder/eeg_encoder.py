@@ -4,26 +4,13 @@
 # from EEG_Encoder.CNN import classifier_CNN
 # from EEG_Encoder.EEGNet import classifier_EEGNet
 # from EEG_Encoder.SyncNet import classifier_SyncNet
-from Encoder.EEGChannelNet import EEGChannelNet
-
-# def load_eeg_encoder(
-#              n_classes,
-#              classes,
-#              encoder,
-#              length, # 512
-#              channel, # 96
-#              min_CNN,
-#              kind):
-#         if encoder=="EEGChannelNet":
-#             net = EEGChannelNet()
-    
-#         # print("DONE: CREATE TORCH CLASSIFIER")
-#         # print(net)
-#         return net
+import torch
+import torch.nn as nn
+from Encoder.EEGChannelNet import EEGChannelNet_Encoder
 
 def load_eeg_encoder(encoder):
     if encoder=="EEGChannelNet":
-        net = EEGChannelNet()
+        net = EEGChannelNet_Encoder()
 
     # print("DONE: CREATE EEG ENCODER")
     # print(net)

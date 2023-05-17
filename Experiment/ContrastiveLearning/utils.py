@@ -11,11 +11,11 @@ def similarity_matrix(eeg_embeds, img_embeds):
     return:
         - sim_matrix: (eeg_num_samples, img_num_samples)
     """
-    sim_matrix = torch.zeros(eeg_embeds.size()[0], img_embeds.size()[0])
-    for i, eeg in enumerate(eeg_embeds):
-        for j, image in enumerate(img_embeds):
-            sim_matrix[i, j] = torch.sum(eeg*image, dim=-1)
-    
+    # sim_matrix = torch.zeros(eeg_embeds.size()[0], img_embeds.size()[0])
+    # for i, eeg in enumerate(eeg_embeds):
+    #     for j, image in enumerate(img_embeds):
+    #         sim_matrix[i, j] = torch.sum(eeg*image, dim=-1)
+    sim_matrix = torch.matmul(eeg_embeds, img_embeds.t())
     return sim_matrix
 
 class TripletSelector:
@@ -66,23 +66,34 @@ class FunctionNegativeTripletSelector(TripletSelector):
             img_embeddings = img_embeddings.cpu()
         sim_matrix = similarity_matrix(eeg_embeddings, img_embeddings)
         sim_matrix = sim_matrix.cpu()
+        # print(sim_matrix)
+        # print(f"sim_matrix size: {sim_matrix.size()}")
 
         labels = labels.cpu().data.numpy()
-        triplets = []
+        # maximum total triplets found: n_labels*n_samples
+        # => dim of triplets (maximum): (n_labels*n_samples, 3)
+        triplets = [] 
 
         for label in set(labels):
+            # loop for n_classes times
+            #len(labels) == batch_size
+            #len(eeg_indices) ==len(pos_img_indices) == n_samples
+            #len(negatvie_indices) == batch_size - n_samples
             label_mask = (labels == label)
-            label_indices = np.where(label_mask)[0]
-            if len(label_indices) < 2:
+            eeg_indices = np.where(label_mask)[0] 
+            pos_img_indices = eeg_indices
+            # # We want each eeg pair with its corresponding image 
+            # # => don't want to shuffle img_indices
+            # pos_img_indices = np.random.permutation(eeg_indices)
+            if len(eeg_indices) < 2:
                 continue
             negative_indices = np.where(np.logical_not(label_mask))[0]
-            # # All anchor-positive pairs => (n_label_indices, 2)
-            # anchor_positives = list(combinations(label_indices, 2))  
-            # anchor_positives = np.array(anchor_positives)
-            label_indices_shuffled = np.random.permutation(label_indices)
 
-            ap_distances = sim_matrix[label_indices, label_indices_shuffled]
-            for anchor_idx, pos_idx, ap_distance in zip(label_indices, label_indices_shuffled, ap_distances):
+
+            ap_distances = sim_matrix[eeg_indices, pos_img_indices]
+            #ap_distance: [sim1(eeg1, pos_img1),..., sim_n(eeg1, pos_img1)] => (n_samples,)
+            # print(f"ap_distance: {ap_distances}")
+            for anchor_idx, pos_idx, ap_distance in zip(eeg_indices, pos_img_indices, ap_distances):
                 loss_values = ap_distance - sim_matrix[torch.LongTensor(np.array([anchor_idx])), torch.LongTensor(negative_indices)] + self.margin
                 loss_values = loss_values.data.cpu().numpy()
                 hard_negative = self.negative_selection_fn(loss_values)
