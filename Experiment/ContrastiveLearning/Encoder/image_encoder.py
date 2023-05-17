@@ -14,7 +14,7 @@ def load_image_encoder(backbone, output_dim, pretrained):
     
         
 class ImageEncoder(nn.Module):
-    def __init__(self, backbone="inception_v3", output_dim=40, pretrained=True):
+    def __init__(self, backbone="inception_v3", output_dim=1000, pretrained=True):
         """
         backbone: "inception_v3" | "resnet50"
         output_dim: (default: 40) 

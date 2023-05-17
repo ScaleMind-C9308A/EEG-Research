@@ -210,7 +210,12 @@ class EEGDataset_Triple(Dataset):
         # while positive_index == index:
         #     positive_index = np.random.choice(self.label_to_indices[label1])
         img_negative_label = np.random.choice(list(self.labels_set - set([img_positive_label])))
-        img_negative_idx = np.random.choice(self.label_to_indices[img_negative_label])
+        sample_negative_idx = np.random.choice(self.label_to_indices[img_negative_label])
+        img_negative_idx = self.eeg_dataset[sample_negative_idx]['image']
+        # print(f"Len img filenames: {len(self.img_filenames)}")
+        # print(f"img to indices: {self.label_to_indices}")
+        # print(f"img_negative_label: {img_negative_label}")
+        # print(f"img_neg_idx: {img_negative_idx}")
         img_positive_filename, img_positive_classname = self.img_filenames[img_positive_idx], self.classes[img_positive_label]
         img_negative_filename, img_negative_classname = self.img_filenames[img_negative_idx], self.classes[img_negative_label]
         img_positive = Image.open(os.path.join(self.img_dir_path, img_positive_filename+'.JPEG' )).convert('RGB')

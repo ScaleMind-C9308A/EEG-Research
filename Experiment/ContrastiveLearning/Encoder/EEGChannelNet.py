@@ -153,8 +153,66 @@ class FeaturesExtractor(nn.Module):
         
         return out
 
+class EEGChannelNet_Encoder(nn.Module):
+    '''The model for EEG encoder.
+    The imput is a tensor where each row is a channel the recorded signal and each colums is a time sample.
+    The model performs different 2D to extract temporal e spatial information.
+    The output is a vector embedding of EEG signal
+    Args:
+        in_channels: number of input channels
+        temp_channels: number of features of temporal block
+        out_channels: number of features before classification
+        num_classes: number possible classes
+        embedding_size: size of the embedding vector
+        input_width: width of the input tensor (necessary to compute classifier input size)
+        input_height: height of the input tensor (necessary to compute classifier input size)
+        temporal_dilation_list: list of dilations for temporal convolutions, second term must be even
+        temporal_kernel: size of the temporal kernel, second term must be even (default: (1, 32))
+        temporal_stride: size of the temporal stride, control temporal output size (default: (1, 2))
+        num_temp_layers: number of temporal block layers
+        num_spatial_layers: number of spatial layers
+        spatial_stride: size of the spatial stride
+        num_residual_blocks: the number of residual blocks
+        down_kernel: size of the bottleneck kernel
+        down_stride: size of the bottleneck stride
+        '''
+    def __init__(self, in_channels=1, temp_channels=10, out_channels=50, embedding_size=1000,
+                 input_width=440, input_height=128, temporal_dilation_list=[(1,1),(1,2),(1,4),(1,8),(1,16)],
+                 temporal_kernel=(1,33), temporal_stride=(1,2),
+                 num_temp_layers=4,
+                 num_spatial_layers=4, spatial_stride=(2,1), num_residual_blocks=4, down_kernel=3, down_stride=2):
+        super().__init__()
 
-class EEGChannelNet(nn.Module):
+        self.encoder = FeaturesExtractor(in_channels, temp_channels, out_channels, input_width, input_height,
+                                     temporal_kernel, temporal_stride,
+                                     temporal_dilation_list, num_temp_layers,
+                                     num_spatial_layers, spatial_stride, num_residual_blocks, down_kernel, down_stride
+                                     )
+
+        encoding_size = self.encoder(torch.zeros(1, in_channels, input_height, input_width)).contiguous().view(-1).size()[0]
+        
+
+        self.fc = nn.Sequential(
+#             nn.Dropout(p=0.2, inplace=False),
+            nn.Linear(encoding_size, embedding_size),
+            nn.ReLU(True)
+        )
+
+    def forward(self, x):
+        x = x.unsqueeze(0).permute(1, 0, 2, 3)
+        
+        out = self.encoder(x)
+        
+        out = torch.mean(out.view(out.size(0), out.size(-1)*out.size(1), -1),dim=2)
+        
+        
+#         out = out.view(x.size(0), -1)
+#         print(out.size())
+        
+        out = self.fc(out)
+
+        return out
+class EEGChannelNet_Classifier(nn.Module):
     '''The model for EEG classification.
     The imput is a tensor where each row is a channel the recorded signal and each colums is a time sample.
     The model performs different 2D to extract temporal e spatial information.

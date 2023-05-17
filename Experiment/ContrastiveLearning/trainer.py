@@ -22,14 +22,15 @@ def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs
         train_loss, metrics = train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, metrics)
         scheduler.step()
 
-        message = 'Epoch: {}/{}. Train set: Average loss: {:.4f}'.format(epoch + 1, n_epochs, train_loss)
+        message = 'Epoch: {}/{}. Train set: Average loss: {:.6f}'.format(epoch + 1, n_epochs, train_loss)
         for metric in metrics:
             message += '\t{}: {}'.format(metric.name(), metric.value())
+        logger.info(message)
 
         val_loss, metrics = test_epoch(val_loader, model, loss_fn, device, metrics)
         val_loss /= len(val_loader)
 
-        message += '\nEpoch: {}/{}. Validation set: Average loss: {:.4f}'.format(epoch + 1, n_epochs,
+        message = 'Epoch: {}/{}. Validation set: Average loss: {:.6f}'.format(epoch + 1, n_epochs,
                                                                                  val_loss)
         for metric in metrics:
             message += '\t{}: {}'.format(metric.name(), metric.value())
@@ -66,7 +67,17 @@ def train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, m
         if type(outputs) not in (tuple, list):
             outputs = (outputs,)
 
+        # WARNING: For inception_v3, must include this if-statement. Otherwise skip it
+        if len(outputs) == 2: # (eeg, image)
+            eeg, img = outputs
+            img_logits = img.logits
+            outputs = (eeg, img_logits)
+        elif len(outputs) == 3: # (eeg, image_pos, image_neg)
+            eeg, image_pos, image_neg = outputs
+            # img_logits = img.logits
+            outputs = (eeg, image_pos.logits, image_neg.logits)
         loss_inputs = outputs
+
         if target is not None:
             target = (target,)
             loss_inputs += target
@@ -102,6 +113,9 @@ def test_epoch(val_loader, model, loss_fn, device, metrics):
         model.eval()
         val_loss = 0
         for batch_idx, (data, target) in enumerate(val_loader):
+            # print(f"Batch {batch_idx}, batch_size: {len(target)}")
+            # print(f"EEG size: {data[0].size()}")
+            # print(f"Image size: {data[1].size()}")
             target = target if len(target) > 0 else None
             if not type(data) in (tuple, list):
                 data = (data,)
@@ -114,6 +128,7 @@ def test_epoch(val_loader, model, loss_fn, device, metrics):
 
             if type(outputs) not in (tuple, list):
                 outputs = (outputs,)
+            
             loss_inputs = outputs
             if target is not None:
                 target = (target,)

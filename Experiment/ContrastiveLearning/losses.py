@@ -19,6 +19,8 @@ class TripletLoss(nn.Module):
         self.margin = margin
     def F(self, eeg_embed, image_embed):
         """Compability func F for compute the dot product between EEG and image representations"""
+        # print(f'eeg embed size: ', eeg_embed.size())
+        # print(f'img embed size: ', image_embed.size())
         return torch.sum(eeg_embed*image_embed, dim=-1)
     def forward(self, anchor, positive, negative, average=True):
         """compute the similarity scores between anchor-positive and anchor-negative pairs"""
@@ -44,18 +46,35 @@ class OnlineTripletLoss(nn.Module):
         self.margin = margin
         self.device = device
         self.triplet_selector = triplet_selector
-    def F(self, eeg_embed, image_embed):
-        """Compability func F for compute the dot product between EEG and image representations"""
-        return torch.sum(eeg_embed*image_embed, dim=-1)
+    def F(self, eeg_embeds, image_embeds):
+        """
+        Compability func F for compute the dot product between EEG and image representations
+        Input:
+            - eeg_embeds: (num_samples, eeg_dim) => tensor
+            - img_embeds: (num_samples, img_dim) => tensor
+            Assume eeg_dim == img_dim
+        Return:
+            - (num_samples, )
+        """
+        return torch.sum(eeg_embeds*image_embeds, dim=-1)
 
     def forward(self, eeg_embeddings, img_embeddings, target):
-
+        """
+        Input:
+            - eeg_embeds: (num_samples, eeg_dim) => tensor
+            - img_embeds: (num_samples, img_dim) => tensor
+            - target: (num_samples,)
+        
+        triplets: (num_triplets, 3) => num_triplets < num_samples
+        """
         triplets = self.triplet_selector.get_triplets(eeg_embeddings, img_embeddings, target)
-
+        # print(f"Triplet size: {triplets.size()}")
         triplets.to(self.device)
 
-        pos_sim = self.F(eeg_embeddings[triplets[0]], img_embeddings[triplets[1]])
-        neg_sim = self.F(eeg_embeddings[triplets[0]], img_embeddings[triplets[2]])
-        losses = F.relu(neg_sim - pos_sim + self.margin)
+        pos_sim = self.F(eeg_embeddings[triplets[:, 0]], img_embeddings[triplets[:, 1]])
+        neg_sim = self.F(eeg_embeddings[triplets[:, 0]], img_embeddings[triplets[:, 2]])
+        losses = F.relu( neg_sim -  pos_sim + self.margin)
+        # losses = neg_sim - pos_sim + self.margin
+        print(f"pos_sim: {pos_sim}, neg_sim: {neg_sim}, losses: {losses}")
 
         return losses.mean(), len(triplets)
