@@ -28,6 +28,8 @@ class TripletLoss(nn.Module):
         neg_similarity = self.F(anchor, negative)
         # Triplet loss
         loss = F.relu(neg_similarity - pos_similarity + self.margin)
+        print(f"pos_sim: {pos_similarity.size()}, neg_sim: {neg_similarity.size()}, losses: {loss.size()}")
+        print(f"pos_sim: {pos_similarity}, neg_sim: {neg_similarity}, losses: {loss}")
         return loss.mean() if average else loss.sum()
 
 class OnlineTripletLoss(nn.Module):
