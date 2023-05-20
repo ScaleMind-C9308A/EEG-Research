@@ -30,9 +30,8 @@ def fine_tune():
 # Load pre-trained Inception v3 model
     model = models.inception_v3(pretrained=True)
 
-    # Load ImageNet class labels
-    for img in args.img_path:
-        labels = os.listdir(args.img_path)[img].split('\\')[-1].split('_')[0] 
+    # # Load ImageNet class labels
+    # labels = os.listdir(args.img_path)[img].split('\\')[-1].split('_')[0] 
 
     # Set up data transformations
     transform = transforms.Compose([
@@ -59,10 +58,12 @@ def fine_tune():
 
         with torch.no_grad():
             outputs = model(image)  # Forward pass
-            _, predicted_idx = torch.max(outputs, 1)  # Get predicted class index
-            predicted_label = labels[predicted_idx.item()]  # Map index to class label
-
-        print(f"Image: {image_path} - Predicted label: {predicted_label}")
+            percents = torch.nn.functional.softmax(outputs, dim=1)[0] * 100
+            top5_vals, top5_inds = percents.topk(5)
+            # _, predicted_idx = torch.max(outputs, 1)  # Get predicted class index
+            # predicted_label = labels[predicted_idx.item()]  # Map index to class label
+        print(f"Top5 index: {top5_inds} - Top5 vals: {top5_vals}")
+        # print(f"Image: {image_path} - Predicted label: {predicted_label}")
 def load_config():
     """
     Load configuration.
