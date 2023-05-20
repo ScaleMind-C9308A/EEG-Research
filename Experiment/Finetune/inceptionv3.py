@@ -60,10 +60,10 @@ def fine_tune():
         with torch.no_grad():
             outputs = model(image)  # Forward pass
             percents = torch.nn.functional.softmax(outputs, dim=1)[0] * 100
-            top5_vals, top5_inds = percents.topk(5)
+            top1_vals, top1_inds = percents.topk(1)
             # _, predicted_idx = torch.max(outputs, 1)  # Get predicted class index
             # predicted_label = labels[predicted_idx.item()]  # Map index to class label
-        print(f"Image: {image_path} - Top5 inds: {top5_inds}")
+        print(f"Image: {image_path} - Top1 inds: {top1_inds} - Top1 vals: {top1_vals}")
         # print(f"Image: {image_path} - Predicted label: {predicted_label}")
 def load_config():
     """
