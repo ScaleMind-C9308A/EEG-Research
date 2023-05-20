@@ -44,7 +44,7 @@ def augmentation():
 
     # Create a directory to save the augmented images
     output_dir = args.img_path_aug
-    os.makedirs(output_dir, exist_ok=True)
+    # os.makedirs(output_dir, exist_ok=True)
 
     # Iterate over the dataset and save the augmented images
     for image_path in image_paths:
@@ -56,10 +56,10 @@ def augmentation():
             image_name = image_path.split('.')[0]
             image_filename = f'{image_name}_crop_{i}.jpeg'
             # print(image_filename)
-            image_path = os.path.join(output_dir, image_filename)
+            image_saved_path = os.path.join(output_dir, image_filename)
             augmented_image = augmented_image.mul(255).byte().numpy().transpose(1, 2, 0)  # Convert tensor to PIL Image format
             augmented_image = Image.fromarray(augmented_image)
-            augmented_image.save(image_path)
+            augmented_image.save(image_saved_path)
             
             
 
