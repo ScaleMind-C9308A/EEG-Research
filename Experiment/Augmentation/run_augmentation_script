@@ -1,0 +1,8 @@
+python3 augmentation.py --dataset CVPR2017 \
+--img-path /home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet \
+--img-path-aug /media/exx/HDD1/LanxHuyen/CVPR2017/imagenet_augmented \
+--log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/Augmentation \
+--info "Augmentation imagenet" \
+--gpu 1 \
+--img-encoder inception_v3
+
