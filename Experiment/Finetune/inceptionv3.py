@@ -46,7 +46,7 @@ def fine_tune():
     model = model.to(args.device)
 
     # Load image paths
-    image_paths = args.img_path
+    image_paths = os.listdir(args.img_path)
 
     # Perform inference
     model.eval()  # Set the model to evaluation mode
