@@ -46,13 +46,14 @@ def fine_tune():
     model = model.to(args.device)
 
     # Load image paths
+    image_folder = args.img_path
     image_paths = os.listdir(args.img_path)
 
     # Perform inference
     model.eval()  # Set the model to evaluation mode
 
     for image_path in image_paths:
-        image = Image.open(image_path).convert("RGB")  # Load image
+        image = Image.open(os.path.join(image_folder, image_path)).convert("RGB")  # Load image
         image = transform(image).unsqueeze(0)  # Apply transformations and add batch dimension
         image = image.to(args.device)  # Move image to device
 
