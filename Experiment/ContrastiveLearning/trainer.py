@@ -128,6 +128,10 @@ def test_epoch(val_loader, model, loss_fn, device, metrics):
 
             if type(outputs) not in (tuple, list):
                 outputs = (outputs,)
+
+            # if len(outputs) == 3: # (eeg, image_pos, image_neg)
+            #     eeg, image_pos, image_neg = outputs
+                
             
             loss_inputs = outputs
             if target is not None:
@@ -135,6 +139,7 @@ def test_epoch(val_loader, model, loss_fn, device, metrics):
                 loss_inputs += target
 
             loss_outputs = loss_fn(*loss_inputs)
+            # print(f"Val loss output: {loss_outputs}")
             loss = loss_outputs[0] if type(loss_outputs) in (tuple, list) else loss_outputs
             val_loss += loss.item()
 

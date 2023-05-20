@@ -6,24 +6,34 @@ import numpy as np
 from PIL import Image
 import os
 
-def img_transform(model="inception_v3"):
+def img_transform(model="inception_v3", mode="train"):
     """
     Training images transform.
 
     Args
         model: "inception_v3" | "resnet50"
+        mode: "train" | "val"
     Returns
         transform(torchvision.transforms): transform
     """
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                      std=[0.229, 0.224, 0.225])
-    img_size = 299 if (model=="inception_v3") else 224
-    return transforms.Compose([
-        transforms.RandomResizedCrop(img_size),                         
-        transforms.RandomHorizontalFlip(),
-        transforms.ToTensor(),
-        normalize,
-    ])
+    img_size = (299,299) if (model=="inception_v3") else (224,224)
+    if (mode == "train"):
+        return transforms.Compose([
+            transforms.RandomResizedCrop(img_size),                         
+            transforms.RandomHorizontalFlip(),
+            transforms.ToTensor(),
+            normalize,
+        ])
+    elif (mode=="val"):
+        return transforms.Compose([
+                transforms.Resize(img_size),  # Resize the image to 299x299 pixels
+                transforms.ToTensor(),  # Convert the image to a PyTorch tensor
+                normalize
+        ])
+
+
 def load_data(eeg_path, img_path, splits_path, eeg_time_low, eeg_time_high, device, mode="triple", img_encoder="inception_v3"):
     """
     mode: "triple" | "online_triplet",
@@ -31,15 +41,16 @@ def load_data(eeg_path, img_path, splits_path, eeg_time_low, eeg_time_high, devi
     """
     loaded_eeg = torch.load(eeg_path)
     loaded_splits = torch.load(splits_path)['splits']
-    transform = img_transform(img_encoder)
+    train_transform = img_transform(img_encoder, mode="train")
+    val_transform = img_transform(img_encoder, mode="val")
     if (mode== "triple"):
-        train_dataset = EEGDataset_Triple(img_path, loaded_eeg, loaded_splits, eeg_time_low,eeg_time_high, mode="train", transform=transform)
-        val_dataset = EEGDataset_Triple(img_path, loaded_eeg, loaded_splits, eeg_time_low,eeg_time_high,mode="val", transform=transform)
-        test_dataset = EEGDataset_Triple(img_path, loaded_eeg, loaded_splits, eeg_time_low,eeg_time_high,mode="test", transform=transform)
+        train_dataset = EEGDataset_Triple(img_path, loaded_eeg, loaded_splits, eeg_time_low,eeg_time_high, mode="train", transform=train_transform)
+        val_dataset = EEGDataset_Triple(img_path, loaded_eeg, loaded_splits, eeg_time_low,eeg_time_high,mode="val", transform=val_transform)
+        test_dataset = EEGDataset_Triple(img_path, loaded_eeg, loaded_splits, eeg_time_low,eeg_time_high,mode="test", transform=val_transform)
     elif (mode=="online_triplet"):
-        train_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits,eeg_time_low,eeg_time_high, mode="train", transform=transform)
-        val_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits,eeg_time_low,eeg_time_high, mode="val", transform=transform)
-        test_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits,eeg_time_low,eeg_time_high, mode="test", transform=transform)
+        train_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits,eeg_time_low,eeg_time_high, mode="train", transform=train_transform)
+        val_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits,eeg_time_low,eeg_time_high, mode="val", transform=val_transform)
+        test_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits,eeg_time_low,eeg_time_high, mode="test", transform=val_transform)
     train_batch_sampler = BalancedBatchSampler(train_dataset.labels, n_classes=8, n_samples=8)
     val_batch_sampler = BalancedBatchSampler(val_dataset.labels, n_classes=8, n_samples=8)
     test_batch_sampler = BalancedBatchSampler(test_dataset.labels, n_classes=8, n_samples=8)
@@ -136,12 +147,7 @@ class EEGDataset_Triple(Dataset):
             img_dir_path: directory path of imagenet images,
             loaded_eeg: eeg dataset loaded from torch.load(),
             loaded_splits: cross-validation splits loaded from torch.load(),
-            opt: {
-                subject:,
-                time_low:,
-                time_high:,
-                model_type:
-            }
+
         """
         # self.opt = opt
         # # Load EEG signals
@@ -206,18 +212,18 @@ class EEGDataset_Triple(Dataset):
             raise ValueError()
         eeg, img_positive_idx, img_positive_label = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
         eeg = eeg.float()[:, self.time_low:self.time_high]
-        # positive_index = index
-        # while positive_index == index:
-        #     positive_index = np.random.choice(self.label_to_indices[label1])
-        img_negative_label = np.random.choice(list(self.labels_set - set([img_positive_label])))
-        sample_negative_idx = np.random.choice(self.label_to_indices[img_negative_label])
-        img_negative_idx = self.eeg_dataset[sample_negative_idx]['image']
+        # We don't need to sample neg image from different labels,
+        # we only need to sample neg image that are different from pos_image
+        # img_negative_label = np.random.choice(list(self.labels_set - set([img_positive_label])))
+        # sample_negative_idx = np.random.choice(self.label_to_indices[img_negative_label])
+        img_negative_idx = np.random.choice(np.delete(np.array(range(len(self.img_filenames))), img_positive_idx))
         # print(f"Len img filenames: {len(self.img_filenames)}")
         # print(f"img to indices: {self.label_to_indices}")
         # print(f"img_negative_label: {img_negative_label}")
+        # print(f"img_pos_idx: {img_positive_idx}")
         # print(f"img_neg_idx: {img_negative_idx}")
-        img_positive_filename, img_positive_classname = self.img_filenames[img_positive_idx], self.classes[img_positive_label]
-        img_negative_filename, img_negative_classname = self.img_filenames[img_negative_idx], self.classes[img_negative_label]
+        img_positive_filename = self.img_filenames[img_positive_idx]
+        img_negative_filename = self.img_filenames[img_negative_idx]
         img_positive = Image.open(os.path.join(self.img_dir_path, img_positive_filename+'.JPEG' )).convert('RGB')
         img_negative = Image.open(os.path.join(self.img_dir_path, img_negative_filename+'.JPEG' )).convert('RGB')
         # else:
