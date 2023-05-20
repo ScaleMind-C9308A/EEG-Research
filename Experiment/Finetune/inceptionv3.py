@@ -83,6 +83,10 @@ def load_config():
                         help='Train info')
     parser.add_argument('--img-encoder', default="inception_v3", type=str,
                         help='inception_v3 | resnet50')
+    parser.add_argument('--arch', default='train',
+                        help='Net arch')
+    parser.add_argument('--save_ckpt', default='checkpoints/',
+                        help='result_save')
     
     
     # GPU training settings
