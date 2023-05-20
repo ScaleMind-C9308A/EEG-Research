@@ -63,7 +63,7 @@ def fine_tune():
             top5_vals, top5_inds = percents.topk(5)
             # _, predicted_idx = torch.max(outputs, 1)  # Get predicted class index
             # predicted_label = labels[predicted_idx.item()]  # Map index to class label
-        print(f"Top5 index: {top5_inds} - Top5 vals: {top5_vals}")
+        print(f"Image: {image_path} - Top5 inds: {top5_inds}")
         # print(f"Image: {image_path} - Predicted label: {predicted_label}")
 def load_config():
     """
