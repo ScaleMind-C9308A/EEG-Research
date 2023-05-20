@@ -18,19 +18,33 @@ class TripletLoss(nn.Module):
         super().__init__()   
         self.margin = margin
     def F(self, eeg_embed, image_embed):
-        """Compability func F for compute the dot product between EEG and image representations"""
+        """
+        Compability func F for compute the dot product between EEG and image representations
+        Input:
+            - eeg_embeds: (num_samples, eeg_dim) => tensor
+            - img_embeds: (num_samples, img_dim) => tensor
+            Assume eeg_dim == img_dim
+        Return:
+            - (num_samples, )
+        """
         # print(f'eeg embed size: ', eeg_embed.size())
         # print(f'img embed size: ', image_embed.size())
         return torch.sum(eeg_embed*image_embed, dim=-1)
     def forward(self, anchor, positive, negative, average=True):
         """compute the similarity scores between anchor-positive and anchor-negative pairs"""
-        pos_similarity = self.F(anchor, positive)
-        neg_similarity = self.F(anchor, negative)
+        pos_similarity = self.F(anchor, positive) #(num_samples,)
+        neg_similarity = self.F(anchor, negative) #(num_samples,)
+        #Normalize
+        pos_similarity = F.normalize(pos_similarity, p=2, dim=0)
+        neg_similarity = F.normalize(neg_similarity, p=2, dim=0)
         # Triplet loss
         loss = F.relu(neg_similarity - pos_similarity + self.margin)
-        print(f"pos_sim: {pos_similarity.size()}, neg_sim: {neg_similarity.size()}, losses: {loss.size()}")
-        print(f"pos_sim: {pos_similarity}, neg_sim: {neg_similarity}, losses: {loss}")
-        return loss.mean() if average else loss.sum()
+        # print(f"pos_sim: {pos_similarity.size()}, neg_sim: {neg_similarity.size()}, losses: {loss.size()}")
+        # print(f"pos_sim: {pos_similarity}, neg_sim: {neg_similarity}, losses: {loss}")
+        loss = loss.mean() if average else loss.sum()
+        # print(f"Average: {average}")
+        # print(f"Loss: {loss}")
+        return loss
 
 class OnlineTripletLoss(nn.Module):
     """
