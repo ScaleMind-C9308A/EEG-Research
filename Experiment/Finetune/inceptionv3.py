@@ -31,7 +31,8 @@ def fine_tune():
     model = models.inception_v3(pretrained=True)
 
     # Load ImageNet class labels
-    labels = datasets.ImageNet.classes
+    for img in args.img_path:
+        labels = os.listdir(args.img_path)[img].split('\\')[-1].split('_')[0] 
 
     # Set up data transformations
     transform = transforms.Compose([
