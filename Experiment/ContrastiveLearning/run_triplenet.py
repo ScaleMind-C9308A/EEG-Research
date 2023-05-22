@@ -11,7 +11,7 @@ import random
 from data_loader import load_data
 from model import load_model
 from losses import TripletLoss
-from trainer import fit
+from trainer_inception import fit
 from metrics import AverageNonzeroTripletsMetric
 
 def seed_everything(seed):

@@ -11,7 +11,7 @@ import random
 from data_loader import load_data
 from model import load_model
 from losses import OnlineTripletLoss
-from trainer import fit
+from trainer_inception import fit
 from utils import HardestNegativeTripletSelector, RandomNegativeTripletSelector, SemihardNegativeTripletSelector # Strategies for selecting triplets within a minibatch
 from metrics import AverageNonzeroTripletsMetric
 
