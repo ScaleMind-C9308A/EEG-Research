@@ -4,7 +4,7 @@ from loguru import logger
 import matplotlib.pyplot as plt 
 import os 
 
-def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs, device, log_interval, metrics=[],
+def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs, device, log_interval, log_path_dir, metrics=[],
         start_epoch=0):
     """
     Loaders, model, loss function and metrics should work together for a given task,
@@ -17,6 +17,7 @@ def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs
     """
     train_losses = []  # List to store training losses for plotting
     val_losses = []  # List to store validation losses for plotting
+    save_fig_path = os.path.join(log_path_dir, 'learning_curve.png')
     for epoch in range(0, start_epoch):
         scheduler.step()
 
@@ -40,14 +41,14 @@ def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs
             message += '\t{}: {}'.format(metric.name(), metric.value())
 
         logger.info(message)
-    train_losses.append(train_loss)  # Append training loss to list for plotting
-    val_losses.append(val_loss)  # Append validation loss to list for plotting
-    if (epoch + 1) % 10 == 0:
-        plot_losses(train_losses, val_losses, epoch + 1)
+        train_losses.append(train_loss)  # Append training loss to list for plotting
+        val_losses.append(val_loss)  # Append validation loss to list for plotting
+        if (epoch + 1) % 10 == 0:
+            plot_losses(train_losses, val_losses, epoch + 1, save_fig_path)
 
-    plot_losses(train_losses, val_losses, n_epochs)  # Plot losses after the final 
+    plot_losses(train_losses, val_losses, n_epochs, save_fig_path)  # Plot losses after the final 
     
-def plot_losses(train_losses, val_losses, n_epochs):
+def plot_losses(train_losses, val_losses, n_epochs, save_path):
     plt.figure()
     plt.plot(range(1, n_epochs + 1), train_losses, label='Train Loss')
     plt.plot(range(1, n_epochs + 1), val_losses, label='Validation Loss')
@@ -55,8 +56,8 @@ def plot_losses(train_losses, val_losses, n_epochs):
     plt.ylabel('Loss')
     plt.title('Training and Validation Loss')
     plt.legend()
-    pwd = os.getcwd()
-    save_path = os.path.abspath(os.path.join(pwd, os.pardir, os.pardir, 'Experiment/ContrastiveLearning/loss_triplet_aug'))
+    # pwd = os.getcwd()
+    # save_path = os.path.abspath(os.path.join(pwd, os.pardir, os.pardir, 'Experiment/ContrastiveLearning/loss_triplet_aug'))
     plt.savefig(save_path)
 
 
