@@ -2,6 +2,7 @@ import torch
 import numpy as np
 from loguru import logger
 import matplotlib.pyplot as plt 
+import os 
 
 def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs, device, log_interval, metrics=[],
         start_epoch=0):
@@ -54,7 +55,9 @@ def plot_losses(train_losses, val_losses, n_epochs):
     plt.ylabel('Loss')
     plt.title('Training and Validation Loss')
     plt.legend()
-    plt.savefig('/home/exx/GithubClonedRepo/EEG-Research/Experiment/ContrastiveLearning/loss_triplet_aug')
+    pwd = os.getcwd()
+    save_path = os.path.abspath(os.path.join(pwd, os.pardir, os.pardir, 'Experiment/ContrastiveLearning/loss_triplet_aug'))
+    plt.savefig(save_path)
 
 
 def train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, metrics):
