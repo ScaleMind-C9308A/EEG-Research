@@ -1,3 +1,6 @@
+# custom
+Experiment/ContrastiveLearning/*/model_epoch*
+
 # Others
 *.swp
 .vscode/*
