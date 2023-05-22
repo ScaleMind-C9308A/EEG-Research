@@ -17,7 +17,7 @@ def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs
     """
     train_losses = []  # List to store training losses for plotting
     val_losses = []  # List to store validation losses for plotting
-    save_fig_path = os.path.join(log_path_dir, 'learning_curve.png')
+    
     for epoch in range(0, start_epoch):
         scheduler.step()
 
@@ -43,22 +43,33 @@ def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs
         logger.info(message)
         train_losses.append(train_loss)  # Append training loss to list for plotting
         val_losses.append(val_loss)  # Append validation loss to list for plotting
-        if (epoch + 1) % 10 == 0:
-            plot_losses(train_losses, val_losses, epoch + 1, save_fig_path)
+        if (epoch + 1) % 10 == 0: # Epoch 10, 20, 30, 40, 50
+            plot_losses(train_losses, val_losses, epoch + 1, log_path_dir)
+            model_path = os.path.join(log_path_dir, f"model_epoch_{epoch+1}.pth")
+            torch.save(model.state_dict(), model_path)
 
-    plot_losses(train_losses, val_losses, n_epochs, save_fig_path)  # Plot losses after the final 
+    # plot_losses(train_losses, val_losses, n_epochs, save_fig_train_val)  # Plot losses after the final 
     
-def plot_losses(train_losses, val_losses, n_epochs, save_path):
+def plot_losses(train_losses, val_losses, n_epochs, save_path_dir):
+    save_fig_train_val = os.path.join(save_path_dir, 'train_val_losses.png')
+    save_fig_train = os.path.join(save_path_dir, 'train_losses.png')
     plt.figure()
     plt.plot(range(1, n_epochs + 1), train_losses, label='Train Loss')
     plt.plot(range(1, n_epochs + 1), val_losses, label='Validation Loss')
     plt.xlabel('Epoch')
+    # plt.xticks()
     plt.ylabel('Loss')
     plt.title('Training and Validation Loss')
     plt.legend()
-    # pwd = os.getcwd()
-    # save_path = os.path.abspath(os.path.join(pwd, os.pardir, os.pardir, 'Experiment/ContrastiveLearning/loss_triplet_aug'))
-    plt.savefig(save_path)
+    plt.savefig(save_fig_train_val)
+
+    plt.figure()
+    plt.plot(range(1, n_epochs + 1), train_losses, label='Train Loss')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.title('Training Loss')
+    plt.legend()
+    plt.savefig(save_fig_train)
 
 
 def train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, metrics):

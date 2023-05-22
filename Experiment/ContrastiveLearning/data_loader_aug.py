@@ -18,15 +18,17 @@ def img_transform(model="inception_v3", mode="train"):
     """
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                      std=[0.229, 0.224, 0.225])
-    # img_size = (299,299) if (model=="inception_v3") else (224,224)
+    img_size = (299,299) if (model=="inception_v3") else (224,224)
     if (mode == "train"):
         return transforms.Compose([
+            transforms.RandomResizedCrop(img_size),                         
+            transforms.RandomHorizontalFlip(),
             transforms.ToTensor(),
             normalize,
         ])
     elif (mode=="val"):
         return transforms.Compose([
-                # transforms.Resize(img_size),  # Resize the image to 299x299 pixels
+                transforms.Resize(img_size),  # Resize the image to 299x299 pixels
                 transforms.ToTensor(),  # Convert the image to a PyTorch tensor
                 normalize
         ])
