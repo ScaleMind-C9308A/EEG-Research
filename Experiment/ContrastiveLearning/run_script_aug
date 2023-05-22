@@ -1,9 +1,9 @@
-python3 run_triplenet.py --dataset CVPR2017 \
+python3 run_triplenet_aug.py --dataset CVPR2017 \
 --eeg-path /media/exx/HDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth \
---img-path /home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet \
+--img-path /media/exx/HDD1/LanxHuyen/CVPR2017/imagenet_augmented \
 --splits-path /media/exx/HDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth \
 --log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/ContrastiveLearning \
---info contrastive_online_triplet \
+--info tripletnet_with_dataset_augmented \
 --max-epoch 50 \
 --log-interval 10 \
 --gpu 1 \

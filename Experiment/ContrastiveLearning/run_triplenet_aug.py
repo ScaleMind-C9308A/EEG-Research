@@ -8,7 +8,7 @@ import os
 import numpy as np
 import random
 # Import modules
-from data_loader import load_data
+from data_loader_aug import load_data
 from model import load_model
 from losses import TripletLoss
 from trainer import fit
@@ -42,9 +42,10 @@ def run_triplet():
     seed_everything(271)
     args = load_config()
     if args.arch != 'test':
-        if not os.path.exists(args.log_path + args.info):
-            os.makedirs(args.log_path + args.info)
-        logger.add(args.log_path + args.info  + '/' + 'train.log')
+        log_path_dir = os.path.join(args.log_path, args.info)
+        if not os.path.exists(log_path_dir):
+            os.makedirs(log_path_dir)
+        logger.add(os.path.join(log_path_dir, 'train.log'))
         logger.info(args)
 
     # Step 1: Set DataLoaders

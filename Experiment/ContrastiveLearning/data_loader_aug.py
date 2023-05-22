@@ -18,17 +18,15 @@ def img_transform(model="inception_v3", mode="train"):
     """
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                      std=[0.229, 0.224, 0.225])
-    img_size = (299,299) if (model=="inception_v3") else (224,224)
+    # img_size = (299,299) if (model=="inception_v3") else (224,224)
     if (mode == "train"):
         return transforms.Compose([
-            transforms.RandomResizedCrop(img_size),                         
-            transforms.RandomHorizontalFlip(),
             transforms.ToTensor(),
             normalize,
         ])
     elif (mode=="val"):
         return transforms.Compose([
-                transforms.Resize(img_size),  # Resize the image to 299x299 pixels
+                # transforms.Resize(img_size),  # Resize the image to 299x299 pixels
                 transforms.ToTensor(),  # Convert the image to a PyTorch tensor
                 normalize
         ])
@@ -224,8 +222,12 @@ class EEGDataset_Triple(Dataset):
         # print(f"img_neg_idx: {img_negative_idx}")
         img_positive_filename = self.img_filenames[img_positive_idx]
         img_negative_filename = self.img_filenames[img_negative_idx]
-        img_positive = Image.open(os.path.join(self.img_dir_path, img_positive_filename+'.JPEG' )).convert('RGB')
-        img_negative = Image.open(os.path.join(self.img_dir_path, img_negative_filename+'.JPEG' )).convert('RGB')
+        chosen_crop_pos = np.random.choice(range(10))
+        chosen_crop_neg = np.random.choice(range(10))
+        img_pos_crop = f"{img_positive_filename}_crop_{chosen_crop_pos}"
+        img_neg_crop = f"{img_negative_filename}_crop_{chosen_crop_neg}"
+        img_positive = Image.open(os.path.join(self.img_dir_path, img_pos_crop+'.jpeg' )).convert('RGB')
+        img_negative = Image.open(os.path.join(self.img_dir_path, img_neg_crop+'.jpeg' )).convert('RGB')
         # else:
         #     img1 = self.test_data[self.test_triplets[index][0]]
         #     img2 = self.test_data[self.test_triplets[index][1]]
