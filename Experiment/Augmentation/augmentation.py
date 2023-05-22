@@ -32,7 +32,7 @@ def augmentation():
 
     # Define the data augmentation transformations
     transform = transforms.Compose([
-        transforms.Resize(299),  # Resize the image to 1.1 times the expected input size
+        transforms.Resize(int(299*1.1)),  # Resize the image to 1.1 times the expected input size
         transforms.TenCrop(299),  # Extract ten crops
         transforms.Lambda(lambda crops: torch.stack([transforms.ToTensor()(crop) for crop in crops])),
         # transforms.Lambda(lambda crops: torch.stack([transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])(crop) for crop in crops])),
