@@ -3,11 +3,11 @@ python3 run_triplenet_aug.py --dataset CVPR2017 \
 --img-path /media/exx/HDD1/LanxHuyen/CVPR2017/imagenet_augmented \
 --splits-path /media/exx/HDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth \
 --log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/ContrastiveLearning \
---info tripletnet_augmented_efficinetnetb0 \
+--info tripletnet_augmented_resnet50 \
 --max-epoch 50 \
 --log-interval 10 \
 --gpu 0 \
 --num-classes 40 \
 --eeg-encoder EEGChannelNet \
---img-encoder efficientnet_b0
+--img-encoder resnet50
 
