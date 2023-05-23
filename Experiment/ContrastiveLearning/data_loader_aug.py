@@ -120,7 +120,9 @@ class EEGDataset(Dataset):
         eeg, img_positive_idx, label = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
         eeg = eeg.float()[:, self.time_low:self.time_high]
         img_positive_filename, img_positive_classname = self.img_filenames[img_positive_idx], self.classes[label]
-        img_positive = Image.open(os.path.join(self.img_dir_path, img_positive_filename+'.JPEG' )).convert('RGB')
+        chosen_crop_pos = np.random.choice(range(10))
+        img_pos_crop = f"{img_positive_filename}_crop_{chosen_crop_pos}"
+        img_positive = Image.open(os.path.join(self.img_dir_path, img_pos_crop+'.jpeg' )).convert('RGB')
 
         if self.transform is not None:
             img_positive = self.transform(img_positive)

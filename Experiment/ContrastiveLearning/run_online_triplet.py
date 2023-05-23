@@ -8,10 +8,10 @@ import os
 import numpy as np
 import random
 # Import modules
-from data_loader import load_data
+from data_loader_aug import load_data
 from model import load_model
 from losses import OnlineTripletLoss
-from trainer_inception import fit
+from trainer_not_inception import fit
 from utils import HardestNegativeTripletSelector, RandomNegativeTripletSelector, SemihardNegativeTripletSelector # Strategies for selecting triplets within a minibatch
 from metrics import AverageNonzeroTripletsMetric
 
@@ -64,7 +64,7 @@ def run_online_triplet():
     optimizer = optim.Adam(model.parameters(), lr=lr, weight_decay=1e-4)
     scheduler = lr_scheduler.StepLR(optimizer, 8, gamma=0.1, last_epoch=-1)
     #Step 5: Put all to net_trainer()/fit()
-    fit(train_dataloader, val_dataloader, model, loss_fn, optimizer, scheduler, args.max_epoch, args.device, args.log_interval, [AverageNonzeroTripletsMetric()])
+    fit(train_dataloader, val_dataloader, model, loss_fn, optimizer, scheduler, args.max_epoch, args.device, args.log_interval, log_path_dir, [AverageNonzeroTripletsMetric()])
     # net_trainer(train_dataloader, val_dataloader, model, loss_fn, optimizer, scheduler, args.max_epoch, args.device, args.log_interval, metrics=[AverageNonzeroTripletsMetric()])
 
 def load_config():
