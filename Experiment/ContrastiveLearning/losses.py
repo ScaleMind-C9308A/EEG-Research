@@ -91,6 +91,6 @@ class OnlineTripletLoss(nn.Module):
         neg_sim = self.F(eeg_embeddings[triplets[:, 0]], img_embeddings[triplets[:, 2]])
         losses = F.relu( neg_sim -  pos_sim + self.margin)
         # losses = neg_sim - pos_sim + self.margin
-        print(f"pos_sim: {pos_sim}, neg_sim: {neg_sim}, losses: {losses}")
+        # print(f"pos_sim: {pos_sim}, neg_sim: {neg_sim}, losses: {losses}")
 
         return losses.mean(), len(triplets)

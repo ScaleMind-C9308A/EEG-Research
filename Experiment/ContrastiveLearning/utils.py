@@ -90,11 +90,13 @@ class FunctionNegativeTripletSelector(TripletSelector):
             negative_indices = np.where(np.logical_not(label_mask))[0]
 
 
-            ap_distances = sim_matrix[eeg_indices, pos_img_indices]
-            #ap_distance: [sim1(eeg1, pos_img1),..., sim_n(eeg1, pos_img1)] => (n_samples,)
-            # print(f"ap_distance: {ap_distances}")
-            for anchor_idx, pos_idx, ap_distance in zip(eeg_indices, pos_img_indices, ap_distances):
-                loss_values = ap_distance - sim_matrix[torch.LongTensor(np.array([anchor_idx])), torch.LongTensor(negative_indices)] + self.margin
+            pos_sims = sim_matrix[eeg_indices, pos_img_indices]
+            #pos_sims: [sim1(eeg1, pos_img1),..., sim_n(eeg1, pos_img1)] => (n_samples,)
+            # print(f"pos_sims: {pos_sims}")
+            for anchor_idx, pos_idx, pos_sim in zip(eeg_indices, pos_img_indices, pos_sims):
+                neg_sim = sim_matrix[torch.LongTensor(np.array([anchor_idx])), torch.LongTensor(negative_indices)]
+                #important fix: neg_sim - pos_sim, not the other way!!
+                loss_values = neg_sim - pos_sim  + self.margin 
                 loss_values = loss_values.data.cpu().numpy()
                 hard_negative = self.negative_selection_fn(loss_values)
                 if hard_negative is not None:
