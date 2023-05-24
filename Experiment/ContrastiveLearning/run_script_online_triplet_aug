@@ -5,6 +5,9 @@ python3 run_online_triplet.py --dataset CVPR2017 \
 --log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/ContrastiveLearning \
 --info online_triplet_augmented_efficientnet_b0 \
 --max-epoch 50 \
+--lr 2.5e-4 \
+--lr-step 10 \
+--optim Adam \
 --log-interval 10 \
 --gpu 0 \
 --num-classes 40 \
