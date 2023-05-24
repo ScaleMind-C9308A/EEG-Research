@@ -6,7 +6,7 @@ import numpy as np
 from PIL import Image
 import os
 
-def load_data(eeg_path, img_path,  eeg_time_low, eeg_time_high, splits_path, device, args):
+def load_data(eeg_path, img_path, splits_path,  eeg_time_low, eeg_time_high, device, args):
     """
     Args:
         is_inception: True | False

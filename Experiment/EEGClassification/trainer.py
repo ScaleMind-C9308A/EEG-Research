@@ -92,7 +92,7 @@ def plot_losses(train_losses, val_losses, train_accs, val_accs, n_epochs, save_p
     plt.savefig(save_fig_accs)
 
 
-def train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, is_inception, metrics):
+def train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, metrics):
     # for metric in metrics:
     #     metric.reset()
 
@@ -133,25 +133,12 @@ def train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, i
         loss.backward()
         optimizer.step()
 
-        # for metric in metrics:
-        #     metric(outputs, target, loss_outputs)
-
-        # if batch_idx % log_interval == 0:
-        #     message = 'Train: [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
-        #         batch_idx * len(data[0]), len(train_loader.dataset),
-        #         100. * batch_idx / len(train_loader), np.mean(losses))
-        #     # for metric in metrics:
-        #     #     message += '\t{}: {}'.format(metric.name(), metric.value())
-
-        #     logger.info(message)
-        #     losses = []
-
     epoch_loss = running_loss / len(train_loader)
     epoch_acc = running_acc / len(train_loader)
     return epoch_loss, epoch_acc
 
 
-def test_epoch(data_loader, model, loss_fn, device, is_inception, metrics):
+def test_epoch(data_loader, model, loss_fn, device, metrics):
     with torch.no_grad():
         # for metric in metrics:
         #     metric.reset()
@@ -164,16 +151,6 @@ def test_epoch(data_loader, model, loss_fn, device, is_inception, metrics):
             # print(f"Image size: {data[1].size()}")
             data, targets = data.to(device), targets.to(device)
 
-            # # WARNING: For inception_v3
-            # if is_inception:
-            #     # From https://discuss.pytorch.org/t/how-to-optimize-inception-model-with-auxiliary-classifiers/7958
-            #     outputs, aux_outputs = model(data)
-            #     loss1 = loss_fn(outputs, targets)
-            #     loss2 = loss_fn(aux_outputs, targets)
-            #     loss = loss1 + 0.4*loss2
-            # else:
-            #     outputs = model(data)
-            #     loss = loss_fn(outputs, targets)
             outputs = model(data)
             loss = loss_fn(outputs, targets)
 
