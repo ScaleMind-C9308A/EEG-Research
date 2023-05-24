@@ -1,5 +1,6 @@
 from torchvision import models
 import torch.nn as nn
+from efficientnet_bo_lite import get_model
 
 def set_parameter_requires_grad(model, feature_extracting):
     if feature_extracting:
@@ -68,6 +69,14 @@ def load_image_encoder(model_name, output_dim, feature_extract, use_pretrained=T
         num_ftrs = model_ft.fc.in_features
         model_ft.fc = nn.Linear(num_ftrs,output_dim)
         input_size = 299
+    elif model_name == "efficientnet_b0_lite":
+        """ Efficientnet B0_lite
+        """
+        model_ft = get_model(output_dim)
+        set_parameter_requires_grad(model_ft, feature_extract = False)
+        # num_ftrs = model_ft.classifier[1].in_features
+        # model_ft.classifier[1] = nn.Linear(num_ftrs,output_dim)
+        input_size = 224
 
     else:
         print("Invalid model name, exiting...")
