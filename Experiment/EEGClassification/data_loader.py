@@ -6,48 +6,17 @@ import numpy as np
 from PIL import Image
 import os
 
-def img_transform(is_inception, mode="train"):
-    """
-    Training images transform.
-
-    Args
-        is_inception: True | False
-        mode: "train" | "val"
-    Returns
-        transform(torchvision.transforms): transform
-    """
-    normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                                     std=[0.229, 0.224, 0.225])
-    img_size = (299,299) if is_inception else (224,224)
-    if (mode == "train"):
-        return transforms.Compose([
-            transforms.RandomResizedCrop(img_size),                         
-            transforms.RandomHorizontalFlip(),
-            transforms.ToTensor(),
-            normalize,
-        ])
-    elif (mode=="val"):
-        return transforms.Compose([
-                transforms.Resize(img_size),  # Resize the image to 299x299 pixels
-                transforms.CenterCrop(img_size),
-                transforms.ToTensor(),  # Convert the image to a PyTorch tensor
-                normalize
-        ])
-
-
-def load_data(eeg_path, img_path, splits_path, device, is_inception, args):
+def load_data(eeg_path, img_path,  eeg_time_low, eeg_time_high, splits_path, device, args):
     """
     Args:
         is_inception: True | False
     """
     loaded_eeg = torch.load(eeg_path)
     loaded_splits = torch.load(splits_path)['splits']
-    train_transform = img_transform(is_inception, mode="train")
-    val_transform = img_transform(is_inception, mode="val")
     
-    train_dataset = ImageDataset(img_path, loaded_eeg, loaded_splits, mode="train", transform=train_transform)
-    val_dataset = ImageDataset(img_path, loaded_eeg, loaded_splits, mode="val", transform=val_transform)
-    test_dataset = ImageDataset(img_path, loaded_eeg, loaded_splits, mode="test", transform=val_transform)
+    train_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits, eeg_time_low,eeg_time_high, mode="train")
+    val_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits, eeg_time_low,eeg_time_high, mode="val")
+    test_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits, eeg_time_low,eeg_time_high, mode="test")
 
     # train_batch_sampler = BalancedBatchSampler(train_dataset.labels, n_classes=8, n_samples=8)
     # val_batch_sampler = BalancedBatchSampler(val_dataset.labels, n_classes=8, n_samples=8)
@@ -59,12 +28,12 @@ def load_data(eeg_path, img_path, splits_path, device, is_inception, args):
     test_dataloader = DataLoader(test_dataset, batch_size=args.batch_size, shuffle=True, **kwargs)
     return train_dataloader, val_dataloader, test_dataloader
 
-class ImageDataset(Dataset):
+class EEGDataset(Dataset):
     """
     Train: For each sample (anchor) randomly chooses a positive and negative samples
     Test: Creates fixed triplets for testing
     """
-    def __init__(self, img_dir_path, loaded_eeg, loaded_splits, mode="train", transform=None):
+    def __init__(self, img_dir_path, loaded_eeg, loaded_splits,time_low, time_high, mode="train", transform=None):
         """
         Args:
             img_dir_path: directory path of imagenet images,
@@ -76,6 +45,8 @@ class ImageDataset(Dataset):
         self.transform = transform
         self.img_dir_path = img_dir_path
         self.splits = loaded_splits
+        self.time_low = time_low
+        self.time_high = time_high
         dataset, classes, img_filenames = [loaded_eeg[k] for k in ['dataset', 'labels', 'images']]
         self.classes = classes
         self.img_filenames = img_filenames
@@ -111,13 +82,10 @@ class ImageDataset(Dataset):
             dataset_idx = self.split_test[index]
         else:
             raise ValueError()
-        _, img_idx, label = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
-        img_filename, img_classname = self.img_filenames[img_idx], self.classes[label]
-        img = Image.open(os.path.join(self.img_dir_path, img_filename+'.JPEG' )).convert('RGB')
+        eeg,_, label = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
+        eeg = eeg.float()[:, self.time_low:self.time_high]
 
-        if self.transform is not None:
-            img = self.transform(img)
-        return img, label
+        return eeg, label
 
     def __len__(self):
         if self.mode == "train":
