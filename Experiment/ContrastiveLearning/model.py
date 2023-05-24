@@ -39,8 +39,8 @@ def load_model(model="triple_net", eeg_encoder="EEGChannelNet", img_encoder="inc
     """
     eeg_encoder = load_eeg_encoder(eeg_encoder)
     img_encoder = load_image_encoder(img_encoder, 1000, pretrained=True)
-    # print("Image Encoder:")
-    # print(img_encoder)
+    print("Image Encoder:")
+    print(img_encoder)
     if (model=="triplet_net"):
         model = TripleNet(eeg_encoder, img_encoder)
     elif (model == "embedding_net"):

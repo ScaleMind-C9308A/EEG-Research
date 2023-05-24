@@ -9,6 +9,7 @@ def load_image_encoder(backbone, output_dim, pretrained):
         backbone: "inception_v3" | "resnet50" | "efficientnet_b0" | "efficientnet_b1" |
         output_dim: (default: 40) 
         pretrained: True | False
+        feature_extract: True | False
     """
     return ImageEncoder(backbone, output_dim, pretrained)
     
