@@ -13,7 +13,7 @@ def run(mode="triplet", eeg_encoder_name="EEGChannelNet", img_encoder_name="ince
     # summary(img_encoder, input_size=(1, 3, 224, 224))
 
     weight_path = '/home/exx/GithubClonedRepo/EEG-Research/Experiment/ContrastiveLearning/tripletnet_augmented_inceptionv3/model_epoch_50.pth'
-    classifier_model = load_model(mode, None, 40, eeg_encoder_name, img_encoder_name)
+    classifier_model = load_model(mode, weight_path, 40, eeg_encoder_name, img_encoder_name)
     summary(classifier_model, input_size=(1, 128, 440))
 
 if __name__ == '__main__':
