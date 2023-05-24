@@ -3,7 +3,7 @@ from Encoder.image_encoder import load_image_encoder
 from Encoder.eeg_encoder import load_eeg_encoder
 from torchinfo import summary
 
-def run(mode="classic", eeg_encoder_name="EEGChannelNet", img_encoder_name="inception_v3"):
+def run(mode="triplet", eeg_encoder_name="EEGChannelNet", img_encoder_name="inception_v3"):
     """
     mode: "triplet" | "online_triplet" | "classic"
     """
