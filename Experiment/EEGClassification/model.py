@@ -6,9 +6,9 @@ from Encoder.eeg_encoder import load_eeg_encoder
 from Encoder.image_encoder import load_image_encoder_triplet
 
 class EEGClassificationNet(nn.Module):
-    def __init__(self, backbone_name, num_classes=40, feature_extract=True, use_pretrained=True):
+    def __init__(self, backbone_name):
         super().__init__()
-        self.backbone = load_eeg_encoder(backbone_name, num_classes, feature_extract, use_pretrained)
+        self.backbone = load_eeg_encoder(backbone_name)
     def forward(self, eeg):
         return self.eeg_encoder(eeg)
 class Triplet_EEGClassificationNet(nn.Module):
@@ -63,7 +63,7 @@ def load_model(mode, weight_path, num_classes=40, eeg_encoder_name="EEGChannelNe
     mode: "triplet" | "online_triplet" | "classic"
     """
     if (mode == "classic"):
-        model = EEGClassificationNet(eeg_encoder_name, num_classes)
+        model = EEGClassificationNet(eeg_encoder_name)
     else:
         eeg_encoder = load_eeg_encoder(eeg_encoder_name)
         img_encoder = load_image_encoder_triplet(img_encoder_name, 1000, True)
