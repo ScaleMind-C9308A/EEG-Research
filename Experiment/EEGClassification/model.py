@@ -10,7 +10,7 @@ class EEGClassificationNet(nn.Module):
         super().__init__()
         self.backbone = load_eeg_encoder(backbone_name)
     def forward(self, eeg):
-        return self.eeg_encoder(eeg)
+        return self.backbone(eeg)
 class Triplet_EEGClassificationNet(nn.Module):
     def __init__(self, pretrained_model, embedding_dim, num_classes):
         super().__init__()
