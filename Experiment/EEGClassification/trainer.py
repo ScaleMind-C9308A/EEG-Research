@@ -6,7 +6,7 @@ import copy
 import time
 import os 
 
-def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs, device, log_interval, log_path_dir, is_inception, metrics=[],
+def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs, device, log_interval, log_path_dir, metrics=[],
         start_epoch=0):
     """
     Loaders, model, loss function and metrics should work together for a given task,
@@ -31,7 +31,7 @@ def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs
     for epoch in range(start_epoch, n_epochs):
 
         # Train stage
-        train_loss, train_acc = train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, is_inception, metrics)
+        train_loss, train_acc = train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, metrics)
         scheduler.step()
 
         message = 'Epoch: {}/{}. Train set: Average loss: {:.6f}. Accuracy: {:.4f}'.format(epoch + 1, n_epochs, train_loss, train_acc)
@@ -39,7 +39,7 @@ def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs
         #     message += '\t{}: {}'.format(metric.name(), metric.value())
         # logger.info(message)
 
-        val_loss, val_acc = test_epoch(val_loader, model, loss_fn, device, is_inception, metrics)
+        val_loss, val_acc = test_epoch(val_loader, model, loss_fn, device, metrics)
         # val_loss /= len(val_loader)
 
         message += '\n\tValidation set: Average loss: {:.6f}. Accuracy: {:.4f}'.format(val_loss, val_acc)
@@ -86,7 +86,7 @@ def plot_losses(train_losses, val_losses, train_accs, val_accs, n_epochs, save_p
     plt.plot(range(1, n_epochs + 1), train_accs, label='Train Accuracy')
     plt.plot(range(1, n_epochs + 1), val_accs, label='Validation Accuracy')
     plt.xlabel('Epoch')
-    plt.ylabel('Loss')
+    plt.ylabel('Accuracy')
     plt.title('Training and Validation Accuracy')
     plt.legend()
     plt.savefig(save_fig_accs)
