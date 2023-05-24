@@ -26,7 +26,7 @@ class Triplet_EEGClassificationNet(nn.Module):
             nn.LogSoftmax(dim=1)
         )
     def forward(self, eeg):
-        output = self.eeg_encoder.get_eeg_embedding(eeg)            
+        output = self.backbone.get_eeg_embedding(eeg)            
         output = self.classifier(output)
         return output
 
