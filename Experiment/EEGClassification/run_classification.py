@@ -47,7 +47,6 @@ def run():
             os.makedirs(log_path_dir)
         logger.add(os.path.join(log_path_dir, 'train.log'))
         logger.info(args)
-    is_inception = True if (args.img_encoder == "inception_v3") else False
     # Step 1: Set DataLoaders
     train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path, args.img_path, args.splits_path, args.time_low, args.time_high, args.device, args)
     # Step 2: Set model
