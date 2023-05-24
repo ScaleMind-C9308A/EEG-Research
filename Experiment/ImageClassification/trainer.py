@@ -112,16 +112,18 @@ def train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, i
 
         optimizer.zero_grad()
 
-        # WARNING: For inception_v3
-        if is_inception:
-            # From https://discuss.pytorch.org/t/how-to-optimize-inception-model-with-auxiliary-classifiers/7958
-            outputs, aux_outputs = model(data)
-            loss1 = loss_fn(outputs, targets)
-            loss2 = loss_fn(aux_outputs, targets)
-            loss = loss1 + 0.4*loss2
-        else:
-            outputs = model(data)
-            loss = loss_fn(outputs, targets)
+        # # WARNING: For inception_v3
+        # if is_inception:
+        #     # From https://discuss.pytorch.org/t/how-to-optimize-inception-model-with-auxiliary-classifiers/7958
+        #     outputs = model(data)
+        #     loss1 = loss_fn(outputs, targets)
+        #     # loss2 = loss_fn(aux_outputs, targets)
+        #     loss = loss1 
+        # else:
+        #     outputs = model(data)
+        #     loss = loss_fn(outputs, targets)
+        outputs = model(data)
+        loss = loss_fn(outputs, targets)
 
         _, preds = torch.max(outputs, 1)
 
@@ -162,16 +164,18 @@ def test_epoch(data_loader, model, loss_fn, device, is_inception, metrics):
             # print(f"Image size: {data[1].size()}")
             data, targets = data.to(device), targets.to(device)
 
-            # WARNING: For inception_v3
-            if is_inception:
-                # From https://discuss.pytorch.org/t/how-to-optimize-inception-model-with-auxiliary-classifiers/7958
-                outputs, aux_outputs = model(data)
-                loss1 = loss_fn(outputs, targets)
-                loss2 = loss_fn(aux_outputs, targets)
-                loss = loss1 + 0.4*loss2
-            else:
-                outputs = model(data)
-                loss = loss_fn(outputs, targets)
+            # # WARNING: For inception_v3
+            # if is_inception:
+            #     # From https://discuss.pytorch.org/t/how-to-optimize-inception-model-with-auxiliary-classifiers/7958
+            #     outputs, aux_outputs = model(data)
+            #     loss1 = loss_fn(outputs, targets)
+            #     loss2 = loss_fn(aux_outputs, targets)
+            #     loss = loss1 + 0.4*loss2
+            # else:
+            #     outputs = model(data)
+            #     loss = loss_fn(outputs, targets)
+            outputs = model(data)
+            loss = loss_fn(outputs, targets)
 
             _, preds = torch.max(outputs, 1)
             running_loss += loss.item()

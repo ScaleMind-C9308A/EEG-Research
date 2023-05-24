@@ -61,9 +61,9 @@ def load_image_encoder(model_name, output_dim, feature_extract, use_pretrained=T
         """
         model_ft = models.inception_v3(pretrained=use_pretrained)
         set_parameter_requires_grad(model_ft, feature_extract)
-        # Handle the auxilary net
-        num_ftrs = model_ft.AuxLogits.fc.in_features
-        model_ft.AuxLogits.fc = nn.Linear(num_ftrs, output_dim)
+        # # Handle the auxilary net
+        # num_ftrs = model_ft.AuxLogits.fc.in_features
+        # model_ft.AuxLogits.fc = nn.Linear(num_ftrs, output_dim)
         # Handle the primary net
         num_ftrs = model_ft.fc.in_features
         model_ft.fc = nn.Linear(num_ftrs,output_dim)

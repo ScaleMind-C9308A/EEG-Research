@@ -12,15 +12,19 @@ class ImageClassificationNet(nn.Module):
             backbone_name: "resnet50" | "inception_v3" | ...
         """
         super().__init__()
+        self.is_inception = (backbone_name=="inception_v3")
         self.backbone = load_image_encoder(backbone_name, num_classes, feature_extract, use_pretrained)
         self.softmax = nn.LogSoftmax(dim=1)
     def forward(self, img):
         output = self.backbone(img)
+        if (self.is_inception and self.training): #check if the model is in training mode
+            output = output.logits
         output = self.softmax(output)
         return output
 class Triplet_ImageClassificationNet(nn.Module):
-    def __init__(self, pretrained_model, embedding_dim, num_classes):
+    def __init__(self, pretrained_model, embedding_dim, num_classes, is_inception):
         super().__init__()
+        self.is_inception = is_inception
         for param in pretrained_model.parameters():
             param.requires_grad = False
         self.backbone = pretrained_model
@@ -30,6 +34,8 @@ class Triplet_ImageClassificationNet(nn.Module):
         )
     def forward(self, img):
         output = self.backbone.get_img_embedding(img)
+        if (self.is_inception and self.training): #check if the model is in training mode
+            output = output.logits
         output = self.classifier(output)
         return output
 
@@ -76,5 +82,6 @@ def load_model(mode, weight_path, num_classes=40, eeg_encoder_name="EEGChannelNe
             backbone = EmbeddingNet(eeg_encoder, img_encoder)
         pretrained_weights = torch.load(weight_path)
         backbone.load_state_dict(pretrained_weights)
-        model = Triplet_ImageClassificationNet(backbone, 1000, num_classes)
+        is_inception = (img_encoder_name=="inception_v3")
+        model = Triplet_ImageClassificationNet(backbone, 1000, num_classes, is_inception)
     return model
