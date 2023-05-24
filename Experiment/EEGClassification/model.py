@@ -3,12 +3,12 @@ import torch.nn.functional as F
 import torch
 
 from Encoder.eeg_encoder import load_eeg_encoder
-from Encoder.image_encoder import load_image_encoder, load_image_encoder_triplet
+from Encoder.image_encoder import load_image_encoder_triplet
 
 class EEGClassificationNet(nn.Module):
     def __init__(self, backbone_name, num_classes=40, feature_extract=True, use_pretrained=True):
         super().__init__()
-        self.backbone = load_image_encoder(backbone_name, num_classes, feature_extract, use_pretrained)
+        self.backbone = load_eeg_encoder(backbone_name, num_classes, feature_extract, use_pretrained)
     def forward(self, eeg):
         return self.eeg_encoder(eeg)
 class Triplet_EEGClassificationNet(nn.Module):
