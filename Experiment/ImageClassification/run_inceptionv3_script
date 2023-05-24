@@ -1,7 +1,0 @@
-python3 inceptionv3.py --dataset CVPR2017 \
---img-path /home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet \
---log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/Finetune \
---info "inference fine tune inceptionv3" \
---gpu 1 \
---img-encoder inception_v3
-
