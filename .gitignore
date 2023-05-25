@@ -1,6 +1,7 @@
 # custom
 Experiment/ContrastiveLearning/*/model_epoch*
 Experiment/ImageClassification/*/model*
+Experiment/EEGClassification/*/model*
 
 # Others
 *.swp

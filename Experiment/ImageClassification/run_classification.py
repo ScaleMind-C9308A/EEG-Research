@@ -63,9 +63,9 @@ def run():
             params_to_update.append(param)
             print("\t",name)
     if (args.optim == "Adam"):
-        optimizer = optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.wd)
+        optimizer = optim.Adam(params_to_update, lr=args.lr, weight_decay=args.wd)
     elif (args.optim == "SGD"):
-        optimizer = optim.SGD(model.parameters(), lr=args.lr, weight_decay=args.wd, momentum=args.momen, nesterov=args.nesterov)
+        optimizer = optim.SGD(params_to_update, lr=args.lr, weight_decay=args.wd, momentum=args.momen, nesterov=args.nesterov)
 
     scheduler = lr_scheduler.StepLR(optimizer, args.lr_step, gamma=0.1, last_epoch=-1)
     #Step 5: Put all to net_trainer()

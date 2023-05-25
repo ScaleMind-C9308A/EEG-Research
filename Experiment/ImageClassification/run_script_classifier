@@ -5,7 +5,7 @@ python3 run_classification.py --dataset CVPR2017 \
 --log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/ImageClassification \
 --weight-path None \
 --classifier-mode classic \
---info classifier_classic_efficientnet_b0_lite \
+--info classifier_classic_efficientnet_b0_2 \
 --max-epoch 50 \
 --lr 5e-3 \
 --lr-step 10 \
@@ -15,5 +15,5 @@ python3 run_classification.py --dataset CVPR2017 \
 --gpu 1 \
 --num-classes 40 \
 --eeg-encoder EEGChannelNet \
---img-encoder efficientnet_b0_lite
+--img-encoder efficientnet_b0
 
