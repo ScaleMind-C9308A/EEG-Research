@@ -11,7 +11,7 @@ import random
 from data_loader_aug import load_data
 from model import load_model
 from losses import OnlineTripletLoss
-from trainer_not_inception import fit
+from trainer import fit
 from utils import HardestNegativeTripletSelector, RandomNegativeTripletSelector, SemihardNegativeTripletSelector # Strategies for selecting triplets within a minibatch
 from metrics import AverageNonzeroTripletsMetric
 
@@ -51,8 +51,10 @@ def run_online_triplet():
         logger.add(os.path.join(log_path_dir, 'train.log'))
         logger.info(args)
 
+    is_inception = (args.img_encoder == "inception_v3")
+
     # Step 1: Set DataLoaders
-    train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path, args.img_path, args.splits_path, args.time_low, args.time_high, args.device, mode='online_triplet', img_encoder=args.img_encoder)
+    train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path, args.img_path, args.splits_path, args.time_low, args.time_high, args.device, mode='online_triplet', is_inception=False)
     # Step 2: Set model
     model = load_model(model="embedding_net", eeg_encoder=args.eeg_encoder, img_encoder=args.img_encoder)
     model.to(args.device)
@@ -67,7 +69,7 @@ def run_online_triplet():
 
     scheduler = lr_scheduler.StepLR(optimizer, args.lr_step, gamma=0.1, last_epoch=-1)
     #Step 5: Put all to net_trainer()/fit()
-    fit(train_dataloader, val_dataloader, model, loss_fn, optimizer, scheduler, args.max_epoch, args.device, args.log_interval, log_path_dir, [AverageNonzeroTripletsMetric()])
+    fit(train_dataloader, val_dataloader, model, loss_fn, optimizer, scheduler, args.max_epoch, args.device, args.log_interval, log_path_dir, is_inception, [AverageNonzeroTripletsMetric()])
     # net_trainer(train_dataloader, val_dataloader, model, loss_fn, optimizer, scheduler, args.max_epoch, args.device, args.log_interval, metrics=[AverageNonzeroTripletsMetric()])
 
 def load_config():

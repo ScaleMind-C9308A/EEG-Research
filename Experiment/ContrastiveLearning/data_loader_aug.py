@@ -6,7 +6,7 @@ import numpy as np
 from PIL import Image
 import os
 
-def img_transform(model="inception_v3", mode="train"):
+def img_transform(is_inception, mode="train"):
     """
     Training images transform.
 
@@ -18,7 +18,7 @@ def img_transform(model="inception_v3", mode="train"):
     """
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                      std=[0.229, 0.224, 0.225])
-    img_size = (299,299) if (model=="inception_v3") else (224,224)
+    img_size = (299,299) if is_inception else (224,224)
     if (mode == "train"):
         return transforms.Compose([
             transforms.RandomResizedCrop(img_size),                         
@@ -34,15 +34,15 @@ def img_transform(model="inception_v3", mode="train"):
         ])
 
 
-def load_data(eeg_path, img_path, splits_path, eeg_time_low, eeg_time_high, device, mode="triple", img_encoder="inception_v3"):
+def load_data(eeg_path, img_path, splits_path, eeg_time_low, eeg_time_high, device, mode="triple", is_inception=False):
     """
     mode: "triple" | "online_triplet",
     img_encoder: "inception_v3" | "resnet50"
     """
     loaded_eeg = torch.load(eeg_path)
     loaded_splits = torch.load(splits_path)['splits']
-    train_transform = img_transform(img_encoder, mode="train")
-    val_transform = img_transform(img_encoder, mode="val")
+    train_transform = img_transform(is_inception, mode="train")
+    val_transform = img_transform(is_inception, mode="val")
     if (mode== "triple"):
         train_dataset = EEGDataset_Triple(img_path, loaded_eeg, loaded_splits, eeg_time_low,eeg_time_high, mode="train", transform=train_transform)
         val_dataset = EEGDataset_Triple(img_path, loaded_eeg, loaded_splits, eeg_time_low,eeg_time_high,mode="val", transform=val_transform)

@@ -1,8 +1,10 @@
 import torch
 import numpy as np
 from loguru import logger
+import matplotlib.pyplot as plt 
+import os 
 
-def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs, device, log_interval, metrics=[],
+def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs, device, log_interval, log_path_dir, is_inception, metrics=[],
         start_epoch=0):
     """
     Loaders, model, loss function and metrics should work together for a given task,
@@ -13,13 +15,16 @@ def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs
     Siamese network: Siamese loader, siamese model, contrastive loss
     Online triplet learning: batch loader, embedding model, online triplet loss
     """
+    train_losses = []  # List to store training losses for plotting
+    val_losses = []  # List to store validation losses for plotting
+    
     for epoch in range(0, start_epoch):
         scheduler.step()
 
     for epoch in range(start_epoch, n_epochs):
 
         # Train stage
-        train_loss, metrics = train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, metrics)
+        train_loss, metrics = train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, is_inception, metrics)
         scheduler.step()
 
         message = 'Epoch: {}/{}. Train set: Average loss: {:.6f}'.format(epoch + 1, n_epochs, train_loss)
@@ -36,9 +41,38 @@ def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs
             message += '\t{}: {}'.format(metric.name(), metric.value())
 
         logger.info(message)
+        train_losses.append(train_loss)  # Append training loss to list for plotting
+        val_losses.append(val_loss)  # Append validation loss to list for plotting
+        if (epoch + 1) % 10 == 0: # Epoch 10, 20, 30, 40, 50
+            plot_losses(train_losses, val_losses, epoch + 1, log_path_dir)
+            model_path = os.path.join(log_path_dir, f"model_epoch_{epoch+1}.pth")
+            torch.save(model.state_dict(), model_path)
+
+    # plot_losses(train_losses, val_losses, n_epochs, save_fig_train_val)  # Plot losses after the final 
+    
+def plot_losses(train_losses, val_losses, n_epochs, save_path_dir):
+    save_fig_train_val = os.path.join(save_path_dir, 'train_val_losses.png')
+    save_fig_train = os.path.join(save_path_dir, 'train_losses.png')
+    plt.figure()
+    plt.plot(range(1, n_epochs + 1), train_losses, label='Train Loss')
+    plt.plot(range(1, n_epochs + 1), val_losses, label='Validation Loss')
+    plt.xlabel('Epoch')
+    # plt.xticks()
+    plt.ylabel('Loss')
+    plt.title('Training and Validation Loss')
+    plt.legend()
+    plt.savefig(save_fig_train_val)
+
+    plt.figure()
+    plt.plot(range(1, n_epochs + 1), train_losses, label='Train Loss')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.title('Training Loss')
+    plt.legend()
+    plt.savefig(save_fig_train)
 
 
-def train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, metrics):
+def train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, is_inception, metrics):
     for metric in metrics:
         metric.reset()
 
@@ -68,14 +102,15 @@ def train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, m
             outputs = (outputs,)
 
         # WARNING: For inception_v3, must include this if-statement. Otherwise skip it
-        if len(outputs) == 2: # (eeg, image)
-            eeg, img = outputs
-            img_logits = img.logits
-            outputs = (eeg, img_logits)
-        elif len(outputs) == 3: # (eeg, image_pos, image_neg)
-            eeg, image_pos, image_neg = outputs
-            # img_logits = img.logits
-            outputs = (eeg, image_pos.logits, image_neg.logits)
+        if (is_inception):
+            if len(outputs) == 2: # (eeg, image)
+                eeg, img = outputs
+                img_logits = img.logits
+                outputs = (eeg, img_logits)
+            elif len(outputs) == 3: # (eeg, image_pos, image_neg)
+                eeg, image_pos, image_neg = outputs
+                # img_logits = img.logits
+                outputs = (eeg, image_pos.logits, image_neg.logits)
         loss_inputs = outputs
 
         if target is not None:

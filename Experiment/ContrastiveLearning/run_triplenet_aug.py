@@ -11,7 +11,7 @@ import random
 from data_loader_aug import load_data
 from model import load_model
 from losses import TripletLoss
-from trainer_not_inception import fit
+from trainer import fit
 from metrics import AverageNonzeroTripletsMetric
 
 def seed_everything(seed):
@@ -48,23 +48,31 @@ def run_triplet():
         logger.add(os.path.join(log_path_dir, 'train.log'))
         logger.info(args)
 
+    is_inception = (args.img_encoder == "inception_v3")
+
     # Step 1: Set DataLoaders
-    train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path, args.img_path, args.splits_path, args.time_low, args.time_high, args.device, mode='triple', img_encoder=args.img_encoder)
+    train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path, args.img_path, args.splits_path, args.time_low, args.time_high, args.device, mode='triple', is_inception=False)
     # Step 2: Set model
-    model = load_model(model="triplet_net", eeg_encoder=args.eeg_encoder, img_encoder=args.img_encoder)
+    model = load_model(model="triplet_net", eeg_encoder=args.eeg_encoder, img_encoder=args.img_encoder, output_dim=args.embedding_size, img_feature_extract=args.img_feature_extract)
     model.to(args.device)
     # Step 3: Set loss_fn
     margin = 0.
     loss_fn = TripletLoss(margin)
     # Step 4: Set optimizer
+    print("Params to learn:")
+    params_to_update = []
+    for name,param in model.named_parameters():
+        if param.requires_grad == True:
+            params_to_update.append(param)
+            print("\t",name)
     if (args.optim == "Adam"):
-        optimizer = optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.wd)
+        optimizer = optim.Adam(params_to_update, lr=args.lr, weight_decay=args.wd)
     elif (args.optim == "SGD"):
-        optimizer = optim.SGD(model.parameters(), lr=args.lr, weight_decay=args.wd, momentum=args.momen, nesterov=args.nesterov)
+        optimizer = optim.SGD(params_to_update, lr=args.lr, weight_decay=args.wd, momentum=args.momen, nesterov=args.nesterov)
 
     scheduler = lr_scheduler.StepLR(optimizer, args.lr_step, gamma=0.1, last_epoch=-1)
     #Step 5: Put all to net_trainer()
-    fit(train_dataloader, val_dataloader, model, loss_fn, optimizer, scheduler, args.max_epoch, args.device, args.log_interval, log_path_dir)
+    fit(train_dataloader, val_dataloader, model, loss_fn, optimizer, scheduler, args.max_epoch, args.device, args.log_interval, log_path_dir, is_inception)
 
 def load_config():
     """
@@ -77,6 +85,12 @@ def load_config():
         args(argparse.ArgumentParser): Configuration.
     """
     parser = argparse.ArgumentParser(description='Online Triplet Training of EEG and image')
+    ### Specific to Contrastive Learning
+    parser.add_argument('--img-feature-extract', default=False, type=bool,
+                        help='Option to turn on feature extraction of image encoder')
+    parser.add_argument('--embedding-size', default=1000, type=int,
+                        help="Embedding size for training")
+    ##################################
     parser.add_argument('--dataset',
                         help='Dataset name.')
     parser.add_argument('--eeg-path',

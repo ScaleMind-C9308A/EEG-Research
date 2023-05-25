@@ -8,9 +8,9 @@ import torch
 import torch.nn as nn
 from Encoder.EEGChannelNet import EEGChannelNet_Encoder
 
-def load_eeg_encoder(encoder):
-    if encoder=="EEGChannelNet":
-        net = EEGChannelNet_Encoder()
+def load_eeg_encoder(encoder_name, output_dim):
+    if encoder_name=="EEGChannelNet":
+        net = EEGChannelNet_Encoder(embedding_size=output_dim)
 
     # print("DONE: CREATE EEG ENCODER")
     # print(net)

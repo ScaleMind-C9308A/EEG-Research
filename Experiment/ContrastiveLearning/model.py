@@ -33,14 +33,14 @@ class EmbeddingNet(nn.Module):
         return self.eeg_encoder(eeg)
     def get_img_embedding(self, img):
         return self.img_encoder(img)
-def load_model(model="triple_net", eeg_encoder="EEGChannelNet", img_encoder="inception_v3"):
+def load_model(model="triple_net", eeg_encoder="EEGChannelNet", img_encoder="inception_v3", output_dim=1000, img_feature_extract=False):
     """
     model: "triple_net" | "embedding_net"
     """
-    eeg_encoder = load_eeg_encoder(eeg_encoder)
-    img_encoder = load_image_encoder(img_encoder, 1000, pretrained=True)
-    print("Image Encoder:")
-    print(img_encoder)
+    eeg_encoder = load_eeg_encoder(eeg_encoder, output_dim)
+    img_encoder = load_image_encoder(img_encoder, output_dim, feature_extract=img_feature_extract, pretrained=True)
+    # print("Image Encoder:")
+    # print(img_encoder)
     if (model=="triplet_net"):
         model = TripleNet(eeg_encoder, img_encoder)
     elif (model == "embedding_net"):
