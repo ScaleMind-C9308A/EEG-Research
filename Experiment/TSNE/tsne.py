@@ -45,43 +45,44 @@ def run():
     # Extract embeddings from the validation set
     validation_embeddings = []
    # Loop over the validation embeddings and concatenate them into a single tensor
-    for batch_idx, (data, targets) in enumerate(val_dataloader):
-        target = target if len(target) > 0 else None
-        if not type(data) in (tuple, list):
-            data = (data,)
-        if args.device:
-            data = tuple(d.to(args.device) for d in data)
-            if target is not None:
-                target = target.to(args.device)
+    with torch.no_grad():
+        for batch_idx, (data, target) in enumerate(val_dataloader):
+            target = target if len(target) > 0 else None
+            if not type(data) in (tuple, list):
+                data = (data,)
+            if args.device:
+                data = tuple(d.to(args.device) for d in data)
+                if target is not None:
+                    target = target.to(args.device)
 
-        outputs = model(*data)
+            outputs = model(*data)
 
-        if type(outputs) not in (tuple, list):
-            outputs = (outputs,)
+            if type(outputs) not in (tuple, list):
+                outputs = (outputs,)
 
-        with torch.no_grad():
-            # Extract embeddings from the desired layer
-            embeddings = feature_extractor(outputs)
+            
+                # Extract embeddings from the desired layer
+        embeddings = feature_extractor(outputs)
 
         validation_embeddings.append(embeddings)
 
-    validation_embeddings = torch.cat(validation_embeddings, dim=0)
+        validation_embeddings = torch.cat(validation_embeddings, dim=0)
 
-    # Convert the embeddings to a numpy array
-    embeddings_np = validation_embeddings.numpy()
+        # Convert the embeddings to a numpy array
+        embeddings_np = validation_embeddings.numpy()
 
-    # Perform dimensionality reduction with t-SNE
-    tsne = TSNE(n_components=2, random_state=42)
-    embeddings_tsne = tsne.fit_transform(embeddings_np)
+        # Perform dimensionality reduction with t-SNE
+        tsne = TSNE(n_components=2, random_state=42)
+        embeddings_tsne = tsne.fit_transform(embeddings_np)
 
-    # Extract the labels for plotting
-    labels = targets.numpy()
-    # Plot the t-SNE visualization
-    save_fig_tnse = os.path.join(log_path_dir, 'plot_tsne.png')
-    plt.scatter(embeddings_tsne[:, 0], embeddings_tsne[:, 1], c=labels, cmap='viridis')
-    plt.colorbar()
-    plt.title("t-SNE Visualization of Embeddings")
-    plt.savefig(save_fig_tnse)
+        # Extract the labels for plotting
+        labels = target.numpy()
+        # Plot the t-SNE visualization
+        save_fig_tnse = os.path.join(log_path_dir, 'plot_tsne.png')
+        plt.scatter(embeddings_tsne[:, 0], embeddings_tsne[:, 1], c=labels, cmap='viridis')
+        plt.colorbar()
+        plt.title("t-SNE Visualization of Embeddings")
+        plt.savefig(save_fig_tnse)
 
     # Perform further analysis or evaluation with the obtained embeddings
 def load_config():
