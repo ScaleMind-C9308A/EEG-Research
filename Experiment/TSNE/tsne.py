@@ -46,12 +46,12 @@ def run():
     validation_embeddings = []
    # Loop over the validation embeddings and concatenate them into a single tensor
     for batch_idx, (data, targets) in enumerate(val_dataloader):
-        data = data.to(args.device)
+        data = [d.to(args.device) for d in data]
         targets = targets.to(args.device)
 
         with torch.no_grad():
             # Extract embeddings from the desired layer
-            embeddings = feature_extractor(data)
+            embeddings = feature_extractor(*data)
 
         validation_embeddings.append(embeddings)
 
