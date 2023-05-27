@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 from model import load_model
 # Added pkgs for configurations
 import argparse
@@ -55,9 +56,11 @@ def run():
                 if target is not None:
                     target = target.to(args.device)
 
-             # Resize the tensors to have the same number of dimensions
-            max_dims = max([d.ndim for d in data])
-            resized_data = [d.unsqueeze(0) if d.ndim < max_dims else d for d in data]
+            # Find the maximum size along the problematic dimension
+            max_size = max([d.size(0) for d in data])
+
+        # Resize the tensors to have the same size along the problematic dimension
+            resized_data = [F.pad(d, pad=(0, max_size - d.size(0))) for d in data]
 
             # Concatenate the resized tensors into a single tensor
             concatenated_data = torch.cat(resized_data, dim=0)
