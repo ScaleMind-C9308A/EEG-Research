@@ -85,5 +85,5 @@ def load_model(mode, weight_path, num_classes=40, eeg_encoder_name="EEGChannelNe
         pretrained_weights = torch.load(weight_path)
         backbone.load_state_dict(pretrained_weights)
         is_inception = (img_encoder_name=="inception_v3")
-        model = Triplet_ImageClassificationNet(backbone, 1000, num_classes, is_inception)
+        model = backbone
     return model
