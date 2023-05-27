@@ -56,16 +56,16 @@ def run():
                     target = target.to(args.device)
 
             outputs = model(*data)
+            
 
-            if type(outputs) not in (tuple, list):
-                outputs = (outputs,)
-            outputs = torch.cat(outputs, dim = 0)
+            if isinstance(outputs, (tuple, list)):
+                outputs = torch.cat(outputs, dim = 0)
 
             
                 # Extract embeddings from the desired layer
-        embeddings = feature_extractor(outputs)
+            embeddings = feature_extractor(outputs)
 
-        validation_embeddings.append(embeddings)
+            validation_embeddings.append(embeddings)
 
         validation_embeddings = torch.cat(validation_embeddings, dim=0)
 
