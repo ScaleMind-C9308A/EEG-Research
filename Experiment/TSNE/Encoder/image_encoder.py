@@ -1,6 +1,6 @@
 from torchvision import models
 import torch.nn as nn
-from Encoder.efficientnet_b0_lite import get_model
+from efficientnet_b0_lite import get_model
 
 def set_parameter_requires_grad(model, feature_extracting):
     if feature_extracting:
