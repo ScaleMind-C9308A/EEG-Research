@@ -14,12 +14,13 @@ class ImageClassificationNet(nn.Module):
         super().__init__()
         self.is_inception = (backbone_name=="inception_v3")
         self.backbone = load_image_encoder(backbone_name, num_classes, feature_extract, use_pretrained)
-        self.softmax = nn.LogSoftmax(dim=1)
+        # # For nn.CrossEntropyLoss() => The input is expected to contain the unnormalized logits for each class
+        # self.softmax = nn.LogSoftmax(dim=1)
     def forward(self, img):
         output = self.backbone(img)
         if (self.is_inception and self.training): #check if the model is in training mode
             output = output.logits
-        output = self.softmax(output)
+        # output = self.softmax(output)
         return output
 class Triplet_ImageClassificationNet(nn.Module):
     def __init__(self, pretrained_model, embedding_dim, num_classes, is_inception):
@@ -29,14 +30,15 @@ class Triplet_ImageClassificationNet(nn.Module):
             param.requires_grad = False
         self.backbone = pretrained_model
         self.classifier = nn.Sequential(
-            nn.Linear(embedding_dim, num_classes),
-            nn.LogSoftmax(dim=1)
+            nn.Linear(embedding_dim, num_classes)
+            # # For nn.CrossEntropyLoss() => The input is expected to contain the unnormalized logits for each class
+            # nn.LogSoftmax(dim=1)
         )
     def forward(self, img):
         output = self.backbone.get_img_embedding(img)
         if (self.is_inception and self.training): #check if the model is in training mode
             output = output.logits
-        output = self.classifier(output)
+        # output = self.classifier(output)
         return output
 
 class TripletNet(nn.Module):

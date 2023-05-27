@@ -50,9 +50,10 @@ def run():
     # Step 1: Set DataLoaders
     train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path, args.img_path, args.splits_path, args.time_low, args.time_high, args.device, args)
     # Step 2: Set model
-    model = load_model(mode=args.classifier_mode, weight_path=args.weight_path, num_classes=args.num_classes, eeg_encoder_name=args.eeg_encoder, img_encoder_name=args.img_encoder)
+    model = load_model(mode=args.classifier_mode, weight_path=args.weight_path, num_classes=args.num_classes, eeg_encoder_name=args.eeg_encoder, img_encoder_name=args.img_encoder, output_dim=args.embedding_size, img_feature_extract=args.img_feature_extract )
     model.to(args.device)
     # Step 3: Set loss_fn
+    ## The input is expected to contain the unnormalized logits for each class
     loss_fn = nn.CrossEntropyLoss()
     # Step 4: Set optimizer
     print("Params to learn:")
@@ -81,6 +82,18 @@ def load_config():
         args(argparse.ArgumentParser): Configuration.
     """
     parser = argparse.ArgumentParser(description='Online Triplet Training of EEG and image')
+    ### Specific to Contrastive Learning
+    # From argparse document: The bool() function is not recommended as a type converter. All it does is convert 
+    # empty strings to False and non-empty strings to True
+    parser.add_argument('--img-feature-extract', default=0, type=int,
+                        help='(1|0: Option to turn on feature extraction of image encoder')
+    parser.add_argument('--embedding-size', default=1000, type=int,
+                        help="Embedding size for training")
+    parser.add_argument('--classifier-mode', default='classic', type=str,
+                        help='classic | triplet | online_triplet')
+    parser.add_argument('--weight-path', default=None, 
+                        help='Path of pretrained weight of the model')
+    ##################################
     parser.add_argument('--dataset',
                         help='Dataset name.')
     parser.add_argument('--eeg-path',
@@ -100,11 +113,7 @@ def load_config():
     parser.add_argument('--img-encoder', default="inception_v3", type=str,
                         help='inception_v3 | resnet50')
     parser.add_argument('--eeg-encoder', default="EEGChannelNet", type=str,
-                        help='eeg encoder')
-    parser.add_argument('--classifier-mode', default='classic', type=str,
-                        help='classic | triplet | online_triplet')
-    parser.add_argument('--weight-path', default=None, 
-                        help='Path of pretrained weight of the model')
+                        help='inception_v3 | resnet50')
     
     # Model training configurations
     parser.add_argument('--batch-size', default=128, type=int,
@@ -153,6 +162,7 @@ def load_config():
         args.device = torch.device("cuda:%d" % args.gpu)
 
     return args
+
 
 if __name__ == '__main__':
     run()

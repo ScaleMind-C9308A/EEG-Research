@@ -56,16 +56,22 @@ def run_online_triplet():
     # Step 1: Set DataLoaders
     train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path, args.img_path, args.splits_path, args.time_low, args.time_high, args.device, mode='online_triplet', is_inception=False)
     # Step 2: Set model
-    model = load_model(model="embedding_net", eeg_encoder=args.eeg_encoder, img_encoder=args.img_encoder)
+    model = load_model(model="embedding_net", eeg_encoder=args.eeg_encoder, img_encoder=args.img_encoder, output_dim=args.embedding_size, img_feature_extract=args.img_feature_extract)
     model.to(args.device)
     # Step 3: Set loss_fn
     margin = 0.
     loss_fn = OnlineTripletLoss(margin, args.device, RandomNegativeTripletSelector(margin))
     # Step 4: Set optimizer
+    print("Params to learn:")
+    params_to_update = []
+    for name,param in model.named_parameters():
+        if param.requires_grad == True:
+            params_to_update.append(param)
+            print("\t",name)
     if (args.optim == "Adam"):
-        optimizer = optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.wd)
+        optimizer = optim.Adam(params_to_update, lr=args.lr, weight_decay=args.wd)
     elif (args.optim == "SGD"):
-        optimizer = optim.SGD(model.parameters(), lr=args.lr, weight_decay=args.wd, momentum=args.momen, nesterov=args.nesterov)
+        optimizer = optim.SGD(params_to_update, lr=args.lr, weight_decay=args.wd, momentum=args.momen, nesterov=args.nesterov)
 
     scheduler = lr_scheduler.StepLR(optimizer, args.lr_step, gamma=0.1, last_epoch=-1)
     #Step 5: Put all to net_trainer()/fit()
@@ -83,6 +89,14 @@ def load_config():
         args(argparse.ArgumentParser): Configuration.
     """
     parser = argparse.ArgumentParser(description='Online Triplet Training of EEG and image')
+    ### Specific to Contrastive Learning
+    # From argparse document: The bool() function is not recommended as a type converter. All it does is convert 
+    # empty strings to False and non-empty strings to True
+    parser.add_argument('--img-feature-extract', default=0, type=int,
+                        help='(1|0: Option to turn on feature extraction of image encoder')
+    parser.add_argument('--embedding-size', default=1000, type=int,
+                        help="Embedding size for training")
+    ##################################
     parser.add_argument('--dataset',
                         help='Dataset name.')
     parser.add_argument('--eeg-path',

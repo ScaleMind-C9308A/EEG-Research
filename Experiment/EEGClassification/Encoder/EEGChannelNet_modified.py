@@ -153,7 +153,7 @@ class FeaturesExtractor(nn.Module):
         
         return out
 
-class EEGChannelNet_Encoder(nn.Module):
+class EEGChannelNet_Encoder_Mod(nn.Module):
     '''The model for EEG encoder.
     The imput is a tensor where each row is a channel the recorded signal and each colums is a time sample.
     The model performs different 2D to extract temporal e spatial information.
@@ -193,7 +193,7 @@ class EEGChannelNet_Encoder(nn.Module):
         
 
         self.fc = nn.Sequential(
-#             nn.Dropout(p=0.2, inplace=False),
+            nn.Dropout(p=0.2, inplace=False),
             nn.Linear(encoding_size, embedding_size),
             nn.ReLU(True)
         )
@@ -252,7 +252,7 @@ class EEGChannelNet_Classifier(nn.Module):
         
 
         self.classifier = nn.Sequential(
-#             nn.Dropout(p=0.2, inplace=False),
+            nn.Dropout(p=0.2, inplace=False),
             nn.Linear(encoding_size, embedding_size),
             nn.ReLU(True),
             nn.Linear(embedding_size,num_classes),

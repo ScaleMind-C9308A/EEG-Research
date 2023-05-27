@@ -3,7 +3,7 @@ python3 run_online_triplet.py --dataset CVPR2017 \
 --img-path /media/exx/HDD1/LanxHuyen/CVPR2017/imagenet_augmented \
 --splits-path /media/exx/HDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth \
 --log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/ContrastiveLearning \
---info online_triplet_augmented_efficientnet_b0 \
+--info online_triplet_efficientnet_b0_embed_500 \
 --max-epoch 50 \
 --lr 2.5e-4 \
 --lr-step 10 \
@@ -12,5 +12,8 @@ python3 run_online_triplet.py --dataset CVPR2017 \
 --gpu 0 \
 --num-classes 40 \
 --eeg-encoder EEGChannelNet \
---img-encoder efficientnet_b0
+--img-encoder efficientnet_b0 \
+--embedding-size 500 \
+--img-feature-extract 0
+
 
