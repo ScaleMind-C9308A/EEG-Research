@@ -57,9 +57,7 @@ def run():
 
             outputs = model(*data)
             
-
-            if not isinstance(outputs, torch.Tensor):
-                raise TypeError("Expected tensor as model output")
+            print("Output type:", type(outputs))  # Print the type of outputs
 
             
                 # Extract embeddings from the desired layer
