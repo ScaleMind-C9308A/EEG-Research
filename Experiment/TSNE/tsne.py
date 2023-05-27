@@ -7,6 +7,7 @@ from loguru import logger
 import os
 import numpy as np
 import random
+import torch.nn.functional as F
 from data_loader import load_data
 from model import load_model
 from sklearn.manifold import TSNE
@@ -55,8 +56,14 @@ def run():
                 if target is not None:
                     target = target.to(args.device)
 
-           # Concatenate the input tensors into a single tensor
-            concatenated_data = torch.cat(data, dim=1)
+           # Find the maximum dimensions among the tensors
+            max_shape = max([d.shape for d in data])
+
+        # Pad the tensors to the maximum shape
+            padded_data = [F.pad(d, pad=(0, max_shape[-1] - d.shape[-1])) for d in data]
+
+        # Concatenate the padded tensors into a single tensor
+            concatenated_data = torch.cat(padded_data, dim=0)
                 # Extract embeddings from the desired layer
             embeddings = feature_extractor(concatenated_data)
 
