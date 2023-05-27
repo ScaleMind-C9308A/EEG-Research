@@ -45,22 +45,15 @@ def run():
     # Extract embeddings from the validation set
     validation_embeddings = []
 
-    with torch.no_grad():
-        for batch in val_dataloader:
-            eeg_inputs, img_inputs, targets = batch
-            eeg_inputs = eeg_inputs.to(args.device)
-            img_inputs = img_inputs.to(args.device)
+   # Loop over the validation embeddings and concatenate them into a single tensor
+    for data, targets in val_dataloader:
+        data = data.to(args.device)
+        targets = targets.to(args.device)
 
-            # Pass the inputs through the feature extractor to obtain the embeddings
-            eeg_embeddings = feature_extractor(eeg_inputs)
-            img_embeddings = feature_extractor(img_inputs)
+        with torch.no_grad():
+            # Extract embeddings from the desired layer
+            embeddings = feature_extractor(data)
 
-            # Append the embeddings to the validation_embeddings list
-            validation_embeddings.append((eeg_embeddings, img_embeddings, targets))
-    # Loop over the validation embeddings and concatenate them into a single tensor
-    for eeg_embeddings, img_embeddings, targets in validation_embeddings:
-        # Combine the EEG and image embeddings into a single tensor
-        embeddings = torch.cat([eeg_embeddings, img_embeddings], dim=1)
         validation_embeddings.append(embeddings)
 
     validation_embeddings = torch.cat(validation_embeddings, dim=0)
@@ -74,7 +67,6 @@ def run():
 
     # Extract the labels for plotting
     labels = targets.numpy()
-
     # Plot the t-SNE visualization
     save_fig_tnse = os.path.join(log_path_dir, 'plot_tsne.png')
     plt.scatter(embeddings_tsne[:, 0], embeddings_tsne[:, 1], c=labels, cmap='viridis')
