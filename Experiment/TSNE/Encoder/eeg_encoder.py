@@ -6,7 +6,7 @@
 # from EEG_Encoder.SyncNet import classifier_SyncNet
 import torch
 import torch.nn as nn
-from EEGChannelNet import EEGChannelNet_Encoder
+from EEG_Encoder.EEGChannelNet import EEGChannelNet_Encoder
 
 def load_eeg_encoder(encoder):
     if encoder=="EEGChannelNet":
