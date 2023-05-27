@@ -59,7 +59,7 @@ def run():
 
             if type(outputs) not in (tuple, list):
                 outputs = (outputs,)
-            outputs = torch.tensor(outputs)
+            outputs = torch.stack(outputs, dim = 0)
 
             
                 # Extract embeddings from the desired layer
