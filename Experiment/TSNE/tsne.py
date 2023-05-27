@@ -32,7 +32,7 @@ def run():
         logger.info(args)
     is_inception = True if (args.img_encoder == "inception_v3") else False 
     # Define your model architecture
-    train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path, args.img_path, args.splits_path, args.time_low, args.time_high, args.device, mode='triple', is_inception = False)
+    train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path, args.img_path, args.splits_path, args.time_low, args.time_high, args.device, mode='triple', img_encoder=args.img_encoder)
     # Step 2: Set model
     model = load_model(mode=args.classifier_mode, weight_path=args.weight_path, num_classes=args.num_classes, eeg_encoder_name=args.eeg_encoder, img_encoder_name=args.img_encoder)
     model.to(args.device)
