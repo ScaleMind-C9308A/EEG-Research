@@ -55,10 +55,10 @@ def run():
                 if target is not None:
                     target = target.to(args.device)
 
-            # Convert data to tensor if it's not already
-            data = tuple(torch.tensor(d) if not torch.is_tensor(d) else d for d in data)
+           # Concatenate the input tensors into a single tensor
+            concatenated_data = torch.cat(data, dim=1)
                 # Extract embeddings from the desired layer
-            embeddings = feature_extractor(data)
+            embeddings = feature_extractor(concatenated_data)
 
             validation_embeddings.append(embeddings)
 
