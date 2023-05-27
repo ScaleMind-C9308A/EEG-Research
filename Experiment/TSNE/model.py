@@ -79,11 +79,10 @@ def load_model(mode, weight_path, num_classes=40, eeg_encoder_name="EEGChannelNe
         eeg_encoder = load_eeg_encoder(eeg_encoder_name)
         img_encoder = load_image_encoder_triplet(img_encoder_name, 1000, True)
         if (mode =="triplet"):
-            backbone = TripletNet(eeg_encoder, img_encoder)
+            model = TripletNet(eeg_encoder, img_encoder)
         elif (mode == "online_triplet"):
-            backbone = EmbeddingNet(eeg_encoder, img_encoder)
+            model = EmbeddingNet(eeg_encoder, img_encoder)
         pretrained_weights = torch.load(weight_path)
-        backbone.load_state_dict(pretrained_weights)
+        model.load_state_dict(pretrained_weights)
         is_inception = (img_encoder_name=="inception_v3")
-        model = backbone
     return model
