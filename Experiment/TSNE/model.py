@@ -2,8 +2,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch
 
-from Encoder.eeg_encoder import load_eeg_encoder
-from Encoder.image_encoder import load_image_encoder, load_image_encoder_triplet
+from eeg_encoder import load_eeg_encoder
+from image_encoder import load_image_encoder, load_image_encoder_triplet
 
 class ImageClassificationNet(nn.Module):
     def __init__(self, backbone_name, num_classes=40, feature_extract=True, use_pretrained=True):
