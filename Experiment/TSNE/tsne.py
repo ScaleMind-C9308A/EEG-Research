@@ -55,15 +55,9 @@ def run():
                 if target is not None:
                     target = target.to(args.device)
 
-            outputs = model(*data)
-            
-            if type(outputs) not in (tuple, list):
-                outputs = (outputs,)
-            print(type(outputs))
-
             
                 # Extract embeddings from the desired layer
-            embeddings = feature_extractor(outputs)
+            embeddings = feature_extractor(*data)
 
             validation_embeddings.append(embeddings)
 
