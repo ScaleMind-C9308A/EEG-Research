@@ -58,8 +58,8 @@ def run():
             outputs = model(*data)
             
 
-            if isinstance(outputs, (tuple, list)):
-                outputs = torch.cat(outputs, dim = 0)
+            if not isinstance(outputs, torch.Tensor):
+                raise TypeError("Expected tensor as model output")
 
             
                 # Extract embeddings from the desired layer
