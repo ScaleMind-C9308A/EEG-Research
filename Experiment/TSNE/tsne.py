@@ -58,7 +58,7 @@ def run():
             # Convert data to tensor if it's not already
             data = tuple(torch.tensor(d) if not torch.is_tensor(d) else d for d in data)
                 # Extract embeddings from the desired layer
-            embeddings = feature_extractor(*data)
+            embeddings = feature_extractor(data)
 
             validation_embeddings.append(embeddings)
 
