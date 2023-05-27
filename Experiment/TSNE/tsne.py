@@ -57,9 +57,9 @@ def run():
 
             outputs = model(*data)
             
-            if isinstance(outputs, tuple):
-            # Extract the first tensor from the tuple
-                outputs = outputs[0]  # Print the type of outputs
+            if type(outputs) not in (tuple, list):
+                outputs = (outputs,)
+            print(type(outputs))
 
             
                 # Extract embeddings from the desired layer
