@@ -55,12 +55,16 @@ def run():
                 if target is not None:
                     target = target.to(args.device)
 
-             # Print the shapes of the tensors in data
-            data = torch.cat(data, dim = 1)
+             # Resize the tensors to have the same number of dimensions
+            max_dims = max([d.ndim for d in data])
+            resized_data = [d.unsqueeze(0) if d.ndim < max_dims else d for d in data]
+
+            # Concatenate the resized tensors into a single tensor
+            concatenated_data = torch.cat(resized_data, dim=0)
 
         
                 # Extract embeddings from the desired layer
-            embeddings = feature_extractor(data)
+            embeddings = feature_extractor(concatenated_data)
 
             validation_embeddings.append(embeddings)
 
