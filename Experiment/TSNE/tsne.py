@@ -44,9 +44,8 @@ def run():
     feature_extractor.eval()
     # Extract embeddings from the validation set
     validation_embeddings = []
-
    # Loop over the validation embeddings and concatenate them into a single tensor
-    for data, targets in val_dataloader:
+    for batch_idx, (data, targets) in enumerate(val_dataloader):
         data = data.to(args.device)
         targets = targets.to(args.device)
 
