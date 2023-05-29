@@ -54,9 +54,10 @@ def run():
             if args.device:
                 data = tuple(d.to(args.device) for d in data)
                 data = torch.Tensor(data)
+                print(type(data))
                 if target is not None:
                     target = target.to(args.device)
-            print(type(data))
+            
                 # Extract embeddings from the desired layer
             embeddings = feature_extractor(data)
 
