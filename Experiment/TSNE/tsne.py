@@ -56,18 +56,18 @@ def run():
                 if target is not None:
                     target = target.to(args.device)
 
-            # Find the maximum size along the problematic dimension
-            max_size = max([d.size(0) for d in data])
+        #     # Find the maximum size along the problematic dimension
+        #     max_size = max([d.size(0) for d in data])
 
-        # Resize the tensors to have the same size along the problematic dimension
-            resized_data = [F.pad(d, pad=(0, max_size - d.size(0))) for d in data]
+        # # Resize the tensors to have the same size along the problematic dimension
+        #     resized_data = [F.pad(d, pad=(0, max_size - d.size(0))) for d in data]
 
-            # Concatenate the resized tensors into a single tensor
-            concatenated_data = torch.cat(resized_data, dim=0)
+        #     # Concatenate the resized tensors into a single tensor
+        #     concatenated_data = torch.cat(resized_data, dim=0)
 
         
                 # Extract embeddings from the desired layer
-            embeddings = feature_extractor(concatenated_data)
+            embeddings = feature_extractor(data)
 
             validation_embeddings.append(embeddings)
 
