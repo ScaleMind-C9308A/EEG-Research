@@ -50,9 +50,9 @@ def run():
         for batch_idx, (data, target) in enumerate(val_dataloader):
             target = target if len(target) > 0 else None
             if not type(data) in (tuple, list):
-                data = data if isinstance(data, tuple) else (data,)
+                data = (data,)
             if args.device:
-                data = tuple(d.to(args.device) for d in data)
+                data = torch.tensor(d.to(args.device) for d in data)
                 if target is not None:
                     target = target.to(args.device)
         
