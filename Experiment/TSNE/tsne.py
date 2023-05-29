@@ -53,6 +53,8 @@ def run():
                 data = (data,)
             if args.device:
                 data = tuple(d.to(args.device) for d in data)
+                data = torch.Tensor(data)
+                print(type(data))
                 if target is not None:
                     target = target.to(args.device)
 
