@@ -56,7 +56,7 @@ def run():
                 if target is not None:
                     target = target.to(args.device)
 
-
+            data = torch.tensor(data)
         
                 # Extract embeddings from the desired layer
             embeddings = feature_extractor(data)
