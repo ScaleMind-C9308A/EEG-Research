@@ -50,13 +50,11 @@ def run():
         for batch_idx, (data, target) in enumerate(val_dataloader):
             target = target if len(target) > 0 else None
             if not type(data) in (tuple, list):
-                data = (data,)
+                data = data if isinstance(data, tuple) else (data,)
             if args.device:
                 data = tuple(d.to(args.device) for d in data)
                 if target is not None:
                     target = target.to(args.device)
-
-            data = torch.tensor(data)
         
                 # Extract embeddings from the desired layer
             embeddings = feature_extractor(data)
