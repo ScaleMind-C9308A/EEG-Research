@@ -52,7 +52,7 @@ def run():
             if not type(data) in (tuple, list):
                 data = (data,)
             if args.device:
-                data = tuple(torch.tensor(d).to(args.device) for d in data)
+                data = tuple(torch.Tensor(d).to(args.device) for d in data)
                 if target is not None:
                     target = target.to(args.device)
         
