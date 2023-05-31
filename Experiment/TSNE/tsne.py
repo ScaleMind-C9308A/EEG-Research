@@ -109,14 +109,15 @@ def run():
         # Convert the embeddings to a numpy array
         # embeddings_np = validation_embeddings.numpy()
 
+        print(f"Image feature size: {eeg_features.shape}")
+        print(img_features)
         # Perform dimensionality reduction with t-SNE
-        eeg_tsne = TSNE(n_components=2, random_state=42).fit_transform(eeg_features)
+        # eeg_tsne = TSNE(n_components=2, random_state=42).fit_transform(eeg_features)
         img_tsne = TSNE(n_components=2, random_state=42).fit_transform(img_features)
         # img_pos_tsne = TSNE(n_components=2, random_state=42).fit_transform(img_pos_features)
         # img_neg_tsne = TSNE(n_components=2, random_state=42).fit_transform(img_neg_features)
-        print(f"EEG feature size: {eeg_features.shape}")
-        print(f"tsne eeg size: {eeg_tsne.shape}")
-        print(eeg_tsne)
+        # print(f"tsne eeg size: {eeg_tsne.shape}")
+        # print(eeg_tsne)
         # embeddings_tsne = tsne
 
         # Extract the labels for plotting
@@ -129,8 +130,8 @@ def run():
         # plt.title("t-SNE Visualization of Embeddings")
         # plt.savefig(save_fig_tnse)
         
-        visualize_tsne(eeg_tsne, labels, log_path_dir, info="EEG")
-        visualize_tsne(img_tsne, labels, log_path_dir, info = "Image")
+        visualize_tsne(img_tsne, labels, log_path_dir, info="Image")
+        # visualize_tsne(img_tsne, labels, log_path_dir, info = "Image")
         # visualize_tsne(img_pos_tsne, labels, log_path_dir, info="Image_positive")
         # visualize_tsne(img_neg_tsne, labels, log_path_dir, info="Image_negative")
 
