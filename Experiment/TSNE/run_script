@@ -3,9 +3,9 @@ python3 tsne.py --dataset CVPR2017 \
 --img-path /home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet \
 --splits-path /media/exx/HDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth \
 --log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/TSNE \
---weight-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/classifier_classic_EEGChannelNet/model.pth \
---classifier-mode classic_eeg \
---info tsne_classc_eeg \
+--weight-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/ContrastiveLearning/tripletnet_augmented_inceptionv3/model_epoch_50.pth \
+--classifier-mode triplet \
+--info tsne_inception_v3_all \
 --max-epoch 50 \
 --lr 5e-3 \
 --lr-step 10 \
@@ -15,5 +15,5 @@ python3 tsne.py --dataset CVPR2017 \
 --gpu 1 \
 --num-classes 40 \
 --eeg-encoder EEGChannelNet \
---img-encoder efficientnet_b0
+--img-encoder inception_v3
 
