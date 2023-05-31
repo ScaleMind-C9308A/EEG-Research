@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from model import load_model
 # Added pkgs for configurations
 import argparse
 from loguru import logger
@@ -12,6 +11,7 @@ from data_loader import load_data
 from model import load_model
 from sklearn.manifold import TSNE
 import matplotlib.pyplot as plt
+import random
 
 def seed_everything(seed):
     random.seed(seed)
@@ -36,62 +36,174 @@ def run():
     train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path, args.img_path, args.splits_path, args.time_low, args.time_high, args.device, mode='triple', img_encoder=args.img_encoder)
     # Step 2: Set model
     model = load_model(mode=args.classifier_mode, weight_path=args.weight_path, num_classes=args.num_classes, eeg_encoder_name=args.eeg_encoder, img_encoder_name=args.img_encoder)
+    # print(model)
     model.to(args.device)
 
-    # Identify the layer from which you want to extract the embeddings
-    feature_extractor = torch.nn.Sequential(*list(model.children())[:-1])
+    # # Identify the layer from which you want to extract the embeddings
+    # feature_extractor = torch.nn.Sequential(*list(model.children())[:-1])
 
-    # Set the feature extractor to evaluation mode
-    feature_extractor.eval()
+    # # Set the feature extractor to evaluation mode
+    # feature_extractor.eval()
+    model.eval()
     # Extract embeddings from the validation set
-    validation_embeddings = []
+    eeg_features = None
+    img_pos_features = None
+    img_neg_features = None
+    labels = np.array([])
+
+
    # Loop over the validation embeddings and concatenate them into a single tensor
     with torch.no_grad():
         for batch_idx, (data, target) in enumerate(val_dataloader):
+            if (batch_idx >= 5): # only take first 5 batches => 64*5=320 samples
+                break
             target = target if len(target) > 0 else None
             if not type(data) in (tuple, list):
                 data = (data,)
             if args.device:
                 data = tuple(d.to(args.device) for d in data)
-                data = torch.Tensor(data)
-                print(type(data))
+                # data = torch.Tensor(data)
+                # print(type(data))
                 if target is not None:
                     target = target.to(args.device)
-
-        #     # Find the maximum size along the problematic dimension
-        #     max_size = max([d.size(0) for d in data])
-
-        # # Resize the tensors to have the same size along the problematic dimension
-        #     resized_data = [F.pad(d, pad=(0, max_size - d.size(0))) for d in data]
-
-        #     # Concatenate the resized tensors into a single tensor
-        #     concatenated_data = torch.cat(resized_data, dim=0)
-
+            labels = np.concatenate((labels, target.detach().cpu().numpy()))
         
-                # Extract embeddings from the desired layer
-            embeddings = feature_extractor(data)
+            # # Extract embeddings from the desired layer
+            # embeddings = feature_extractor(data)
+            if (args.classifier_mode == "triplet"):
+                eeg, img1, img2 = data    
+                eeg_feature = model.get_eeg_embedding(eeg).detach().cpu().numpy()
+                img_pos_feature = model.get_img_embedding(img1).detach().cpu().numpy()
+                img_neg_feature = model.get_img_embedding(img2).detach().cpu().numpy()
+                if eeg_features is not None:
+                    eeg_features = np.concatenate((eeg_features, eeg_feature))
+                else:
+                    eeg_features = eeg_feature
+                if img_pos_features is not None:
+                    img_pos_features = np.concatenate((img_pos_features, img_pos_feature))
+                else:
+                    img_pos_features = img_pos_feature
+                if img_neg_features is not None:
+                    img_neg_features = np.concatenate((img_neg_features, img_neg_feature))
+                else:
+                    img_neg_features = img_neg_feature
+                
 
-            validation_embeddings.append(embeddings)
+        # validation_embeddings.append(embeddings)
 
-        validation_embeddings = torch.cat(validation_embeddings, dim=0)
+        # validation_embeddings = torch.cat(validation_embeddings, dim=0)
 
         # Convert the embeddings to a numpy array
-        embeddings_np = validation_embeddings.numpy()
+        # embeddings_np = validation_embeddings.numpy()
 
         # Perform dimensionality reduction with t-SNE
-        tsne = TSNE(n_components=2, random_state=42)
-        embeddings_tsne = tsne.fit_transform(embeddings_np)
+        eeg_tsne = TSNE(n_components=2, random_state=42).fit_transform(eeg_features)
+        img_pos_tsne = TSNE(n_components=2, random_state=42).fit_transform(img_pos_features)
+        img_neg_tsne = TSNE(n_components=2, random_state=42).fit_transform(img_neg_features)
+        print(f"EEG feature size: {eeg_features.shape}")
+        print(f"tsne eeg size: {eeg_tsne.shape}")
+        print(eeg_tsne)
+        # embeddings_tsne = tsne
 
         # Extract the labels for plotting
-        labels = target.numpy()
-        # Plot the t-SNE visualization
-        save_fig_tnse = os.path.join(log_path_dir, 'plot_tsne.png')
-        plt.scatter(embeddings_tsne[:, 0], embeddings_tsne[:, 1], c=labels, cmap='viridis')
-        plt.colorbar()
-        plt.title("t-SNE Visualization of Embeddings")
-        plt.savefig(save_fig_tnse)
+        # labels = target.numpy()
 
-    # Perform further analysis or evaluation with the obtained embeddings
+        # # Plot the t-SNE visualization
+        # save_fig_tnse = os.path.join(log_path_dir, 'plot_tsne.png')
+        # plt.scatter(embeddings_tsne[:, 0], embeddings_tsne[:, 1], c=labels, cmap='viridis')
+        # plt.colorbar()
+        # plt.title("t-SNE Visualization of Embeddings")
+        # plt.savefig(save_fig_tnse)
+        
+        visualize_tsne(eeg_tsne, labels, log_path_dir, info="EEG")
+        # visualize_tsne(img_pos_tsne, labels, log_path_dir, info="Image_positive")
+        # visualize_tsne(img_neg_tsne, labels, log_path_dir, info="Image_negative")
+
+def generate_random_colors(n):
+    """
+    Generates a list of n distinct random colors.
+
+    Args:
+        n: The number of colors to generate.
+
+    Returns:
+        A list of n distinct random colors.
+    
+    """
+
+    colors = {}
+    for i in range(n):
+        r = random.randint(0, 255)
+        g = random.randint(0, 255)
+        b = random.randint(0, 255)
+        colors[i] = (b, g, r)
+
+    return colors
+
+
+# scale and move the coordinates so they fit [0; 1] range
+def scale_to_01_range(x):
+    # compute the distribution range
+    value_range = (np.max(x) - np.min(x))
+
+    # move the distribution so that it starts from zero
+    # by extracting the minimal value from all its values
+    starts_from_zero = x - np.min(x)
+
+    # make the distribution fit [0; 1] by dividing by its range
+    return starts_from_zero / value_range
+
+def visualize_tsne_points(tx, ty, labels, dict_class_to_color, log_path_dir, info):
+    #initialize save_fig path
+    save_fig_path = os.path.join(log_path_dir, f"{info}_tsne.png")
+    # initialize matplotlib plot
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    print(f"Labels length: {len(labels)}")
+    # print("dict class to color")
+    # print(dict_class_to_color)
+
+    # for every class, we'll add a scatter plot separately
+    for label in dict_class_to_color:
+        # find the samples of the current class in the data
+        indices = [i for i, l in enumerate(labels) if l == label]
+
+        # extract the coordinates of the points of this class only
+        current_tx = np.take(tx, indices)
+        current_ty = np.take(ty, indices)
+
+        # convert the class color to matplotlib format:
+        # BGR -> RGB, divide by 255, convert to np.array
+        color = np.array([dict_class_to_color[label][::-1]], dtype=np.float) / 255
+
+        # add a scatter plot with the correponding color and label
+        ax.scatter(current_tx, current_ty, c=color, label=label)
+
+    # build a legend using the labels we set previously
+    ax.legend(loc='best')
+    plt.title(f"{info} tsne plot")
+
+    # finally, show the plot
+    plt.savefig(save_fig_path)
+
+def visualize_tsne(tsne, labels, log_path_dir, info, plot_size=1000, max_image_size=100):
+    # extract x and y coordinates representing the positions of the images on T-SNE plot
+    tx = tsne[:, 0]
+    ty = tsne[:, 1]
+
+    # scale and move the coordinates so they fit [0; 1] range
+    tx = scale_to_01_range(tx)
+    ty = scale_to_01_range(ty)
+
+    dict_class_to_color = generate_random_colors(40)
+
+    # visualize the plot: samples as colored points
+    visualize_tsne_points(tx, ty, labels, dict_class_to_color, log_path_dir, info)
+
+    # # visualize the plot: samples as images
+    # visualize_tsne_images(tx, ty, images, labels, plot_size=plot_size, max_image_size=max_image_size)
+
+# Perform further analysis or evaluation with the obtained embeddings
 def load_config():
     """
     Load configuration.

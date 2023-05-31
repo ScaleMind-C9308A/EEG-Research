@@ -210,7 +210,7 @@ class EEGDataset_Triple(Dataset):
             dataset_idx = self.split_test[index]
         else:
             raise ValueError()
-        eeg, img_positive_idx, img_positive_label = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
+        eeg, img_positive_idx, label = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
         eeg = eeg.float()[:, self.time_low:self.time_high]
         # We don't need to sample neg image from different labels,
         # we only need to sample neg image that are different from pos_image
@@ -237,7 +237,7 @@ class EEGDataset_Triple(Dataset):
         if self.transform is not None:
             img_positive = self.transform(img_positive)
             img_negative = self.transform(img_negative)
-        return (eeg, img_positive, img_negative), []
+        return (eeg, img_positive, img_negative), label
 
     def __len__(self):
         if self.mode == "train":
@@ -248,6 +248,7 @@ class EEGDataset_Triple(Dataset):
             return len(self.split_test)
         else:
             raise ValueError()
+
     
 class BalancedBatchSampler(BatchSampler):
     """

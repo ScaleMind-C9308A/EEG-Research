@@ -5,7 +5,7 @@ python3 tsne.py --dataset CVPR2017 \
 --log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/TSNE \
 --weight-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/ContrastiveLearning/tripletnet_augmented_inceptionv3/model_epoch_50.pth \
 --classifier-mode triplet \
---info tsne_inceptionv3 \
+--info tsne_inception_v3_1 \
 --max-epoch 50 \
 --lr 5e-3 \
 --lr-step 10 \
