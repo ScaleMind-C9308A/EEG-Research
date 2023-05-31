@@ -130,6 +130,7 @@ def run():
         # plt.savefig(save_fig_tnse)
         
         visualize_tsne(eeg_tsne, labels, log_path_dir, info="EEG")
+        visualize_tsne(img_tsne, labels, log_path_dir, info = "Image")
         # visualize_tsne(img_pos_tsne, labels, log_path_dir, info="Image_positive")
         # visualize_tsne(img_neg_tsne, labels, log_path_dir, info="Image_negative")
 
