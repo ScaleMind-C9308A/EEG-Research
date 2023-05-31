@@ -112,8 +112,8 @@ def run():
         # Perform dimensionality reduction with t-SNE
         eeg_tsne = TSNE(n_components=2, random_state=42).fit_transform(eeg_features)
         img_tsne = TSNE(n_components=2, random_state=42).fit_transform(img_features)
-        img_pos_tsne = TSNE(n_components=2, random_state=42).fit_transform(img_pos_features)
-        img_neg_tsne = TSNE(n_components=2, random_state=42).fit_transform(img_neg_features)
+        # img_pos_tsne = TSNE(n_components=2, random_state=42).fit_transform(img_pos_features)
+        # img_neg_tsne = TSNE(n_components=2, random_state=42).fit_transform(img_neg_features)
         print(f"EEG feature size: {eeg_features.shape}")
         print(f"tsne eeg size: {eeg_tsne.shape}")
         print(eeg_tsne)
