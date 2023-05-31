@@ -87,6 +87,18 @@ def run():
                     img_neg_features = np.concatenate((img_neg_features, img_neg_feature))
                 else:
                     img_neg_features = img_neg_feature
+            elif (args.classifier_mode == "online_triplet"):
+                eeg, img = data
+                eeg_feature = model.get_eeg_embedding(eeg).detach().cpu().numpy()
+                img_feature = model.get_img_embedding(img).detach().cpu().numpy()
+                if eeg_features is not None:
+                    eeg_features = np.concatenate((eeg_features, eeg_feature))
+                else:
+                    eeg_features = eeg_feature
+                if img_features is not None:
+                    img_features = np.concatenate((img_features, img_feature))
+                else:
+                    img_features = img_feature
                 
 
         # validation_embeddings.append(embeddings)
@@ -98,6 +110,7 @@ def run():
 
         # Perform dimensionality reduction with t-SNE
         eeg_tsne = TSNE(n_components=2, random_state=42).fit_transform(eeg_features)
+        img_tsne = TSNE(n_components=2, random_state=42).fit_transform(img_features)
         img_pos_tsne = TSNE(n_components=2, random_state=42).fit_transform(img_pos_features)
         img_neg_tsne = TSNE(n_components=2, random_state=42).fit_transform(img_neg_features)
         print(f"EEG feature size: {eeg_features.shape}")
