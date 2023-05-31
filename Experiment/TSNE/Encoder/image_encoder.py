@@ -98,7 +98,7 @@ def load_image_encoder_triplet(backbone, output_dim, pretrained):
     
         
 class ImageEncoder(nn.Module):
-    def __init__(self, backbone="inception_v3", output_dim=500, pretrained=True):
+    def __init__(self, backbone="inception_v3", output_dim=1000, pretrained=True):
         """
         backbone: "inception_v3" | "resnet50" | "efficientnet_b0" | "efficientnet_b1" |
         output_dim: (default: 40) 

@@ -176,7 +176,7 @@ class EEGChannelNet_Encoder(nn.Module):
         down_kernel: size of the bottleneck kernel
         down_stride: size of the bottleneck stride
         '''
-    def __init__(self, in_channels=1, temp_channels=10, out_channels=50, embedding_size=500,
+    def __init__(self, in_channels=1, temp_channels=10, out_channels=50, embedding_size=1000,
                  input_width=440, input_height=128, temporal_dilation_list=[(1,1),(1,2),(1,4),(1,8),(1,16)],
                  temporal_kernel=(1,33), temporal_stride=(1,2),
                  num_temp_layers=4,
@@ -235,7 +235,7 @@ class EEGChannelNet_Classifier(nn.Module):
         down_kernel: size of the bottleneck kernel
         down_stride: size of the bottleneck stride
         '''
-    def __init__(self, in_channels=1, temp_channels=10, out_channels=50, num_classes=40, embedding_size=500,
+    def __init__(self, in_channels=1, temp_channels=10, out_channels=50, num_classes=40, embedding_size=1000,
                  input_width=440, input_height=128, temporal_dilation_list=[(1,1),(1,2),(1,4),(1,8),(1,16)],
                  temporal_kernel=(1,33), temporal_stride=(1,2),
                  num_temp_layers=4,
