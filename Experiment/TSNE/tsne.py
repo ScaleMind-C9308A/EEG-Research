@@ -47,6 +47,7 @@ def run():
     model.eval()
     # Extract embeddings from the validation set
     eeg_features = None
+    img_features = None
     img_pos_features = None
     img_neg_features = None
     labels = np.array([])
