@@ -43,11 +43,11 @@ def load_data(eeg_path, img_path, splits_path, eeg_time_low, eeg_time_high, devi
     loaded_splits = torch.load(splits_path)['splits']
     train_transform = img_transform(img_encoder, mode="train")
     val_transform = img_transform(img_encoder, mode="val")
-    if (mode== "triple"):
+    if (mode== "triplet"):
         train_dataset = EEGDataset_Triple(img_path, loaded_eeg, loaded_splits, eeg_time_low,eeg_time_high, mode="train", transform=train_transform)
         val_dataset = EEGDataset_Triple(img_path, loaded_eeg, loaded_splits, eeg_time_low,eeg_time_high,mode="val", transform=val_transform)
         test_dataset = EEGDataset_Triple(img_path, loaded_eeg, loaded_splits, eeg_time_low,eeg_time_high,mode="test", transform=val_transform)
-    elif (mode=="online_triplet"):
+    elif (mode=="online_triplet" or mode=="classic_eeg"):
         train_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits,eeg_time_low,eeg_time_high, mode="train", transform=train_transform)
         val_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits,eeg_time_low,eeg_time_high, mode="val", transform=val_transform)
         test_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits,eeg_time_low,eeg_time_high, mode="test", transform=val_transform)

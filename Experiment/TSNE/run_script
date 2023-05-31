@@ -3,9 +3,9 @@ python3 tsne.py --dataset CVPR2017 \
 --img-path /home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet \
 --splits-path /media/exx/HDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth \
 --log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/TSNE \
---weight-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/ContrastiveLearning/online_triplet_augmented_efficientnet_b0/model_epoch_50.pth \
---classifier-mode online_triplet \
---info tsne_online_efficientnet_b0 \
+--weight-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/classifier_classic_EEGChannelNet/model.pth \
+--classifier-mode classic_eeg \
+--info tsne_classc_eeg \
 --max-epoch 50 \
 --lr 5e-3 \
 --lr-step 10 \

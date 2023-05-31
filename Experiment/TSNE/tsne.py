@@ -33,9 +33,9 @@ def run():
         logger.info(args)
     is_inception = True if (args.img_encoder == "inception_v3") else False 
     # Define your model architecture
-    train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path, args.img_path, args.splits_path, args.time_low, args.time_high, args.device, mode='online_triplet', img_encoder=args.img_encoder)
+    train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path, args.img_path, args.splits_path, args.time_low, args.time_high, args.device, mode=args.classifier_mode, img_encoder=args.img_encoder)
     # Step 2: Set model
-    model = load_model(mode=args.classifier_mode, weight_path=args.weight_path, num_classes=args.num_classes, eeg_encoder_name=args.eeg_encoder, img_encoder_name=args.img_encoder)
+    model = load_model(mode=args.classifier_mode, weight_path=args.weight_path, embedding_dim=args.embedding_size, num_classes=args.num_classes, eeg_encoder_name=args.eeg_encoder, img_encoder_name=args.img_encoder)
     # print(model)
     model.to(args.device)
 
@@ -100,6 +100,13 @@ def run():
                     img_features = np.concatenate((img_features, img_feature))
                 else:
                     img_features = img_feature
+            elif (args.classifier_mode == "classic_eeg"):
+                eeg, img = data
+                eeg_feature = model.get_eeg_embedding(eeg).detach().cpu().numpy()
+                if eeg_features is not None:
+                    eeg_features = np.concatenate((eeg_features, eeg_feature))
+                else:
+                    eeg_features = eeg_feature
                 
 
         # validation_embeddings.append(embeddings)
@@ -110,27 +117,17 @@ def run():
         # embeddings_np = validation_embeddings.numpy()
 
         print(f"Image feature size: {eeg_features.shape}")
-        print(img_features)
+        print(eeg_features)
         # Perform dimensionality reduction with t-SNE
-        # eeg_tsne = TSNE(n_components=2, random_state=42).fit_transform(eeg_features)
-        img_tsne = TSNE(n_components=2, random_state=42).fit_transform(img_features)
+        eeg_tsne = TSNE(n_components=2, random_state=42).fit_transform(eeg_features)
+        # img_tsne = TSNE(n_components=2, random_state=42).fit_transform(img_features)
         # img_pos_tsne = TSNE(n_components=2, random_state=42).fit_transform(img_pos_features)
         # img_neg_tsne = TSNE(n_components=2, random_state=42).fit_transform(img_neg_features)
         # print(f"tsne eeg size: {eeg_tsne.shape}")
         # print(eeg_tsne)
-        # embeddings_tsne = tsne
 
-        # Extract the labels for plotting
-        # labels = target.numpy()
-
-        # # Plot the t-SNE visualization
-        # save_fig_tnse = os.path.join(log_path_dir, 'plot_tsne.png')
-        # plt.scatter(embeddings_tsne[:, 0], embeddings_tsne[:, 1], c=labels, cmap='viridis')
-        # plt.colorbar()
-        # plt.title("t-SNE Visualization of Embeddings")
-        # plt.savefig(save_fig_tnse)
         
-        visualize_tsne(img_tsne, labels, log_path_dir, info="Image")
+        visualize_tsne(eeg_tsne, labels, log_path_dir, info="EEG")
         # visualize_tsne(img_tsne, labels, log_path_dir, info = "Image")
         # visualize_tsne(img_pos_tsne, labels, log_path_dir, info="Image_positive")
         # visualize_tsne(img_neg_tsne, labels, log_path_dir, info="Image_negative")
@@ -231,6 +228,18 @@ def load_config():
         args(argparse.ArgumentParser): Configuration.
     """
     parser = argparse.ArgumentParser(description='Online Triplet Training of EEG and image')
+    ### Specific to Contrastive Learning
+    # From argparse document: The bool() function is not recommended as a type converter. All it does is convert 
+    # empty strings to False and non-empty strings to True
+    parser.add_argument('--img-feature-extract', default=0, type=int,
+                        help='(1|0: Option to turn on feature extraction of image encoder')
+    parser.add_argument('--embedding-size', default=1000, type=int,
+                        help="Embedding size for training")
+    parser.add_argument('--classifier-mode', default='classic', type=str,
+                        help='classic | triplet | online_triplet')
+    parser.add_argument('--weight-path', default=None, 
+                        help='Path of pretrained weight of the model')
+    ##################################
     parser.add_argument('--dataset',
                         help='Dataset name.')
     parser.add_argument('--eeg-path',
@@ -250,11 +259,7 @@ def load_config():
     parser.add_argument('--img-encoder', default="inception_v3", type=str,
                         help='inception_v3 | resnet50')
     parser.add_argument('--eeg-encoder', default="EEGChannelNet", type=str,
-                        help='eeg encoder')
-    parser.add_argument('--classifier-mode', default='classic', type=str,
-                        help='classic | triplet | online_triplet')
-    parser.add_argument('--weight-path', default=None, 
-                        help='Path of pretrained weight of the model')
+                        help='inception_v3 | resnet50')
     
     # Model training configurations
     parser.add_argument('--batch-size', default=128, type=int,

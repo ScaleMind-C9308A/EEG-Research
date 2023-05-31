@@ -7,10 +7,13 @@
 import torch
 import torch.nn as nn
 from Encoder.EEGChannelNet import EEGChannelNet_Encoder
+from Encoder.EEGChannelNet_modified import EEGChannelNet_Encoder_Mod
 
-def load_eeg_encoder(encoder):
+def load_eeg_encoder(encoder, embedding_dim):
     if encoder=="EEGChannelNet":
-        net = EEGChannelNet_Encoder()
+        net = EEGChannelNet_Encoder(embedding_size=embedding_dim)
+    elif encoder=="EEGChannelNet_Modified":
+        net = EEGChannelNet_Encoder_Mod(embedding_size=embedding_dim)
 
     # print("DONE: CREATE EEG ENCODER")
     # print(net)
