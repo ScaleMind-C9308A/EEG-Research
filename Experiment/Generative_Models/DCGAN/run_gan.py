@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import torch.optim as optim
 # Added pkgs for configurations
 import argparse
 from loguru import logger
@@ -8,7 +9,8 @@ import os
 import numpy as np
 import random
 from data_loader import load_data
-from model import load_model
+from model import Generator, Discriminator
+from trainer import GAN_fit
 import matplotlib.pyplot as plt
 import random
 
@@ -31,23 +33,24 @@ def run():
         logger.add(os.path.join(log_path_dir, 'train.log'))
         logger.info(args)
     # Define your model architecture
-    train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path, args.img_path, args.splits_path, args.time_low, args.time_high, args.device, mode=args.classifier_mode, img_encoder=args.img_encoder)
+    train_loader_stage1, train_loader_stage2, val_loader = load_data(args.eeg_path, args.img_path, args.splits_path, args.time_low, args.time_high, args.device, mode=args.classifier_mode, img_encoder=args.img_encoder)
     # Step 2: Set model
-    model = load_model(mode=args.classifier_mode, weight_path=args.weight_path, embedding_dim=args.embedding_size, num_classes=args.num_classes, eeg_encoder_name=args.eeg_encoder, img_encoder_name=args.img_encoder)
-    # print(model)
-    model.to(args.device)
-    # Step 3: Set loss_fn
+    # Initialize the generator and discriminator
+    generator = Generator(args.latent_dim, args.eeg_dim).to(args.device)
+    discriminator = Discriminator().to(args.device)
+
+    # Step 3: Set loss_fn/criterion
     margin = 0.
-    loss_fn = TripletLoss(margin)
+    criterion = nn.BCELoss()
     # Step 4: Set optimizer
     if (args.optim == "Adam"):
-        optimizer = optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.wd)
-    elif (args.optim == "SGD"):
-        optimizer = optim.SGD(model.parameters(), lr=args.lr, weight_decay=args.wd, momentum=args.momen, nesterov=args.nesterov)
+        optimizer_G = optim.Adam(generator.parameters(), lr=args.lr, betas=(0.5, 0.999))
+        optimizer_D = optim.Adam(discriminator.parameters(), lr=args.lr, betas=(0.5, 0.999))
+    
 
     scheduler = lr_scheduler.StepLR(optimizer, args.lr_step, gamma=0.1, last_epoch=-1)
     #Step 5: Put all to net_trainer()
-    fit(train_dataloader, val_dataloader, model, loss_fn, optimizer, scheduler, args.max_epoch, args.device, args.log_interval)
+    GAN_fit(train_loader_stage1, train_loader_stage2, val_loader, generator, discriminator,  criterion, optimizer_G, optimizer_D, scheduler, args.num_epochs_stage1, args.num_epochs_stage2, args.device, args.log_interval, log_path_dir)
 
 
     
