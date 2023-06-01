@@ -1,0 +1,3 @@
+[submodule "Dataset/ImageNet-Datasets-Downloader"]
+	path = Dataset/ImageNet-Datasets-Downloader
+	url = https://github.com/skaldek/ImageNet-Datasets-Downloader.git
