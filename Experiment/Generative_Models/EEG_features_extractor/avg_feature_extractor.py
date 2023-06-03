@@ -35,6 +35,8 @@ def avg_feature_extract():
                                     for label in set(labels_test)}
     # Calculate avg eeg embeddings on each class
 
+
+
 class EEGClassificationNet(nn.Module):
     def __init__(self, backbone_name, embedding_dim, num_classes):
         super().__init__()

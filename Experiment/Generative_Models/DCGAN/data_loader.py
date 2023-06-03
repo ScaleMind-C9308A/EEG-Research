@@ -152,12 +152,13 @@ class GANDatasetStage2(Dataset):
         An image
         Average EEG feature vector over all images of the selected class and over all subjects
     """
-    def __init__(self, img_dir_path, loaded_eeg, loaded_splits, time_low, time_high, mode="train", transform=None):
+    def __init__(self, img_dir_path, loaded_eeg, loaded_splits, class_to_eeg_embeddings, time_low, time_high, mode="train", transform=None):
         """
         Args:
             img_dir_path: directory path of imagenet images,
             loaded_eeg: eeg dataset loaded from torch.load(),
             loaded_splits: cross-validation splits loaded from torch.load(),
+            class_to_eeg_embeddings: <Dict> {<class>: <torch tensor: eeg_embedding>}
 
         """
         self.mode = mode
@@ -204,7 +205,7 @@ class GANDatasetStage2(Dataset):
             dataset_idx = self.split_test[index]
         else:
             raise ValueError()
-        eeg, img_positive_idx, label = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
+        eeg, img_idx, label = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
         eeg = eeg.float()[:, self.time_low:self.time_high]
         
         img_positive_filename = self.img_filenames[img_positive_idx]
