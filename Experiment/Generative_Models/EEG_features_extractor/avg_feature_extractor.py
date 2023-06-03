@@ -23,11 +23,16 @@ def avg_feature_extract():
     loaded_eeg = torch.load(args.eeg_path)
     loaded_splits = torch.load(args.splits_path)['splits'][0]
     eeg_dataset, classes, img_filenames = [loaded_eeg[k] for k in ['dataset', 'labels', 'images']]
+    # Create labels
     labels_train = np.array([eeg_dataset[sample_idx]['label'] for sample_idx in loaded_splits['train']])
     labels_val = np.array([eeg_dataset[sample_idx]['label'] for sample_idx in loaded_splits['val']])
     labels_test = np.array([eeg_dataset[sample_idx]['label'] for sample_idx in loaded_splits['test']])
-    label_to_indices = {label: np.where(labels == label)[0]
-                                    for label in self.labels_set}
+    train_label_to_indices = {label: np.where(labels_train == label)[0]
+                                    for label in set(labels_train)}
+    val_label_to_indices = {label: np.where(labels_val == label)[0]
+                                    for label in set(labels_val)}
+    test_label_to_indices = {label: np.where(labels_test == label)[0]
+                                    for label in set(labels_test)}
     # Calculate avg eeg embeddings on each class
 
 class EEGClassificationNet(nn.Module):
