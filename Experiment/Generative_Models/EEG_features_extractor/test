@@ -1,0 +1,4 @@
+python3 test.py \
+    --eeg-path /media/exx/HDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth \
+    --img-path /home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet \
+    --splits-path /media/exx/HDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth 

@@ -1,0 +1,8 @@
+python3 avg_feature_extractor.py \
+--weight-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/classifier_classic_EEGChannelNet/model.pth \
+--eeg-path /media/exx/HDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth \
+--img-path /home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet \
+--splits-path /media/exx/HDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth \
+--save-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/Generative_Models/EEG_features_extractor \
+--info avg_eeg_embeddings \
+--gpu 0

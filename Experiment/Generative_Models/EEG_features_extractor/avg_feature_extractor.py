@@ -4,6 +4,7 @@ import torch
 from torch.utils.data import Dataset, DataLoader
 import numpy as np
 import argparse
+import os
 
 from Encoder.eeg_encoder import load_eeg_encoder
 from Encoder.image_encoder import load_image_encoder, load_image_encoder_triplet
@@ -11,13 +12,13 @@ from Encoder.image_encoder import load_image_encoder, load_image_encoder_triplet
 def avg_feature_extract():
     """
     Return:
-        eeg_features: Tensor([num_classes, eeg_embedding_size])
+        eeg_features: <Dict> {<label>: <avg eeg embedding>}
     """
     args = load_config()
     #Load model for inference
     model = EEGClassificationNet('EEGChannelNet', args.embedding_size, 40)
     model.load_state_dict(torch.load(args.weight_path))
-    model.to(args.device)
+    # model.to(args.device)
     model.eval()
     #Load eeg data
     loaded_eeg = torch.load(args.eeg_path)
@@ -34,26 +35,26 @@ def avg_feature_extract():
     test_label_to_indices = {label: np.where(labels_test == label)[0]
                                     for label in set(labels_test)}
     # Calculate avg eeg embeddings on each class
-    eeg_features = torch.zeros((len(classes), args.embedding_size))
-    for sample_class in train_label_to_indices:
-        indices = train_label_to_indices[sample_class]
-        time_low = 20
-        time_high = 460
-        eeg_embeddings = torch.empty((len(indices), args.embedding_size))
-        for idx in indices:
-            eeg, img, label = [eeg_dataset[idx][key] for key in ['eeg', 'image', 'label']]
-            eeg = eeg.float()[:, time_low:time_high]
-            eeg_embedding = model.get_eeg_embedding(eeg)
-            eeg_embeddings[idx] = eeg_embedding
-        average_eeg_embedding = torch.mean(eeg_embeddings, dim=0)
-        eeg_features[train_label_to_indices.index(sample_class)] = average_eeg_embedding
-    return eeg_features
-    
-    
-    
-    
+    label_to_eeg_embeddings = {}
+    with torch.no_grad():
+        for sample_class in train_label_to_indices:
+            indices = train_label_to_indices[sample_class]
+            eeg_embeddings = torch.empty((len(indices), args.embedding_size))
+            for i, idx in enumerate(indices):
+                eeg, img, label = [eeg_dataset[idx][key] for key in ['eeg', 'image', 'label']]
+                eeg = eeg.float()[:, args.time_low:args.time_high]
+                eeg = eeg.unsqueeze(0)
+                # eeg.to(args.device)
+                
+                # print(f"EEG Size: {eeg.size()}")
+                eeg_embedding = model.get_eeg_embedding(eeg)
+                eeg_embeddings[i] = eeg_embedding
+            average_eeg_embedding = torch.mean(eeg_embeddings, dim=0)
+            # print(average_eeg_embedding)
+            label_to_eeg_embeddings[sample_class] = average_eeg_embedding
+        torch.save(label_to_eeg_embeddings, os.path.join(args.save_path, f"{args.info}.pth"))
 
-
+    
 
 class EEGClassificationNet(nn.Module):
     def __init__(self, backbone_name, embedding_dim, num_classes):
@@ -69,83 +70,6 @@ class EEGClassificationNet(nn.Module):
     def get_eeg_embedding(self, eeg):
         return self.backbone(eeg)
     
-class EEGDataset(Dataset):
-    """
-    Train: For each sample (anchor) randomly chooses a positive and negative samples
-    Test: Creates fixed triplets for testing
-    """
-    def __init__(self, img_dir_path, loaded_eeg, loaded_splits, time_low, time_high, mode="train", transform=None):
-        """
-        Args:
-            img_dir_path: directory path of imagenet images,
-            loaded_eeg: eeg dataset loaded from torch.load(),
-            loaded_splits: cross-validation splits loaded from torch.load(),
-
-        """
-        self.mode = mode
-        self.transform = transform
-        self.img_dir_path = img_dir_path
-        self.splits = loaded_splits
-        dataset, classes, img_filenames = [loaded_eeg[k] for k in ['dataset', 'labels', 'images']]
-        self.classes = classes
-        self.img_filenames = img_filenames
-
-        self.eeg_dataset = dataset
-        self.time_low = time_low
-        self.time_high = time_high
-        """We use only split 0, no cross-validation"""
-        self.split_chosen = loaded_splits[0]
-        self.split_train = self.split_chosen['train']
-        self.split_val = self.split_chosen['val']
-        self.split_test = self.split_chosen['test']
-
-        if self.mode == "train":
-            self.labels = [self.eeg_dataset[sample_idx]['label'] for sample_idx in self.split_train]
-        elif self.mode == "val":
-            self.labels = [self.eeg_dataset[sample_idx]['label'] for sample_idx in self.split_val]
-        elif self.mode == "test":
-            self.labels = [self.eeg_dataset[sample_idx]['label'] for sample_idx in self.split_test]
-        else:
-            raise ValueError()
-        self.labels = torch.tensor(self.labels)
-        self.labels_set = set(self.labels.numpy())
-        """self.label_to_indices: Map each label to its corresponding samples in the dataset"""
-        self.label_to_indices = {label: np.where(self.labels.numpy() == label)[0]
-                                    for label in self.labels_set}
-        
-    def __getitem__(self, index):
-        """
-        ds = EEGDataset()
-        ds[i] will return by what we define __getitem__ magic methods
-        """
-        if self.mode == "train":
-            dataset_idx = self.split_train[index]
-        elif self.mode == "val":
-            dataset_idx = self.split_val[index]
-        elif self.mode == "test":
-            dataset_idx = self.split_test[index]
-        else:
-            raise ValueError()
-        eeg, img_positive_idx, label = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
-        eeg = eeg.float()[:, self.time_low:self.time_high]
-       
-        img_positive_filename = self.img_filenames[img_positive_idx]
-        img_positive = Image.open(os.path.join(self.img_dir_path, img_positive_filename+'.JPEG' )).convert('RGB')
-        
-        if self.transform is not None:
-            img_positive = self.transform(img_positive)
-            img_negative = self.transform(img_negative)
-        return (eeg, img_positive, img_negative), label
-
-    def __len__(self):
-        if self.mode == "train":
-            return len(self.split_train)
-        elif self.mode == "val":
-            return len(self.split_val)
-        elif self.mode == "test":
-            return len(self.split_test)
-        else:
-            raise ValueError()
 
 def load_config():
     """
@@ -161,10 +85,29 @@ def load_config():
 
     # From argparse document: The bool() function is not recommended as a type converter. All it does is convert 
     # empty strings to False and non-empty strings to True
-    parser.add_argument('--embedding-size', default=1000, type=int,
-                        help="Embedding size for training")
+
+    ### SPECIFIC TO THIS SCRIPT
+    parser.add_argument('--save-path', type=str,
+                        help='Directory to save.')
+    parser.add_argument('--info', type=str,
+                        help='Save file name')
+    parser.add_argument('--embedding-size', type=int, default=1000,
+                        help='EEG Embedding size')
     parser.add_argument('--weight-path', default=None, 
                         help='Path of pretrained weight of the model')
+    ###########################
+    parser.add_argument('--dataset', type=str, default="CVPR2017",
+                        help='Dataset name.')
+    parser.add_argument('--eeg-path',
+                        help='Path of eeg dataset')
+    parser.add_argument('--time-low', type=float, default=20,
+                        help='Lowest time value of eeg segment')
+    parser.add_argument('--time-high', type=float, default=460,
+                        help='highest time value of eeg segment')
+    parser.add_argument('--img-path',
+                        help='Path of image dataset')
+    parser.add_argument('--splits-path',
+                        help='Path of splits dataset')
     parser.add_argument('--gpu', default=None, type=int,
                         help='Using gpu.(default: False)')
     
@@ -178,3 +121,6 @@ def load_config():
         args.device = torch.device("cuda:%d" % args.gpu)
 
     return args
+
+if __name__ == "__main__":
+    avg_feature_extract()
