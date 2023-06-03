@@ -34,6 +34,24 @@ def avg_feature_extract():
     test_label_to_indices = {label: np.where(labels_test == label)[0]
                                     for label in set(labels_test)}
     # Calculate avg eeg embeddings on each class
+    eeg_features = torch.zeros((len(classes), args.embedding_size))
+    for sample_class in train_label_to_indices:
+        indices = train_label_to_indices[sample_class]
+        time_low = 20
+        time_high = 460
+        eeg_embeddings = torch.empty((len(indices), args.embedding_size))
+        for idx in indices:
+            eeg, img, label = [eeg_dataset[idx][key] for key in ['eeg', 'image', 'label']]
+            eeg = eeg.float()[:, time_low:time_high]
+            eeg_embedding = model.get_eeg_embedding(eeg)
+            eeg_embeddings[idx] = eeg_embedding
+        average_eeg_embedding = torch.mean(eeg_embeddings, dim=0)
+        eeg_features[train_label_to_indices.index(sample_class)] = average_eeg_embedding
+    return eeg_features
+    
+    
+    
+    
 
 class EEGClassificationNet(nn.Module):
     def __init__(self, backbone_name, embedding_dim, num_classes):
