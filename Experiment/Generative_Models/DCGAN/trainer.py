@@ -3,15 +3,16 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 
-def GAN_fit(train_loader_stage1, train_loader_stage2, val_loader, generator, discriminator, criterion, optimizer_G, optimizer_D, scheduler, num_epochs_stage1, num_epochs_stage2, device, log_interval, log_path_dir):
+def GAN_fit(train_loader_stage1, train_loader_stage2, val_loader, generator, discriminator, criterion, optimizer_G, optimizer_D, scheduler, log_path_dir, args):
     # Set the parameters
-    latent_dim = 100
-    eeg_dim = 128
-    image_size = 64
+    latent_dim = args.latent_dim #100
+    eeg_dim = args.eeg_dim # 128
+    image_size = args.img_size # 64
+    device = args.device
 
     # Set the training parameters
-    num_epochs_stage1 = 100
-    num_epochs_stage2 = 50
+    num_epochs_stage1 = args.num_epochs_stage1 # 100
+    num_epochs_stage2 = args.num_epochs_stage2 # 50
     batch_size = 64
     learning_rate = 0.0002
 

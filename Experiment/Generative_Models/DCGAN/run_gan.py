@@ -48,9 +48,9 @@ def run():
         optimizer_D = optim.Adam(discriminator.parameters(), lr=args.lr, betas=(0.5, 0.999))
     
 
-    scheduler = lr_scheduler.StepLR(optimizer, args.lr_step, gamma=0.1, last_epoch=-1)
+    # scheduler = lr_scheduler.StepLR(optimizer, args.lr_step, gamma=0.1, last_epoch=-1)
     #Step 5: Put all to net_trainer()
-    GAN_fit(train_loader_stage1, train_loader_stage2, val_loader, generator, discriminator,  criterion, optimizer_G, optimizer_D, scheduler, args.num_epochs_stage1, args.num_epochs_stage2, args.device, args.log_interval, log_path_dir)
+    GAN_fit(train_loader_stage1, train_loader_stage2, val_loader, generator, discriminator,  criterion, optimizer_G, optimizer_D, None, log_path_dir, args)
 
 
     
@@ -65,41 +65,34 @@ def load_config():
         args(argparse.ArgumentParser): Configuration.
     """
     parser = argparse.ArgumentParser(description='Online Triplet Training of EEG and image')
-    ### Specific to Contrastive Learning
+    ### Specific to GAN
     # From argparse document: The bool() function is not recommended as a type converter. All it does is convert 
     # empty strings to False and non-empty strings to True
-    parser.add_argument('--img-feature-extract', default=0, type=int,
-                        help='(1|0: Option to turn on feature extraction of image encoder')
+
     parser.add_argument('--embedding-size', default=1000, type=int,
                         help="Embedding size for training")
     parser.add_argument('--classifier-mode', default='classic', type=str,
                         help='classic | triplet | online_triplet')
     parser.add_argument('--weight-path', default=None, 
                         help='Path of pretrained weight of the model')
+    parser.add_argument('--img-w-eeg-path', default=None, 
+                        help='Path of image dataset that has recorded EEG data')
+    parser.add_argument('--img-no-eeg-path', default=None, 
+                        help='Path of image dataset that has NO recorded EEG data')
     ##################################
     parser.add_argument('--dataset',
                         help='Dataset name.')
     parser.add_argument('--eeg-path',
                         help='Path of eeg dataset')
-    parser.add_argument('--time-low', type=float, default=20,
-                        help='Lowest time value of eeg segment')
-    parser.add_argument('--time-high', type=float, default=460,
-                        help='highest time value of eeg segment')
-    parser.add_argument('--img-path',
-                        help='Path of image dataset')
     parser.add_argument('--splits-path',
                         help='Path of splits dataset')
     parser.add_argument('--log-path', 
                         help="Directory path to save log files during training")
     parser.add_argument('--info', default='Trivial',
                         help='Train info')
-    parser.add_argument('--img-encoder', default="inception_v3", type=str,
-                        help='inception_v3 | resnet50')
-    parser.add_argument('--eeg-encoder', default="EEGChannelNet", type=str,
-                        help='inception_v3 | resnet50')
     
     # Model training configurations
-    parser.add_argument('--batch-size', default=128, type=int,
+    parser.add_argument('--batch-size', default=64, type=int,
                         help='Batch size.(default: 128)')
     parser.add_argument('--max-epoch', default=100, type=int,
                         help='Number of epochs.(default: 30)')
@@ -119,7 +112,7 @@ def load_config():
                         help='Using gpu.(default: False)')    
     
     # Training Optim Settings
-    parser.add_argument('--lr', default=2.5e-4, type=float,
+    parser.add_argument('--lr', default=2e-4, type=float,
                     help='Learning rate.(default: 2.5e-4)')
     parser.add_argument('--wd', default=1e-4, type=float,
                         help='Weight Decay.(default: 1e-4)')

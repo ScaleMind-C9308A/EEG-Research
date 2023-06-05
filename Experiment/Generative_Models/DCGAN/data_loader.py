@@ -110,7 +110,7 @@ class ImageFolder(Dataset):
     def __init__(self, root, classes, transform=None, target_transform=None,
                  classes_idx=None):
         class_to_idx = {classes[i]: i for i in range(len(classes))}
-        self.classes_idx = classes_idx
+        # self.classes_idx = classes_idx
         # classes, class_to_idx = find_classes(root, self.classes_idx)
         imgs, labels = make_dataset(root, class_to_idx)
         if len(imgs) == 0:
@@ -152,7 +152,7 @@ class GANDatasetStage2(Dataset):
         An image
         Average EEG feature vector over all images of the selected class and over all subjects
     """
-    def __init__(self, img_dir_path, loaded_eeg, loaded_splits, class_to_eeg_embeddings, time_low, time_high, mode="train", transform=None):
+    def __init__(self, img_dir_path, loaded_eeg, loaded_splits, label_to_eeg_embeddings, mode="train", transform=None):
         """
         Args:
             img_dir_path: directory path of imagenet images,
@@ -168,10 +168,11 @@ class GANDatasetStage2(Dataset):
         dataset, classes, img_filenames = [loaded_eeg[k] for k in ['dataset', 'labels', 'images']]
         self.classes = classes
         self.img_filenames = img_filenames
+        self.label_to_eeg_embeddings = label_to_eeg_embeddings
 
         self.eeg_dataset = dataset
-        self.time_low = time_low
-        self.time_high = time_high
+        # self.time_low = time_low
+        # self.time_high = time_high
         """We use only split 0, no cross-validation"""
         self.split_chosen = loaded_splits[0]
         self.split_train = self.split_chosen['train']
@@ -194,8 +195,10 @@ class GANDatasetStage2(Dataset):
 
     def __getitem__(self, index):
         """
-        ds = EEGDataset()
-        ds[i] will return by what we define __getitem__ magic methods
+        Return:
+            Label (Target)
+            An image
+            Average EEG feature vector over all images of the selected class and over all subjects
         """
         if self.mode == "train":
             dataset_idx = self.split_train[index]
@@ -205,16 +208,15 @@ class GANDatasetStage2(Dataset):
             dataset_idx = self.split_test[index]
         else:
             raise ValueError()
-        eeg, img_idx, label = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
-        eeg = eeg.float()[:, self.time_low:self.time_high]
+        _, img_idx, label = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
+        avg_eeg_embedding = self.label_to_eeg_embeddings[label]
         
-        img_positive_filename = self.img_filenames[img_positive_idx]
-        img_positive = Image.open(os.path.join(self.img_dir_path, img_positive_filename+'.JPEG' )).convert('RGB')
+        img_filename = self.img_filenames[img_idx]
+        img = Image.open(os.path.join(self.img_dir_path, img_filename+'.JPEG' )).convert('RGB')
         
         if self.transform is not None:
-            img_positive = self.transform(img_positive)
-            img_negative = self.transform(img_negative)
-        return (eeg, img_positive, img_negative), label
+            img = self.transform(img)
+        return (avg_eeg_embedding, img), label
 
     def __len__(self):
         if self.mode == "train":
@@ -265,7 +267,7 @@ class BalancedBatchSampler(BatchSampler):
     def __len__(self):
         return self.n_dataset // self.batch_size
 
-def load_data(eeg_path, img_path, splits_path, eeg_time_low, eeg_time_high, device, mode="triple", img_encoder="inception_v3"):
+def load_data(eeg_path, img_w_eeg_path, img_no_eeg_path, eeg_embeddings_path, splits_path, args):
     """
     mode: "triple" | "online_triplet",
     img_encoder: "inception_v3" | "resnet50"
@@ -277,23 +279,20 @@ def load_data(eeg_path, img_path, splits_path, eeg_time_low, eeg_time_high, devi
     """
     loaded_eeg = torch.load(eeg_path)
     loaded_splits = torch.load(splits_path)['splits']
+    label_to_eeg_embeddings = torch.load(eeg_embeddings_path)
     _, classes, _ = [loaded_eeg[k] for k in ['dataset', 'labels', 'images']]
     train_transform = img_transform(mode="train")
     val_transform = img_transform(mode="val")
-    if (mode== "triplet"):
-        train_dataset = EEGDataset_Triple(img_path, loaded_eeg, loaded_splits, eeg_time_low,eeg_time_high, mode="train", transform=train_transform)
-        val_dataset = EEGDataset_Triple(img_path, loaded_eeg, loaded_splits, eeg_time_low,eeg_time_high,mode="val", transform=val_transform)
-        test_dataset = EEGDataset_Triple(img_path, loaded_eeg, loaded_splits, eeg_time_low,eeg_time_high,mode="test", transform=val_transform)
-    elif (mode=="online_triplet" or mode=="classic_eeg"):
-        train_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits,eeg_time_low,eeg_time_high, mode="train", transform=train_transform)
-        val_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits,eeg_time_low,eeg_time_high, mode="val", transform=val_transform)
-        test_dataset = EEGDataset(img_path, loaded_eeg, loaded_splits,eeg_time_low,eeg_time_high, mode="test", transform=val_transform)
-    train_batch_sampler = BalancedBatchSampler(train_dataset.labels, n_classes=8, n_samples=8)
-    val_batch_sampler = BalancedBatchSampler(val_dataset.labels, n_classes=8, n_samples=8)
-    test_batch_sampler = BalancedBatchSampler(test_dataset.labels, n_classes=8, n_samples=8)
 
-    kwargs = {'num_workers': 1, 'pin_memory': True} if device else {}
-    train_dataloader = DataLoader(train_dataset, batch_sampler=train_batch_sampler, **kwargs)
-    val_dataloader = DataLoader(val_dataset, batch_sampler=val_batch_sampler, **kwargs)
-    test_dataloader = DataLoader(test_dataset, batch_sampler=test_batch_sampler, **kwargs)
-    return train_dataloader, val_dataloader, test_dataloader
+    train_ds_stage1 = ImageFolder(img_no_eeg_path, classes, train_transform)
+    train_ds_stage2 = GANDatasetStage2(img_w_eeg_path, loaded_eeg, loaded_splits, label_to_eeg_embeddings, mode="train", transform=train_transform)
+
+    options = {
+        'num_workers': 4, 
+        'pin_memory': True,
+        'batch_size': args.batch_size,
+        'shuffle': True
+        }
+    train_loader_stage1 = DataLoader(train_ds_stage1, **options)
+    train_loader_stage2 = DataLoader(train_ds_stage2, **options)
+    return train_loader_stage1, train_loader_stage2

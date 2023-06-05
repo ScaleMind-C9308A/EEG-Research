@@ -52,9 +52,7 @@ def avg_feature_extract():
             average_eeg_embedding = torch.mean(eeg_embeddings, dim=0)
             # print(average_eeg_embedding)
             label_to_eeg_embeddings[sample_class] = average_eeg_embedding
-        torch.save(label_to_eeg_embeddings, os.path.join(args.save_path, f"{args.info}.pth"))
-
-    
+        torch.save(label_to_eeg_embeddings, os.path.join(args.save_path, f"{args.info}.pth"))    
 
 class EEGClassificationNet(nn.Module):
     def __init__(self, backbone_name, embedding_dim, num_classes):
