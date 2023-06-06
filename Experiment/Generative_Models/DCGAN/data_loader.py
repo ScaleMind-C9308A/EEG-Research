@@ -21,7 +21,7 @@ def img_transform(mode="train"):
     if (mode == "train"):
         return transforms.Compose([
             transforms.Resize((96, 96)),
-            transforms.CenterCrop((64, 64)),                         
+            transforms.RandomCrop((64, 64)),                         
             transforms.RandomHorizontalFlip(),
             transforms.ToTensor(),
             normalize
@@ -207,15 +207,17 @@ class GANDatasetStage2(Dataset):
             dataset_idx = self.split_test[index]
         else:
             raise ValueError()
-        _, img_idx, label = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
-        avg_eeg_embedding = self.label_to_eeg_embeddings[label]
+        _, img_idx, label_pos = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
+        label_neg = np.random.choice(self.labels_set - label_pos)
+        avg_eeg_embedding_pos = self.label_to_eeg_embeddings[label_pos]
+        avg_eeg_embedding_neg = self.label_to_eeg_embeddings[label_neg]
         
         img_filename = self.img_filenames[img_idx]
         img = Image.open(os.path.join(self.img_dir_path, img_filename+'.JPEG' )).convert('RGB')
         
         if self.transform is not None:
             img = self.transform(img)
-        return (avg_eeg_embedding, img), label
+        return (img, avg_eeg_embedding_pos, avg_eeg_embedding_neg), label_pos
 
     def __len__(self):
         if self.mode == "train":

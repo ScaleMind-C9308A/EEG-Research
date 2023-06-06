@@ -3,11 +3,11 @@ import torch.nn as nn
 
 # Define the generator network
 class Generator(nn.Module):
-    def __init__(self, latent_dim, eeg_dim):
+    def __init__(self, noise_dim, condition_dim):
         super(Generator, self).__init__()
         
         self.main = nn.Sequential(
-            nn.Linear(latent_dim + eeg_dim, 4 * 4 * 512),
+            nn.Linear(noise_dim + condition_dim, 4 * 4 * 512),
             nn.BatchNorm1d(4 * 4 * 512),
             nn.ReLU(True),
             nn.Unflatten(1, (512, 4, 4)),
@@ -38,7 +38,7 @@ class Generator(nn.Module):
 
 # Define the discriminator network
 class Discriminator(nn.Module):
-    def __init__(self):
+    def __init__(self, condition_dim):
         super(Discriminator, self).__init__()
 
         self.main = nn.Sequential(
@@ -58,31 +58,28 @@ class Discriminator(nn.Module):
             nn.BatchNorm2d(512),
             nn.LeakyReLU(0.2, inplace=True),
 
-            nn.Conv2d(512, 1, kernel_size=4, stride=1, padding=0),
-            nn.Sigmoid()
         )
 
         self.fc = nn.Sequential(
-            nn.Linear(1025, 1024),
+            nn.Linear((512+condition_dim)*4*4, 1024),
             nn.ReLU(inplace=True),
-            nn.Linear(1024, 1),
-            nn.Sigmoid()
+            nn.Linear(1024, 1)
+            # nn.Sigmoid() # Don't need, since nn.BCELoss() assumes that the input tensor contains logits (raw scores) rather than probabilities
         )
 
     def forward(self, input_image, input_condition):
+        """
+        Explain: The condition vector is "spatially appended" after the final conv layer
+            => the condition vector needs to be expanded to match the spatial dimensions of the feature map. 
+            This can be done using the torch.repeat() or torch.tile() functions.
+        """
         x = self.main(input_image)
-        x = torch.cat((x, input_condition), dim=1)
-        x = x.view(x.size(0), -1)
+        batch_size = x.size(0)
+        condition = input_condition.view(batch_size, -1, 1, 1)  # reshape condition vector to (batch_size, condition_size, 1, 1)
+        condition = condition.repeat(1, 1, x.size(2), x.size(3))  # repeat condition along spatial dimensions to match feature map size
+        x = torch.cat((x, condition), dim=1)  # concatenate feature map and condition along the channel dimension
+        x = x.view(batch_size, -1)
         output = self.fc(x)
         return output
 
-# Training stage 1: Train non-conditional GAN on images without EEG data
-# (Sample code for training stage 1)
 
-latent_dim = 100
-eeg_dim = 128
-
-generator = Generator(latent_dim, eeg_dim)
-discriminator = Discriminator()
-
-#
