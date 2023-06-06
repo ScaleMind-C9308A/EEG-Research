@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
+from loguru import logger
 
 def GAN_fit(train_loader_stage1, train_loader_stage2, val_loader, generator, discriminator, criterion, optimizer_G, optimizer_D, scheduler, log_path_dir, args):
     # Set the parameters
@@ -13,15 +14,14 @@ def GAN_fit(train_loader_stage1, train_loader_stage2, val_loader, generator, dis
     # Set the training parameters
     num_epochs_stage1 = args.num_epochs_stage1 # 100
     num_epochs_stage2 = args.num_epochs_stage2 # 50
-    batch_size = 64
-    learning_rate = 0.0002
+    log_interval = args.log_interval
 
     # Training stage 1: Train non-conditional GAN on images without EEG data
     # (Assuming you have a dataset of images without EEG data named "dataset_stage1")
 
     # Training loop
     for epoch in range(num_epochs_stage1):
-        for i, real_images in enumerate(train_loader_stage1):
+        for i, (real_images, labels) in enumerate(train_loader_stage1):
             real_images = real_images.to(device)
             
             # Train the discriminator
@@ -47,8 +47,8 @@ def GAN_fit(train_loader_stage1, train_loader_stage2, val_loader, generator, dis
             optimizer_G.step()
             
             # Print training progress
-            if (i + 1) % 10 == 0:
-                print(f"Stage 1 - Epoch [{epoch+1}/{num_epochs_stage1}], Step [{i+1}/{len(train_loader_stage1)}], Loss D: {loss_D.item():.4f}, Loss G: {loss_G.item():.4f}")
+            if (i + 1) % log_interval == 0:
+                logger.info(f"Stage 1 - Epoch [{epoch+1}/{num_epochs_stage1}], Step [{i+1}/{len(train_loader_stage1)}], Loss D: {loss_D.item():.4f}, Loss G: {loss_G.item():.4f}")
 
     # Training stage 2: Train GAN on images with EEG data
     # (Assuming you have a dataset of images with EEG data named "dataset_stage2")
@@ -83,4 +83,4 @@ def GAN_fit(train_loader_stage1, train_loader_stage2, val_loader, generator, dis
             
             # Print training progress
             if (i + 1) % 10 == 0:
-                print(f"Stage 2 - Epoch [{epoch+1}/{num_epochs_stage2}], Step [{i+1}/{len(train_loader_stage2)}], Loss D: {loss_D.item():.4f}, Loss G: {loss_G.item():.4f}")
+                logger.info(f"Stage 2 - Epoch [{epoch+1}/{num_epochs_stage2}], Step [{i+1}/{len(train_loader_stage2)}], Loss D: {loss_D.item():.4f}, Loss G: {loss_G.item():.4f}")

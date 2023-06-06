@@ -16,16 +16,15 @@ def img_transform(mode="train"):
     Returns
         transform(torchvision.transforms): transform
     """
-    normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                                     std=[0.229, 0.224, 0.225])
-    # img_size = (299,299) if (model=="inception_v3") else (224,224)
+    #GAN Normalization
+    normalize = transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
     if (mode == "train"):
         return transforms.Compose([
             transforms.Resize((96, 96)),
-            transforms.RandomCrop((64, 64)),                         
+            transforms.CenterCrop((64, 64)),                         
             transforms.RandomHorizontalFlip(),
             transforms.ToTensor(),
-            normalize,
+            normalize
         ])
     elif (mode=="val"):
         return transforms.Compose([

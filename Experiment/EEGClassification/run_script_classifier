@@ -16,6 +16,6 @@ python3 run_classification.py --dataset CVPR2017 \
 --num-classes 40 \
 --eeg-encoder EEGChannelNet_Modified \
 --img-encoder efficientnet_b0 \
---embedding-size 1000 \
+--embedding-size 128 \
 --img-feature-extract 0
 
