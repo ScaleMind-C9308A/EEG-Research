@@ -66,8 +66,8 @@ class Discriminator(nn.Module):
         self.fc = nn.Sequential(
             nn.Linear((512+condition_dim)*4*4, 1024),
             nn.ReLU(inplace=True),
-            nn.Linear(1024, 1)
-            # nn.Sigmoid() # Don't need, since nn.BCELoss() assumes that the input tensor contains logits (raw scores) rather than probabilities
+            nn.Linear(1024, 1),
+            nn.Sigmoid() 
         )
 
     def forward(self, input_image, input_condition):
