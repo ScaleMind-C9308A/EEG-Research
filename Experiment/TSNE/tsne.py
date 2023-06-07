@@ -227,7 +227,7 @@ def load_config():
     Returns
         args(argparse.ArgumentParser): Configuration.
     """
-    parser = argparse.ArgumentParser(description='Online Triplet Training of EEG and image')
+    parser = argparse.ArgumentParser(description='Argparser')
     ### Specific to Contrastive Learning
     # From argparse document: The bool() function is not recommended as a type converter. All it does is convert 
     # empty strings to False and non-empty strings to True
