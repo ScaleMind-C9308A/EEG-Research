@@ -208,7 +208,7 @@ class GANDatasetStage2(Dataset):
         else:
             raise ValueError()
         _, img_idx, label_pos = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
-        label_neg = np.random.choice(list(self.labels_set - set([label_pos])))
+        label_neg = np.random.choice(self.labels_set - label_pos)
         avg_eeg_embedding_pos = self.label_to_eeg_embeddings[label_pos]
         avg_eeg_embedding_neg = self.label_to_eeg_embeddings[label_neg]
         

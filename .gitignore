@@ -2,6 +2,7 @@
 Experiment/ContrastiveLearning/*/model_epoch*
 Experiment/ImageClassification/*/model*
 Experiment/EEGClassification/*/model*
+Experiment/Generative_Models/*/*/*.pth
 
 # Others
 *.swp
