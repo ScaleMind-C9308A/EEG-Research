@@ -270,9 +270,6 @@ class BalancedBatchSampler(BatchSampler):
 
 def load_data(eeg_path, img_w_eeg_path, img_no_eeg_path, eeg_embeddings_path, splits_path, args):
     """
-    mode: "triple" | "online_triplet",
-    img_encoder: "inception_v3" | "resnet50"
-
     Return:
         train_loader_stage1: each __getitem__ returns (real_img)
         train_loader_stage2: each __getitem__ returns (real_img, eeg)
@@ -287,13 +284,15 @@ def load_data(eeg_path, img_w_eeg_path, img_no_eeg_path, eeg_embeddings_path, sp
 
     train_ds_stage1 = ImageFolder(img_no_eeg_path, classes, train_transform)
     train_ds_stage2 = GANDatasetStage2(img_w_eeg_path, loaded_eeg, loaded_splits, label_to_eeg_embeddings, mode="train", transform=train_transform)
+    val_ds_stage2 = GANDatasetStage2(img_w_eeg_path, loaded_eeg, loaded_splits, label_to_eeg_embeddings, mode="val", transform=val_transform)
 
     options = {
-        'num_workers': 4, 
+        'num_workers': args.num_workers, 
         'pin_memory': True,
         'batch_size': args.batch_size,
         'shuffle': True
         }
     train_loader_stage1 = DataLoader(train_ds_stage1, **options)
     train_loader_stage2 = DataLoader(train_ds_stage2, **options)
-    return train_loader_stage1, train_loader_stage2
+    val_loader = DataLoader(val_ds_stage2, **options)
+    return train_loader_stage1, train_loader_stage2, val_loader

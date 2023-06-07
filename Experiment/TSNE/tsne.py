@@ -116,8 +116,8 @@ def run():
         # Convert the embeddings to a numpy array
         # embeddings_np = validation_embeddings.numpy()
 
-        print(f"Image feature size: {eeg_features.shape}")
-        print(eeg_features)
+        # print(f"Image feature size: {eeg_features.shape}")
+        # print(eeg_features)
         # Perform dimensionality reduction with t-SNE
         eeg_tsne = TSNE(n_components=2, random_state=42).fit_transform(eeg_features)
         # img_tsne = TSNE(n_components=2, random_state=42).fit_transform(img_features)
