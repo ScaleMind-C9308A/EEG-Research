@@ -56,8 +56,8 @@ def run():
    # Loop over the validation embeddings and concatenate them into a single tensor
     with torch.no_grad():
         for batch_idx, (data, target) in enumerate(val_dataloader):
-            if (batch_idx >= 5): # only take first 5 batches => 64*5=320 samples
-                break
+            # if (batch_idx >= 5): # only take first 5 batches => 64*5=320 samples
+            #    break
             target = target if len(target) > 0 else None
             if not type(data) in (tuple, list):
                 data = (data,)
