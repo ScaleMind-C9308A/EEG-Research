@@ -81,5 +81,13 @@ class Discriminator(nn.Module):
         x = x.view(batch_size, -1)
         output = self.fc(x)
         return output
+    
+def load_model(noise_dim, condition_dim, is_pretrained_stage1, pretrained_netG, pretrained_netD):
+    netG = Generator(noise_dim, condition_dim)
+    netD = Discriminator(condition_dim)
+    if is_pretrained_stage1:
+        netG.load_state_dict(torch.load(pretrained_netG))
+        netD.load_state_dict(torch.load(pretrained_netD))
+    return netG, netD
 
 

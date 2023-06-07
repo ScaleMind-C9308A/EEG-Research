@@ -5,4 +5,5 @@ python3 avg_feature_extractor.py \
 --splits-path /media/exx/HDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth \
 --save-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/Generative_Models/EEG_features_extractor \
 --info avg_eeg_embeddings_128 \
+--embedding-size 128 \
 --gpu 0

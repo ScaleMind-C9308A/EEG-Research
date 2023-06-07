@@ -9,8 +9,8 @@ import os
 import numpy as np
 import random
 from data_loader import load_data
-from model import Generator, Discriminator
-from trainer import GAN_fit
+from model import load_model
+from trainer_DCGAN import trainer_DCGAN
 import matplotlib.pyplot as plt
 import random
 
@@ -33,24 +33,28 @@ def run():
         logger.add(os.path.join(log_path_dir, 'train.log'))
         logger.info(args)
     # Define your model architecture
-    train_loader_stage1, train_loader_stage2, val_loader = load_data(args.eeg_path, args.img_path, args.splits_path, args.time_low, args.time_high, args.device, mode=args.classifier_mode, img_encoder=args.img_encoder)
+    train_loader_stage1, train_loader_stage2, val_loader = load_data(args.eeg_path, args.img_w_eeg_path, args.img_no_eeg_path, args.eeg_embedding_path, args.splits_path, args)
     # Step 2: Set model
-    # Initialize the generator and discriminator
-    generator = Generator(args.latent_dim, args.eeg_dim).to(args.device)
-    discriminator = Discriminator().to(args.device)
+    # Initialize the netG and netD
+    if args.pretrained_netG != None and args.pretrained_netD != None:
+        logger.info("Use pretrained netG and netD for stage1 training")
+        is_pretrained_stage1 = True
+    else:
+        is_pretrained_stage1 = False
+    netG, netD = load_model(args.latent_dim, args.eeg_dim, is_pretrained_stage1, args.pretrained_netG, args.pretrained_netD)
 
     # Step 3: Set loss_fn/criterion
     margin = 0.
     criterion = nn.BCELoss()
     # Step 4: Set optimizer
     if (args.optim == "Adam"):
-        optimizer_G = optim.Adam(generator.parameters(), lr=args.lr, betas=(0.5, 0.999))
-        optimizer_D = optim.Adam(discriminator.parameters(), lr=args.lr, betas=(0.5, 0.999))
+        optimizer_G = optim.Adam(netG.parameters(), lr=args.lr, betas=(0.5, 0.999))
+        optimizer_D = optim.Adam(netD.parameters(), lr=args.lr, betas=(0.5, 0.999))
     
 
     # scheduler = lr_scheduler.StepLR(optimizer, args.lr_step, gamma=0.1, last_epoch=-1)
     #Step 5: Put all to net_trainer()
-    GAN_fit(train_loader_stage1, train_loader_stage2, val_loader, generator, discriminator,  criterion, optimizer_G, optimizer_D, None, log_path_dir, args)
+    trainer_DCGAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD, criterion, optimizer_G, optimizer_D, is_pretrained_stage1, None, log_path_dir, args)
 
 
     
@@ -64,21 +68,31 @@ def load_config():
     Returns
         args(argparse.ArgumentParser): Configuration.
     """
-    parser = argparse.ArgumentParser(description='Online Triplet Training of EEG and image')
-    ### Specific to GAN
+    parser = argparse.ArgumentParser(description='Argparser')
+    ### Specific to DCGAN
     # From argparse document: The bool() function is not recommended as a type converter. All it does is convert 
     # empty strings to False and non-empty strings to True
 
-    parser.add_argument('--embedding-size', default=1000, type=int,
-                        help="Embedding size for training")
-    parser.add_argument('--classifier-mode', default='classic', type=str,
-                        help='classic | triplet | online_triplet')
+    parser.add_argument('--latent-dim', default=100, type=int,
+                        help="Latent z (Noise) vector dimension")
+    parser.add_argument('--eeg-dim', default=128, type=int,
+                        help="EEG (Condition) vector dimension")
     parser.add_argument('--weight-path', default=None, 
                         help='Path of pretrained weight of the model')
     parser.add_argument('--img-w-eeg-path', default=None, 
                         help='Path of image dataset that has recorded EEG data')
     parser.add_argument('--img-no-eeg-path', default=None, 
                         help='Path of image dataset that has NO recorded EEG data')
+    parser.add_argument('--eeg-embedding-path', default=None, 
+                        help='Path of extracted average EEG embeddings')
+    parser.add_argument('--pretrained-netG', default=None, 
+                        help='If pretrained: path of pretrained generator')
+    parser.add_argument('--pretrained-netD', default=None, 
+                        help='If pretrained: path of pretrained discriminator')
+    parser.add_argument('--num-epochs-stage1', default=100, type=int,
+                        help="Number of epochs trained at stage1 of GAN")
+    parser.add_argument('--num-epochs-stage2', default=50, type=int,
+                        help="Number of epochs trained at stage2 of GAN")
     ##################################
     parser.add_argument('--dataset',
                         help='Dataset name.')
@@ -94,8 +108,6 @@ def load_config():
     # Model training configurations
     parser.add_argument('--batch-size', default=64, type=int,
                         help='Batch size.(default: 128)')
-    parser.add_argument('--max-epoch', default=100, type=int,
-                        help='Number of epochs.(default: 30)')
     parser.add_argument('--log-interval', default=10, type=int,
                         help='Log interval during training.(default: 10)')
     parser.add_argument('--arch', default='train',
@@ -106,7 +118,7 @@ def load_config():
                         help='Number of classes.(default: 40)')
     
     # GPU training settings
-    parser.add_argument('--num-workers', default=2, type=int,
+    parser.add_argument('--num-workers', default=4, type=int,
                         help='Number of loading data threads.(default: 4)')
     parser.add_argument('--gpu', default=None, type=int,
                         help='Using gpu.(default: False)')    

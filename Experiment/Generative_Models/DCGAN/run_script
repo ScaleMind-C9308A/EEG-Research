@@ -1,19 +1,23 @@
-python3 tsne.py --dataset CVPR2017 \
+python3 run_gan.py --dataset CVPR2017 \
 --eeg-path /media/exx/HDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth \
---img-path /home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet \
+--img-w-eeg-path /home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet \
+--img-no-eeg-path /home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet \
+--eeg-embedding-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/Generative_Models/EEG_features_extractor/avg_eeg_embeddings_128.pth \
 --splits-path /media/exx/HDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth \
 --log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/TSNE \
---weight-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/ContrastiveLearning/tripletnet_augmented_inceptionv3/model_epoch_50.pth \
---classifier-mode triplet \
---info tsne_inception_v3_all \
---max-epoch 50 \
---lr 5e-3 \
+--pretrained-netG \
+--pretrained-netD \
+--latent-dim 100 \
+--eeg-dim 128 \
+--num-epochs-stage1 100 \
+--num-epochs-stage2 50 \
+--info DCGAN \
+--lr 1e-3 \
 --lr-step 10 \
 --optim Adam \
 --batch-size 64 \
---log-interval 50 \
---gpu 1 \
---num-classes 40 \
---eeg-encoder EEGChannelNet \
---img-encoder inception_v3
+--log-interval 10 \
+--gpu 0 \
+--num-workers 4 \
+--num-classes 40 
 
