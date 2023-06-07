@@ -42,6 +42,8 @@ def run():
     else:
         is_pretrained_stage1 = False
     netG, netD = load_model(args.latent_dim, args.eeg_dim, is_pretrained_stage1, args.pretrained_netG, args.pretrained_netD)
+    netG = netG.to(args.device)
+    netD = netD.to(args.device)
 
     # Step 3: Set loss_fn/criterion
     margin = 0.

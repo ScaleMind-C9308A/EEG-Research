@@ -66,7 +66,7 @@ def make_dataset(dir, class_to_idx):
                     images.append(item)
                     labels.append(class_to_idx[target])
 
-    return images
+    return images, labels
 
 def find_classes(dir, classes_idx=None):
     """

@@ -7,11 +7,15 @@ class Generator(nn.Module):
         super(Generator, self).__init__()
         
         self.main = nn.Sequential(
-            nn.Linear(noise_dim + condition_dim, 4 * 4 * 512),
-            nn.BatchNorm1d(4 * 4 * 512),
-            nn.ReLU(True),
-            nn.Unflatten(1, (512, 4, 4)),
+            # nn.Linear(noise_dim + condition_dim, 4 * 4 * 512),
+            # nn.BatchNorm1d(4 * 4 * 512),
+            # nn.ReLU(True),
+            # nn.Unflatten(1, (512, 4, 4)),
             
+            nn.ConvTranspose2d(noise_dim + condition_dim, 512, kernel_size=4, stride=4, padding=0),
+            nn.BatchNorm2d(512),
+            nn.ReLU(True),
+
             nn.ConvTranspose2d(512, 256, kernel_size=4, stride=2, padding=1),
             nn.BatchNorm2d(256),
             nn.ReLU(True),
@@ -24,17 +28,16 @@ class Generator(nn.Module):
             nn.BatchNorm2d(64),
             nn.ReLU(True),
             
-            nn.ConvTranspose2d(64, 32, kernel_size=4, stride=2, padding=1),
-            nn.BatchNorm2d(32),
-            nn.ReLU(True),
-            
-            nn.ConvTranspose2d(32, 3, kernel_size=4, stride=2, padding=1),
+            nn.ConvTranspose2d(64, 3, kernel_size=4, stride=2, padding=1),
             nn.Tanh()
         )
     
     def forward(self, input_noise, input_eeg):
         input_combined = torch.cat((input_noise, input_eeg), dim=1)
-        return self.main(input_combined)
+        input_combined = input_combined.view(input_combined.size(0), -1, 1, 1)
+        output = self.main(input_combined)
+        # print(f"Size of generator output: {output.size()}")
+        return output
 
 # Define the discriminator network
 class Discriminator(nn.Module):
@@ -42,7 +45,7 @@ class Discriminator(nn.Module):
         super(Discriminator, self).__init__()
 
         self.main = nn.Sequential(
-            nn.Conv2d(4, 64, kernel_size=4, stride=2, padding=1),
+            nn.Conv2d(3, 64, kernel_size=4, stride=2, padding=1),
             nn.BatchNorm2d(64),
             nn.LeakyReLU(0.2, inplace=True),
 
@@ -73,12 +76,18 @@ class Discriminator(nn.Module):
             => the condition vector needs to be expanded to match the spatial dimensions of the feature map. 
             This can be done using the torch.repeat() or torch.tile() functions.
         """
-        x = self.main(input_image)
+        x = self.main(input_image) #(batch, 512, 4, 4)
         batch_size = x.size(0)
+        # transform input_condition to size (batch, 128, 4, 4)
         condition = input_condition.view(batch_size, -1, 1, 1)  # reshape condition vector to (batch_size, condition_size, 1, 1)
         condition = condition.repeat(1, 1, x.size(2), x.size(3))  # repeat condition along spatial dimensions to match feature map size
+        # print(f"Transform input condition to size: {condition.size()}")
+        # Size after concat is (batch, 512+128, 4, 4)
         x = torch.cat((x, condition), dim=1)  # concatenate feature map and condition along the channel dimension
+        # print(f"Size after concat: {x.size()}")
+        # Size after flatten is (batch, (512+128)*4*4)
         x = x.view(batch_size, -1)
+        # print(f"Size after flatten: {x.size()}")
         output = self.fc(x)
         return output
     

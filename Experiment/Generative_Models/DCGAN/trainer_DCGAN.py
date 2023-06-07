@@ -45,9 +45,15 @@ def trainer_DCGAN(train_loader_stage1, train_loader_stage2, val_loader, netG, ne
                 ## For stage1, condition vector is set to zeros for netD
                 real_outputs = netD(real_images, torch.zeros(N, eeg_dim).to(device))
                 fake_outputs = netD(fake_images.detach(), torch.zeros(N, eeg_dim).to(device))
-                
-                loss_D = criterion(real_outputs, real_labels) + criterion(fake_outputs, fake_labels)
-                loss_D.backward()
+                # CANNOT combine the losses to do backpropagation, must go separately!!!
+                print(real_outputs)
+                print(real_labels)
+                loss_D_real = criterion(real_outputs, real_labels) 
+                print(f"Loss D real: {loss_D_real.item()}")
+                loss_D_fake = criterion(fake_outputs, fake_labels)
+                loss_D_real.backward()
+                loss_D_fake.backward()
+                loss_D = loss_D_real + loss_D_fake
                 optimizer_D.step()
                 
                 ############################
