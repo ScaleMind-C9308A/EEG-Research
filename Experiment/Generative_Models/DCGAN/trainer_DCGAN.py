@@ -152,7 +152,7 @@ def train_GAN_stage2(data_loader, netG, netD, criterion, optimizer_G, optimizer_
         netD.zero_grad()
         real_labels = torch.ones(N, 1).to(device)
         fake_labels = torch.zeros(N, 1).to(device)
-        
+
         out_xc_yc = netD(real_images, avg_eeg_pos)
         loss_D_xc_yc = criterion(out_xc_yc, real_labels) 
         loss_D_xc_yc.backward()
@@ -230,6 +230,7 @@ def test_GAN_stage2(eval_noise, data_loader, netG, netD, criterion, args):
             ## Train with real images with correct condition
 
             real_labels = torch.ones(N, 1).to(device)
+            fake_labels = torch.zeros(N, 1).to(device)
             out_xc_yc = netD(real_images, avg_eeg_pos)
             loss_D_xc_yc = criterion(out_xc_yc, real_labels) 
             D_xc_yc = loss_D_xc_yc.mean().item()
@@ -244,7 +245,6 @@ def test_GAN_stage2(eval_noise, data_loader, netG, netD, criterion, args):
 
             # noise = torch.normal(mean=0.0, std=1.0, size=(N, latent_dim)).to(device)
             fake_images = netG(eval_noise, avg_eeg_pos)
-            fake_labels = torch.zeros(N, 1).to(device)
             
             out_xw_yw = netD(fake_images.detach(), avg_eeg_neg)            
             loss_D_xw_yw =  criterion(out_xw_yw, fake_labels)
