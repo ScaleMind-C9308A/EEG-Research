@@ -105,7 +105,7 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
         G_losses_stage2.append(train_loss_G.item())
         logger.info(f"Stage 2 - Epoch [{epoch+1}/{num_epochs_stage2}], Loss D: {train_loss_D.item():.4f}, Loss G: {train_loss_G.item():.4f}, D(x): {D_x:.4f}, D(G(z)): {D_G_z1:.4f} | {D_G_z2:.4f}, aux_acc: {aux_accuracy:.4f}")
         # Checkpoint
-        if (epoch+1) % log_interval == 0 and (epoch+1) != num_epochs_stage2:
+        if (epoch+1) % log_interval == 0:
             save_image(train_real_images, f"{log_path_dir}/train_real_images_epoch_{epoch+1}.png")
             save_image(train_fake_images, f"{log_path_dir}/train_fake_images_epoch_{epoch+1}.png")
 
@@ -116,8 +116,6 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
 
             torch.save(netG.state_dict(), f"{log_path_dir}/netG_epoch_{epoch+1}.pth")
             torch.save(netD.state_dict(), f"{log_path_dir}/netD_epoch_{epoch+1}.pth")
-    torch.save(netG.state_dict(), f"{log_path_dir}/netG_epoch_{num_epochs_stage2}.pth")
-    torch.save(netD.state_dict(), f"{log_path_dir}/netD_epoch_{num_epochs_stage2}.pth")
     plot_losses(D_losses_stage2, num_epochs_stage2, log_path_dir, "Discriminator Loss Stage 2")
     plot_losses(G_losses_stage2, num_epochs_stage2, log_path_dir, "Generator Loss Stage 2")
     
