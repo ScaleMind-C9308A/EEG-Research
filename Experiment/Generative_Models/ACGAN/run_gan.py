@@ -75,10 +75,12 @@ def load_config():
     # From argparse document: The bool() function is not recommended as a type converter. All it does is convert 
     # empty strings to False and non-empty strings to True
 
-    parser.add_argument('--latent-dim', default=100, type=int,
+    parser.add_argument('--img-size', default=64, type=int,
                         help="Latent z (Noise) vector dimension")
     parser.add_argument('--eeg-dim', default=128, type=int,
                         help="EEG (Condition) vector dimension")
+    parser.add_argument('--latent-dim', default=100, type=int,
+                        help="Latent z (Noise) vector dimension")
     parser.add_argument('--weight-path', default=None, 
                         help='Path of pretrained weight of the model')
     parser.add_argument('--img-w-eeg-path', default=None, 
