@@ -10,7 +10,7 @@ import numpy as np
 import random
 from data_loader import load_data
 from model import load_model
-from trainer_DCGAN import trainer_DCGAN
+from trainer_GAN import trainer_GAN
 import matplotlib.pyplot as plt
 import random
 
@@ -46,17 +46,17 @@ def run():
     netD = netD.to(args.device)
 
     # Step 3: Set loss_fn/criterion
-    margin = 0.
-    criterion = nn.BCELoss()
+    # loss functions
+    dis_criterion = nn.BCELoss()
+    aux_criterion = nn.NLLLoss()
     # Step 4: Set optimizer
     if (args.optim == "Adam"):
         optimizer_G = optim.Adam(netG.parameters(), lr=args.lr, betas=(0.5, 0.999))
-        optimizer_D = optim.Adam(netD.parameters(), lr=args.lr, betas=(0.5, 0.999))
-    
+        optimizer_D = optim.Adam(netD.parameters(), lr=args.lr, betas=(0.5, 0.999))    
 
     # scheduler = lr_scheduler.StepLR(optimizer, args.lr_step, gamma=0.1, last_epoch=-1)
     #Step 5: Put all to net_trainer()
-    trainer_DCGAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD, criterion, optimizer_G, optimizer_D, is_pretrained_stage1, None, log_path_dir, args)
+    trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD, dis_criterion, aux_criterion, optimizer_G, optimizer_D, is_pretrained_stage1, None, log_path_dir, args)
 
 
     
