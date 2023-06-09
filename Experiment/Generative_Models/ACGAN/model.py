@@ -86,7 +86,7 @@ class Discriminator(nn.Module):
         # aux-classifier fc
         self.fc_aux = nn.Linear(13*13*512, num_classes)
         # softmax and sigmoid
-        self.softmax = nn.Softmax()
+        self.softmax = nn.Softmax(dim=num_classes)
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, input_image, input_condition=None):
