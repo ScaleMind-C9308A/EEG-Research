@@ -6,7 +6,7 @@ import numpy as np
 from PIL import Image
 import os
 
-def img_transform(mode="train"):
+def img_transform(mode="train", img_size=128):
     """
     Training images transform.
 
@@ -20,15 +20,15 @@ def img_transform(mode="train"):
     normalize = transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
     if (mode == "train"):
         return transforms.Compose([
-            transforms.Resize((96, 96)),
-            transforms.RandomCrop((64, 64)),                         
+            transforms.Resize(img_size),
+            transforms.CenterCrop(img_size),                         
             transforms.RandomHorizontalFlip(),
             transforms.ToTensor(),
             normalize
         ])
     elif (mode=="val"):
         return transforms.Compose([
-            transforms.Resize((64, 64)),  # Resize the image to 299x299 pixels
+            transforms.Resize(img_size),  # Resize the image to 299x299 pixels
             transforms.ToTensor(),  # Convert the image to a PyTorch tensor
             normalize
         ])
@@ -144,7 +144,7 @@ class ImageFolder(Dataset):
     def __len__(self):
         return len(self.imgs)
         
-class GANDatasetStage2(Dataset):
+class GANDataset(Dataset):
     """
     Each sample (__getitem__) of dataset returns:
         Label (Target)
@@ -208,16 +208,16 @@ class GANDatasetStage2(Dataset):
         else:
             raise ValueError()
         _, img_idx, label_pos = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
-        label_neg = np.random.choice(self.labels_set - label_pos)
+        # label_neg = np.random.choice(self.labels_set - label_pos)
         avg_eeg_embedding_pos = self.label_to_eeg_embeddings[label_pos]
-        avg_eeg_embedding_neg = self.label_to_eeg_embeddings[label_neg]
+        # avg_eeg_embedding_neg = self.label_to_eeg_embeddings[label_neg]
         
         img_filename = self.img_filenames[img_idx]
         img = Image.open(os.path.join(self.img_dir_path, img_filename+'.JPEG' )).convert('RGB')
         
         if self.transform is not None:
             img = self.transform(img)
-        return (img, avg_eeg_embedding_pos, avg_eeg_embedding_neg), label_pos
+        return (img, avg_eeg_embedding_pos), label_pos
 
     def __len__(self):
         if self.mode == "train":
@@ -229,44 +229,6 @@ class GANDatasetStage2(Dataset):
         else:
             raise ValueError()
     
-class BalancedBatchSampler(BatchSampler):
-    """
-    BatchSampler - samples n_classes and within these classes samples n_samples.
-    Each iter will return a batch of indices of size n_classes * n_samples
-    """
-
-    def __init__(self, labels, n_classes, n_samples):
-        self.labels = labels
-        self.labels_set = list(set(self.labels.numpy()))
-        self.label_to_indices = {label: np.where(self.labels.numpy() == label)[0]
-                                 for label in self.labels_set}
-        for l in self.labels_set:
-            np.random.shuffle(self.label_to_indices[l])
-        self.used_label_indices_count = {label: 0 for label in self.labels_set}
-        self.count = 0
-        self.n_classes = n_classes
-        self.n_samples = n_samples
-        self.n_dataset = len(self.labels) # num of samples in dataset
-        self.batch_size = self.n_samples * self.n_classes
-
-    def __iter__(self):
-        self.count = 0
-        while self.count + self.batch_size < self.n_dataset:
-            classes = np.random.choice(self.labels_set, self.n_classes, replace=False)
-            indices = []
-            for class_ in classes:
-                indices.extend(self.label_to_indices[class_][
-                               self.used_label_indices_count[class_]:self.used_label_indices_count[
-                                                                         class_] + self.n_samples])
-                self.used_label_indices_count[class_] += self.n_samples
-                if self.used_label_indices_count[class_] + self.n_samples > len(self.label_to_indices[class_]):
-                    np.random.shuffle(self.label_to_indices[class_])
-                    self.used_label_indices_count[class_] = 0
-            yield indices
-            self.count += self.n_classes * self.n_samples
-
-    def __len__(self):
-        return self.n_dataset // self.batch_size
 
 def load_data(eeg_path, img_w_eeg_path, img_no_eeg_path, eeg_embeddings_path, splits_path, args):
     """
@@ -279,20 +241,26 @@ def load_data(eeg_path, img_w_eeg_path, img_no_eeg_path, eeg_embeddings_path, sp
     loaded_splits = torch.load(splits_path)['splits']
     label_to_eeg_embeddings = torch.load(eeg_embeddings_path)
     _, classes, _ = [loaded_eeg[k] for k in ['dataset', 'labels', 'images']]
-    train_transform = img_transform(mode="train")
-    val_transform = img_transform(mode="val")
+    train_transform = img_transform("train", args.img_size)
+    val_transform = img_transform("val", args.img_size)
 
     train_ds_stage1 = ImageFolder(img_no_eeg_path, classes, train_transform)
-    train_ds_stage2 = GANDatasetStage2(img_w_eeg_path, loaded_eeg, loaded_splits, label_to_eeg_embeddings, mode="train", transform=train_transform)
-    val_ds_stage2 = GANDatasetStage2(img_w_eeg_path, loaded_eeg, loaded_splits, label_to_eeg_embeddings, mode="val", transform=val_transform)
+    train_ds_stage2 = GANDataset(img_w_eeg_path, loaded_eeg, loaded_splits, label_to_eeg_embeddings, mode="train", transform=train_transform)
+    val_ds_stage2 = GANDataset(img_w_eeg_path, loaded_eeg, loaded_splits, label_to_eeg_embeddings, mode="val", transform=val_transform)
 
-    options = {
+    options_train = {
         'num_workers': args.num_workers, 
         'pin_memory': True,
         'batch_size': args.batch_size,
         'shuffle': True
         }
-    train_loader_stage1 = DataLoader(train_ds_stage1, **options)
-    train_loader_stage2 = DataLoader(train_ds_stage2, **options)
-    val_loader = DataLoader(val_ds_stage2, **options)
+    options_val = {
+        'num_workers': args.num_workers, 
+        'pin_memory': True,
+        'batch_size': args.batch_size,
+        'shuffle': False
+        }
+    train_loader_stage1 = DataLoader(train_ds_stage1, **options_train)
+    train_loader_stage2 = DataLoader(train_ds_stage2, **options_train)
+    val_loader = DataLoader(val_ds_stage2, **options_val)
     return train_loader_stage1, train_loader_stage2, val_loader
