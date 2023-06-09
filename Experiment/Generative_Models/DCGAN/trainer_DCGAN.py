@@ -156,14 +156,14 @@ def train_GAN_stage2(data_loader, netG, netD, criterion, optimizer_G, optimizer_
         out_xc_yc = netD(real_images, avg_eeg_pos)
         loss_D_xc_yc = criterion(out_xc_yc, real_labels) 
         loss_D_xc_yc.backward()
-        D_xc_yc = loss_D_xc_yc.mean().item()
+        D_xc_yc = out_xc_yc.mean().item()
 
         ## Train with real images with wrong condition batch
 
         out_xc_yw = netD(real_images, avg_eeg_neg)
         loss_D_xc_yw = criterion(out_xc_yw, fake_labels)
         loss_D_xc_yw.backward()
-        D_xc_yw = loss_D_xc_yw.mean().item()
+        D_xc_yw = out_xc_yw.mean().item()
         
         ## Train with all-fake batch
 
@@ -235,13 +235,13 @@ def test_GAN_stage2(eval_noise, data_loader, netG, netD, criterion, args):
             fake_labels = torch.zeros(N, 1).to(device)
             out_xc_yc = netD(real_images, avg_eeg_pos)
             loss_D_xc_yc = criterion(out_xc_yc, real_labels) 
-            D_xc_yc = loss_D_xc_yc.mean().item()
+            D_xc_yc = out_xc_yc.mean().item()
 
             ## Train with real images with wrong condition batch
 
             out_xc_yw = netD(real_images, avg_eeg_neg)
             loss_D_xc_yw = criterion(out_xc_yw, fake_labels)
-            D_xc_yw = loss_D_xc_yw.mean().item()
+            D_xc_yw = out_xc_yw.mean().item()
             
             ## Train with all-fake batch
 

@@ -159,7 +159,7 @@ def train_GAN_stage2(data_loader, netG, netD, dis_criterion, aux_criterion, opti
         
         errD_real = dis_errD_real + aux_errD_real
         errD_real.backward()
-        D_x = dis_output.data.mean()
+        D_x = dis_output.mean().item()
         # compute the current classification accuracy
         aux_accuracy = compute_acc(aux_output, target)
         
@@ -173,7 +173,7 @@ def train_GAN_stage2(data_loader, netG, netD, dis_criterion, aux_criterion, opti
         aux_errD_fake = aux_criterion(aux_output, target)
         errD_fake = dis_errD_fake + aux_errD_fake
         errD_fake.backward()
-        D_G_z1 = dis_output.data.mean()
+        D_G_z1 = dis_output.mean().item()
         errD = errD_real + errD_fake
         optimizer_D.step()
         
@@ -188,7 +188,7 @@ def train_GAN_stage2(data_loader, netG, netD, dis_criterion, aux_criterion, opti
         aux_errG = aux_criterion(aux_output, target)
         errG = dis_errG + aux_errG
         errG.backward()
-        D_G_z2 = dis_output.data.mean()
+        D_G_z2 = dis_output.mean().item()
         optimizer_G.step()
         
         running_loss_G += errG
@@ -210,7 +210,7 @@ def test_GAN_stage2(eval_noise, data_loader, netG, netD, dis_criterion, aux_crit
         netG.eval()
         netD.eval()
         for i, (data, target) in enumerate(data_loader):
-            if i>0: #only evaluate images of the first batch
+            if i>0: # only evaluate images of the first batch
                 break
             real_images, avg_eeg_pos = data
             real_images = real_images.to(device)
@@ -238,7 +238,7 @@ def test_GAN_stage2(eval_noise, data_loader, netG, netD, dis_criterion, aux_crit
             aux_errD_real = aux_criterion(aux_output, target)
             
             errD_real = dis_errD_real + aux_errD_real
-            D_x = dis_output.data.mean()
+            D_x = dis_output.mean().item()
             # compute the current classification accuracy
             aux_accuracy = compute_acc(aux_output, target)
             
@@ -251,7 +251,7 @@ def test_GAN_stage2(eval_noise, data_loader, netG, netD, dis_criterion, aux_crit
             dis_errD_fake = dis_criterion(dis_output, fake_labels)
             aux_errD_fake = aux_criterion(aux_output, target)
             errD_fake = dis_errD_fake + aux_errD_fake
-            D_G_z1 = dis_output.data.mean()
+            D_G_z1 = dis_output.mean().item()
             errD = errD_real + errD_fake
             
             ############################
@@ -263,7 +263,7 @@ def test_GAN_stage2(eval_noise, data_loader, netG, netD, dis_criterion, aux_crit
             dis_errG = dis_criterion(dis_output, real_labels)
             aux_errG = aux_criterion(aux_output, target)
             errG = dis_errG + aux_errG
-            D_G_z2 = dis_output.data.mean()
+            D_G_z2 = dis_output.mean().item()
             
             running_loss_G += errG
             running_loss_D += errD
