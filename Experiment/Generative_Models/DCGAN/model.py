@@ -12,23 +12,23 @@ class Generator(nn.Module):
             # nn.ReLU(True),
             # nn.Unflatten(1, (512, 4, 4)),
             
-            nn.ConvTranspose2d(noise_dim + condition_dim, 512, kernel_size=4, stride=4, padding=0),
+            nn.ConvTranspose2d(noise_dim + condition_dim, 512, kernel_size=4, stride=1, padding=0, bias=False),
             nn.BatchNorm2d(512),
             nn.ReLU(True),
 
-            nn.ConvTranspose2d(512, 256, kernel_size=4, stride=2, padding=1),
+            nn.ConvTranspose2d(512, 256, kernel_size=4, stride=2, padding=1, bias=False),
             nn.BatchNorm2d(256),
             nn.ReLU(True),
             
-            nn.ConvTranspose2d(256, 128, kernel_size=4, stride=2, padding=1),
+            nn.ConvTranspose2d(256, 128, kernel_size=4, stride=2, padding=1, bias=False),
             nn.BatchNorm2d(128),
             nn.ReLU(True),
             
-            nn.ConvTranspose2d(128, 64, kernel_size=4, stride=2, padding=1),
+            nn.ConvTranspose2d(128, 64, kernel_size=4, stride=2, padding=1, bias=False),
             nn.BatchNorm2d(64),
             nn.ReLU(True),
             
-            nn.ConvTranspose2d(64, 3, kernel_size=4, stride=2, padding=1),
+            nn.ConvTranspose2d(64, 3, kernel_size=4, stride=2, padding=1, bias=False),
             nn.Tanh()
         )
     
@@ -45,27 +45,29 @@ class Discriminator(nn.Module):
         super(Discriminator, self).__init__()
 
         self.main = nn.Sequential(
-            nn.Conv2d(3, 64, kernel_size=4, stride=2, padding=1),
+            # input is ``(nc) x 64 x 64``
+            nn.Conv2d(3, 64, kernel_size=4, stride=2, padding=1, bias=False),
             nn.BatchNorm2d(64),
             nn.LeakyReLU(0.2, inplace=True),
-
-            nn.Conv2d(64, 128, kernel_size=4, stride=2, padding=1),
+            # state size. ``(ndf) x 32 x 32``
+            nn.Conv2d(64, 128, kernel_size=4, stride=2, padding=1, bias=False),
             nn.BatchNorm2d(128),
             nn.LeakyReLU(0.2, inplace=True),
-
-            nn.Conv2d(128, 256, kernel_size=4, stride=2, padding=1),
+            # state size. ``(ndf*2) x 16 x 16``
+            nn.Conv2d(128, 256, kernel_size=4, stride=2, padding=1, bias=False),
             nn.BatchNorm2d(256),
             nn.LeakyReLU(0.2, inplace=True),
-
-            nn.Conv2d(256, 512, kernel_size=4, stride=2, padding=1),
+            # state size. ``(ndf*4) x 8 x 8``
+            nn.Conv2d(256, 512, kernel_size=4, stride=2, padding=1, bias=False),
             nn.BatchNorm2d(512),
             nn.LeakyReLU(0.2, inplace=True),
+            # state size. ``(ndf*8) x 4 x 4``
 
         )
 
         self.fc = nn.Sequential(
             nn.Linear((512+condition_dim)*4*4, 1024),
-            nn.ReLU(inplace=True),
+            # nn.LeakyReLU(inplace=True),
             nn.Linear(1024, 1),
             nn.Sigmoid() 
         )
@@ -91,12 +93,24 @@ class Discriminator(nn.Module):
         output = self.fc(x)
         return output
     
+# custom weights initialization called on ``netG`` and ``netD``
+def weights_init(m):
+    classname = m.__class__.__name__
+    if classname.find('Conv') != -1:
+        nn.init.normal_(m.weight.data, 0.0, 0.02)
+    elif classname.find('BatchNorm') != -1:
+        nn.init.normal_(m.weight.data, 1.0, 0.02)
+        nn.init.constant_(m.bias.data, 0)
+
 def load_model(noise_dim, condition_dim, is_pretrained_stage1, pretrained_netG, pretrained_netD):
     netG = Generator(noise_dim, condition_dim)
     netD = Discriminator(condition_dim)
     if is_pretrained_stage1:
         netG.load_state_dict(torch.load(pretrained_netG))
         netD.load_state_dict(torch.load(pretrained_netD))
+    else:
+        netG.apply(weights_init)
+        netD.apply(weights_init)
     return netG, netD
 
 
