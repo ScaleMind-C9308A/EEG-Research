@@ -34,7 +34,7 @@ class Generator(nn.Module):
         input_combined = torch.cat((input_noise, input_eeg), dim=1)
         fc1 = self.fc1(input_combined)
         fc1 = fc1.view(input_combined.size(0), -1, 1, 1)
-        output = self.main(input_combined)
+        output = self.main(fc1)
         # print(f"Size of generator output: {output.size()}")
         return output
 
