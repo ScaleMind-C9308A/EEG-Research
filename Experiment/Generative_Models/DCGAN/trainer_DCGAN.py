@@ -129,6 +129,8 @@ def train_GAN_stage2(data_loader, netG, netD, criterion, optimizer_G, optimizer_
     netG.train()
     netD.train()
     for i, (data, target) in enumerate(data_loader):
+        if i>0:
+            break
         real_images, avg_eeg_pos, avg_eeg_neg = data
         real_images = real_images.to(device)
         avg_eeg_pos, avg_eeg_neg = avg_eeg_pos.to(device), avg_eeg_neg.to(device)
