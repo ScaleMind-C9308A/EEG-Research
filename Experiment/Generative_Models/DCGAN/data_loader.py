@@ -286,13 +286,19 @@ def load_data(eeg_path, img_w_eeg_path, img_no_eeg_path, eeg_embeddings_path, sp
     train_ds_stage2 = GANDatasetStage2(img_w_eeg_path, loaded_eeg, loaded_splits, label_to_eeg_embeddings, mode="train", transform=train_transform)
     val_ds_stage2 = GANDatasetStage2(img_w_eeg_path, loaded_eeg, loaded_splits, label_to_eeg_embeddings, mode="val", transform=val_transform)
 
-    options = {
+    options_train = {
         'num_workers': args.num_workers, 
         'pin_memory': True,
         'batch_size': args.batch_size,
         'shuffle': True
         }
-    train_loader_stage1 = DataLoader(train_ds_stage1, **options)
-    train_loader_stage2 = DataLoader(train_ds_stage2, **options)
-    val_loader = DataLoader(val_ds_stage2, **options)
+    options_val = {
+        'num_workers': args.num_workers, 
+        'pin_memory': True,
+        'batch_size': args.batch_size,
+        'shuffle': False
+        }
+    train_loader_stage1 = DataLoader(train_ds_stage1, **options_train)
+    train_loader_stage2 = DataLoader(train_ds_stage2, **options_train)
+    val_loader = DataLoader(val_ds_stage2, **options_val)
     return train_loader_stage1, train_loader_stage2, val_loader
