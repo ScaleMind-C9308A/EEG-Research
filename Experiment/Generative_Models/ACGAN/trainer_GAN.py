@@ -109,10 +109,10 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
             save_image(train_real_images, f"{log_path_dir}/train_real_images_epoch_{epoch+1}.png")
             save_image(train_fake_images, f"{log_path_dir}/train_fake_images_epoch_{epoch+1}.png")
 
-            val_loss_G, val_loss_D, D_x, D_G_z1, D_G_z2, aux_accuracy, val_real_images, val_fake_images = test_GAN_stage2(eval_noise, val_loader, netG, netD, dis_criterion, aux_criterion, args)
-            logger.info(f"Stage 2 - Validation, Loss D: {val_loss_D.item():.4f}, Loss G: {val_loss_G.item():.4f}, D(x): {D_x:.4f}, D(G(z)): {D_G_z1:.4f} | {D_G_z2:.4f}, aux_acc: {aux_accuracy:.4f}")
-            save_image(val_real_images, f"{log_path_dir}/val_real_images.png")
-            save_image(val_fake_images, f"{log_path_dir}/val_fake_images.png")
+            # val_loss_G, val_loss_D, D_x, D_G_z1, D_G_z2, aux_accuracy, val_real_images, val_fake_images = test_GAN_stage2(eval_noise, val_loader, netG, netD, dis_criterion, aux_criterion, args)
+            # logger.info(f"Stage 2 - Validation, Loss D: {val_loss_D.item():.4f}, Loss G: {val_loss_G.item():.4f}, D(x): {D_x:.4f}, D(G(z)): {D_G_z1:.4f} | {D_G_z2:.4f}, aux_acc: {aux_accuracy:.4f}")
+            # save_image(val_real_images, f"{log_path_dir}/val_real_images.png")
+            # save_image(val_fake_images, f"{log_path_dir}/val_fake_images.png")
 
             torch.save(netG.state_dict(), f"{log_path_dir}/netG_epoch_{epoch+1}.pth")
             torch.save(netD.state_dict(), f"{log_path_dir}/netD_epoch_{epoch+1}.pth")
