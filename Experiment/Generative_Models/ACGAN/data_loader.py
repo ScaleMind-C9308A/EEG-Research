@@ -257,7 +257,7 @@ def load_data(eeg_path, img_w_eeg_path, img_no_eeg_path, eeg_embeddings_path, sp
     options_val = {
         'num_workers': args.num_workers, 
         'pin_memory': True,
-        'batch_size': args.batch_size,
+        'batch_size': 64,
         'shuffle': False
         }
     train_loader_stage1 = DataLoader(train_ds_stage1, **options_train)
