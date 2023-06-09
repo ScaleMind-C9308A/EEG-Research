@@ -16,7 +16,7 @@ def avg_feature_extract():
     """
     args = load_config()
     #Load model for inference
-    model = EEGClassificationNet('EEGChannelNet', args.embedding_size, 40)
+    model = EEGClassificationNet(args.eeg_encoder, args.embedding_size, 40)
     model.load_state_dict(torch.load(args.weight_path))
     # model.to(args.device)
     model.eval()
@@ -108,6 +108,8 @@ def load_config():
                         help='Path of splits dataset')
     parser.add_argument('--gpu', default=None, type=int,
                         help='Using gpu.(default: False)')
+    parser.add_argument('--eeg-encoder', default="EEGChannelNet", type=str,
+                        help='Name of eeg encoder')
     
     
     args = parser.parse_args()

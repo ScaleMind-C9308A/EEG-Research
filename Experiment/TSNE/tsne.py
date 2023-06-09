@@ -259,7 +259,7 @@ def load_config():
     parser.add_argument('--img-encoder', default="inception_v3", type=str,
                         help='inception_v3 | resnet50')
     parser.add_argument('--eeg-encoder', default="EEGChannelNet", type=str,
-                        help='inception_v3 | resnet50')
+                        help='Name of eeg encoder')
     
     # Model training configurations
     parser.add_argument('--batch-size', default=128, type=int,

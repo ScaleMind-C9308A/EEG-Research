@@ -6,4 +6,5 @@ python3 avg_feature_extractor.py \
 --save-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/Generative_Models/EEG_features_extractor \
 --info avg_eeg_embeddings_128_modified \
 --embedding-size 128 \
+--eeg-encoder EEGChannelNet_Modified \
 --gpu 0
