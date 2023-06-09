@@ -2,7 +2,7 @@ python3 run_gan.py --dataset CVPR2017 \
 --eeg-path /media/exx/HDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth \
 --img-w-eeg-path /home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet \
 --img-no-eeg-path /media/exx/HDD1/LanxHuyen/CVPR2017/imagenet_noeeg_40 \
---eeg-embedding-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/Generative_Models/EEG_features_extractor/avg_eeg_embeddings_128.pth \
+--eeg-embedding-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/Generative_Models/EEG_features_extractor/avg_eeg_embeddings_128_modified.pth \
 --splits-path /media/exx/HDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth \
 --log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/Generative_Models/ACGAN \
 --latent-dim 100 \

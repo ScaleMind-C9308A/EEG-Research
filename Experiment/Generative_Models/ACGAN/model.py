@@ -40,7 +40,7 @@ class Generator(nn.Module):
 
 # Define the discriminator network
 class Discriminator(nn.Module):
-    def __init__(self, condition_dim, num_classes=40):
+    def __init__(self, num_classes=40):
         super(Discriminator, self).__init__()
 
         self.main = nn.Sequential(
@@ -119,9 +119,9 @@ class Discriminator(nn.Module):
         realfake = self.sigmoid(fc_dis)
         return realfake, classes
     
-def load_model(noise_dim, condition_dim, is_pretrained_stage1, pretrained_netG, pretrained_netD):
+def load_model(num_classes, noise_dim, condition_dim, is_pretrained_stage1, pretrained_netG, pretrained_netD):
     netG = Generator(noise_dim, condition_dim)
-    netD = Discriminator(condition_dim)
+    netD = Discriminator(num_classes)
     if is_pretrained_stage1:
         netG.load_state_dict(torch.load(pretrained_netG))
         netD.load_state_dict(torch.load(pretrained_netD))
