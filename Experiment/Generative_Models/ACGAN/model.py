@@ -5,12 +5,11 @@ from utils import weights_init
 class Generator(nn.Module):
     def __init__(self, noise_dim, condition_dim):
         super(Generator, self).__init__()
-        
-        self.main = nn.Sequential(
+        self.fc1 = nn.Sequential(
             nn.Linear(noise_dim + condition_dim, 768),
-            nn.ReLU(True),
-            # nn.Unflatten(1, (512, 4, 4)),
-            
+            nn.ReLU(True)
+        )
+        self.main = nn.Sequential(
             nn.ConvTranspose2d(768, 384, 5, 2, 0, bias=False),
             nn.BatchNorm2d(384),
             nn.ReLU(True),
@@ -33,9 +32,10 @@ class Generator(nn.Module):
     
     def forward(self, input_noise, input_eeg):
         input_combined = torch.cat((input_noise, input_eeg), dim=1)
-        input_combined = input_combined.view(input_combined.size(0), -1, 1, 1)
+        fc1 = self.fc1(input_combined)
+        fc1 = fc1.view(input_combined.size(0), -1, 1, 1)
         output = self.main(input_combined)
-        print(f"Size of generator output: {output.size()}")
+        # print(f"Size of generator output: {output.size()}")
         return output
 
 # Define the discriminator network
