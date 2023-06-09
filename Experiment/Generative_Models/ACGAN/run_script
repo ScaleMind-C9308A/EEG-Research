@@ -17,5 +17,6 @@ python3 run_gan.py --dataset CVPR2017 \
 --log-interval 10 \
 --gpu 0 \
 --num-workers 4 \
+--img-size 128 \
 --num-classes 40 
 
