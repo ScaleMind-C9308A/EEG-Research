@@ -193,7 +193,7 @@ class EEGChannelNet_Encoder_Mod(nn.Module):
         
 
         self.fc = nn.Sequential(
-            nn.Dropout(p=0.2, inplace=False),
+            nn.Dropout(p=0.5, inplace=False),
             nn.Linear(encoding_size, embedding_size),
             nn.ReLU(True)
         )
