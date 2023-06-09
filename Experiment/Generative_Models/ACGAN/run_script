@@ -17,7 +17,5 @@ python3 run_gan.py --dataset CVPR2017 \
 --log-interval 10 \
 --gpu 0 \
 --num-workers 4 \
---num-classes 40 \
---pretrained-netD /home/exx/GithubClonedRepo/EEG-Research/Experiment/Generative_Models/DCGAN/DCGAN_test1/netD_stage1.pth \
---pretrained-netG /home/exx/GithubClonedRepo/EEG-Research/Experiment/Generative_Models/DCGAN/DCGAN_test1/netG_stage1.pth
+--num-classes 40 
 

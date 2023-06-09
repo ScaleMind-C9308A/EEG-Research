@@ -98,7 +98,7 @@ def trainer_DCGAN(train_loader_stage1, train_loader_stage2, val_loader, netG, ne
             save_image(train_real_images, f"{log_path_dir}/real_images_epoch_{epoch+1}.png")
             save_image(train_fake_images, f"{log_path_dir}/fake_images_epoch_{epoch+1}.png")
 
-            val_loss_G, val_loss_D, val_real_images, val_fake_images = test_GAN_stage2(val_loader, netG, netD, criterion, args)
+            val_loss_G, val_loss_D, val_real_images, val_fake_images = test_GAN_stage2(val_loader, netG, netD, criterion, log_path_dir, args)
             logger.info(f"Stage 2 - Validation, Loss D: {val_loss_D.item():.4f}, Loss G: {val_loss_G.item():.4f}")
             save_image(val_real_images, f"{log_path_dir}/real_images_val.png")
             save_image(val_fake_images, f"{log_path_dir}/fake_images_val.png")
