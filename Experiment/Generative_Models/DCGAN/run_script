@@ -10,14 +10,14 @@ python3 run_gan.py --dataset CVPR2017 \
 --num-epochs-stage1 100 \
 --num-epochs-stage2 50 \
 --info DCGAN_test2 \
---lr 2.5e-4 \
+--lr 2e-4 \
 --lr-step 10 \
 --optim Adam \
 --batch-size 64 \
 --log-interval 10 \
 --gpu 0 \
 --num-workers 4 \
---num-classes 40 
-# --pretrained-netD /home/exx/GithubClonedRepo/EEG-Research/Experiment/Generative_Models/DCGAN/DCGAN_test1/netD_stage1.pth \
-# --pretrained-netG /home/exx/GithubClonedRepo/EEG-Research/Experiment/Generative_Models/DCGAN/DCGAN_test1/netG_stage1.pth
+--num-classes 40 \
+--pretrained-netD /home/exx/GithubClonedRepo/EEG-Research/Experiment/Generative_Models/DCGAN/DCGAN_test2/netD_stage1.pth \
+--pretrained-netG /home/exx/GithubClonedRepo/EEG-Research/Experiment/Generative_Models/DCGAN/DCGAN_test2/netG_stage1.pth
 
