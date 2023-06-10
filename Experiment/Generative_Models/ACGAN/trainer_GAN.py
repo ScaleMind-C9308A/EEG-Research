@@ -41,10 +41,7 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
                 
                 # Extract Batch size
                 N = real_images.size(0)
-                if i==0:
-                    print(f"Batch size: {N}")
-                    print(f"Len dataloader: {len(train_loader_stage1)}")
-                    print(f"Target: {target}")
+                
 
                 ############################
                 # Train the netD: maximize log(D(x_c|y_c)) + log(1-D(x_c|y_w)) + log(1-D(x_w|y_w))
@@ -70,6 +67,12 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
                 # compute the current classification accuracy
                 aux_accuracy = compute_acc(aux_output, target)
                 
+                if i==0:
+                    print(f"Batch size: {N}")
+                    print(f"Len dataloader: {len(train_loader_stage1)}")
+                    print(f"aux_accuracy: {aux_accuracy}")
+                    print(f"Target: {target}")
+                    print(f"aux_output: {aux_output}")
                 ## Train with all-fake batch
 
                 noise = torch.normal(mean=0.0, std=1.0, size=(N, latent_dim)).to(device)
