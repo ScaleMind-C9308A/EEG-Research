@@ -72,10 +72,9 @@ def extract_classes(classes, chosen_classes_idx=None):
     """
     if chosen_classes_idx is not None:
         chosen_classes = [classes[i] for i in chosen_classes_idx]
-        class_to_idx = {classes[i]: i for i in range(len(chosen_classes))}
     else:
         chosen_classes = classes
-        class_to_idx = {classes[i]: i for i in range(len(classes))}
+    class_to_idx = {chosen_classes[i]: i for i in range(len(chosen_classes))}
     return chosen_classes, class_to_idx
 
 class ImageFolder(Dataset):
