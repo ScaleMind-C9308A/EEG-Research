@@ -98,9 +98,9 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
                 running_loss_G += errG
                 running_loss_D += errD
                 
-                # # Print training progress
-                # if (i + 1) % log_interval == 0:
-                #     logger.info(f"Stage 1 - Epoch [{epoch+1}/{num_epochs_stage1}], Step [{i+1}/{len(train_loader_stage1)}], Loss D: {loss_D.item():.4f}, Loss G: {loss_G.item():.4f}")
+            if (epoch+1) % log_interval == 0:
+                save_image(real_images, f"{log_path_dir}/train_real_images_epoch_{epoch+1}.png")
+                save_image(fake_images, f"{log_path_dir}/train_fake_images_epoch_{epoch+1}.png")
             epoch_loss_G = running_loss_G / len(train_loader_stage1)
             epoch_loss_D = running_loss_D / len(train_loader_stage1)
             D_losses_stage1.append(epoch_loss_D.item())
@@ -108,8 +108,8 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
             logger.info(f"Stage 1 - Epoch [{epoch+1}/{num_epochs_stage1}], Loss D: {epoch_loss_D.item():.4f}, Loss G: {epoch_loss_G.item():.4f}, D(x): {D_x:.4f}, D(G(z)): {D_G_z1:.4f} | {D_G_z2:.4f}, aux_acc: {aux_accuracy:.4f}")
         torch.save(netG.state_dict(), f"{log_path_dir}/netG_stage1.pth")
         torch.save(netD.state_dict(), f"{log_path_dir}/netD_stage1.pth")
-        plot_losses(D_losses_stage1, 100, log_path_dir, "Discriminator Loss Stage 1")
-        plot_losses(G_losses_stage1, 100, log_path_dir, "Generator Loss Stage 1")
+        plot_losses(D_losses_stage1, num_epochs_stage1, log_path_dir, "Discriminator Loss Stage 1")
+        plot_losses(G_losses_stage1, num_epochs_stage1, log_path_dir, "Generator Loss Stage 1")
 
     # # Training stage 2: Train GAN on images with EEG data
     # D_losses_stage2 = []
