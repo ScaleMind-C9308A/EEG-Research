@@ -41,6 +41,10 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
                 
                 # Extract Batch size
                 N = real_images.size(0)
+                if i==0:
+                    print(f"Batch size: {N}")
+                    print(f"Len dataloader: {len(train_loader_stage1)}")
+                    print(f"Target: {target}")
 
                 ############################
                 # Train the netD: maximize log(D(x_c|y_c)) + log(1-D(x_c|y_w)) + log(1-D(x_w|y_w))
