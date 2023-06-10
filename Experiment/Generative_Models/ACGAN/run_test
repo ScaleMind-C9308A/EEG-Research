@@ -18,7 +18,7 @@ python3 test.py --dataset CVPR2017 \
 --gpu 1 \
 --num-workers 4 \
 --img-size 128 \
---num-classes 5 \
---start-class 0 \
---end-class 4 
+--num-classes 10 \
+--start-class 10 \
+--end-class 19 
 
