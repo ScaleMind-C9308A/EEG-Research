@@ -97,6 +97,10 @@ def load_config():
                         help="Number of epochs trained at stage1 of GAN")
     parser.add_argument('--num-epochs-stage2', default=50, type=int,
                         help="Number of epochs trained at stage2 of GAN")
+    parser.add_argument('--start-class', default=0, type=int,
+                        help='Start class for training')
+    parser.add_argument('--end-class', default=9, type=int,
+                        help='End class for training')
     ##################################
     parser.add_argument('--dataset',
                         help='Dataset name.')
