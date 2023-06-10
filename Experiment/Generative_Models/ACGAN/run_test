@@ -1,4 +1,4 @@
-python3 run_gan.py --dataset CVPR2017 \
+python3 test.py --dataset CVPR2017 \
 --eeg-path /media/exx/HDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth \
 --img-w-eeg-path /home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet \
 --img-no-eeg-path /media/exx/HDD1/LanxHuyen/CVPR2017/imagenet_noeeg_40 \
@@ -18,7 +18,7 @@ python3 run_gan.py --dataset CVPR2017 \
 --gpu 1 \
 --num-workers 4 \
 --img-size 128 \
---num-classes 10 \
---start-classes 0 \
---end-classes 9 
+--num-classes 5 \
+--start-class 0 \
+--end-class 4 
 
