@@ -66,6 +66,7 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
                 D_x = dis_output.mean().item()
                 # compute the current classification accuracy
                 aux_accuracy = compute_acc(aux_output, target)
+                print(f"aux_output: {aux_output}")
                 
                 # if i==0:
                 #     print(f"Batch size: {N}")
