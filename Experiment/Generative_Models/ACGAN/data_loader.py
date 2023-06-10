@@ -249,7 +249,8 @@ def load_data(eeg_path, img_w_eeg_path, img_no_eeg_path, eeg_embeddings_path, sp
         'num_workers': args.num_workers, 
         'pin_memory': True,
         'batch_size': args.batch_size,
-        'shuffle': True
+        'shuffle': True,
+        'drop_last': True
         }
     options_val = {
         'num_workers': args.num_workers, 
