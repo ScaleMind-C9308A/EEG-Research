@@ -120,7 +120,7 @@ class Discriminator(nn.Module):
         return realfake, classes
     
 def load_model(num_classes, noise_dim, condition_dim, is_pretrained_stage1, pretrained_netG, pretrained_netD):
-    netG = Generator(noise_dim, condition_dim)
+    netG = Generator(noise_dim, condition_dim=num_classes)
     netD = Discriminator(num_classes)
     if is_pretrained_stage1:
         netG.load_state_dict(torch.load(pretrained_netG))

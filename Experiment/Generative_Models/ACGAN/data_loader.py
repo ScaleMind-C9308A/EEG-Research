@@ -47,39 +47,36 @@ def is_image_file(filename):
     filename_lower = filename.lower()
     return any(filename_lower.endswith(ext) for ext in IMG_EXTENSIONS)
 
-def make_dataset(dir, class_to_idx):
+def make_dataset(dir, classes, class_to_idx):
     images = []
     labels = []
     dir = os.path.expanduser(dir)
-    for target in sorted(os.listdir(dir)):
-        if target not in class_to_idx:
-            continue
-        d = os.path.join(dir, target)
-        if not os.path.isdir(d):
-            continue
-
-        for root, _, fnames in sorted(os.walk(d)):
-            for fname in sorted(fnames):
+    for class_name in classes:
+        class_dir = os.path.join(dir, class_name)
+        if os.path.exists(class_dir):
+            for fname in sorted(os.listdir(class_dir)):
                 if is_image_file(fname):
-                    path = os.path.join(root, fname)
-                    item = (path, class_to_idx[target])
+                    path = os.path.join(class_dir, fname)
+                    item = (path, class_to_idx[class_name])
                     images.append(item)
-                    labels.append(class_to_idx[target])
-
+                    labels.append(class_to_idx[class_name])
     return images, labels
 
-def find_classes(dir, classes_idx=None):
+def extract_classes(classes, chosen_classes_idx=None):
     """
-    class_to_idx: dict that map each class name to its index (0...40)
+    classes: list of class names
+    chosen_classes_idx: list of chosen classes' index
+    Return:
+        chosen_classes: list of chosen classes' name
+        class_to_idx: dict of {class_name: idx}
     """
-    classes = [d for d in os.listdir(dir) if os.path.isdir(os.path.join(dir, d))]
-    classes.sort()
-    if classes_idx is not None:
-        assert type(classes_idx) == tuple
-        start, end = classes_idx
-        classes = classes[start:end]
-    class_to_idx = {classes[i]: i for i in range(len(classes))}
-    return classes, class_to_idx
+    if chosen_classes_idx is not None:
+        chosen_classes = [classes[i] for i in chosen_classes_idx]
+        class_to_idx = {classes[i]: i for i in range(len(chosen_classes))}
+    else:
+        chosen_classes = classes
+        class_to_idx = {classes[i]: i for i in range(len(classes))}
+    return chosen_classes, class_to_idx
 
 class ImageFolder(Dataset):
     """A generic data loader where the images are arranged in this way: ::
@@ -106,12 +103,11 @@ class ImageFolder(Dataset):
         imgs (list): List of (image path, class_index) tuples
     """
 
-    def __init__(self, root, classes, transform=None, target_transform=None,
-                 classes_idx=None):
+    def __init__(self, root, classes, chosen_classes_idx=None, transform=None, target_transform=None):
         class_to_idx = {classes[i]: i for i in range(len(classes))}
-        # self.classes_idx = classes_idx
-        # classes, class_to_idx = find_classes(root, self.classes_idx)
-        imgs, labels = make_dataset(root, class_to_idx)
+        self.chosen_classes_idx = chosen_classes_idx
+        chosen_classes, class_to_idx = extract_classes(classes, self.chosen_classes_idx)
+        imgs, labels = make_dataset(root,chosen_classes, class_to_idx)
         if len(imgs) == 0:
             raise(RuntimeError("Found 0 images in subfolders of: " + root + "\n"
                                "Supported image extensions are: " + ",".join(IMG_EXTENSIONS)))
@@ -119,7 +115,7 @@ class ImageFolder(Dataset):
         self.root = root
         self.imgs = imgs #(num_imgs, )
         self.labels = labels #(num_imgs,)
-        self.classes = classes #(40, )
+        self.classes = chosen_classes #(40, )
         self.class_to_idx = class_to_idx #<Dict> {class1: idx1,...}
         self.transform = transform
         self.target_transform = target_transform
@@ -244,7 +240,9 @@ def load_data(eeg_path, img_w_eeg_path, img_no_eeg_path, eeg_embeddings_path, sp
     train_transform = img_transform("train", args.img_size)
     val_transform = img_transform("val", args.img_size)
 
-    train_ds_stage1 = ImageFolder(img_no_eeg_path, classes, train_transform)
+    chosen_classes_idx = range(args.start_class, args.end_class+1)
+
+    train_ds_stage1 = ImageFolder(img_no_eeg_path, classes, chosen_classes_idx, train_transform)
     train_ds_stage2 = GANDataset(img_w_eeg_path, loaded_eeg, loaded_splits, label_to_eeg_embeddings, mode="train", transform=train_transform)
     val_ds_stage2 = GANDataset(img_w_eeg_path, loaded_eeg, loaded_splits, label_to_eeg_embeddings, mode="val", transform=val_transform)
 
