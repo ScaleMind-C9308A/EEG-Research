@@ -9,7 +9,7 @@ python3 test.py --dataset CVPR2017 \
 --eeg-dim 128 \
 --num-epochs-stage1 1500 \
 --num-epochs-stage2 50 \
---info ACGAN_no_eeg_1_class_12 \
+--info ACGAN_no_eeg_1_class_14 \
 --lr 2e-4 \
 --lr-step 10 \
 --optim Adam \
@@ -19,6 +19,6 @@ python3 test.py --dataset CVPR2017 \
 --num-workers 4 \
 --img-size 128 \
 --num-classes 1 \
---start-class 12 \
---end-class 12
+--start-class 14 \
+--end-class 14
 
