@@ -124,6 +124,69 @@ def load_config():
                         help='result_save')
     parser.add_argument('--num-classes', default=40, type=int,
                         help='Number of classes.(default: 40)')
+    parser.add_argument(
+    '--G_param', type=str, default='SN',
+    help='Parameterization style to use for G, spectral norm (SN) or SVD (SVD)'
+          ' or None (default: %(default)s)')
+    parser.add_argument(
+        '--D_param', type=str, default='SN',
+        help='Parameterization style to use for D, spectral norm (SN) or SVD (SVD)'
+            ' or None (default: %(default)s)')    
+    parser.add_argument(
+        '--G_ch', type=int, default=64,
+        help='Channel multiplier for G (default: %(default)s)')
+    parser.add_argument(
+        '--D_ch', type=int, default=64,
+        help='Channel multiplier for D (default: %(default)s)')
+    parser.add_argument(
+        '--G_depth', type=int, default=1,
+        help='Number of resblocks per stage in G? (default: %(default)s)')
+    parser.add_argument(
+        '--D_depth', type=int, default=1,
+        help='Number of resblocks per stage in D? (default: %(default)s)')
+    parser.add_argument(
+        '--D_thin', action='store_false', dest='D_wide', default=True,
+        help='Use the SN-GAN channel pattern for D? (default: %(default)s)')
+    parser.add_argument(
+        '--G_shared', action='store_true', default=False,
+        help='Use shared embeddings in G? (default: %(default)s)')
+    parser.add_argument(
+        '--shared_dim', type=int, default=0,
+        help='G''s shared embedding dimensionality; if 0, will be equal to dim_z. '
+            '(default: %(default)s)')
+    parser.add_argument(
+        '--dim_z', type=int, default=128,
+        help='Noise dimensionality: %(default)s)')
+    parser.add_argument(
+        '--z_var', type=float, default=1.0,
+        help='Noise variance: %(default)s)')    
+    parser.add_argument(
+        '--hier', action='store_true', default=False,
+        help='Use hierarchical z in G? (default: %(default)s)')
+    parser.add_argument(
+        '--cross_replica', action='store_true', default=False,
+        help='Cross_replica batchnorm in G?(default: %(default)s)')
+    parser.add_argument(
+        '--mybn', action='store_true', default=False,
+        help='Use my batchnorm (which supports standing stats?) %(default)s)')
+    parser.add_argument(
+        '--G_nl', type=str, default='relu',
+        help='Activation function for G (default: %(default)s)')
+    parser.add_argument(
+        '--D_nl', type=str, default='relu',
+        help='Activation function for D (default: %(default)s)')
+    parser.add_argument(
+        '--G_attn', type=str, default='64',
+        help='What resolutions to use attention on for G (underscore separated) '
+            '(default: %(default)s)')
+    parser.add_argument(
+        '--D_attn', type=str, default='64',
+        help='What resolutions to use attention on for D (underscore separated) '
+            '(default: %(default)s)')
+    parser.add_argument(
+        '--norm_style', type=str, default='bn',
+        help='Normalizer style for G, one of bn [batchnorm], in [instancenorm], '
+            'ln [layernorm], gn [groupnorm] (default: %(default)s)')
     
     # GPU training settings
     parser.add_argument('--num-workers', default=4, type=int,
@@ -148,6 +211,25 @@ def load_config():
                         help='Hyper-parameter.(default: 0.9)')
     parser.add_argument('--nesterov', action='store_true',
                         help='Using SGD nesterov')
+        ### Optimizer stuff ###
+    parser.add_argument(
+        '--G_lr', type=float, default=5e-5,
+        help='Learning rate to use for Generator (default: %(default)s)')
+    parser.add_argument(
+        '--D_lr', type=float, default=2e-4,
+        help='Learning rate to use for Discriminator (default: %(default)s)')
+    parser.add_argument(
+        '--G_B1', type=float, default=0.0,
+        help='Beta1 to use for Generator (default: %(default)s)')
+    parser.add_argument(
+        '--D_B1', type=float, default=0.0,
+        help='Beta1 to use for Discriminator (default: %(default)s)')
+    parser.add_argument(
+        '--G_B2', type=float, default=0.999,
+        help='Beta2 to use for Generator (default: %(default)s)')
+    parser.add_argument(
+        '--D_B2', type=float, default=0.999,
+        help='Beta2 to use for Discriminator (default: %(default)s)')
     
     args = parser.parse_args()
 

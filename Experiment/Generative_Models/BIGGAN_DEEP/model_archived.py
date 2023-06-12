@@ -533,10 +533,10 @@ class G_D(nn.Module):
         else:
           return D_out
     
-def load_model(embedding_dim, num_classes=40, eeg_encoder_name="EEGChannelNet", img_encoder_name="inception_v3"):
-    eeg_model = EEGClassificationNet(eeg_encoder_name, embedding_dim,num_classes)
-    img_model = ImageClassificationNet(img_encoder_name, num_classes)
-    netG = Generator(eeg_model, img_model)
-    netD = Discriminator(img_model)
-    return netG, netD
+# def load_model(embedding_dim, num_classes=40, eeg_encoder_name="EEGChannelNet", img_encoder_name="inception_v3"):
+#     eeg_model = EEGClassificationNet(eeg_encoder_name, embedding_dim,num_classes)
+#     img_model = ImageClassificationNet(img_encoder_name, num_classes)
+#     netG = Generator(eeg_model, img_model)
+#     netD = Discriminator(img_model)
+#     return netG, netD
 
