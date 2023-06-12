@@ -19,6 +19,6 @@ python3 test.py --dataset CVPR2017 \
 --num-workers 4 \
 --img-size 128 \
 --num-classes 1 \
---start-class 13 \
---end-class 13
+--start-class 14 \
+--end-class 14
 
