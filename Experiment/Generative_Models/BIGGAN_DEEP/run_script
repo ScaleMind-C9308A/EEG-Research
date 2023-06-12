@@ -1,4 +1,4 @@
-python3 test.py --dataset CVPR2017 \
+python3 run_gan.py --dataset CVPR2017 \
 --eeg-path /media/exx/HDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth \
 --img-w-eeg-path /home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet \
 --img-no-eeg-path /media/exx/HDD1/LanxHuyen/CVPR2017/imagenet_noeeg_40 \
@@ -7,18 +7,16 @@ python3 test.py --dataset CVPR2017 \
 --log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/Generative_Models/ACGAN \
 --latent-dim 100 \
 --eeg-dim 128 \
---num-epochs-stage1 700 \
---num-epochs-stage2 50 \
---info ACGAN_no_eeg_1_class \
+--num-epochs-stage1 100 \
+--num-epochs-stage2 1000 \
+--info ACGAN_test3_1000_epochs \
 --lr 2e-4 \
 --lr-step 10 \
 --optim Adam \
---batch-size 100 \
---log-interval 50 \
---gpu 1 \
+--batch-size 64 \
+--log-interval 25 \
+--gpu 0 \
 --num-workers 4 \
 --img-size 128 \
---num-classes 1 \
---start-class 12 \
---end-class 12
+--num-classes 40 
 
