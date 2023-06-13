@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from torchvision.utils import save_image
-from loguru import logger
+from loguru import logger 
 import matplotlib.pyplot as plt
 import os
 
@@ -30,8 +30,8 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
         G_losses_stage1 = []
         # Training loop
         for epoch in range(num_epochs_stage1):
-            netG.train()
-            netD.train()
+            # netG.train()
+            # netD.train()
 
             running_loss_G = 0.0
             running_loss_D = 0.0
@@ -61,9 +61,9 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
                 dis_output, aux_output = netD(real_images)
                 dis_errD_real = dis_criterion(dis_output, real_labels)
                 aux_errD_real = aux_criterion(aux_output, target)
-                
                 errD_real = dis_errD_real + aux_errD_real
                 # errD_real.backward()
+
                 D_x = dis_output.mean().item()
                 # compute the current classification accuracy
                 aux_accuracy = compute_acc(aux_output, target)
