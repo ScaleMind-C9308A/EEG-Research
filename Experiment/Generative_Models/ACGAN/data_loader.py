@@ -17,7 +17,7 @@ def img_transform(mode="train", img_size=128):
         transform(torchvision.transforms): transform
     """
     #GAN Normalization
-    normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225]) 
+    normalize = transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)) 
     if (mode == "train"):
         return transforms.Compose([
             transforms.Resize(img_size),
