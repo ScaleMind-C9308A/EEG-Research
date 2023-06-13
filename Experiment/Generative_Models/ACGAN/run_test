@@ -9,7 +9,7 @@ python3 test.py --dataset CVPR2017 \
 --eeg-dim 128 \
 --num-epochs-stage1 1000 \
 --num-epochs-stage2 50 \
---info ACGAN_no_normalize_class_14 \
+--info ACGAN_different_normalize_class_14 \
 --lr 2e-4 \
 --lr-step 10 \
 --optim Adam \
