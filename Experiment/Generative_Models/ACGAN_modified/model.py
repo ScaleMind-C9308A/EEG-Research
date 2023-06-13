@@ -101,7 +101,7 @@ class DiscOptBlock(nn.Module):
         out = self.activation(out)
         out = self.conv2d2(out)
         out = self.bn0(x)
-        out = self.bn1(out)
+        out = self.bn1(x)
         out = self.activation(out)
         out = self.average_pooling(out)
         return out
