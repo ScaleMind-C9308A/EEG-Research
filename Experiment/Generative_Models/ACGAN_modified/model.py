@@ -1,14 +1,38 @@
 import torch
 import torch.nn as nn
 from utils import weights_init
+import torch.nn.functional as F
+
+
+class ConditionalBatchNorm2d(nn.Module):
+    def __init__(self, num_features, num_classes, bias=True):
+        super().__init__()
+        self.num_features = num_features
+        self.bias = bias
+        self.bn = nn.BatchNorm2d(num_features, affine=False)
+        if self.bias:
+            self.embed = nn.Embedding(num_classes, num_features * 2)
+            self.embed.weight.data[:, :num_features].uniform_()
+            self.embed.weight.data[:, num_features:].zero_()
+        else:
+            self.embed = nn.Embedding(num_classes, num_features)
+            self.embed.weight.data.uniform_()
+
+    def forward(self, x, y):
+        out = self.bn(x)
+        if self.bias:
+            gamma, beta = self.embed(y).chunk(2, dim=1)
+            out = gamma.view(-1, self.num_features, 1, 1) * out + beta.view(-1, self.num_features, 1, 1)
+        else:
+            gamma = self.embed(y)
+            out = gamma.view(-1, self.num_features, 1, 1) * out
+        return out
 # Define the generator network
 class GenBlock(nn.Module):
     def __init__(self, in_channels, out_channels, condition_dim):
         super(GenBlock, self).__init__()
-        self.cv1 = nn.ConvTranspose2d(in_channels, condition_dim)
-        self.bn1 = nn.BatchNorm2d(condition_dim)
-        self.cv2 = nn.ConvTranspose2d(out_channels, condition_dim)
-        self.bn2 = nn.BatchNorm2d(condition_dim)
+        self.bn1 = ConditionalBatchNorm2d(in_channels, condition_dim)
+        self.bn2 = ConditionalBatchNorm2d(out_channels, condition_dim)
         self.activation = nn.ReLU(inplace=True)
         self.conv2d0 = nn.Conv2d(in_channels, out_channels, kernel_size=(1, 1), stride=(1, 1))
         self.conv2d1 = nn.Conv2d(in_channels, out_channels, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
