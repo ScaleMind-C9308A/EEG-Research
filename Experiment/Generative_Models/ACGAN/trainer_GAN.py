@@ -52,8 +52,8 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
                 ### (2) Fake images 
 
                 ## Train with real images with correct condition
-                netD.train()
-                netG.eval()
+                # netD.train()
+                # netG.eval()
                 netD.zero_grad()
                 real_labels = torch.ones(N, 1).to(device)
                 fake_labels = torch.zeros(N, 1).to(device)
@@ -71,9 +71,8 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
                 # Train with all-fake batch
 
                 noise = torch.normal(mean=0.0, std=1.0, size=(N, latent_dim)).to(device)
-                condition = F.one_hot(target, num_classes).float().to(device)
-                with torch.no_grad(): 
-                    fake_images = netG(noise, condition)
+                condition = F.one_hot(target, num_classes).float().to(device) 
+                fake_images = netG(noise, condition)
                 
                 dis_output, aux_output = netD(fake_images.detach())
                 dis_errD_fake = dis_criterion(dis_output, fake_labels)
@@ -90,8 +89,8 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
                 ## For stage2, y_w is average eeg embeddings
                 ############################
                 netG.zero_grad()
-                netD.eval()
-                netG.train()
+                # netD.eval()
+                # netG.train()
                 noise = torch.normal(mean=0.0, std=1.0, size=(N, latent_dim)).to(device)
                 condition = F.one_hot(target, num_classes).float().to(device)
                 fake_images = netG(noise, condition)
@@ -99,7 +98,7 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
                 dis_errG = dis_criterion(dis_output, real_labels)
                 aux_errG = aux_criterion(aux_output, target)
                 errG = dis_errG + aux_errG
-                netD.zero_grad()
+                # netD.zero_grad()
                 errG.backward()
                 D_G_z2 = dis_output.mean().item()
                 optimizer_G.step()
