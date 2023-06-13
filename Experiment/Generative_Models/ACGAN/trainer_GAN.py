@@ -82,7 +82,7 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
                 # errD_fake.backward()
                 D_G_z1 = dis_output.mean().item()
                 errD = errD_real + errD_fake
-                errD = errD.backward()
+                errD.backward()
                 optimizer_D.step()
                 
                 ############################
@@ -104,8 +104,8 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
                 D_G_z2 = dis_output.mean().item()
                 optimizer_G.step()
                 
-                running_loss_G += errG
-                running_loss_D += errD
+                running_loss_G += errG.item()
+                running_loss_D += errD.item()
                 
             if (epoch+1) % log_interval == 0:
                 save_image(real_images, f"{log_path_dir}/train_real_images_epoch_{epoch+1}.png")
