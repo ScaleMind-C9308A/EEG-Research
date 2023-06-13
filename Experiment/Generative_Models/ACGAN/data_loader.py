@@ -24,13 +24,13 @@ def img_transform(mode="train", img_size=128):
             transforms.CenterCrop(img_size),                         
             transforms.RandomHorizontalFlip(),
             transforms.ToTensor(),
-            normalize
+            # normalize
         ])
     elif (mode=="val"):
         return transforms.Compose([
             transforms.Resize(img_size),  # Resize the image to 299x299 pixels
             transforms.ToTensor(),  # Convert the image to a PyTorch tensor
-            normalize
+            # normalize
         ])
 
 IMG_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.ppm', '.bmp', '.pgm']
