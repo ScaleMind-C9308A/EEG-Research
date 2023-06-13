@@ -95,11 +95,11 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
                 noise = torch.normal(mean=0.0, std=1.0, size=(N, latent_dim)).to(device)
                 condition = F.one_hot(target, num_classes).float().to(device)
                 fake_images = netG(noise, condition)
-                with torch.no_grad():
-                    dis_output, aux_output = netD(fake_images)
+                dis_output, aux_output = netD(fake_images)
                 dis_errG = dis_criterion(dis_output, real_labels)
                 aux_errG = aux_criterion(aux_output, target)
                 errG = dis_errG + aux_errG
+                netD.zero_grad()
                 errG.backward()
                 D_G_z2 = dis_output.mean().item()
                 optimizer_G.step()
