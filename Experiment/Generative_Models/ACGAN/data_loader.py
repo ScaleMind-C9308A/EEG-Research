@@ -17,20 +17,20 @@ def img_transform(mode="train", img_size=128):
         transform(torchvision.transforms): transform
     """
     #GAN Normalization
-    normalize = transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+    normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225]) 
     if (mode == "train"):
         return transforms.Compose([
             transforms.Resize(img_size),
             transforms.CenterCrop(img_size),                         
             transforms.RandomHorizontalFlip(),
             transforms.ToTensor(),
-            # normalize
+            normalize
         ])
     elif (mode=="val"):
         return transforms.Compose([
             transforms.Resize(img_size),  # Resize the image to 299x299 pixels
             transforms.ToTensor(),  # Convert the image to a PyTorch tensor
-            # normalize
+            normalize
         ])
 
 IMG_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.ppm', '.bmp', '.pgm']
