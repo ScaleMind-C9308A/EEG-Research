@@ -10,23 +10,23 @@ class Generator(nn.Module):
             nn.ReLU(True)
         )
         self.main = nn.Sequential(
-            nn.ConvTranspose2d(768, 384, 5, 2, 0, bias=True),
+            nn.ConvTranspose2d(768, 384, 5, 2, 0, bias=False),
             nn.BatchNorm2d(384),
             nn.ReLU(True),
 
-            nn.ConvTranspose2d(384, 256, 5, 2, 0, bias=True),
+            nn.ConvTranspose2d(384, 256, 5, 2, 0, bias=False),
             nn.BatchNorm2d(256),
             nn.ReLU(True),
             
-            nn.ConvTranspose2d(256, 192, 5, 2, 0, bias=True),
+            nn.ConvTranspose2d(256, 192, 5, 2, 0, bias=False),
             nn.BatchNorm2d(192),
             nn.ReLU(True),
             
-            nn.ConvTranspose2d(192, 64, 5, 2, 0, bias=True),
+            nn.ConvTranspose2d(192, 64, 5, 2, 0, bias=False),
             nn.BatchNorm2d(64),
             nn.ReLU(True),
             
-            nn.ConvTranspose2d(64, 3, 8, 2, 0, bias=True),
+            nn.ConvTranspose2d(64, 3, 8, 2, 0, bias=False),
             nn.Tanh()
         )
     
@@ -44,31 +44,31 @@ class Discriminator(nn.Module):
         super(Discriminator, self).__init__()
 
         self.main = nn.Sequential(
-            nn.Conv2d(3, 16, 3, 2, 1, bias=True),
+            nn.Conv2d(3, 16, 3, 2, 1, bias=False),
             nn.LeakyReLU(0.2, inplace=True),
             nn.Dropout(0.5, inplace=False),
 
-            nn.Conv2d(16, 32, 3, 1, 0, bias=True),
+            nn.Conv2d(16, 32, 3, 1, 0, bias=False),
             nn.BatchNorm2d(32),
             nn.LeakyReLU(0.2, inplace=True),
             nn.Dropout(0.5, inplace=False),
 
-            nn.Conv2d(32, 64, 3, 2, 1, bias=True),
+            nn.Conv2d(32, 64, 3, 2, 1, bias=False),
             nn.BatchNorm2d(64),
             nn.LeakyReLU(0.2, inplace=True),
             nn.Dropout(0.5, inplace=False),
 
-            nn.Conv2d(64, 128, 3, 1, 0, bias=True),
+            nn.Conv2d(64, 128, 3, 1, 0, bias=False),
             nn.BatchNorm2d(128),
             nn.LeakyReLU(0.2, inplace=True),
             nn.Dropout(0.5, inplace=False),
 
-            nn.Conv2d(128, 256, 3, 2, 1, bias=True),
+            nn.Conv2d(128, 256, 3, 2, 1, bias=False),
             nn.BatchNorm2d(256),
             nn.LeakyReLU(0.2, inplace=True),
             nn.Dropout(0.5, inplace=False),
 
-            nn.Conv2d(256, 512, 3, 1, 0, bias=True),
+            nn.Conv2d(256, 512, 3, 1, 0, bias=False),
             nn.BatchNorm2d(512),
             nn.LeakyReLU(0.2, inplace=True),
             nn.Dropout(0.5, inplace=False),
