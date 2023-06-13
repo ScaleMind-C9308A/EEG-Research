@@ -30,8 +30,8 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
         G_losses_stage1 = []
         # Training loop
         for epoch in range(num_epochs_stage1):
-            # netG.train()
-            # netD.train()
+            netG.train()
+            netD.train()
 
             running_loss_G = 0.0
             running_loss_D = 0.0
@@ -52,7 +52,7 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
                 ### (2) Fake images 
 
                 ## Train with real images with correct condition
-                netD.train()
+                # netD.train()
                 # netG.eval()
                 netD.zero_grad()
                 real_labels = torch.ones(N, 1).to(device)
@@ -89,8 +89,8 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
                 ## For stage2, y_w is average eeg embeddings
                 ############################
                 netG.zero_grad()
-                netD.eval()
-                netG.train()
+                # netD.eval()
+                # netG.train()
                 noise = torch.normal(mean=0.0, std=1.0, size=(N, latent_dim)).to(device)
                 condition = F.one_hot(target, num_classes).float().to(device)
                 fake_images = netG(noise, condition)

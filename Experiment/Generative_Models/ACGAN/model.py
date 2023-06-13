@@ -46,32 +46,32 @@ class Discriminator(nn.Module):
         self.main = nn.Sequential(
             nn.Conv2d(3, 16, 3, 2, 1, bias=False),
             nn.LeakyReLU(0.2, inplace=True),
-            nn.Dropout(0.5, inplace=False),
+            nn.Dropout(0.2, inplace=False),
 
             nn.Conv2d(16, 32, 3, 1, 0, bias=False),
             nn.BatchNorm2d(32),
             nn.LeakyReLU(0.2, inplace=True),
-            nn.Dropout(0.5, inplace=False),
+            nn.Dropout(0.2, inplace=False),
 
             nn.Conv2d(32, 64, 3, 2, 1, bias=False),
             nn.BatchNorm2d(64),
             nn.LeakyReLU(0.2, inplace=True),
-            nn.Dropout(0.5, inplace=False),
+            nn.Dropout(0.2, inplace=False),
 
             nn.Conv2d(64, 128, 3, 1, 0, bias=False),
             nn.BatchNorm2d(128),
             nn.LeakyReLU(0.2, inplace=True),
-            nn.Dropout(0.5, inplace=False),
+            nn.Dropout(0.2, inplace=False),
 
             nn.Conv2d(128, 256, 3, 2, 1, bias=False),
             nn.BatchNorm2d(256),
             nn.LeakyReLU(0.2, inplace=True),
-            nn.Dropout(0.5, inplace=False),
+            nn.Dropout(0.2, inplace=False),
 
             nn.Conv2d(256, 512, 3, 1, 0, bias=False),
             nn.BatchNorm2d(512),
             nn.LeakyReLU(0.2, inplace=True),
-            nn.Dropout(0.5, inplace=False),
+            nn.Dropout(0.2, inplace=False),
         )
 
         # self.fc = nn.Sequential(
