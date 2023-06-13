@@ -6,7 +6,7 @@ import numpy as np
 from PIL import Image
 import os
 
-def img_transform(mode="train", img_size=64):
+def img_transform(mode="train", img_size=128):
     """
     Training images transform.
 
