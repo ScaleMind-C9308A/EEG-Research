@@ -178,9 +178,9 @@ def load_model(num_classes, noise_dim, condition_dim, is_pretrained_stage1, pret
     if is_pretrained_stage1:
         netG.load_state_dict(torch.load(pretrained_netG))
         netD.load_state_dict(torch.load(pretrained_netD))
-    else:
-        netG.apply(weights_init)
-        netD.apply(weights_init)
+    # else:
+        # netG.apply(weights_init)
+        # netD.apply(weights_init)
     return netG, netD
 
 
