@@ -1,6 +1,6 @@
 [submodule "Dataset/ImageNet-Datasets-Downloader"]
 	path = Dataset/ImageNet-Datasets-Downloader
 	url = https://github.com/skaldek/ImageNet-Datasets-Downloader.git
-[submodule "Experiment/Generative_Models/PyTorch-StudioGAN"]
-	path = Experiment/Generative_Models/PyTorch-StudioGAN
-	url = https://github.com/POSTECH-CVLab/PyTorch-StudioGAN.git
+[submodule "Experiment/Generative_Models/PyTorch-StudioGAN-hl271"]
+	path = Experiment/Generative_Models/PyTorch-StudioGAN-hl271
+	url = https://github.com/hl271/PyTorch-StudioGAN-hl271.git
