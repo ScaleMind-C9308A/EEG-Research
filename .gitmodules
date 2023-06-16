@@ -4,3 +4,4 @@
 [submodule "Experiment/Generative_Models/PyTorch-StudioGAN-hl271"]
 	path = Experiment/Generative_Models/PyTorch-StudioGAN-hl271
 	url = https://github.com/hl271/PyTorch-StudioGAN-hl271.git
+	update = merge
