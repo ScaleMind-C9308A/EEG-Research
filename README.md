@@ -18,6 +18,24 @@ source .env/bin/activate # For Linux
 pip install -r requirements.txt
 ```
 
+### Sync with submodule repo
+
+https://stackoverflow.com/questions/18770545/why-is-my-git-submodule-head-detached-from-master/55570998#55570998
+
+```bash
+# .gitmodules
+[submodule "bash/plugins/dircolors-solarized"]
+    path = bash/plugins/dircolors-solarized
+    url = https://github.com/seebi/dircolors-solarized.git
+    update = merge # <-- this is what you need to add
+
+#bash command to set alias
+git config alias.spull 'submodule update --remote'
+
+#Each time to pull (update) submodule from remote
+git spull
+```
+
 ### How to ssh into the server (Managed with tmux sessions)
 
 #### If the server has no tmux sessions and jupyter notebook is not running
