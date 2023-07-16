@@ -30,8 +30,8 @@ def trainer_GAN(train_loader_stage1, train_loader_stage2, val_loader, netG, netD
         G_losses_stage1 = []
         # Training loop
         for epoch in range(num_epochs_stage1):
-            netG.train()
-            netD.train()
+            # netG.train()
+            # netD.train()
 
             running_loss_G = 0.0
             running_loss_D = 0.0
