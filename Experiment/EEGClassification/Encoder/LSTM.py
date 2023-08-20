@@ -31,9 +31,6 @@ class classifier_LSTM(nn.Module):
         batch_size = x.size(0)
         lstm_init = (torch.zeros(self.lstm_layers, batch_size, self.lstm_size),
                      torch.zeros(self.lstm_layers, batch_size, self.lstm_size))
-        if x.is_cuda:
-            lstm_init = (lstm_init[0].cuda(self.GPUindex),
-                         lstm_init[0].cuda(self.GPUindex))
         lstm_init = (Variable(lstm_init[0]), Variable(lstm_init[1]))
         x = self.lstm(x, lstm_init)[0][:, -1, :]
         x = self.output1(x)
