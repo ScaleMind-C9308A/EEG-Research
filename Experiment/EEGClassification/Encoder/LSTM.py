@@ -12,7 +12,7 @@ from scipy.stats import mode
 class classifier_LSTM(nn.Module):
 
     def __init__(self,
-                 input_size=96,
+                 input_size=128,
                  lstm_layers=1,
                  lstm_size=128,
                  embedding_size=128):

@@ -12,7 +12,7 @@ from scipy.stats import mode
 class classifier_Stacked_BiLSTM(nn.Module):
 
     def __init__(self,
-                 input_size=96,
+                 input_size=128,
                  lstm_layers=2,
                  lstm_size=128,
                  embedding_size=128):
@@ -26,7 +26,7 @@ class classifier_Stacked_BiLSTM(nn.Module):
 
 
     def forward(self, x):
-        # Change order of axis from (n, 96, 512) to (n, 512, 96)
+        # Change order of axis from (n, spatial, temporal) to (n, temporal, spatial)
         x = torch.permute(x, (0, 2, 1))
         batch_size = x.size(0)
         # h0, c0 size are: (D*num_layers, batch, lstm_size); with D=2 for bidirectional RNN

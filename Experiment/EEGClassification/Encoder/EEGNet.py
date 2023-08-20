@@ -11,7 +11,7 @@ from scipy.stats import mode
 ##############################################################
 
 class classifier_EEGNet(nn.Module):
-    def __init__(self, embedding_size, spatial=96, temporal=512):
+    def __init__(self, embedding_size, spatial=128, temporal=440):
         super(classifier_EEGNet, self).__init__()
         #possible spatial [128, 96, 64, 32, 16, 8]
         #possible temporal [1024, 512, 440, 256, 200, 128, 100, 50]
