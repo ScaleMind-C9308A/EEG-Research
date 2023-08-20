@@ -15,7 +15,8 @@ class classifier_Stacked_BiLSTM(nn.Module):
                  input_size=128,
                  lstm_layers=2,
                  lstm_size=128,
-                 embedding_size=128):
+                 embedding_size=128,
+                 device=None):
         super().__init__()
         self.lstm_layers = lstm_layers
         self.lstm_size = lstm_size
@@ -30,14 +31,14 @@ class classifier_Stacked_BiLSTM(nn.Module):
         x = torch.permute(x, (0, 2, 1))
         batch_size = x.size(0)
         # h0, c0 size are: (D*num_layers, batch, lstm_size); with D=2 for bidirectional RNN
-        lstm_init = (torch.zeros(2*self.lstm_layers, batch_size, self.lstm_size),
-                     torch.zeros(2*self.lstm_layers, batch_size, self.lstm_size))
-        if x.is_cuda:
-            lstm_init = (lstm_init[0].cuda(self.GPUindex),
-                         lstm_init[0].cuda(self.GPUindex))
+        lstm_init = (torch.zeros(2*self.lstm_layers, batch_size, self.lstm_size).to(self.device),
+                     torch.zeros(2*self.lstm_layers, batch_size, self.lstm_size).to(self.device))
+        # lstm_init = (Variable(lstm_init[0]), Variable(lstm_init[1]))
+        # if x.is_cuda:
+        #     lstm_init = (lstm_init[0].cuda(self.GPUindex),
+        #                  lstm_init[0].cuda(self.GPUindex))
         x = self.stacked_bilstm(x, lstm_init)[0] 
         #Output size: (N, Sequence, D*output_size); with D=2 for bidirectional RNN
-        lstm_init = (Variable(lstm_init[0]), Variable(lstm_init[1]))
         x = x[:, -1, :] #(N, 1, 2*output_size)
         x = self.output1(x)
         return x

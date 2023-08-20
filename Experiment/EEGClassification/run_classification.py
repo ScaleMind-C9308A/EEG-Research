@@ -50,7 +50,7 @@ def run():
     # Step 1: Set DataLoaders
     train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path, args.img_path, args.splits_path, args.time_low, args.time_high, args.device, args)
     # Step 2: Set model
-    model = load_model(mode=args.classifier_mode, weight_path=args.weight_path, num_classes=args.num_classes, eeg_encoder_name=args.eeg_encoder, img_encoder_name=args.img_encoder, output_dim=args.embedding_size, img_feature_extract=args.img_feature_extract )
+    model = load_model(mode=args.classifier_mode, weight_path=args.weight_path, num_classes=args.num_classes, eeg_encoder_name=args.eeg_encoder, img_encoder_name=args.img_encoder, output_dim=args.embedding_size, img_feature_extract=args.img_feature_extract, device=args.device )
     model.to(args.device)
     # Step 3: Set loss_fn
     ## The input is expected to contain the unnormalized logits for each class

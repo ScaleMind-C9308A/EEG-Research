@@ -6,9 +6,9 @@ from Encoder.eeg_encoder import load_eeg_encoder
 from Encoder.image_encoder import load_image_encoder_triplet
 
 class EEGClassificationNet(nn.Module):
-    def __init__(self, backbone_name, embedding_dim, num_classes):
+    def __init__(self, backbone_name, embedding_dim, num_classes, device):
         super().__init__()
-        self.backbone = load_eeg_encoder(backbone_name, embedding_dim)
+        self.backbone = load_eeg_encoder(backbone_name, embedding_dim, device=device)
         self.classifier = nn.Sequential(
             nn.Linear(embedding_dim, num_classes)
             # # For nn.CrossEntropyLoss() => The input is expected to contain the unnormalized logits for each class
@@ -61,12 +61,12 @@ class EmbeddingNet(nn.Module):
         return self.eeg_encoder(eeg)
     def get_img_embedding(self, img):
         return self.img_encoder(img)
-def load_model(mode, weight_path, num_classes=40, eeg_encoder_name="EEGChannelNet", img_encoder_name="inception_v3", output_dim=1000, img_feature_extract=False):
+def load_model(mode, weight_path, num_classes=40, eeg_encoder_name="EEGChannelNet", img_encoder_name="inception_v3", output_dim=1000, img_feature_extract=False, device=None):
     """
     mode: "triplet" | "online_triplet" | "classic"
     """
     if (mode == "classic"):
-        model = EEGClassificationNet(eeg_encoder_name,output_dim, num_classes)
+        model = EEGClassificationNet(eeg_encoder_name,output_dim, num_classes, device=device)
     else:
         eeg_encoder = load_eeg_encoder(eeg_encoder_name,output_dim)
         img_encoder = load_image_encoder_triplet(img_encoder_name, output_dim, pretrained=True)

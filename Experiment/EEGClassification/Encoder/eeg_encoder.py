@@ -12,7 +12,7 @@ from Encoder.EEGNet import classifier_EEGNet
 from Encoder.Stacked_BiLSTM import classifier_Stacked_BiLSTM
 from Encoder.LSTM import classifier_LSTM
 
-def load_eeg_encoder(encoder, embedding_dim):
+def load_eeg_encoder(encoder, embedding_dim, device):
     if encoder=="EEGChannelNet":
         net = EEGChannelNet_Encoder(embedding_size=embedding_dim)
     elif encoder=="EEGChannelNet_Modified":
@@ -20,9 +20,9 @@ def load_eeg_encoder(encoder, embedding_dim):
     elif encoder=="EEGNet":
         net = classifier_EEGNet(embedding_size=embedding_dim)
     elif encoder=="Stacked_BiLSTM":
-        net = classifier_Stacked_BiLSTM(embedding_size=embedding_dim)
+        net = classifier_Stacked_BiLSTM(embedding_size=embedding_dim, device=device)
     elif encoder=="LSTM":
-        net=classifier_LSTM(embedding_size=embedding_dim)
+        net=classifier_LSTM(embedding_size=embedding_dim, device=device)
 
     # print("DONE: CREATE EEG ENCODER")
     # print(net)
