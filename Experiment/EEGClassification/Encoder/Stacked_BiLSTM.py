@@ -24,7 +24,7 @@ class classifier_Stacked_BiLSTM(nn.Module):
             input_size, lstm_size, num_layers = self.lstm_layers, bidirectional=True, batch_first = True)
         self.output1 = nn.Linear(2*lstm_size, embedding_size)
         self.relu = nn.ReLU()
-
+        self.device = device
 
     def forward(self, x):
         # Change order of axis from (n, spatial, temporal) to (n, temporal, spatial)
