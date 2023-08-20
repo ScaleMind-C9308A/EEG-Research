@@ -1,7 +1,7 @@
 python3 run_classification.py --dataset CVPR2017 \
---eeg-path /media/exx/HDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth \
+--eeg-path /media/mountHDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth \
 --img-path /home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet \
---splits-path /media/exx/HDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth \
+--splits-path /media/mountHDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth \
 --log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification \
 --weight-path None \
 --classifier-mode classic \
