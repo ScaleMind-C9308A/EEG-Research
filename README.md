@@ -3,11 +3,12 @@
 Use the dataset from 2 sources:
 - S. Palazzo, C. Spampinato, I. Kavasidis, D. Giordano, J. Schmidt, M. Shah, Decoding Brain Representations by Multimodal Learning of Neural Activity and Visual Features, IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE, 2020, doi: 10.1109/TPAMI.2020.2995909
 [https://github.com/perceivelab/eeg_visual_classification](https://github.com/perceivelab/eeg_visual_classification)
-## Setup Guideline: 
+
+## I. Setup Guideline: 
 
 - Follow the commands in Git Bash (Windows) or Terminal (Linux/Mac)
 
-### Setup repo for first-time clone:
+### *Setup repo for first-time clone:
 
 - Create .env folder and install neccessary packages 
 
@@ -18,25 +19,24 @@ source .env/bin/activate # For Linux
 pip install -r requirements.txt
 ```
 
-### Sync with submodule repo
+### *Sync with submodule repo
 
 https://stackoverflow.com/questions/18770545/why-is-my-git-submodule-head-detached-from-master/55570998#55570998
 
+In order to sync all of the submodules:
+
 ```bash
-# .gitmodules
-[submodule "bash/plugins/dircolors-solarized"]
-    path = bash/plugins/dircolors-solarized
-    url = https://github.com/seebi/dircolors-solarized.git
-    update = merge # <-- this is what you need to add
-
-#bash command to set alias
-git config alias.spull 'submodule update --remote'
-
-#Each time to pull (update) submodule from remote
-git spull
+# cd back to project root
+git submodule update --remote --merge
 ```
 
-### How to ssh into the server (Managed with tmux sessions)
+### *How to ssh into the server 
+- Step 1: Install tailscale https://tailscale.com/              
+- Step 2: In terminal (preferably Git Bash): `ssh exx@100.98.174.90`
+- Step 3: Login tailscale with google account scalemindserver@gmail.com
+- Step 4: Enjoy
+
+### *\[SSH Tools] Tmux (enable background running)
 
 #### If the server has no tmux sessions and jupyter notebook is not running
 
