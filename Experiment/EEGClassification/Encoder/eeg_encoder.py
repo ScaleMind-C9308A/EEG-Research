@@ -11,6 +11,7 @@ from Encoder.EEGChannelNet_modified import EEGChannelNet_Encoder_Mod
 from Encoder.EEGNet import classifier_EEGNet
 from Encoder.Stacked_BiLSTM import classifier_Stacked_BiLSTM
 from Encoder.LSTM import classifier_LSTM
+from Encoder.LSTM_Dropout import classifier_LSTM_Dropout
 
 def load_eeg_encoder(encoder, embedding_dim, device):
     if encoder=="EEGChannelNet":
@@ -23,6 +24,8 @@ def load_eeg_encoder(encoder, embedding_dim, device):
         net = classifier_Stacked_BiLSTM(embedding_size=embedding_dim, device=device)
     elif encoder=="LSTM":
         net=classifier_LSTM(embedding_size=embedding_dim, device=device)
+    elif encoder=="LSTM_Dropout":
+        net=classifier_LSTM_Dropout(embedding_size=embedding_dim, device=device)
 
     # print("DONE: CREATE EEG ENCODER")
     # print(net)
