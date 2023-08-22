@@ -25,9 +25,9 @@ class classifier_Stacked_BiLSTM_Dropout(nn.Module):
         self.lstm1 = nn.LSTM(
             input_size, lstm_size_1, num_layers = 1, bidirectional=True, batch_first = True) # (N,L,Hout), (h0, c0)
         self.dropout1 = nn.Dropout(0.2)
-        self.lstm2 = nn.LSTM(lstm_size_1, lstm_size_2, num_layers = 1, bidirectional=True, batch_first =True)
+        self.lstm2 = nn.LSTM(2*lstm_size_1, lstm_size_2, num_layers = 1, bidirectional=True, batch_first =True)
         self.dropout2 = nn.Dropout(0.2)
-        self.output1 = nn.Linear(lstm_size_2, embedding_size)
+        self.output1 = nn.Linear(2*lstm_size_2, embedding_size)
         self.relu = nn.ReLU()
         # self.softmax = nn.Softmax()
         self.device = device
@@ -36,10 +36,10 @@ class classifier_Stacked_BiLSTM_Dropout(nn.Module):
         # Change order of axis from (N, 128, 440) to (n, 440, 128) => (batch_size, seq_len, input_size)
         x = torch.permute(x, (0, 2, 1))
         batch_size = x.size(0)
-        lstm_init1 = (torch.zeros(self.lstm_layers, batch_size, self.lstm_size_1).to(self.device),
-                     torch.zeros(self.lstm_layers, batch_size, self.lstm_size_1).to(self.device))
-        lstm_init2 = (torch.zeros(self.lstm_layers, batch_size, self.lstm_size_2).to(self.device),
-                     torch.zeros(self.lstm_layers, batch_size, self.lstm_size_2).to(self.device))
+        lstm_init1 = (torch.zeros(2*self.lstm_layers, batch_size, self.lstm_size_1).to(self.device),
+                     torch.zeros(2*self.lstm_layers, batch_size, self.lstm_size_1).to(self.device))
+        lstm_init2 = (torch.zeros(2*self.lstm_layers, batch_size, self.lstm_size_2).to(self.device),
+                     torch.zeros(2*self.lstm_layers, batch_size, self.lstm_size_2).to(self.device))
         # lstm_init = (Variable(lstm_init[0]), Variable(lstm_init[1]))
         x = self.lstm1(x, lstm_init1)[0]
         x = self.dropout1(x)
