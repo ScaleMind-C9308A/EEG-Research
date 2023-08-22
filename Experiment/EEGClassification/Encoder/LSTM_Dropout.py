@@ -23,7 +23,7 @@ class classifier_LSTM_Dropout(nn.Module):
         self.lstm_size_1 = lstm_size_1
         self.lstm_size_2 = lstm_size_2
         self.lstm1 = nn.LSTM(
-            input_size, lstm_size_1, num_layers = 1, batch_first = True)
+            input_size, lstm_size_1, num_layers = 1, batch_first = True) # (N,L,D*Hout), (h0, c0)
         self.dropout1 = nn.Dropout(0.2)
         self.lstm2 = nn.LSTM(lstm_size_1, lstm_size_2, num_layers = 1, batch_first =True)
         self.dropout2 = nn.Dropout(0.2)
@@ -33,7 +33,7 @@ class classifier_LSTM_Dropout(nn.Module):
         self.device = device
 
     def forward(self, x):
-        # Change order of axis from (n, 96, 512) to (n, 512, 96)
+        # Change order of axis from (N, 128, 440) to (n, 440, 128) => (batch_size, seq_len, input_size)
         x = torch.permute(x, (0, 2, 1))
         batch_size = x.size(0)
         lstm_init1 = (torch.zeros(self.lstm_layers, batch_size, self.lstm_size_1).to(self.device),
@@ -42,8 +42,11 @@ class classifier_LSTM_Dropout(nn.Module):
                      torch.zeros(self.lstm_layers, batch_size, self.lstm_size_2).to(self.device))
         # lstm_init = (Variable(lstm_init[0]), Variable(lstm_init[1]))
         x = self.lstm1(x, lstm_init1)[0][:, -1, :]
+        print(x.size())
         x = self.dropout1(x)
+        print(x.size())
         x = self.lstm2(x, lstm_init2)[0][:, -1, :]
+        print(x.size())
         x = self.dropout2(x)
         x = self.output1(x)
         return x
