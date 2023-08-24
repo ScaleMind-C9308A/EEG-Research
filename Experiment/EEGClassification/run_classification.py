@@ -69,7 +69,7 @@ def run():
 
     scheduler = lr_scheduler.StepLR(optimizer, args.lr_step, gamma=0.1, last_epoch=-1)
     #Step 5: Put all to net_trainer()
-    fit(train_dataloader, val_dataloader, model, loss_fn, optimizer, scheduler, args.max_epoch, args.device, args.log_interval, log_path_dir)
+    fit(train_dataloader, val_dataloader, test_dataloader, model, loss_fn, optimizer, scheduler, args.max_epoch, args.device, args.log_interval, log_path_dir)
 
 def load_config():
     """
