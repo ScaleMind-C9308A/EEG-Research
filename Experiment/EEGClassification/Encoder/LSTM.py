@@ -30,9 +30,15 @@ class classifier_LSTM(nn.Module):
         # Change order of axis from (n, 96, 512) to (n, 512, 96)
         x = torch.permute(x, (0, 2, 1))
         batch_size = x.size(0)
-        lstm_init = (torch.zeros(self.lstm_layers, batch_size, self.lstm_size).to(self.device),
+        if self.device is None:
+            lstm_init = (torch.zeros(self.lstm_layers, batch_size, self.lstm_size),
+                         torch.zeros(self.lstm_layers, batch_size, self.lstm_size))
+        else:
+            lstm_init = (torch.zeros(self.lstm_layers, batch_size, self.lstm_size).to(self.device),
                      torch.zeros(self.lstm_layers, batch_size, self.lstm_size).to(self.device))
         # lstm_init = (Variable(lstm_init[0]), Variable(lstm_init[1]))
         x = self.lstm(x, lstm_init)[0][:, -1, :]
         x = self.output1(x)
+        # EDIT: Add relu
+        x = self.relu(x)
         return x
