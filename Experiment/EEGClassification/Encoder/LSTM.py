@@ -35,4 +35,6 @@ class classifier_LSTM(nn.Module):
         # lstm_init = (Variable(lstm_init[0]), Variable(lstm_init[1]))
         x = self.lstm(x, lstm_init)[0][:, -1, :]
         x = self.output1(x)
+        # EDIT: Add relu
+        x = self.relu(x)
         return x
