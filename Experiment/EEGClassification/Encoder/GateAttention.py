@@ -7,7 +7,6 @@ import torch.distributions
 from torch import nn 
 import torch.nn.functional as F
 
-
 class AuxiliaryNet(torch.nn.Module):
     """
     Arguments
@@ -17,6 +16,7 @@ class AuxiliaryNet(torch.nn.Module):
     embedding_length : Embeddding dimension of GloVe word embeddings
     --------
     """
+    
     def __init__(self, batch_size, auxiliary_hidden_size, embedding_length, biDirectional = False, num_layers = 1, tau=1):
         super(AuxiliaryNet, self).__init__()
         self.batch_size = batch_size
@@ -32,7 +32,7 @@ class AuxiliaryNet(torch.nn.Module):
             self.aux_linear = nn.Linear(self.hidden_size,1)
             self.sigmoid = torch.nn.Sigmoid()
             self.tau = tau
-        
+            
 
     def forward(self, input_sequence, is_train = True, batch_size=None):
         
