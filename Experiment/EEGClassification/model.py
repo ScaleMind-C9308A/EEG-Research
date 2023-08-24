@@ -15,7 +15,7 @@ class EEGClassificationNet(nn.Module):
             # nn.LogSoftmax(dim=1)
         )
     def forward(self, eeg):
-        return self.backbone(eeg)
+        return self.classifier(self.backbone(eeg))
 class Triplet_EEGClassificationNet(nn.Module):
     def __init__(self, pretrained_model, embedding_dim, num_classes):
         super().__init__()
