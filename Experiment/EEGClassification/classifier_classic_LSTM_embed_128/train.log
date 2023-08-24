@@ -1,0 +1,215 @@
+2023-08-20 15:31:32.541 | INFO     | __main__:run:49 - Namespace(img_feature_extract=0, embedding_size=128, classifier_mode='classic', weight_path='None', dataset='CVPR2017', eeg_path='/media/mountHDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth', time_low=20, time_high=460, img_path='/home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet', splits_path='/media/mountHDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth', log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification', info='classifier_classic_LSTM_embed_128', img_encoder='efficientnet_b0', eeg_encoder='LSTM', batch_size=64, max_epoch=100, log_interval=50, arch='train', save_ckpt='checkpoints/', num_classes=40, num_workers=2, gpu=0, lr=0.001, wd=0.0001, optim='Adam', gamma=200, lr_step=10, pretrain=False, momen=0.9, nesterov=False, device=device(type='cuda', index=0))
+2023-08-20 15:34:44.054 | INFO     | __main__:run:49 - Namespace(img_feature_extract=0, embedding_size=128, classifier_mode='classic', weight_path='None', dataset='CVPR2017', eeg_path='/media/mountHDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth', time_low=20, time_high=460, img_path='/home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet', splits_path='/media/mountHDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth', log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification', info='classifier_classic_LSTM_embed_128', img_encoder='efficientnet_b0', eeg_encoder='LSTM', batch_size=64, max_epoch=100, log_interval=50, arch='train', save_ckpt='checkpoints/', num_classes=40, num_workers=2, gpu=0, lr=0.001, wd=0.0001, optim='Adam', gamma=200, lr_step=10, pretrain=False, momen=0.9, nesterov=False, device=device(type='cuda', index=0))
+2023-08-20 15:53:26.360 | INFO     | __main__:run:49 - Namespace(img_feature_extract=0, embedding_size=128, classifier_mode='classic', weight_path='None', dataset='CVPR2017', eeg_path='/media/mountHDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth', time_low=20, time_high=460, img_path='/home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet', splits_path='/media/mountHDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth', log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification', info='classifier_classic_LSTM_embed_128', img_encoder='efficientnet_b0', eeg_encoder='LSTM', batch_size=64, max_epoch=100, log_interval=50, arch='train', save_ckpt='checkpoints/', num_classes=40, num_workers=2, gpu=0, lr=0.001, wd=0.0001, optim='Adam', gamma=200, lr_step=10, pretrain=False, momen=0.9, nesterov=False, device=device(type='cuda', index=0))
+2023-08-20 16:05:23.400 | INFO     | __main__:run:49 - Namespace(img_feature_extract=0, embedding_size=128, classifier_mode='classic', weight_path='None', dataset='CVPR2017', eeg_path='/media/mountHDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth', time_low=20, time_high=460, img_path='/home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet', splits_path='/media/mountHDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth', log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification', info='classifier_classic_LSTM_embed_128', img_encoder='efficientnet_b0', eeg_encoder='LSTM', batch_size=64, max_epoch=100, log_interval=50, arch='train', save_ckpt='checkpoints/', num_classes=40, num_workers=2, gpu=0, lr=0.001, wd=0.0001, optim='Adam', gamma=200, lr_step=10, pretrain=False, momen=0.9, nesterov=False, device=device(type='cuda', index=0))
+2023-08-20 16:05:27.174 | INFO     | trainer:fit:49 - Epoch: 1/100. Train set: Average loss: 3.951515. Accuracy: 0.0264
+	Validation set: Average loss: 3.708023. Accuracy: 0.0288
+2023-08-20 16:05:28.810 | INFO     | trainer:fit:49 - Epoch: 2/100. Train set: Average loss: 3.644124. Accuracy: 0.0529
+	Validation set: Average loss: 3.649908. Accuracy: 0.0476
+2023-08-20 16:05:30.498 | INFO     | trainer:fit:49 - Epoch: 3/100. Train set: Average loss: 3.570633. Accuracy: 0.0653
+	Validation set: Average loss: 3.588810. Accuracy: 0.0591
+2023-08-20 16:05:32.188 | INFO     | trainer:fit:49 - Epoch: 4/100. Train set: Average loss: 3.393574. Accuracy: 0.0787
+	Validation set: Average loss: 3.306559. Accuracy: 0.0787
+2023-08-20 16:05:33.803 | INFO     | trainer:fit:49 - Epoch: 5/100. Train set: Average loss: 3.327177. Accuracy: 0.0878
+	Validation set: Average loss: 3.370082. Accuracy: 0.0716
+2023-08-20 16:05:35.513 | INFO     | trainer:fit:49 - Epoch: 6/100. Train set: Average loss: 3.186537. Accuracy: 0.1061
+	Validation set: Average loss: 3.175295. Accuracy: 0.0916
+2023-08-20 16:05:37.163 | INFO     | trainer:fit:49 - Epoch: 7/100. Train set: Average loss: 2.997636. Accuracy: 0.1322
+	Validation set: Average loss: 3.094231. Accuracy: 0.0933
+2023-08-20 16:05:38.860 | INFO     | trainer:fit:49 - Epoch: 8/100. Train set: Average loss: 2.964244. Accuracy: 0.1369
+	Validation set: Average loss: 3.184855. Accuracy: 0.0939
+2023-08-20 16:05:40.482 | INFO     | trainer:fit:49 - Epoch: 9/100. Train set: Average loss: 2.853987. Accuracy: 0.1568
+	Validation set: Average loss: 2.892362. Accuracy: 0.1253
+2023-08-20 16:05:42.266 | INFO     | trainer:fit:49 - Epoch: 10/100. Train set: Average loss: 2.890505. Accuracy: 0.1568
+	Validation set: Average loss: 2.887635. Accuracy: 0.1249
+2023-08-20 16:05:42.266 | INFO     | trainer:fit:58 - Best val accuracy: 0.1253
+2023-08-20 16:05:44.105 | INFO     | trainer:fit:49 - Epoch: 11/100. Train set: Average loss: 2.671300. Accuracy: 0.1954
+	Validation set: Average loss: 2.801640. Accuracy: 0.1451
+2023-08-20 16:05:45.794 | INFO     | trainer:fit:49 - Epoch: 12/100. Train set: Average loss: 2.619651. Accuracy: 0.2157
+	Validation set: Average loss: 2.782634. Accuracy: 0.1507
+2023-08-20 16:05:47.571 | INFO     | trainer:fit:49 - Epoch: 13/100. Train set: Average loss: 2.588352. Accuracy: 0.2220
+	Validation set: Average loss: 2.773188. Accuracy: 0.1443
+2023-08-20 16:05:49.267 | INFO     | trainer:fit:49 - Epoch: 14/100. Train set: Average loss: 2.607236. Accuracy: 0.2141
+	Validation set: Average loss: 2.777965. Accuracy: 0.1397
+2023-08-20 16:05:51.056 | INFO     | trainer:fit:49 - Epoch: 15/100. Train set: Average loss: 2.559750. Accuracy: 0.2270
+	Validation set: Average loss: 2.722576. Accuracy: 0.1431
+2023-08-20 16:05:52.663 | INFO     | trainer:fit:49 - Epoch: 16/100. Train set: Average loss: 2.528216. Accuracy: 0.2336
+	Validation set: Average loss: 2.706896. Accuracy: 0.1493
+2023-08-20 16:05:54.449 | INFO     | trainer:fit:49 - Epoch: 17/100. Train set: Average loss: 2.507034. Accuracy: 0.2362
+	Validation set: Average loss: 2.697563. Accuracy: 0.1514
+2023-08-20 16:05:56.100 | INFO     | trainer:fit:49 - Epoch: 18/100. Train set: Average loss: 2.487263. Accuracy: 0.2470
+	Validation set: Average loss: 2.665572. Accuracy: 0.1578
+2023-08-20 16:05:57.748 | INFO     | trainer:fit:49 - Epoch: 19/100. Train set: Average loss: 2.519829. Accuracy: 0.2367
+	Validation set: Average loss: 2.677867. Accuracy: 0.1492
+2023-08-20 16:05:59.514 | INFO     | trainer:fit:49 - Epoch: 20/100. Train set: Average loss: 2.463809. Accuracy: 0.2505
+	Validation set: Average loss: 2.639487. Accuracy: 0.1625
+2023-08-20 16:05:59.515 | INFO     | trainer:fit:58 - Best val accuracy: 0.1625
+2023-08-20 16:06:01.419 | INFO     | trainer:fit:49 - Epoch: 21/100. Train set: Average loss: 2.440330. Accuracy: 0.2588
+	Validation set: Average loss: 2.635816. Accuracy: 0.1551
+2023-08-20 16:06:03.013 | INFO     | trainer:fit:49 - Epoch: 22/100. Train set: Average loss: 2.434997. Accuracy: 0.2614
+	Validation set: Average loss: 2.638962. Accuracy: 0.1568
+2023-08-20 16:06:04.672 | INFO     | trainer:fit:49 - Epoch: 23/100. Train set: Average loss: 2.431387. Accuracy: 0.2603
+	Validation set: Average loss: 2.638417. Accuracy: 0.1570
+2023-08-20 16:06:06.248 | INFO     | trainer:fit:49 - Epoch: 24/100. Train set: Average loss: 2.429504. Accuracy: 0.2619
+	Validation set: Average loss: 2.636526. Accuracy: 0.1556
+2023-08-20 16:06:07.914 | INFO     | trainer:fit:49 - Epoch: 25/100. Train set: Average loss: 2.426448. Accuracy: 0.2604
+	Validation set: Average loss: 2.630451. Accuracy: 0.1573
+2023-08-20 16:06:09.626 | INFO     | trainer:fit:49 - Epoch: 26/100. Train set: Average loss: 2.424236. Accuracy: 0.2624
+	Validation set: Average loss: 2.635599. Accuracy: 0.1597
+2023-08-20 16:06:11.342 | INFO     | trainer:fit:49 - Epoch: 27/100. Train set: Average loss: 2.422385. Accuracy: 0.2633
+	Validation set: Average loss: 2.629293. Accuracy: 0.1565
+2023-08-20 16:06:13.054 | INFO     | trainer:fit:49 - Epoch: 28/100. Train set: Average loss: 2.418861. Accuracy: 0.2679
+	Validation set: Average loss: 2.628775. Accuracy: 0.1562
+2023-08-20 16:06:14.777 | INFO     | trainer:fit:49 - Epoch: 29/100. Train set: Average loss: 2.417431. Accuracy: 0.2657
+	Validation set: Average loss: 2.619195. Accuracy: 0.1642
+2023-08-20 16:06:16.531 | INFO     | trainer:fit:49 - Epoch: 30/100. Train set: Average loss: 2.417448. Accuracy: 0.2651
+	Validation set: Average loss: 2.622554. Accuracy: 0.1573
+2023-08-20 16:06:16.531 | INFO     | trainer:fit:58 - Best val accuracy: 0.1642
+2023-08-20 16:06:18.390 | INFO     | trainer:fit:49 - Epoch: 31/100. Train set: Average loss: 2.414004. Accuracy: 0.2644
+	Validation set: Average loss: 2.618449. Accuracy: 0.1573
+2023-08-20 16:06:20.073 | INFO     | trainer:fit:49 - Epoch: 32/100. Train set: Average loss: 2.412246. Accuracy: 0.2647
+	Validation set: Average loss: 2.616766. Accuracy: 0.1565
+2023-08-20 16:06:21.718 | INFO     | trainer:fit:49 - Epoch: 33/100. Train set: Average loss: 2.412176. Accuracy: 0.2647
+	Validation set: Average loss: 2.619218. Accuracy: 0.1635
+2023-08-20 16:06:23.320 | INFO     | trainer:fit:49 - Epoch: 34/100. Train set: Average loss: 2.411250. Accuracy: 0.2652
+	Validation set: Average loss: 2.619770. Accuracy: 0.1635
+2023-08-20 16:06:25.030 | INFO     | trainer:fit:49 - Epoch: 35/100. Train set: Average loss: 2.412412. Accuracy: 0.2651
+	Validation set: Average loss: 2.627552. Accuracy: 0.1600
+2023-08-20 16:06:26.802 | INFO     | trainer:fit:49 - Epoch: 36/100. Train set: Average loss: 2.411019. Accuracy: 0.2657
+	Validation set: Average loss: 2.619808. Accuracy: 0.1565
+2023-08-20 16:06:28.444 | INFO     | trainer:fit:49 - Epoch: 37/100. Train set: Average loss: 2.411630. Accuracy: 0.2651
+	Validation set: Average loss: 2.623053. Accuracy: 0.1600
+2023-08-20 16:06:30.073 | INFO     | trainer:fit:49 - Epoch: 38/100. Train set: Average loss: 2.410909. Accuracy: 0.2661
+	Validation set: Average loss: 2.622080. Accuracy: 0.1565
+2023-08-20 16:06:31.751 | INFO     | trainer:fit:49 - Epoch: 39/100. Train set: Average loss: 2.409518. Accuracy: 0.2659
+	Validation set: Average loss: 2.618048. Accuracy: 0.1600
+2023-08-20 16:06:33.440 | INFO     | trainer:fit:49 - Epoch: 40/100. Train set: Average loss: 2.409916. Accuracy: 0.2663
+	Validation set: Average loss: 2.623380. Accuracy: 0.1583
+2023-08-20 16:06:33.441 | INFO     | trainer:fit:58 - Best val accuracy: 0.1642
+2023-08-20 16:06:35.336 | INFO     | trainer:fit:49 - Epoch: 41/100. Train set: Average loss: 2.409438. Accuracy: 0.2668
+	Validation set: Average loss: 2.618650. Accuracy: 0.1618
+2023-08-20 16:06:36.963 | INFO     | trainer:fit:49 - Epoch: 42/100. Train set: Average loss: 2.410303. Accuracy: 0.2666
+	Validation set: Average loss: 2.627677. Accuracy: 0.1565
+2023-08-20 16:06:38.696 | INFO     | trainer:fit:49 - Epoch: 43/100. Train set: Average loss: 2.409980. Accuracy: 0.2664
+	Validation set: Average loss: 2.618040. Accuracy: 0.1600
+2023-08-20 16:06:40.405 | INFO     | trainer:fit:49 - Epoch: 44/100. Train set: Average loss: 2.409980. Accuracy: 0.2666
+	Validation set: Average loss: 2.628072. Accuracy: 0.1565
+2023-08-20 16:06:42.106 | INFO     | trainer:fit:49 - Epoch: 45/100. Train set: Average loss: 2.409455. Accuracy: 0.2666
+	Validation set: Average loss: 2.617434. Accuracy: 0.1583
+2023-08-20 16:06:43.725 | INFO     | trainer:fit:49 - Epoch: 46/100. Train set: Average loss: 2.409435. Accuracy: 0.2669
+	Validation set: Average loss: 2.626372. Accuracy: 0.1583
+2023-08-20 16:06:45.408 | INFO     | trainer:fit:49 - Epoch: 47/100. Train set: Average loss: 2.409456. Accuracy: 0.2668
+	Validation set: Average loss: 2.623100. Accuracy: 0.1605
+2023-08-20 16:06:47.053 | INFO     | trainer:fit:49 - Epoch: 48/100. Train set: Average loss: 2.410166. Accuracy: 0.2671
+	Validation set: Average loss: 2.621708. Accuracy: 0.1588
+2023-08-20 16:06:48.802 | INFO     | trainer:fit:49 - Epoch: 49/100. Train set: Average loss: 2.410134. Accuracy: 0.2665
+	Validation set: Average loss: 2.617321. Accuracy: 0.1618
+2023-08-20 16:06:50.521 | INFO     | trainer:fit:49 - Epoch: 50/100. Train set: Average loss: 2.410663. Accuracy: 0.2666
+	Validation set: Average loss: 2.616393. Accuracy: 0.1565
+2023-08-20 16:06:50.521 | INFO     | trainer:fit:58 - Best val accuracy: 0.1642
+2023-08-20 16:06:52.399 | INFO     | trainer:fit:49 - Epoch: 51/100. Train set: Average loss: 2.409819. Accuracy: 0.2672
+	Validation set: Average loss: 2.625789. Accuracy: 0.1565
+2023-08-20 16:06:54.092 | INFO     | trainer:fit:49 - Epoch: 52/100. Train set: Average loss: 2.409557. Accuracy: 0.2665
+	Validation set: Average loss: 2.615879. Accuracy: 0.1583
+2023-08-20 16:06:55.800 | INFO     | trainer:fit:49 - Epoch: 53/100. Train set: Average loss: 2.409607. Accuracy: 0.2668
+	Validation set: Average loss: 2.616273. Accuracy: 0.1583
+2023-08-20 16:06:57.440 | INFO     | trainer:fit:49 - Epoch: 54/100. Train set: Average loss: 2.409448. Accuracy: 0.2668
+	Validation set: Average loss: 2.615867. Accuracy: 0.1583
+2023-08-20 16:06:59.177 | INFO     | trainer:fit:49 - Epoch: 55/100. Train set: Average loss: 2.409612. Accuracy: 0.2668
+	Validation set: Average loss: 2.616069. Accuracy: 0.1618
+2023-08-20 16:07:00.888 | INFO     | trainer:fit:49 - Epoch: 56/100. Train set: Average loss: 2.409553. Accuracy: 0.2670
+	Validation set: Average loss: 2.615772. Accuracy: 0.1565
+2023-08-20 16:07:02.558 | INFO     | trainer:fit:49 - Epoch: 57/100. Train set: Average loss: 2.409545. Accuracy: 0.2671
+	Validation set: Average loss: 2.616606. Accuracy: 0.1600
+2023-08-20 16:07:04.288 | INFO     | trainer:fit:49 - Epoch: 58/100. Train set: Average loss: 2.409226. Accuracy: 0.2668
+	Validation set: Average loss: 2.623431. Accuracy: 0.1583
+2023-08-20 16:07:05.925 | INFO     | trainer:fit:49 - Epoch: 59/100. Train set: Average loss: 2.410542. Accuracy: 0.2666
+	Validation set: Average loss: 2.622684. Accuracy: 0.1583
+2023-08-20 16:07:07.680 | INFO     | trainer:fit:49 - Epoch: 60/100. Train set: Average loss: 2.410556. Accuracy: 0.2664
+	Validation set: Average loss: 2.618364. Accuracy: 0.1565
+2023-08-20 16:07:07.681 | INFO     | trainer:fit:58 - Best val accuracy: 0.1642
+2023-08-20 16:07:09.611 | INFO     | trainer:fit:49 - Epoch: 61/100. Train set: Average loss: 2.409512. Accuracy: 0.2671
+	Validation set: Average loss: 2.624045. Accuracy: 0.1565
+2023-08-20 16:07:11.289 | INFO     | trainer:fit:49 - Epoch: 62/100. Train set: Average loss: 2.409641. Accuracy: 0.2668
+	Validation set: Average loss: 2.620487. Accuracy: 0.1565
+2023-08-20 16:07:12.943 | INFO     | trainer:fit:49 - Epoch: 63/100. Train set: Average loss: 2.409563. Accuracy: 0.2672
+	Validation set: Average loss: 2.622844. Accuracy: 0.1600
+2023-08-20 16:07:14.565 | INFO     | trainer:fit:49 - Epoch: 64/100. Train set: Average loss: 2.409622. Accuracy: 0.2674
+	Validation set: Average loss: 2.615656. Accuracy: 0.1600
+2023-08-20 16:07:16.221 | INFO     | trainer:fit:49 - Epoch: 65/100. Train set: Average loss: 2.409176. Accuracy: 0.2671
+	Validation set: Average loss: 2.619715. Accuracy: 0.1600
+2023-08-20 16:07:17.886 | INFO     | trainer:fit:49 - Epoch: 66/100. Train set: Average loss: 2.409937. Accuracy: 0.2669
+	Validation set: Average loss: 2.620111. Accuracy: 0.1600
+2023-08-20 16:07:19.650 | INFO     | trainer:fit:49 - Epoch: 67/100. Train set: Average loss: 2.409565. Accuracy: 0.2672
+	Validation set: Average loss: 2.621781. Accuracy: 0.1583
+2023-08-20 16:07:21.377 | INFO     | trainer:fit:49 - Epoch: 68/100. Train set: Average loss: 2.409481. Accuracy: 0.2670
+	Validation set: Average loss: 2.628867. Accuracy: 0.1548
+2023-08-20 16:07:23.056 | INFO     | trainer:fit:49 - Epoch: 69/100. Train set: Average loss: 2.409559. Accuracy: 0.2670
+	Validation set: Average loss: 2.621390. Accuracy: 0.1600
+2023-08-20 16:07:24.732 | INFO     | trainer:fit:49 - Epoch: 70/100. Train set: Average loss: 2.409350. Accuracy: 0.2669
+	Validation set: Average loss: 2.618614. Accuracy: 0.1600
+2023-08-20 16:07:24.733 | INFO     | trainer:fit:58 - Best val accuracy: 0.1642
+2023-08-20 16:07:26.520 | INFO     | trainer:fit:49 - Epoch: 71/100. Train set: Average loss: 2.410388. Accuracy: 0.2664
+	Validation set: Average loss: 2.621231. Accuracy: 0.1618
+2023-08-20 16:07:28.249 | INFO     | trainer:fit:49 - Epoch: 72/100. Train set: Average loss: 2.409675. Accuracy: 0.2672
+	Validation set: Average loss: 2.624454. Accuracy: 0.1565
+2023-08-20 16:07:30.074 | INFO     | trainer:fit:49 - Epoch: 73/100. Train set: Average loss: 2.408686. Accuracy: 0.2671
+	Validation set: Average loss: 2.613858. Accuracy: 0.1618
+2023-08-20 16:07:31.698 | INFO     | trainer:fit:49 - Epoch: 74/100. Train set: Average loss: 2.409548. Accuracy: 0.2670
+	Validation set: Average loss: 2.619151. Accuracy: 0.1548
+2023-08-20 16:07:33.412 | INFO     | trainer:fit:49 - Epoch: 75/100. Train set: Average loss: 2.409374. Accuracy: 0.2670
+	Validation set: Average loss: 2.623551. Accuracy: 0.1583
+2023-08-20 16:07:35.118 | INFO     | trainer:fit:49 - Epoch: 76/100. Train set: Average loss: 2.409105. Accuracy: 0.2674
+	Validation set: Average loss: 2.616535. Accuracy: 0.1565
+2023-08-20 16:07:36.768 | INFO     | trainer:fit:49 - Epoch: 77/100. Train set: Average loss: 2.409992. Accuracy: 0.2664
+	Validation set: Average loss: 2.626967. Accuracy: 0.1565
+2023-08-20 16:07:38.519 | INFO     | trainer:fit:49 - Epoch: 78/100. Train set: Average loss: 2.409869. Accuracy: 0.2670
+	Validation set: Average loss: 2.614643. Accuracy: 0.1618
+2023-08-20 16:07:40.109 | INFO     | trainer:fit:49 - Epoch: 79/100. Train set: Average loss: 2.409493. Accuracy: 0.2670
+	Validation set: Average loss: 2.622338. Accuracy: 0.1583
+2023-08-20 16:07:41.821 | INFO     | trainer:fit:49 - Epoch: 80/100. Train set: Average loss: 2.408871. Accuracy: 0.2675
+	Validation set: Average loss: 2.618335. Accuracy: 0.1618
+2023-08-20 16:07:41.822 | INFO     | trainer:fit:58 - Best val accuracy: 0.1642
+2023-08-20 16:07:43.559 | INFO     | trainer:fit:49 - Epoch: 81/100. Train set: Average loss: 2.409746. Accuracy: 0.2673
+	Validation set: Average loss: 2.616073. Accuracy: 0.1600
+2023-08-20 16:07:45.279 | INFO     | trainer:fit:49 - Epoch: 82/100. Train set: Average loss: 2.409290. Accuracy: 0.2673
+	Validation set: Average loss: 2.621409. Accuracy: 0.1583
+2023-08-20 16:07:46.844 | INFO     | trainer:fit:49 - Epoch: 83/100. Train set: Average loss: 2.409513. Accuracy: 0.2669
+	Validation set: Average loss: 2.624846. Accuracy: 0.1565
+2023-08-20 16:07:48.510 | INFO     | trainer:fit:49 - Epoch: 84/100. Train set: Average loss: 2.409289. Accuracy: 0.2670
+	Validation set: Average loss: 2.622916. Accuracy: 0.1583
+2023-08-20 16:07:50.145 | INFO     | trainer:fit:49 - Epoch: 85/100. Train set: Average loss: 2.409515. Accuracy: 0.2670
+	Validation set: Average loss: 2.617732. Accuracy: 0.1583
+2023-08-20 16:07:51.751 | INFO     | trainer:fit:49 - Epoch: 86/100. Train set: Average loss: 2.409813. Accuracy: 0.2669
+	Validation set: Average loss: 2.623831. Accuracy: 0.1548
+2023-08-20 16:07:53.366 | INFO     | trainer:fit:49 - Epoch: 87/100. Train set: Average loss: 2.409046. Accuracy: 0.2675
+	Validation set: Average loss: 2.617497. Accuracy: 0.1600
+2023-08-20 16:07:55.110 | INFO     | trainer:fit:49 - Epoch: 88/100. Train set: Average loss: 2.409799. Accuracy: 0.2669
+	Validation set: Average loss: 2.617345. Accuracy: 0.1565
+2023-08-20 16:07:56.826 | INFO     | trainer:fit:49 - Epoch: 89/100. Train set: Average loss: 2.409466. Accuracy: 0.2674
+	Validation set: Average loss: 2.617180. Accuracy: 0.1600
+2023-08-20 16:07:58.464 | INFO     | trainer:fit:49 - Epoch: 90/100. Train set: Average loss: 2.409784. Accuracy: 0.2672
+	Validation set: Average loss: 2.624512. Accuracy: 0.1600
+2023-08-20 16:07:58.464 | INFO     | trainer:fit:58 - Best val accuracy: 0.1642
+2023-08-20 16:08:00.231 | INFO     | trainer:fit:49 - Epoch: 91/100. Train set: Average loss: 2.410112. Accuracy: 0.2666
+	Validation set: Average loss: 2.623458. Accuracy: 0.1565
+2023-08-20 16:08:01.923 | INFO     | trainer:fit:49 - Epoch: 92/100. Train set: Average loss: 2.409095. Accuracy: 0.2670
+	Validation set: Average loss: 2.618597. Accuracy: 0.1565
+2023-08-20 16:08:03.608 | INFO     | trainer:fit:49 - Epoch: 93/100. Train set: Average loss: 2.409838. Accuracy: 0.2671
+	Validation set: Average loss: 2.618794. Accuracy: 0.1583
+2023-08-20 16:08:05.367 | INFO     | trainer:fit:49 - Epoch: 94/100. Train set: Average loss: 2.408621. Accuracy: 0.2672
+	Validation set: Average loss: 2.614653. Accuracy: 0.1600
+2023-08-20 16:08:07.116 | INFO     | trainer:fit:49 - Epoch: 95/100. Train set: Average loss: 2.409189. Accuracy: 0.2668
+	Validation set: Average loss: 2.624528. Accuracy: 0.1565
+2023-08-20 16:08:08.767 | INFO     | trainer:fit:49 - Epoch: 96/100. Train set: Average loss: 2.409473. Accuracy: 0.2670
+	Validation set: Average loss: 2.623705. Accuracy: 0.1618
+2023-08-20 16:08:10.494 | INFO     | trainer:fit:49 - Epoch: 97/100. Train set: Average loss: 2.409771. Accuracy: 0.2670
+	Validation set: Average loss: 2.625281. Accuracy: 0.1618
+2023-08-20 16:08:12.275 | INFO     | trainer:fit:49 - Epoch: 98/100. Train set: Average loss: 2.409722. Accuracy: 0.2668
+	Validation set: Average loss: 2.615928. Accuracy: 0.1583
+2023-08-20 16:08:14.002 | INFO     | trainer:fit:49 - Epoch: 99/100. Train set: Average loss: 2.409335. Accuracy: 0.2671
+	Validation set: Average loss: 2.622702. Accuracy: 0.1565
+2023-08-20 16:08:15.757 | INFO     | trainer:fit:49 - Epoch: 100/100. Train set: Average loss: 2.409758. Accuracy: 0.2670
+	Validation set: Average loss: 2.620574. Accuracy: 0.1565
+2023-08-20 16:08:15.757 | INFO     | trainer:fit:62 - Training complete in 2m 51s
+2023-08-20 16:08:15.757 | INFO     | trainer:fit:63 - Best Val Accuracy: 0.1642
