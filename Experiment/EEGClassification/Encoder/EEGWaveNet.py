@@ -3,7 +3,7 @@ from torch import nn
 
 
 class EEGWaveNet_Encoder(nn.Module):
-    def __init__(self, n_chans,n_classes):
+    def __init__(self, n_chans,n_classes=40):
         super(Net, self).__init__()
 
         self.temp_conv1 = nn.Conv1d(n_chans, n_chans, kernel_size=2, stride=2 ,groups=n_chans)
