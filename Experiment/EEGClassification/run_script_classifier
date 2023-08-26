@@ -5,7 +5,7 @@ python3 run_classification.py --dataset CVPR2017 \
 --log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/results \
 --weight-path None \
 --classifier-mode classic \
---info LSTM_embed_128_batch64_55_95 \
+--info EEGChannelNet_embed_128_batch64_55_95 \
 --max-epoch 100 \
 --lr 1e-3 \
 --lr-step 10 \
@@ -14,7 +14,7 @@ python3 run_classification.py --dataset CVPR2017 \
 --log-interval 50 \
 --gpu 0 \
 --num-classes 40 \
---eeg-encoder LSTM \
+--eeg-encoder EEGChannelNet \
 --img-encoder efficientnet_b0 \
 --embedding-size 128 \
 --img-feature-extract 0
