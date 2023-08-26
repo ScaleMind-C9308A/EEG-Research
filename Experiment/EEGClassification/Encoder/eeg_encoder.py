@@ -23,7 +23,7 @@ def load_eeg_encoder(encoder, embedding_dim, device):
     elif encoder=="EEGNet":
         net = classifier_EEGNet(embedding_size=embedding_dim)
     elif encoder=="EEGWaveNet":
-        net = EEGWaveNet_Encoder(embedding_size=embedding_dim)
+        net = EEGWaveNet_Encoder(n_chans=128)
     elif encoder=="Stacked_BiLSTM":
         net = classifier_Stacked_BiLSTM(embedding_size=embedding_dim, device=device)
     elif encoder=="LSTM":
