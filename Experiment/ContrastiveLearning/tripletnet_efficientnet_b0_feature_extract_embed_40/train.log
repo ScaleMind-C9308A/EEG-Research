@@ -1,0 +1,827 @@
+2023-05-24 18:57:01.201 | INFO     | __main__:run_triplet:49 - Namespace(img_feature_extract=True, embedding_size=1000, dataset='CVPR2017', eeg_path='/media/exx/HDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth', time_low=20, time_high=460, img_path='/media/exx/HDD1/LanxHuyen/CVPR2017/imagenet_augmented', splits_path='/media/exx/HDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth', log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/ContrastiveLearning', info='tripletnet_efficientnet_b0_feature_extract', img_encoder='efficientnet_b0_lite', eeg_encoder='EEGChannelNet', batch_size=128, max_epoch=50, log_interval=10, arch='train', save_ckpt='checkpoints/', num_classes=40, num_workers=2, gpu=1, lr=0.00025, wd=0.0001, optim='Adam', gamma=200, lr_step=10, pretrain=False, momen=0.9, nesterov=False, device=device(type='cuda', index=1))
+2023-05-24 18:57:52.850 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.008174
+2023-05-24 18:58:00.419 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.005479
+2023-05-24 18:58:08.015 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.005245
+2023-05-24 18:58:15.614 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.003048
+2023-05-24 18:58:23.212 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.002682
+2023-05-24 18:58:30.813 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.002352
+2023-05-24 18:58:38.410 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.001675
+2023-05-24 18:58:46.007 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.001929
+2023-05-24 18:58:53.612 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.001401
+2023-05-24 18:59:01.222 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000744
+2023-05-24 18:59:08.826 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000830
+2023-05-24 18:59:16.441 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000791
+2023-05-24 18:59:24.050 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000579
+2023-05-24 18:59:26.430 | INFO     | trainer:fit:33 - Epoch: 1/50. Train set: Average loss: 0.002234
+2023-05-24 18:59:34.292 | INFO     | trainer:fit:43 - Epoch: 1/50. Validation set: Average loss: 0.002763
+2023-05-24 18:59:35.381 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000197
+2023-05-24 18:59:42.989 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.001414
+2023-05-24 18:59:50.595 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000798
+2023-05-24 18:59:58.205 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.001092
+2023-05-24 19:00:05.811 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000690
+2023-05-24 19:00:13.430 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.001111
+2023-05-24 19:00:21.058 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000496
+2023-05-24 19:00:28.703 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.001468
+2023-05-24 19:00:36.350 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.001767
+2023-05-24 19:00:43.991 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000158
+2023-05-24 19:00:51.641 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000983
+2023-05-24 19:24:46.201 | INFO     | __main__:run_triplet:49 - Namespace(img_feature_extract=True, embedding_size=1000, dataset='CVPR2017', eeg_path='/media/exx/HDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth', time_low=20, time_high=460, img_path='/media/exx/HDD1/LanxHuyen/CVPR2017/imagenet_augmented', splits_path='/media/exx/HDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth', log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/ContrastiveLearning', info='tripletnet_efficientnet_b0_feature_extract', img_encoder='efficientnet_b0', eeg_encoder='EEGChannelNet', batch_size=128, max_epoch=50, log_interval=10, arch='train', save_ckpt='checkpoints/', num_classes=40, num_workers=2, gpu=1, lr=0.00025, wd=0.0001, optim='Adam', gamma=200, lr_step=10, pretrain=False, momen=0.9, nesterov=False, device=device(type='cuda', index=1))
+2023-05-24 19:25:37.421 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.008145
+2023-05-24 19:25:44.061 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.006996
+2023-05-24 19:25:50.729 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.005982
+2023-05-24 19:25:57.416 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.004488
+2023-05-24 19:26:04.087 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.002887
+2023-05-24 19:26:10.768 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.002637
+2023-05-24 19:26:17.444 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.003342
+2023-05-24 19:26:24.126 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.002865
+2023-05-24 19:26:30.799 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.001722
+2023-05-24 19:26:37.467 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.001850
+2023-05-24 19:26:44.148 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.002459
+2023-05-24 19:26:50.818 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.001220
+2023-05-24 19:26:57.490 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.001302
+2023-05-24 19:26:59.589 | INFO     | trainer:fit:33 - Epoch: 1/50. Train set: Average loss: 0.003143
+2023-05-24 19:27:07.299 | INFO     | trainer:fit:43 - Epoch: 1/50. Validation set: Average loss: 0.009726
+2023-05-24 19:27:08.339 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.003569
+2023-05-24 19:27:15.014 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.001652
+2023-05-24 19:27:21.706 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.001795
+2023-05-24 19:27:28.400 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.001641
+2023-05-24 19:27:35.083 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.001514
+2023-05-24 19:27:41.762 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.001986
+2023-05-24 19:27:48.436 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.001594
+2023-05-24 19:27:55.114 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.002298
+2023-05-24 19:28:01.807 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.001207
+2023-05-24 19:28:08.500 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.001603
+2023-05-24 19:28:15.187 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.001337
+2023-05-24 19:28:21.865 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.002053
+2023-05-24 19:28:28.569 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.001373
+2023-05-24 19:28:30.686 | INFO     | trainer:fit:33 - Epoch: 2/50. Train set: Average loss: 0.001693
+2023-05-24 19:28:38.436 | INFO     | trainer:fit:43 - Epoch: 2/50. Validation set: Average loss: 0.040675
+2023-05-24 19:28:39.470 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000357
+2023-05-24 19:28:46.152 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000810
+2023-05-24 19:28:52.823 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.001528
+2023-05-24 19:28:59.503 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000813
+2023-05-24 19:29:06.183 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000735
+2023-05-24 19:29:12.866 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.001227
+2023-05-24 19:29:19.537 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.001204
+2023-05-24 19:29:26.212 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000832
+2023-05-24 19:29:32.894 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.002169
+2023-05-24 19:29:39.573 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.001018
+2023-05-24 19:29:46.250 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.001194
+2023-05-24 19:29:52.926 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.001506
+2023-05-24 19:29:59.599 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.001674
+2023-05-24 19:30:01.686 | INFO     | trainer:fit:33 - Epoch: 3/50. Train set: Average loss: 0.001201
+2023-05-24 19:30:09.392 | INFO     | trainer:fit:43 - Epoch: 3/50. Validation set: Average loss: 0.000504
+2023-05-24 19:30:10.430 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.001390
+2023-05-24 19:30:17.107 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.002782
+2023-05-24 19:30:23.783 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.001675
+2023-05-24 19:30:59.613 | INFO     | __main__:run_triplet:49 - Namespace(img_feature_extract=True, embedding_size=40, dataset='CVPR2017', eeg_path='/media/exx/HDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth', time_low=20, time_high=460, img_path='/media/exx/HDD1/LanxHuyen/CVPR2017/imagenet_augmented', splits_path='/media/exx/HDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth', log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/ContrastiveLearning', info='tripletnet_efficientnet_b0_feature_extract', img_encoder='efficientnet_b0', eeg_encoder='EEGChannelNet', batch_size=128, max_epoch=50, log_interval=10, arch='train', save_ckpt='checkpoints/', num_classes=40, num_workers=2, gpu=1, lr=0.00025, wd=0.0001, optim='Adam', gamma=200, lr_step=10, pretrain=False, momen=0.9, nesterov=False, device=device(type='cuda', index=1))
+2023-05-24 19:31:51.089 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.017583
+2023-05-24 19:31:57.763 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.026176
+2023-05-24 19:32:04.464 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.017953
+2023-05-24 19:32:11.154 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.013888
+2023-05-24 19:32:17.830 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.010351
+2023-05-24 19:32:24.512 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.008700
+2023-05-24 19:32:31.200 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.006622
+2023-05-24 19:32:37.892 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.005830
+2023-05-24 19:32:44.567 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.006135
+2023-05-24 19:32:51.240 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.005338
+2023-05-24 19:32:57.917 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.002420
+2023-05-24 19:33:04.602 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.004068
+2023-05-24 19:33:11.291 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.002992
+2023-05-24 19:33:13.397 | INFO     | trainer:fit:33 - Epoch: 1/50. Train set: Average loss: 0.009087
+2023-05-24 19:33:21.201 | INFO     | trainer:fit:43 - Epoch: 1/50. Validation set: Average loss: 0.002765
+2023-05-24 19:33:22.213 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.003508
+2023-05-24 19:33:28.897 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.002008
+2023-05-24 19:33:35.571 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.004096
+2023-05-24 19:33:42.248 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.006251
+2023-05-24 19:33:48.924 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.005783
+2023-05-24 19:33:55.598 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.003362
+2023-05-24 19:34:02.274 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.003414
+2023-05-24 19:34:08.951 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.006452
+2023-05-24 19:34:15.626 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.003122
+2023-05-24 19:34:22.305 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.001427
+2023-05-24 19:34:28.971 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.001195
+2023-05-24 19:34:35.648 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.002039
+2023-05-24 19:34:42.341 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000857
+2023-05-24 19:34:44.460 | INFO     | trainer:fit:33 - Epoch: 2/50. Train set: Average loss: 0.003370
+2023-05-24 19:34:52.225 | INFO     | trainer:fit:43 - Epoch: 2/50. Validation set: Average loss: 0.009080
+2023-05-24 19:34:53.249 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.001036
+2023-05-24 19:34:59.935 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.004108
+2023-05-24 19:35:06.605 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.002898
+2023-05-24 19:35:13.283 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.001686
+2023-05-24 19:35:19.944 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.001528
+2023-05-24 19:35:26.616 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.001354
+2023-05-24 19:35:33.280 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.002059
+2023-05-24 19:35:39.953 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.002287
+2023-05-24 19:35:46.626 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000850
+2023-05-24 19:35:53.290 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000256
+2023-05-24 19:35:59.959 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.001632
+2023-05-24 19:36:06.631 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.001351
+2023-05-24 19:36:13.313 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.001589
+2023-05-24 19:36:15.431 | INFO     | trainer:fit:33 - Epoch: 3/50. Train set: Average loss: 0.001842
+2023-05-24 19:36:23.321 | INFO     | trainer:fit:43 - Epoch: 3/50. Validation set: Average loss: 0.000000
+2023-05-24 19:36:24.347 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000042
+2023-05-24 19:36:31.030 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.002404
+2023-05-24 19:36:37.704 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.001643
+2023-05-24 19:36:44.414 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.002644
+2023-05-24 19:36:51.115 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.006496
+2023-05-24 19:36:57.815 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.002527
+2023-05-24 19:37:04.522 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.005426
+2023-05-24 19:37:11.207 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.003683
+2023-05-24 19:37:17.876 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.001014
+2023-05-24 19:37:24.566 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.003921
+2023-05-24 19:37:31.249 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.005611
+2023-05-24 19:37:37.942 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.004481
+2023-05-24 19:37:44.638 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.002465
+2023-05-24 19:37:46.757 | INFO     | trainer:fit:33 - Epoch: 4/50. Train set: Average loss: 0.003532
+2023-05-24 19:37:54.741 | INFO     | trainer:fit:43 - Epoch: 4/50. Validation set: Average loss: 0.000000
+2023-05-24 19:37:55.781 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.003317
+2023-05-24 19:38:02.423 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.002553
+2023-05-24 19:38:09.101 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.005535
+2023-05-24 19:38:15.778 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.005234
+2023-05-24 19:38:22.456 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.004588
+2023-05-24 19:38:29.127 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.004795
+2023-05-24 19:38:35.797 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.004769
+2023-05-24 19:38:42.469 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.004993
+2023-05-24 19:38:49.140 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.003787
+2023-05-24 19:38:55.820 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.002494
+2023-05-24 19:39:02.493 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.003501
+2023-05-24 19:39:09.163 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.003072
+2023-05-24 19:39:15.834 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.003376
+2023-05-24 19:39:17.952 | INFO     | trainer:fit:33 - Epoch: 5/50. Train set: Average loss: 0.004001
+2023-05-24 19:39:25.917 | INFO     | trainer:fit:43 - Epoch: 5/50. Validation set: Average loss: 0.000000
+2023-05-24 19:39:26.951 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000172
+2023-05-24 19:39:33.637 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.001050
+2023-05-24 19:39:40.318 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000989
+2023-05-24 19:39:46.996 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.001703
+2023-05-24 19:39:53.679 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.003691
+2023-05-24 19:40:00.363 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.004500
+2023-05-24 19:40:07.039 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.003226
+2023-05-24 19:40:13.718 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.003479
+2023-05-24 19:40:20.402 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.003598
+2023-05-24 19:40:27.080 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.002668
+2023-05-24 19:40:33.760 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.002739
+2023-05-24 19:40:40.434 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.001832
+2023-05-24 19:40:47.111 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.001699
+2023-05-24 19:40:49.231 | INFO     | trainer:fit:33 - Epoch: 6/50. Train set: Average loss: 0.002576
+2023-05-24 19:40:57.183 | INFO     | trainer:fit:43 - Epoch: 6/50. Validation set: Average loss: 0.000000
+2023-05-24 19:40:58.216 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.003657
+2023-05-24 19:41:04.887 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.001234
+2023-05-24 19:41:11.548 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.002247
+2023-05-24 19:41:18.230 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.001161
+2023-05-24 19:41:24.899 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.001188
+2023-05-24 19:41:31.574 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.001485
+2023-05-24 19:41:38.190 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000029
+2023-05-24 19:41:44.846 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000959
+2023-05-24 19:41:51.514 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.003261
+2023-05-24 19:41:58.194 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.002450
+2023-05-24 19:42:04.877 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.002037
+2023-05-24 19:42:11.553 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.002576
+2023-05-24 19:42:18.234 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.001379
+2023-05-24 19:42:20.352 | INFO     | trainer:fit:33 - Epoch: 7/50. Train set: Average loss: 0.001708
+2023-05-24 19:42:28.288 | INFO     | trainer:fit:43 - Epoch: 7/50. Validation set: Average loss: 0.000000
+2023-05-24 19:42:29.316 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.003787
+2023-05-24 19:42:35.982 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.002090
+2023-05-24 19:42:42.658 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.001302
+2023-05-24 19:42:49.321 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.002954
+2023-05-24 19:42:55.930 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000759
+2023-05-24 19:43:02.523 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 19:43:09.107 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 19:43:15.717 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000008
+2023-05-24 19:43:22.307 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.001563
+2023-05-24 19:43:28.900 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000012
+2023-05-24 19:43:35.496 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 19:43:42.082 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 19:43:48.672 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 19:43:50.732 | INFO     | trainer:fit:33 - Epoch: 8/50. Train set: Average loss: 0.000731
+2023-05-24 19:43:58.656 | INFO     | trainer:fit:43 - Epoch: 8/50. Validation set: Average loss: 0.000000
+2023-05-24 19:43:59.682 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 19:44:06.264 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 19:44:12.845 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.001563
+2023-05-24 19:44:19.440 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 19:44:26.024 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 19:44:32.621 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000006
+2023-05-24 19:44:39.206 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 19:44:45.789 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 19:44:52.377 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000053
+2023-05-24 19:44:58.981 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 19:45:05.570 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 19:45:12.172 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000016
+2023-05-24 19:45:18.769 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 19:45:20.866 | INFO     | trainer:fit:33 - Epoch: 9/50. Train set: Average loss: 0.000132
+2023-05-24 19:45:28.757 | INFO     | trainer:fit:43 - Epoch: 9/50. Validation set: Average loss: 0.000000
+2023-05-24 19:45:29.785 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 19:45:36.368 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 19:45:42.959 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.001563
+2023-05-24 19:45:49.543 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 19:45:56.135 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 19:46:02.723 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 19:46:09.314 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 19:46:15.909 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 19:46:22.505 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 19:46:29.086 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.001563
+2023-05-24 19:46:35.677 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 19:46:42.264 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 19:46:48.860 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 19:46:50.965 | INFO     | trainer:fit:33 - Epoch: 10/50. Train set: Average loss: 0.000255
+2023-05-24 19:46:58.744 | INFO     | trainer:fit:43 - Epoch: 10/50. Validation set: Average loss: 0.000000
+2023-05-24 19:47:00.436 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 19:47:07.042 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 19:47:13.632 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.001563
+2023-05-24 19:47:20.237 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 19:47:26.836 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 19:47:33.426 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 19:47:40.020 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 19:47:46.606 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 19:47:53.199 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 19:47:59.788 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 19:48:06.377 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 19:48:12.982 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 19:48:19.577 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 19:48:21.673 | INFO     | trainer:fit:33 - Epoch: 11/50. Train set: Average loss: 0.000126
+2023-05-24 19:48:29.796 | INFO     | trainer:fit:43 - Epoch: 11/50. Validation set: Average loss: 0.000000
+2023-05-24 19:48:30.815 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 19:48:37.409 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.001599
+2023-05-24 19:48:44.005 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 19:48:50.600 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 19:48:57.185 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.001563
+2023-05-24 19:49:03.780 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 19:49:10.374 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 19:49:16.975 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.001563
+2023-05-24 19:49:23.575 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.001563
+2023-05-24 19:49:30.170 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 19:49:36.756 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 19:49:43.352 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000001
+2023-05-24 19:49:49.945 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 19:49:52.042 | INFO     | trainer:fit:33 - Epoch: 12/50. Train set: Average loss: 0.000507
+2023-05-24 19:50:00.127 | INFO     | trainer:fit:43 - Epoch: 12/50. Validation set: Average loss: 0.000000
+2023-05-24 19:50:01.148 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 19:50:07.732 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 19:50:14.315 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 19:50:20.901 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 19:50:27.497 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000274
+2023-05-24 19:50:34.085 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 19:50:40.673 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 19:50:47.267 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 19:50:53.851 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 19:51:00.443 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 19:51:07.032 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 19:51:13.630 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 19:51:20.218 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 19:51:22.319 | INFO     | trainer:fit:33 - Epoch: 13/50. Train set: Average loss: 0.000022
+2023-05-24 19:51:30.450 | INFO     | trainer:fit:43 - Epoch: 13/50. Validation set: Average loss: 0.000000
+2023-05-24 19:51:31.481 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 19:51:38.073 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 19:51:44.690 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 19:51:51.294 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 19:51:57.885 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 19:52:04.486 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 19:52:11.098 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 19:52:17.682 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 19:52:24.274 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.001563
+2023-05-24 19:52:30.857 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 19:52:37.456 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 19:52:44.052 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 19:52:50.662 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 19:52:52.747 | INFO     | trainer:fit:33 - Epoch: 14/50. Train set: Average loss: 0.000126
+2023-05-24 19:53:00.510 | INFO     | trainer:fit:43 - Epoch: 14/50. Validation set: Average loss: 0.000000
+2023-05-24 19:53:01.522 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 19:53:08.107 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 19:53:14.700 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 19:53:21.293 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 19:53:27.888 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.001563
+2023-05-24 19:53:34.485 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 19:53:41.083 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 19:53:47.713 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 19:53:54.332 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 19:54:00.932 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 19:54:07.567 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 19:54:14.186 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 19:54:20.807 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 19:54:22.908 | INFO     | trainer:fit:33 - Epoch: 15/50. Train set: Average loss: 0.000126
+2023-05-24 19:54:30.743 | INFO     | trainer:fit:43 - Epoch: 15/50. Validation set: Average loss: 0.000000
+2023-05-24 19:54:31.780 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 19:54:38.364 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 19:54:44.953 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.001563
+2023-05-24 19:54:51.537 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 19:54:58.135 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 19:55:04.726 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 19:55:11.308 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 19:55:17.898 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.001563
+2023-05-24 19:55:24.483 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 19:55:31.066 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 19:55:37.658 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 19:55:44.260 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 19:55:50.852 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 19:55:52.947 | INFO     | trainer:fit:33 - Epoch: 16/50. Train set: Average loss: 0.000252
+2023-05-24 19:56:00.696 | INFO     | trainer:fit:43 - Epoch: 16/50. Validation set: Average loss: 0.000000
+2023-05-24 19:56:01.699 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 19:56:08.289 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 19:56:14.889 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 19:56:21.483 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 19:56:28.070 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 19:56:34.661 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 19:56:41.259 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 19:56:47.850 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 19:56:54.436 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 19:57:01.039 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 19:57:07.631 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 19:57:14.229 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 19:57:20.828 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.001563
+2023-05-24 19:57:22.923 | INFO     | trainer:fit:33 - Epoch: 17/50. Train set: Average loss: 0.000252
+2023-05-24 19:57:30.733 | INFO     | trainer:fit:43 - Epoch: 17/50. Validation set: Average loss: 0.000000
+2023-05-24 19:57:31.768 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 19:57:38.360 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 19:57:44.950 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 19:57:51.537 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 19:57:58.123 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 19:58:04.713 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 19:58:11.298 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 19:58:17.891 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 19:58:24.482 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 19:58:31.066 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 19:58:37.664 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 19:58:44.263 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 19:58:50.863 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 19:58:52.957 | INFO     | trainer:fit:33 - Epoch: 18/50. Train set: Average loss: 0.000000
+2023-05-24 19:59:00.703 | INFO     | trainer:fit:43 - Epoch: 18/50. Validation set: Average loss: 0.000000
+2023-05-24 19:59:01.736 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 19:59:08.321 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 19:59:14.915 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 19:59:21.506 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 19:59:28.091 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 19:59:34.680 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 19:59:41.265 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 19:59:47.856 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 19:59:54.440 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:00:01.033 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:00:07.617 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:00:14.210 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:00:20.793 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:00:22.890 | INFO     | trainer:fit:33 - Epoch: 19/50. Train set: Average loss: 0.000000
+2023-05-24 20:00:30.979 | INFO     | trainer:fit:43 - Epoch: 19/50. Validation set: Average loss: 0.000000
+2023-05-24 20:00:32.011 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:00:38.615 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:00:45.201 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:00:51.792 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:00:58.392 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:01:04.994 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:01:11.595 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:01:18.194 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:01:24.797 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:01:31.390 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:01:37.999 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:01:44.631 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:01:51.246 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:01:53.345 | INFO     | trainer:fit:33 - Epoch: 20/50. Train set: Average loss: 0.000000
+2023-05-24 20:02:01.150 | INFO     | trainer:fit:43 - Epoch: 20/50. Validation set: Average loss: 0.000000
+2023-05-24 20:02:02.557 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:02:09.145 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:02:15.737 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:02:22.333 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:02:28.932 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:02:35.531 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:02:42.132 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:02:48.726 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:02:55.324 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:03:01.921 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:03:08.517 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:03:15.113 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:03:21.706 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:03:23.796 | INFO     | trainer:fit:33 - Epoch: 21/50. Train set: Average loss: 0.000000
+2023-05-24 20:03:31.793 | INFO     | trainer:fit:43 - Epoch: 21/50. Validation set: Average loss: 0.000000
+2023-05-24 20:03:32.818 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:03:39.415 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:03:46.030 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:03:52.632 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:03:59.247 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:04:05.853 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:04:12.448 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:04:19.045 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:04:25.644 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:04:32.256 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:04:38.871 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:04:45.479 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:04:52.070 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:04:54.168 | INFO     | trainer:fit:33 - Epoch: 22/50. Train set: Average loss: 0.000000
+2023-05-24 20:05:01.930 | INFO     | trainer:fit:43 - Epoch: 22/50. Validation set: Average loss: 0.000000
+2023-05-24 20:05:02.969 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:05:09.582 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:05:16.186 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:05:22.778 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:05:29.375 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:05:35.971 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:05:42.578 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:05:49.171 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:05:55.770 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:06:02.367 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:06:08.964 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:06:15.568 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:06:22.164 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:06:24.258 | INFO     | trainer:fit:33 - Epoch: 23/50. Train set: Average loss: 0.000000
+2023-05-24 20:06:32.373 | INFO     | trainer:fit:43 - Epoch: 23/50. Validation set: Average loss: 0.000000
+2023-05-24 20:06:33.407 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:06:39.993 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:06:46.589 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:06:53.190 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:06:59.783 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:07:06.369 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:07:12.964 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:07:19.558 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:07:26.144 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:07:32.737 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:07:39.334 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:07:45.933 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:07:52.529 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:07:54.629 | INFO     | trainer:fit:33 - Epoch: 24/50. Train set: Average loss: 0.000000
+2023-05-24 20:08:02.764 | INFO     | trainer:fit:43 - Epoch: 24/50. Validation set: Average loss: 0.000000
+2023-05-24 20:08:03.806 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:08:10.410 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:08:17.023 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:08:23.642 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:08:30.258 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:08:36.880 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:08:43.484 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:08:50.099 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:08:56.725 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:09:03.350 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:09:09.957 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:09:16.587 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:09:23.188 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:09:25.250 | INFO     | trainer:fit:33 - Epoch: 25/50. Train set: Average loss: 0.000000
+2023-05-24 20:09:33.303 | INFO     | trainer:fit:43 - Epoch: 25/50. Validation set: Average loss: 0.000000
+2023-05-24 20:09:34.341 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:09:40.929 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:09:47.517 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:09:54.108 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:10:00.693 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:10:07.282 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:10:13.867 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:10:20.453 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:10:27.043 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:10:33.627 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:10:40.217 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:10:46.803 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:10:53.396 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:10:55.494 | INFO     | trainer:fit:33 - Epoch: 26/50. Train set: Average loss: 0.000000
+2023-05-24 20:11:03.277 | INFO     | trainer:fit:43 - Epoch: 26/50. Validation set: Average loss: 0.000000
+2023-05-24 20:11:04.326 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:11:10.912 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:11:17.507 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:11:24.089 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:11:30.685 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:11:37.275 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:11:43.863 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:11:50.454 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:11:57.040 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:12:03.631 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:12:10.216 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:12:16.811 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:12:23.399 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:12:25.480 | INFO     | trainer:fit:33 - Epoch: 27/50. Train set: Average loss: 0.000000
+2023-05-24 20:12:33.208 | INFO     | trainer:fit:43 - Epoch: 27/50. Validation set: Average loss: 0.000000
+2023-05-24 20:12:34.231 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:12:40.829 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:12:47.425 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:12:54.015 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:13:00.600 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:13:07.188 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:13:13.778 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:13:20.372 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:13:26.958 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:13:33.552 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:13:40.148 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:13:46.741 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.001563
+2023-05-24 20:13:53.326 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:13:55.422 | INFO     | trainer:fit:33 - Epoch: 28/50. Train set: Average loss: 0.000126
+2023-05-24 20:14:03.130 | INFO     | trainer:fit:43 - Epoch: 28/50. Validation set: Average loss: 0.000000
+2023-05-24 20:14:04.150 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:14:10.740 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:14:17.333 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:14:23.918 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:14:30.514 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:14:37.114 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:14:43.710 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:14:50.314 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:14:56.907 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:15:03.504 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:15:10.103 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:15:16.701 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:15:23.298 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:15:25.396 | INFO     | trainer:fit:33 - Epoch: 29/50. Train set: Average loss: 0.000000
+2023-05-24 20:15:33.116 | INFO     | trainer:fit:43 - Epoch: 29/50. Validation set: Average loss: 0.000000
+2023-05-24 20:15:34.138 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:15:40.750 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:15:47.356 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:15:53.955 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:16:00.586 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:16:07.215 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:16:13.831 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:16:20.467 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:16:27.103 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:16:33.743 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:16:40.374 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:16:47.000 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:16:53.620 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:16:55.717 | INFO     | trainer:fit:33 - Epoch: 30/50. Train set: Average loss: 0.000000
+2023-05-24 20:17:03.712 | INFO     | trainer:fit:43 - Epoch: 30/50. Validation set: Average loss: 0.000000
+2023-05-24 20:17:04.991 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:17:11.595 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:17:18.210 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:17:24.812 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:17:31.428 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:17:38.037 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:17:44.651 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:17:51.268 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:17:57.895 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:18:04.515 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:18:11.152 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:18:17.774 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:18:24.389 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:18:26.490 | INFO     | trainer:fit:33 - Epoch: 31/50. Train set: Average loss: 0.000000
+2023-05-24 20:18:34.495 | INFO     | trainer:fit:43 - Epoch: 31/50. Validation set: Average loss: 0.000000
+2023-05-24 20:18:35.516 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:18:42.127 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:18:48.759 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:18:55.375 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:19:01.984 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:19:08.601 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:19:15.214 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:19:21.834 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:19:28.451 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:19:35.056 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:19:41.670 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:19:48.285 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:19:54.899 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:19:57.001 | INFO     | trainer:fit:33 - Epoch: 32/50. Train set: Average loss: 0.000000
+2023-05-24 20:20:04.731 | INFO     | trainer:fit:43 - Epoch: 32/50. Validation set: Average loss: 0.000000
+2023-05-24 20:20:05.748 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:20:12.377 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:20:18.983 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:20:25.595 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:20:32.195 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:20:38.812 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:20:45.432 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:20:52.048 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:20:58.666 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:21:05.288 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:21:11.922 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:21:18.553 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:21:25.160 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:21:27.265 | INFO     | trainer:fit:33 - Epoch: 33/50. Train set: Average loss: 0.000000
+2023-05-24 20:21:34.971 | INFO     | trainer:fit:43 - Epoch: 33/50. Validation set: Average loss: 0.000000
+2023-05-24 20:21:35.975 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:21:42.607 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:21:49.231 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:21:55.848 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:22:02.467 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:22:09.079 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:22:15.689 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:22:22.314 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:22:28.920 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:22:35.543 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:22:42.157 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:22:48.778 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:22:55.391 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:22:57.490 | INFO     | trainer:fit:33 - Epoch: 34/50. Train set: Average loss: 0.000000
+2023-05-24 20:23:05.186 | INFO     | trainer:fit:43 - Epoch: 34/50. Validation set: Average loss: 0.000000
+2023-05-24 20:23:06.212 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:23:12.864 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:23:19.513 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:23:26.134 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:23:32.775 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:23:39.405 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:23:46.032 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:23:52.653 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:23:59.269 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:24:05.889 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:24:12.488 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:24:19.092 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:24:25.719 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:24:27.819 | INFO     | trainer:fit:33 - Epoch: 35/50. Train set: Average loss: 0.000000
+2023-05-24 20:24:35.640 | INFO     | trainer:fit:43 - Epoch: 35/50. Validation set: Average loss: 0.000000
+2023-05-24 20:24:36.673 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:24:43.313 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:24:49.931 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:24:56.535 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:25:03.171 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:25:09.768 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:25:16.379 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:25:22.986 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:25:29.602 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:25:36.241 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:25:42.855 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:25:49.462 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:25:56.076 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:25:58.174 | INFO     | trainer:fit:33 - Epoch: 36/50. Train set: Average loss: 0.000000
+2023-05-24 20:26:06.076 | INFO     | trainer:fit:43 - Epoch: 36/50. Validation set: Average loss: 0.000000
+2023-05-24 20:26:07.104 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:26:13.713 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:26:20.327 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:26:26.931 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:26:33.543 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:26:40.144 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:26:46.768 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:26:53.379 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:26:59.994 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:27:06.599 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:27:13.216 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:27:19.831 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:27:26.463 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:27:28.566 | INFO     | trainer:fit:33 - Epoch: 37/50. Train set: Average loss: 0.000000
+2023-05-24 20:27:36.307 | INFO     | trainer:fit:43 - Epoch: 37/50. Validation set: Average loss: 0.000000
+2023-05-24 20:27:37.310 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:27:43.924 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:27:50.546 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:27:57.157 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:28:03.775 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:28:10.406 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:28:17.029 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:28:23.649 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:28:30.251 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:28:36.863 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:28:43.477 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:28:50.100 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:28:56.718 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:28:58.817 | INFO     | trainer:fit:33 - Epoch: 38/50. Train set: Average loss: 0.000000
+2023-05-24 20:29:06.548 | INFO     | trainer:fit:43 - Epoch: 38/50. Validation set: Average loss: 0.000000
+2023-05-24 20:29:07.585 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:29:14.206 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:29:20.815 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:29:27.432 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.001563
+2023-05-24 20:29:34.047 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:29:40.678 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:29:47.315 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:29:53.924 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:30:00.553 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:30:07.193 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:30:13.824 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:30:20.452 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:30:27.065 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:30:29.167 | INFO     | trainer:fit:33 - Epoch: 39/50. Train set: Average loss: 0.000126
+2023-05-24 20:30:36.876 | INFO     | trainer:fit:43 - Epoch: 39/50. Validation set: Average loss: 0.000000
+2023-05-24 20:30:37.897 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:30:44.536 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:30:51.154 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:30:57.781 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:31:04.391 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:31:10.999 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:31:17.612 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:31:24.233 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:31:30.856 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:31:37.486 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:31:44.110 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.001563
+2023-05-24 20:31:50.737 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:31:57.365 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:31:59.473 | INFO     | trainer:fit:33 - Epoch: 40/50. Train set: Average loss: 0.000126
+2023-05-24 20:32:07.564 | INFO     | trainer:fit:43 - Epoch: 40/50. Validation set: Average loss: 0.000000
+2023-05-24 20:32:08.836 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:32:15.442 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:32:22.057 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:32:28.675 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:32:35.301 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:32:41.943 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:32:48.559 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:32:55.169 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:33:01.786 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:33:08.403 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:33:15.019 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:33:21.637 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:33:28.255 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:33:30.356 | INFO     | trainer:fit:33 - Epoch: 41/50. Train set: Average loss: 0.000000
+2023-05-24 20:33:38.640 | INFO     | trainer:fit:43 - Epoch: 41/50. Validation set: Average loss: 0.000000
+2023-05-24 20:33:39.673 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:33:46.287 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:33:52.919 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:33:59.557 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:34:06.181 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:34:12.788 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:34:19.419 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:34:26.037 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:34:32.654 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:34:39.270 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:34:45.892 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.001563
+2023-05-24 20:34:52.517 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:34:59.142 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:35:01.245 | INFO     | trainer:fit:33 - Epoch: 42/50. Train set: Average loss: 0.000126
+2023-05-24 20:35:09.229 | INFO     | trainer:fit:43 - Epoch: 42/50. Validation set: Average loss: 0.000000
+2023-05-24 20:35:10.335 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:35:16.944 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:35:23.559 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:35:30.174 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:35:36.849 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:35:43.465 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:35:50.090 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:35:56.707 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:36:03.324 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:36:09.940 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.001563
+2023-05-24 20:36:16.555 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:36:23.171 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:36:29.789 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:36:31.896 | INFO     | trainer:fit:33 - Epoch: 43/50. Train set: Average loss: 0.000126
+2023-05-24 20:36:39.822 | INFO     | trainer:fit:43 - Epoch: 43/50. Validation set: Average loss: 0.000000
+2023-05-24 20:36:40.839 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:36:47.470 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:36:54.107 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:37:00.718 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.001563
+2023-05-24 20:37:07.329 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:37:13.945 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:37:20.563 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:37:27.181 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:37:33.797 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:37:40.410 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:37:47.023 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:37:53.634 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:38:00.249 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:38:02.351 | INFO     | trainer:fit:33 - Epoch: 44/50. Train set: Average loss: 0.000126
+2023-05-24 20:38:10.291 | INFO     | trainer:fit:43 - Epoch: 44/50. Validation set: Average loss: 0.000000
+2023-05-24 20:38:11.318 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:38:17.954 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:38:24.567 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:38:31.180 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:38:37.806 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:38:44.442 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:38:51.075 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:38:57.692 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:39:04.318 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:39:10.956 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:39:17.594 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:39:24.241 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:39:30.872 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:39:32.978 | INFO     | trainer:fit:33 - Epoch: 45/50. Train set: Average loss: 0.000000
+2023-05-24 20:39:40.729 | INFO     | trainer:fit:43 - Epoch: 45/50. Validation set: Average loss: 0.000000
+2023-05-24 20:39:41.760 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:39:48.369 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:39:54.975 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:40:01.588 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:40:08.197 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:40:14.829 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:40:21.445 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:40:28.063 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:40:34.678 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:40:41.300 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:40:47.915 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:40:54.530 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:41:01.140 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:41:03.243 | INFO     | trainer:fit:33 - Epoch: 46/50. Train set: Average loss: 0.000000
+2023-05-24 20:41:10.926 | INFO     | trainer:fit:43 - Epoch: 46/50. Validation set: Average loss: 0.000000
+2023-05-24 20:41:11.944 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:41:18.571 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:41:25.194 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:41:31.806 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:41:38.419 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:41:45.031 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:41:51.645 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:41:58.259 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:42:04.873 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:42:11.482 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:42:18.108 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:42:24.729 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:42:31.345 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:42:33.459 | INFO     | trainer:fit:33 - Epoch: 47/50. Train set: Average loss: 0.000000
+2023-05-24 20:42:41.498 | INFO     | trainer:fit:43 - Epoch: 47/50. Validation set: Average loss: 0.000000
+2023-05-24 20:42:42.534 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:42:49.196 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:42:55.842 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:43:02.513 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:43:09.157 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:43:15.825 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:43:22.481 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:43:29.132 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:43:35.783 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:43:42.453 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:43:49.103 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.001563
+2023-05-24 20:43:55.751 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:44:02.385 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:44:04.486 | INFO     | trainer:fit:33 - Epoch: 48/50. Train set: Average loss: 0.000126
+2023-05-24 20:44:12.319 | INFO     | trainer:fit:43 - Epoch: 48/50. Validation set: Average loss: 0.000000
+2023-05-24 20:44:13.352 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:44:19.964 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:44:26.579 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:44:33.194 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:44:39.808 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:44:46.428 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:44:53.057 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:44:59.674 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:45:06.304 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:45:12.921 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:45:19.535 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:45:26.149 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:45:32.762 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:45:34.864 | INFO     | trainer:fit:33 - Epoch: 49/50. Train set: Average loss: 0.000000
+2023-05-24 20:45:43.007 | INFO     | trainer:fit:43 - Epoch: 49/50. Validation set: Average loss: 0.000000
+2023-05-24 20:45:44.034 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-24 20:45:50.679 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000
+2023-05-24 20:45:57.334 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000
+2023-05-24 20:46:03.997 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000
+2023-05-24 20:46:10.649 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000
+2023-05-24 20:46:17.299 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000
+2023-05-24 20:46:23.933 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000
+2023-05-24 20:46:30.607 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000
+2023-05-24 20:46:37.265 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000
+2023-05-24 20:46:43.913 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000
+2023-05-24 20:46:50.569 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000
+2023-05-24 20:46:57.217 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000
+2023-05-24 20:47:03.866 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000
+2023-05-24 20:47:05.966 | INFO     | trainer:fit:33 - Epoch: 50/50. Train set: Average loss: 0.000000
+2023-05-24 20:47:13.680 | INFO     | trainer:fit:43 - Epoch: 50/50. Validation set: Average loss: 0.000000

@@ -1,0 +1,393 @@
+2023-05-25 19:52:02.986 | INFO     | __main__:run_online_triplet:52 - Namespace(img_feature_extract=0, embedding_size=40, dataset='CVPR2017', eeg_path='/media/exx/HDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth', time_low=20, time_high=460, img_path='/media/exx/HDD1/LanxHuyen/CVPR2017/imagenet_augmented', splits_path='/media/exx/HDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth', log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/ContrastiveLearning', info='online_triplet_efficientnet_b0_embed_500', img_encoder='efficientnet_b0', eeg_encoder='EEGChannelNet', batch_size=128, max_epoch=50, log_interval=10, arch='train', save_ckpt='checkpoints/', num_classes=40, num_workers=2, gpu=0, lr=0.00025, wd=0.0001, optim='Adam', gamma=200, lr_step=10, pretrain=False, momen=0.9, nesterov=False, device=device(type='cuda', index=0))
+2023-05-25 20:00:42.338 | INFO     | __main__:run_online_triplet:52 - Namespace(img_feature_extract=0, embedding_size=500, dataset='CVPR2017', eeg_path='/media/exx/HDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth', time_low=20, time_high=460, img_path='/media/exx/HDD1/LanxHuyen/CVPR2017/imagenet_augmented', splits_path='/media/exx/HDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth', log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/ContrastiveLearning', info='online_triplet_efficientnet_b0_embed_500', img_encoder='efficientnet_b0', eeg_encoder='EEGChannelNet', batch_size=128, max_epoch=50, log_interval=10, arch='train', save_ckpt='checkpoints/', num_classes=40, num_workers=2, gpu=0, lr=0.00025, wd=0.0001, optim='Adam', gamma=200, lr_step=10, pretrain=False, momen=0.9, nesterov=False, device=device(type='cuda', index=0))
+2023-05-25 20:01:33.972 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.748238	Average nonzero triplets: 62.0
+2023-05-25 20:01:41.012 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.456691	Average nonzero triplets: 62.18181818181818
+2023-05-25 20:01:48.070 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.313917	Average nonzero triplets: 62.61904761904762
+2023-05-25 20:01:55.132 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.229361	Average nonzero triplets: 62.645161290322584
+2023-05-25 20:02:02.205 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.161773	Average nonzero triplets: 62.65853658536585
+2023-05-25 20:02:09.295 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.136959	Average nonzero triplets: 62.627450980392155
+2023-05-25 20:02:16.392 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.101763	Average nonzero triplets: 62.704918032786885
+2023-05-25 20:02:23.493 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.077146	Average nonzero triplets: 62.66197183098591
+2023-05-25 20:02:30.601 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.061107	Average nonzero triplets: 62.72839506172839
+2023-05-25 20:02:37.715 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.040496	Average nonzero triplets: 62.76923076923077
+2023-05-25 20:02:44.832 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.035396	Average nonzero triplets: 62.613861386138616
+2023-05-25 20:02:51.945 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.023472	Average nonzero triplets: 61.792792792792795
+2023-05-25 20:02:59.059 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.023363	Average nonzero triplets: 60.50413223140496
+2023-05-25 20:03:01.291 | INFO     | trainer:fit:33 - Epoch: 1/50. Train set: Average loss: 0.140374	Average nonzero triplets: 60.00806451612903
+2023-05-25 20:03:08.102 | INFO     | trainer:fit:43 - Epoch: 1/50. Validation set: Average loss: 0.008040	Average nonzero triplets: 2.4516129032258065
+2023-05-25 20:03:09.046 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.017900	Average nonzero triplets: 36.0
+2023-05-25 20:03:16.166 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.025382	Average nonzero triplets: 36.18181818181818
+2023-05-25 20:03:23.289 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.021634	Average nonzero triplets: 34.095238095238095
+2023-05-25 20:03:30.412 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.020140	Average nonzero triplets: 31.967741935483872
+2023-05-25 20:03:37.539 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.024673	Average nonzero triplets: 29.121951219512194
+2023-05-25 20:03:44.662 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.020337	Average nonzero triplets: 26.470588235294116
+2023-05-25 20:03:51.785 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.018963	Average nonzero triplets: 24.540983606557376
+2023-05-25 20:03:58.913 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.010656	Average nonzero triplets: 22.338028169014084
+2023-05-25 20:04:06.042 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.009353	Average nonzero triplets: 20.160493827160494
+2023-05-25 20:04:13.176 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.015778	Average nonzero triplets: 18.560439560439562
+2023-05-25 20:04:20.302 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.019373	Average nonzero triplets: 17.445544554455445
+2023-05-25 20:04:27.435 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.022023	Average nonzero triplets: 16.43243243243243
+2023-05-25 20:04:34.565 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.020335	Average nonzero triplets: 15.446280991735538
+2023-05-25 20:04:36.827 | INFO     | trainer:fit:33 - Epoch: 2/50. Train set: Average loss: 0.019089	Average nonzero triplets: 15.153225806451612
+2023-05-25 20:04:43.652 | INFO     | trainer:fit:43 - Epoch: 2/50. Validation set: Average loss: 0.021033	Average nonzero triplets: 1.0
+2023-05-25 20:04:44.598 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.017492	Average nonzero triplets: 2.0
+2023-05-25 20:04:51.724 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.011242	Average nonzero triplets: 2.1818181818181817
+2023-05-25 20:04:58.819 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.006431	Average nonzero triplets: 1.7142857142857142
+2023-05-25 20:05:05.913 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.065250	Average nonzero triplets: 1.8064516129032258
+2023-05-25 20:05:13.020 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.053955	Average nonzero triplets: 1.975609756097561
+2023-05-25 20:05:20.123 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.014479	Average nonzero triplets: 1.9607843137254901
+2023-05-25 20:05:27.200 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.017577	Average nonzero triplets: 1.8688524590163935
+2023-05-25 20:05:34.275 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.002152	Average nonzero triplets: 1.7605633802816902
+2023-05-25 20:05:41.315 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.002547	Average nonzero triplets: 1.6790123456790123
+2023-05-25 20:05:48.380 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.003666	Average nonzero triplets: 1.6153846153846154
+2023-05-25 20:05:55.410 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.004306	Average nonzero triplets: 1.5643564356435644
+2023-05-25 20:06:02.480 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.013980	Average nonzero triplets: 1.5675675675675675
+2023-05-25 20:06:09.583 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.018392	Average nonzero triplets: 1.578512396694215
+2023-05-25 20:06:11.810 | INFO     | trainer:fit:33 - Epoch: 3/50. Train set: Average loss: 0.019484	Average nonzero triplets: 1.5806451612903225
+2023-05-25 20:06:18.617 | INFO     | trainer:fit:43 - Epoch: 3/50. Validation set: Average loss: 0.000087	Average nonzero triplets: 1.0
+2023-05-25 20:06:19.541 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:06:26.609 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.025604	Average nonzero triplets: 1.1818181818181819
+2023-05-25 20:06:33.667 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.017927	Average nonzero triplets: 1.1904761904761905
+2023-05-25 20:06:40.709 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.002569	Average nonzero triplets: 1.1290322580645162
+2023-05-25 20:06:47.765 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.015687	Average nonzero triplets: 1.0975609756097562
+2023-05-25 20:06:54.798 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.001320	Average nonzero triplets: 1.1372549019607843
+2023-05-25 20:07:01.832 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.003883	Average nonzero triplets: 1.1147540983606556
+2023-05-25 20:07:08.849 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.002543	Average nonzero triplets: 1.0985915492957747
+2023-05-25 20:07:15.849 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000	Average nonzero triplets: 1.0864197530864197
+2023-05-25 20:07:22.876 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000360	Average nonzero triplets: 1.0769230769230769
+2023-05-25 20:07:29.901 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.001446	Average nonzero triplets: 1.0693069306930694
+2023-05-25 20:07:36.902 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000	Average nonzero triplets: 1.063063063063063
+2023-05-25 20:07:43.946 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.007426	Average nonzero triplets: 1.0661157024793388
+2023-05-25 20:07:46.210 | INFO     | trainer:fit:33 - Epoch: 4/50. Train set: Average loss: 0.006827	Average nonzero triplets: 1.1209677419354838
+2023-05-25 20:07:53.059 | INFO     | trainer:fit:43 - Epoch: 4/50. Validation set: Average loss: 0.002589	Average nonzero triplets: 1.0
+2023-05-25 20:07:54.011 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.012833	Average nonzero triplets: 3.0
+2023-05-25 20:08:01.123 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.043822	Average nonzero triplets: 1.5454545454545454
+2023-05-25 20:08:08.193 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.008433	Average nonzero triplets: 1.5238095238095237
+2023-05-25 20:08:15.297 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.002874	Average nonzero triplets: 1.3548387096774193
+2023-05-25 20:08:22.326 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.010638	Average nonzero triplets: 1.2682926829268293
+2023-05-25 20:08:29.402 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.004317	Average nonzero triplets: 1.2156862745098038
+2023-05-25 20:08:36.485 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.001698	Average nonzero triplets: 1.180327868852459
+2023-05-25 20:08:43.516 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000	Average nonzero triplets: 1.1549295774647887
+2023-05-25 20:08:50.559 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000963	Average nonzero triplets: 1.1358024691358024
+2023-05-25 20:08:57.596 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.003109	Average nonzero triplets: 1.120879120879121
+2023-05-25 20:09:04.627 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000	Average nonzero triplets: 1.108910891089109
+2023-05-25 20:09:11.673 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000066	Average nonzero triplets: 1.0990990990990992
+2023-05-25 20:09:18.698 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000	Average nonzero triplets: 1.0909090909090908
+2023-05-25 20:09:20.932 | INFO     | trainer:fit:33 - Epoch: 5/50. Train set: Average loss: 0.006226	Average nonzero triplets: 1.0887096774193548
+2023-05-25 20:09:27.774 | INFO     | trainer:fit:43 - Epoch: 5/50. Validation set: Average loss: 0.006625	Average nonzero triplets: 1.0
+2023-05-25 20:09:28.703 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:09:35.726 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.001568	Average nonzero triplets: 1.0
+2023-05-25 20:09:42.765 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.002656	Average nonzero triplets: 1.0
+2023-05-25 20:09:49.779 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.009796	Average nonzero triplets: 1.0
+2023-05-25 20:09:56.799 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.002022	Average nonzero triplets: 1.0
+2023-05-25 20:10:03.818 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000238	Average nonzero triplets: 1.0
+2023-05-25 20:10:10.857 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.020822	Average nonzero triplets: 1.0
+2023-05-25 20:10:17.921 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.010967	Average nonzero triplets: 1.0845070422535212
+2023-05-25 20:10:24.989 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.007098	Average nonzero triplets: 1.0987654320987654
+2023-05-25 20:10:32.031 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.006408	Average nonzero triplets: 1.0879120879120878
+2023-05-25 20:10:39.068 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.002456	Average nonzero triplets: 1.0891089108910892
+2023-05-25 20:10:46.102 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000251	Average nonzero triplets: 1.0810810810810811
+2023-05-25 20:10:53.105 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000	Average nonzero triplets: 1.0743801652892562
+2023-05-25 20:10:55.327 | INFO     | trainer:fit:33 - Epoch: 6/50. Train set: Average loss: 0.005184	Average nonzero triplets: 1.0725806451612903
+2023-05-25 20:11:02.195 | INFO     | trainer:fit:43 - Epoch: 6/50. Validation set: Average loss: 0.001917	Average nonzero triplets: 1.0
+2023-05-25 20:11:03.131 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:11:10.158 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.002579	Average nonzero triplets: 1.0
+2023-05-25 20:11:17.188 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.001863	Average nonzero triplets: 1.0
+2023-05-25 20:11:24.195 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:11:31.243 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.008172	Average nonzero triplets: 1.0
+2023-05-25 20:11:38.251 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:11:45.266 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000515	Average nonzero triplets: 1.0
+2023-05-25 20:11:52.267 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:11:59.290 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.001313	Average nonzero triplets: 1.0
+2023-05-25 20:12:06.303 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:12:13.335 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:12:20.362 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:12:27.398 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.003126	Average nonzero triplets: 1.0
+2023-05-25 20:12:29.640 | INFO     | trainer:fit:33 - Epoch: 7/50. Train set: Average loss: 0.001945	Average nonzero triplets: 1.0
+2023-05-25 20:12:36.500 | INFO     | trainer:fit:43 - Epoch: 7/50. Validation set: Average loss: 0.001825	Average nonzero triplets: 1.0
+2023-05-25 20:12:37.440 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:12:44.533 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.026777	Average nonzero triplets: 1.5454545454545454
+2023-05-25 20:12:51.554 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000	Average nonzero triplets: 1.2857142857142858
+2023-05-25 20:12:58.587 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.037420	Average nonzero triplets: 1.1935483870967742
+2023-05-25 20:13:05.626 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000086	Average nonzero triplets: 1.146341463414634
+2023-05-25 20:13:12.649 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000	Average nonzero triplets: 1.1176470588235294
+2023-05-25 20:13:19.678 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.004305	Average nonzero triplets: 1.098360655737705
+2023-05-25 20:13:26.689 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000	Average nonzero triplets: 1.0845070422535212
+2023-05-25 20:13:33.719 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.008596	Average nonzero triplets: 1.0740740740740742
+2023-05-25 20:13:40.737 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000	Average nonzero triplets: 1.065934065934066
+2023-05-25 20:13:47.764 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000843	Average nonzero triplets: 1.0594059405940595
+2023-05-25 20:13:54.777 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000	Average nonzero triplets: 1.054054054054054
+2023-05-25 20:14:01.793 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000	Average nonzero triplets: 1.0495867768595042
+2023-05-25 20:14:04.043 | INFO     | trainer:fit:33 - Epoch: 8/50. Train set: Average loss: 0.006315	Average nonzero triplets: 1.0483870967741935
+2023-05-25 20:14:10.899 | INFO     | trainer:fit:43 - Epoch: 8/50. Validation set: Average loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:14:11.839 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:14:18.841 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000167	Average nonzero triplets: 1.0
+2023-05-25 20:14:25.850 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.005014	Average nonzero triplets: 1.0
+2023-05-25 20:14:32.849 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:14:39.858 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.033132	Average nonzero triplets: 1.0
+2023-05-25 20:14:46.865 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.007148	Average nonzero triplets: 1.0
+2023-05-25 20:14:53.854 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:15:00.850 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:15:07.848 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:15:14.845 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:15:21.855 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000721	Average nonzero triplets: 1.0
+2023-05-25 20:15:28.857 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:15:35.866 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000101	Average nonzero triplets: 1.0
+2023-05-25 20:15:38.085 | INFO     | trainer:fit:33 - Epoch: 9/50. Train set: Average loss: 0.003732	Average nonzero triplets: 1.0
+2023-05-25 20:15:44.918 | INFO     | trainer:fit:43 - Epoch: 9/50. Validation set: Average loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:15:45.847 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:15:52.835 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:15:59.831 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:16:06.830 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:16:13.840 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000360	Average nonzero triplets: 1.0
+2023-05-25 20:16:20.859 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:16:27.875 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:16:34.881 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:16:41.879 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:16:48.878 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:16:55.875 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:17:02.873 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:17:09.870 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:17:12.085 | INFO     | trainer:fit:33 - Epoch: 10/50. Train set: Average loss: 0.000029	Average nonzero triplets: 1.0
+2023-05-25 20:17:18.925 | INFO     | trainer:fit:43 - Epoch: 10/50. Validation set: Average loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:17:20.331 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:17:27.366 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.009849	Average nonzero triplets: 1.0
+2023-05-25 20:17:34.382 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.001693	Average nonzero triplets: 1.0
+2023-05-25 20:17:41.383 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:17:48.400 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000255	Average nonzero triplets: 1.024390243902439
+2023-05-25 20:17:55.420 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.001396	Average nonzero triplets: 1.0196078431372548
+2023-05-25 20:18:02.433 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.007223	Average nonzero triplets: 1.0163934426229508
+2023-05-25 20:18:09.437 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000	Average nonzero triplets: 1.0140845070422535
+2023-05-25 20:18:16.451 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.007064	Average nonzero triplets: 1.0123456790123457
+2023-05-25 20:18:23.450 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000	Average nonzero triplets: 1.010989010989011
+2023-05-25 20:18:30.454 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000	Average nonzero triplets: 1.00990099009901
+2023-05-25 20:18:37.494 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.002079	Average nonzero triplets: 1.009009009009009
+2023-05-25 20:18:44.523 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000	Average nonzero triplets: 1.0082644628099173
+2023-05-25 20:18:46.756 | INFO     | trainer:fit:33 - Epoch: 11/50. Train set: Average loss: 0.002384	Average nonzero triplets: 1.0080645161290323
+2023-05-25 20:18:53.616 | INFO     | trainer:fit:43 - Epoch: 11/50. Validation set: Average loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:18:54.562 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:19:01.575 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.008900	Average nonzero triplets: 1.0
+2023-05-25 20:19:08.594 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:19:15.695 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000024	Average nonzero triplets: 1.0
+2023-05-25 20:19:22.718 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.014379	Average nonzero triplets: 1.0
+2023-05-25 20:19:29.735 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:19:36.753 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:19:43.771 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:19:50.790 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:19:57.807 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:20:04.822 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:20:11.857 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000119	Average nonzero triplets: 1.0
+2023-05-25 20:20:18.877 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:20:21.105 | INFO     | trainer:fit:33 - Epoch: 12/50. Train set: Average loss: 0.001889	Average nonzero triplets: 1.0
+2023-05-25 20:20:27.968 | INFO     | trainer:fit:43 - Epoch: 12/50. Validation set: Average loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:20:28.902 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:20:35.915 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000151	Average nonzero triplets: 1.0
+2023-05-25 20:20:42.949 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000485	Average nonzero triplets: 1.0
+2023-05-25 20:20:49.965 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:20:56.984 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:21:04.015 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000089	Average nonzero triplets: 1.0
+2023-05-25 20:21:11.037 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:21:18.059 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:21:25.078 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:21:32.115 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.004177	Average nonzero triplets: 1.0
+2023-05-25 20:21:39.134 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:21:46.168 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000039	Average nonzero triplets: 1.0
+2023-05-25 20:21:53.177 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:21:55.406 | INFO     | trainer:fit:33 - Epoch: 13/50. Train set: Average loss: 0.000398	Average nonzero triplets: 1.0
+2023-05-25 20:22:02.271 | INFO     | trainer:fit:43 - Epoch: 13/50. Validation set: Average loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:22:03.182 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:22:10.190 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:22:17.205 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:22:24.217 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:22:31.237 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:22:38.260 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.061982	Average nonzero triplets: 1.0
+2023-05-25 20:22:45.274 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:22:52.293 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:22:59.312 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:23:06.350 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.001243	Average nonzero triplets: 1.0
+2023-05-25 20:23:13.406 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000160	Average nonzero triplets: 1.0
+2023-05-25 20:23:20.429 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:23:27.451 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:23:29.680 | INFO     | trainer:fit:33 - Epoch: 14/50. Train set: Average loss: 0.005112	Average nonzero triplets: 1.0
+2023-05-25 20:23:36.514 | INFO     | trainer:fit:43 - Epoch: 14/50. Validation set: Average loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:23:37.436 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:23:44.450 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:23:51.457 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:23:58.469 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:24:05.497 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.001718	Average nonzero triplets: 1.0
+2023-05-25 20:24:12.519 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:24:19.542 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000256	Average nonzero triplets: 1.0
+2023-05-25 20:24:26.559 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:24:33.591 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.010385	Average nonzero triplets: 1.0
+2023-05-25 20:24:40.613 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.002887	Average nonzero triplets: 1.0
+2023-05-25 20:24:47.630 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:24:54.635 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:25:01.683 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.007618	Average nonzero triplets: 1.0
+2023-05-25 20:25:03.914 | INFO     | trainer:fit:33 - Epoch: 15/50. Train set: Average loss: 0.001844	Average nonzero triplets: 1.0
+2023-05-25 20:25:10.761 | INFO     | trainer:fit:43 - Epoch: 15/50. Validation set: Average loss: 0.002721	Average nonzero triplets: 1.0
+2023-05-25 20:25:11.682 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:25:18.685 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:25:25.694 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:25:32.703 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:25:39.717 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:25:46.734 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:25:53.739 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:26:00.771 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000887	Average nonzero triplets: 1.0
+2023-05-25 20:26:07.795 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.010741	Average nonzero triplets: 1.0
+2023-05-25 20:26:14.806 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:26:21.814 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:26:28.836 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:26:35.854 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:26:38.084 | INFO     | trainer:fit:33 - Epoch: 16/50. Train set: Average loss: 0.000938	Average nonzero triplets: 1.0
+2023-05-25 20:26:44.969 | INFO     | trainer:fit:43 - Epoch: 16/50. Validation set: Average loss: 0.000396	Average nonzero triplets: 1.0
+2023-05-25 20:26:45.894 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:26:52.926 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.002031	Average nonzero triplets: 1.0
+2023-05-25 20:26:59.935 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:27:06.955 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:27:13.985 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.003642	Average nonzero triplets: 1.0
+2023-05-25 20:27:21.002 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:27:28.023 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.002052	Average nonzero triplets: 1.0
+2023-05-25 20:27:35.042 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:27:42.059 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:27:49.091 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000164	Average nonzero triplets: 1.0
+2023-05-25 20:27:56.110 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:28:03.131 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:28:10.157 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:28:12.387 | INFO     | trainer:fit:33 - Epoch: 17/50. Train set: Average loss: 0.000636	Average nonzero triplets: 1.0
+2023-05-25 20:28:19.235 | INFO     | trainer:fit:43 - Epoch: 17/50. Validation set: Average loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:28:20.169 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:28:27.185 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:28:34.202 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:28:41.217 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:28:48.259 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.006836	Average nonzero triplets: 1.0
+2023-05-25 20:28:55.267 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:29:02.277 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:29:09.287 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:29:16.291 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:29:23.305 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:29:30.306 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:29:37.309 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:29:44.322 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:29:46.561 | INFO     | trainer:fit:33 - Epoch: 18/50. Train set: Average loss: 0.000555	Average nonzero triplets: 1.0
+2023-05-25 20:29:53.425 | INFO     | trainer:fit:43 - Epoch: 18/50. Validation set: Average loss: 0.000265	Average nonzero triplets: 1.0
+2023-05-25 20:29:54.364 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:30:01.379 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:30:08.398 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:30:15.411 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:30:22.418 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:30:29.427 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:30:36.443 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:30:43.443 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:30:50.446 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:30:57.459 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:31:04.478 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:31:11.514 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000305	Average nonzero triplets: 1.0
+2023-05-25 20:31:18.531 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:31:20.755 | INFO     | trainer:fit:33 - Epoch: 19/50. Train set: Average loss: 0.000025	Average nonzero triplets: 1.0
+2023-05-25 20:31:27.615 | INFO     | trainer:fit:43 - Epoch: 19/50. Validation set: Average loss: 0.000058	Average nonzero triplets: 1.0
+2023-05-25 20:31:28.544 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:31:35.547 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:31:42.554 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:31:49.582 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.003114	Average nonzero triplets: 1.0
+2023-05-25 20:31:56.603 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.011869	Average nonzero triplets: 1.0
+2023-05-25 20:32:03.617 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:32:10.635 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:32:17.653 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:32:24.671 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000092	Average nonzero triplets: 1.0
+2023-05-25 20:32:31.689 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:32:38.769 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:32:45.784 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:32:52.797 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:32:55.027 | INFO     | trainer:fit:33 - Epoch: 20/50. Train set: Average loss: 0.001216	Average nonzero triplets: 1.0
+2023-05-25 20:33:01.870 | INFO     | trainer:fit:43 - Epoch: 20/50. Validation set: Average loss: 0.000011	Average nonzero triplets: 1.0
+2023-05-25 20:33:03.043 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:33:10.058 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:33:17.075 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:33:24.077 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:33:31.093 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:33:38.103 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:33:45.122 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:33:52.126 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:33:59.143 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:34:06.163 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:34:13.181 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:34:20.195 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:34:27.198 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:34:29.432 | INFO     | trainer:fit:33 - Epoch: 21/50. Train set: Average loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:34:36.302 | INFO     | trainer:fit:43 - Epoch: 21/50. Validation set: Average loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:34:37.205 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:34:44.211 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:34:51.226 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:34:58.223 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:35:05.226 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:35:12.240 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:35:19.255 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.133885	Average nonzero triplets: 1.0
+2023-05-25 20:35:26.253 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:35:33.253 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:35:40.250 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:35:47.246 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:35:54.245 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:36:01.245 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:36:03.468 | INFO     | trainer:fit:33 - Epoch: 22/50. Train set: Average loss: 0.010797	Average nonzero triplets: 1.0
+2023-05-25 20:36:10.316 | INFO     | trainer:fit:43 - Epoch: 22/50. Validation set: Average loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:36:11.241 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:36:18.237 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:36:25.237 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:36:32.232 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:36:39.229 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:36:46.250 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.003199	Average nonzero triplets: 1.0
+2023-05-25 20:36:53.246 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:37:00.245 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:37:07.263 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000493	Average nonzero triplets: 1.0
+2023-05-25 20:37:14.261 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:37:21.259 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:37:28.259 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:37:35.263 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:37:37.495 | INFO     | trainer:fit:33 - Epoch: 23/50. Train set: Average loss: 0.000298	Average nonzero triplets: 1.0
+2023-05-25 20:37:44.362 | INFO     | trainer:fit:43 - Epoch: 23/50. Validation set: Average loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:37:45.292 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:37:52.291 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:37:59.297 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:38:06.310 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:38:13.322 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:38:20.324 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:38:27.322 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:38:34.323 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:38:41.326 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:38:48.335 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:38:55.334 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:39:02.333 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:39:09.340 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:39:11.545 | INFO     | trainer:fit:33 - Epoch: 24/50. Train set: Average loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:39:18.361 | INFO     | trainer:fit:43 - Epoch: 24/50. Validation set: Average loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:39:19.279 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:39:26.295 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.001062	Average nonzero triplets: 1.0
+2023-05-25 20:39:33.303 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:39:40.318 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000674	Average nonzero triplets: 1.0
+2023-05-25 20:39:47.318 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:39:54.318 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:40:01.317 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:40:08.314 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:40:15.324 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:40:22.344 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000075	Average nonzero triplets: 1.0
+2023-05-25 20:40:29.347 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:40:36.351 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:40:43.378 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000577	Average nonzero triplets: 1.0
+2023-05-25 20:40:45.605 | INFO     | trainer:fit:33 - Epoch: 25/50. Train set: Average loss: 0.000193	Average nonzero triplets: 1.0
+2023-05-25 20:40:52.449 | INFO     | trainer:fit:43 - Epoch: 25/50. Validation set: Average loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:40:53.372 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:41:00.382 | INFO     | trainer:train_epoch:137 - Train: [640/7970 (8%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:41:07.391 | INFO     | trainer:train_epoch:137 - Train: [1280/7970 (16%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:41:14.400 | INFO     | trainer:train_epoch:137 - Train: [1920/7970 (24%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:41:21.414 | INFO     | trainer:train_epoch:137 - Train: [2560/7970 (32%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:41:28.414 | INFO     | trainer:train_epoch:137 - Train: [3200/7970 (40%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:41:35.427 | INFO     | trainer:train_epoch:137 - Train: [3840/7970 (48%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:41:42.433 | INFO     | trainer:train_epoch:137 - Train: [4480/7970 (56%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:41:49.446 | INFO     | trainer:train_epoch:137 - Train: [5120/7970 (65%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:41:56.447 | INFO     | trainer:train_epoch:137 - Train: [5760/7970 (73%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:42:03.463 | INFO     | trainer:train_epoch:137 - Train: [6400/7970 (81%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:42:10.480 | INFO     | trainer:train_epoch:137 - Train: [7040/7970 (89%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:42:17.496 | INFO     | trainer:train_epoch:137 - Train: [7680/7970 (97%)]	Loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:42:19.721 | INFO     | trainer:fit:33 - Epoch: 26/50. Train set: Average loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:42:26.561 | INFO     | trainer:fit:43 - Epoch: 26/50. Validation set: Average loss: 0.000000	Average nonzero triplets: 1.0
+2023-05-25 20:42:27.471 | INFO     | trainer:train_epoch:137 - Train: [0/7970 (0%)]	Loss: 0.000000	Average nonzero triplets: 1.0

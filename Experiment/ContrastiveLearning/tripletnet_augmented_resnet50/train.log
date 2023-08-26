@@ -1,0 +1,753 @@
+2023-05-22 23:01:22.961 | INFO     | __main__:run_triplet:49 - Namespace(dataset='CVPR2017', eeg_path='/media/exx/HDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth', time_low=20, time_high=460, img_path='/media/exx/HDD1/LanxHuyen/CVPR2017/imagenet_augmented', splits_path='/media/exx/HDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth', log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/ContrastiveLearning', info='tripletnet_augmented_resnet50', img_encoder='resnet50', eeg_encoder='EEGChannelNet', batch_size=128, lr=0.005, wd=0.0001, optim='SGD', max_epoch=50, log_interval=10, num_workers=2, gpu=1, gamma=200, arch='train', save_ckpt='checkpoints/', lr_step='40', pretrain=False, momen=0.9, nesterov=False, num_classes=40, device=device(type='cuda', index=1))
+2023-05-22 23:03:17.727 | INFO     | __main__:run_triplet:49 - Namespace(dataset='CVPR2017', eeg_path='/media/exx/HDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth', time_low=20, time_high=460, img_path='/media/exx/HDD1/LanxHuyen/CVPR2017/imagenet_augmented', splits_path='/media/exx/HDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth', log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/ContrastiveLearning', info='tripletnet_augmented_resnet50', img_encoder='inception_v3', eeg_encoder='EEGChannelNet', batch_size=128, lr=0.005, wd=0.0001, optim='SGD', max_epoch=50, log_interval=10, num_workers=2, gpu=1, gamma=200, arch='train', save_ckpt='checkpoints/', lr_step='40', pretrain=False, momen=0.9, nesterov=False, num_classes=40, device=device(type='cuda', index=1))
+2023-05-23 08:19:57.600 | INFO     | __main__:run_triplet:49 - Namespace(dataset='CVPR2017', eeg_path='/media/exx/HDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth', time_low=20, time_high=460, img_path='/media/exx/HDD1/LanxHuyen/CVPR2017/imagenet_augmented', splits_path='/media/exx/HDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth', log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/ContrastiveLearning', info='tripletnet_augmented_resnet50', img_encoder='resnet50', eeg_encoder='EEGChannelNet', batch_size=128, lr=0.005, wd=0.0001, optim='SGD', max_epoch=50, log_interval=10, num_workers=2, gpu=0, gamma=200, arch='train', save_ckpt='checkpoints/', lr_step='40', pretrain=False, momen=0.9, nesterov=False, num_classes=40, device=device(type='cuda', index=0))
+2023-05-23 08:20:51.591 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.014001
+2023-05-23 08:21:00.441 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.011145
+2023-05-23 08:21:09.318 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.009452
+2023-05-23 08:21:18.204 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.006160
+2023-05-23 08:21:27.093 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.003588
+2023-05-23 08:21:35.985 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.002535
+2023-05-23 08:21:44.890 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.002160
+2023-05-23 08:21:53.806 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.004509
+2023-05-23 08:22:02.726 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.007170
+2023-05-23 08:22:11.652 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.010338
+2023-05-23 08:22:20.573 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.005993
+2023-05-23 08:22:29.494 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.003304
+2023-05-23 08:22:38.417 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.004243
+2023-05-23 08:22:41.215 | INFO     | trainer_not_inception:fit:33 - Epoch: 1/50. Train set: Average loss: 0.005904
+2023-05-23 08:22:50.240 | INFO     | trainer_not_inception:fit:43 - Epoch: 1/50. Validation set: Average loss: 0.038108
+2023-05-23 08:22:51.507 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.010989
+2023-05-23 08:23:00.438 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.002796
+2023-05-23 08:23:09.361 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.002629
+2023-05-23 08:23:18.358 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.004969
+2023-05-23 08:23:27.999 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.003113
+2023-05-23 08:23:37.677 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.004183
+2023-05-23 08:23:46.880 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.003213
+2023-05-23 08:23:56.147 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.007466
+2023-05-23 08:24:05.079 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.003820
+2023-05-23 08:24:14.005 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.004454
+2023-05-23 08:24:22.932 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.003802
+2023-05-23 08:24:31.858 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.001969
+2023-05-23 08:24:40.786 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000900
+2023-05-23 08:24:43.590 | INFO     | trainer_not_inception:fit:33 - Epoch: 2/50. Train set: Average loss: 0.003632
+2023-05-23 08:24:52.546 | INFO     | trainer_not_inception:fit:43 - Epoch: 2/50. Validation set: Average loss: 0.035230
+2023-05-23 08:24:53.806 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.003194
+2023-05-23 08:25:02.733 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.002265
+2023-05-23 08:25:11.660 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.003258
+2023-05-23 08:25:20.581 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.002382
+2023-05-23 08:25:29.499 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000613
+2023-05-23 08:25:38.416 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.001544
+2023-05-23 08:25:47.333 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.003476
+2023-05-23 08:25:56.249 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000845
+2023-05-23 08:26:05.172 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000761
+2023-05-23 08:26:14.091 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.001969
+2023-05-23 08:26:23.006 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000707
+2023-05-23 08:26:31.922 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.002831
+2023-05-23 08:26:40.837 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.001997
+2023-05-23 08:26:43.640 | INFO     | trainer_not_inception:fit:33 - Epoch: 3/50. Train set: Average loss: 0.001865
+2023-05-23 08:26:52.604 | INFO     | trainer_not_inception:fit:43 - Epoch: 3/50. Validation set: Average loss: 0.001252
+2023-05-23 08:26:53.853 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000053
+2023-05-23 08:27:02.765 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.002112
+2023-05-23 08:27:11.681 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.001190
+2023-05-23 08:27:20.589 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000684
+2023-05-23 08:27:29.501 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000693
+2023-05-23 08:27:38.408 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000207
+2023-05-23 08:27:47.321 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000056
+2023-05-23 08:27:56.234 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.001673
+2023-05-23 08:28:05.156 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.001580
+2023-05-23 08:28:14.070 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.001696
+2023-05-23 08:28:22.982 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000133
+2023-05-23 08:28:31.893 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000535
+2023-05-23 08:28:40.804 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000614
+2023-05-23 08:28:43.614 | INFO     | trainer_not_inception:fit:33 - Epoch: 4/50. Train set: Average loss: 0.000906
+2023-05-23 08:28:52.628 | INFO     | trainer_not_inception:fit:43 - Epoch: 4/50. Validation set: Average loss: 0.003644
+2023-05-23 08:28:53.890 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000091
+2023-05-23 08:29:02.797 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.002197
+2023-05-23 08:29:11.712 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.006824
+2023-05-23 08:29:20.625 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.002666
+2023-05-23 08:29:29.532 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.002956
+2023-05-23 08:29:38.441 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.001690
+2023-05-23 08:29:47.354 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.003975
+2023-05-23 08:29:56.324 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.002650
+2023-05-23 08:30:05.250 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.002419
+2023-05-23 08:30:14.155 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000822
+2023-05-23 08:30:23.064 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.002224
+2023-05-23 08:30:31.971 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.004168
+2023-05-23 08:30:40.878 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000862
+2023-05-23 08:30:43.681 | INFO     | trainer_not_inception:fit:33 - Epoch: 5/50. Train set: Average loss: 0.002785
+2023-05-23 08:30:52.670 | INFO     | trainer_not_inception:fit:43 - Epoch: 5/50. Validation set: Average loss: 0.029448
+2023-05-23 08:30:53.927 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000355
+2023-05-23 08:31:02.835 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000741
+2023-05-23 08:31:11.738 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.001125
+2023-05-23 08:31:20.641 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.001548
+2023-05-23 08:31:29.539 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.001544
+2023-05-23 08:31:38.446 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.001285
+2023-05-23 08:31:47.351 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000808
+2023-05-23 08:31:56.259 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000540
+2023-05-23 08:32:05.177 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.002803
+2023-05-23 08:32:14.082 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.005668
+2023-05-23 08:32:22.991 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000535
+2023-05-23 08:32:31.904 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.002854
+2023-05-23 08:32:40.818 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.007597
+2023-05-23 08:32:43.626 | INFO     | trainer_not_inception:fit:33 - Epoch: 6/50. Train set: Average loss: 0.002348
+2023-05-23 08:32:52.631 | INFO     | trainer_not_inception:fit:43 - Epoch: 6/50. Validation set: Average loss: 0.038300
+2023-05-23 08:32:53.906 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.002242
+2023-05-23 08:33:02.818 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.002134
+2023-05-23 08:33:11.732 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.004818
+2023-05-23 08:33:20.639 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.003619
+2023-05-23 08:33:29.544 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.004345
+2023-05-23 08:33:38.450 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.001614
+2023-05-23 08:33:47.357 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.001751
+2023-05-23 08:33:56.264 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.001887
+2023-05-23 08:34:05.180 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000478
+2023-05-23 08:34:14.090 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000777
+2023-05-23 08:34:23.001 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.001587
+2023-05-23 08:34:31.906 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.001521
+2023-05-23 08:34:40.810 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.002983
+2023-05-23 08:34:43.615 | INFO     | trainer_not_inception:fit:33 - Epoch: 7/50. Train set: Average loss: 0.002285
+2023-05-23 08:34:52.588 | INFO     | trainer_not_inception:fit:43 - Epoch: 7/50. Validation set: Average loss: 0.017967
+2023-05-23 08:34:53.850 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.005963
+2023-05-23 08:35:02.757 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.003199
+2023-05-23 08:35:11.664 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.001804
+2023-05-23 08:35:20.566 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.004797
+2023-05-23 08:35:29.462 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.001031
+2023-05-23 08:35:38.366 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.001750
+2023-05-23 08:35:47.264 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000127
+2023-05-23 08:35:56.161 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000009
+2023-05-23 08:36:05.065 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.001034
+2023-05-23 08:36:13.966 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000524
+2023-05-23 08:36:22.869 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.003103
+2023-05-23 08:36:31.769 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.002053
+2023-05-23 08:36:40.665 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.004756
+2023-05-23 08:36:43.464 | INFO     | trainer_not_inception:fit:33 - Epoch: 8/50. Train set: Average loss: 0.002126
+2023-05-23 08:36:52.461 | INFO     | trainer_not_inception:fit:43 - Epoch: 8/50. Validation set: Average loss: 0.000000
+2023-05-23 08:36:53.722 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000003
+2023-05-23 08:37:02.590 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.001851
+2023-05-23 08:37:11.466 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.001711
+2023-05-23 08:37:20.362 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.002181
+2023-05-23 08:37:29.261 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.001055
+2023-05-23 08:37:38.159 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000379
+2023-05-23 08:37:47.050 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.002444
+2023-05-23 08:37:55.947 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000210
+2023-05-23 08:38:04.834 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000980
+2023-05-23 08:38:13.725 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.002205
+2023-05-23 08:38:22.620 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000113
+2023-05-23 08:38:31.487 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.001176
+2023-05-23 08:38:40.364 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000118
+2023-05-23 08:38:43.152 | INFO     | trainer_not_inception:fit:33 - Epoch: 9/50. Train set: Average loss: 0.001163
+2023-05-23 08:38:52.116 | INFO     | trainer_not_inception:fit:43 - Epoch: 9/50. Validation set: Average loss: 0.000000
+2023-05-23 08:38:53.398 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000019
+2023-05-23 08:39:02.282 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.001757
+2023-05-23 08:39:11.177 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000393
+2023-05-23 08:39:20.074 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000250
+2023-05-23 08:39:28.922 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000002
+2023-05-23 08:39:37.777 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000025
+2023-05-23 08:39:46.646 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000378
+2023-05-23 08:39:55.529 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000163
+2023-05-23 08:40:04.408 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000125
+2023-05-23 08:40:13.306 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000357
+2023-05-23 08:40:22.137 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000012
+2023-05-23 08:40:30.955 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000066
+2023-05-23 08:40:39.788 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000182
+2023-05-23 08:40:42.577 | INFO     | trainer_not_inception:fit:33 - Epoch: 10/50. Train set: Average loss: 0.000300
+2023-05-23 08:40:51.562 | INFO     | trainer_not_inception:fit:43 - Epoch: 10/50. Validation set: Average loss: 0.002727
+2023-05-23 08:40:53.402 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-23 08:41:02.260 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000735
+2023-05-23 08:41:11.113 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.001182
+2023-05-23 08:41:19.975 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000896
+2023-05-23 08:41:28.867 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.002418
+2023-05-23 08:41:37.770 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.003664
+2023-05-23 08:41:46.669 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000349
+2023-05-23 08:41:55.569 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.001189
+2023-05-23 08:42:04.472 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000087
+2023-05-23 08:42:13.370 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000220
+2023-05-23 08:42:22.266 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000515
+2023-05-23 08:42:31.165 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000021
+2023-05-23 08:42:40.060 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000033
+2023-05-23 08:42:42.857 | INFO     | trainer_not_inception:fit:33 - Epoch: 11/50. Train set: Average loss: 0.000917
+2023-05-23 08:42:51.799 | INFO     | trainer_not_inception:fit:43 - Epoch: 11/50. Validation set: Average loss: 0.007369
+2023-05-23 08:42:53.031 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000003
+2023-05-23 08:43:01.928 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000008
+2023-05-23 08:43:10.832 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000712
+2023-05-23 08:43:19.822 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000079
+2023-05-23 08:43:28.698 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000030
+2023-05-23 08:43:37.604 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000061
+2023-05-23 08:43:46.500 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000142
+2023-05-23 08:43:55.392 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000017
+2023-05-23 08:44:04.297 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000060
+2023-05-23 08:44:13.194 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000505
+2023-05-23 08:44:22.089 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000088
+2023-05-23 08:44:30.985 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000615
+2023-05-23 08:44:39.882 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000137
+2023-05-23 08:44:42.669 | INFO     | trainer_not_inception:fit:33 - Epoch: 12/50. Train set: Average loss: 0.000205
+2023-05-23 08:44:51.608 | INFO     | trainer_not_inception:fit:43 - Epoch: 12/50. Validation set: Average loss: 0.003342
+2023-05-23 08:44:52.877 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.002118
+2023-05-23 08:45:01.777 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.001018
+2023-05-23 08:45:10.671 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000613
+2023-05-23 08:45:19.569 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000340
+2023-05-23 08:45:28.468 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000097
+2023-05-23 08:45:37.361 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000474
+2023-05-23 08:45:46.258 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000559
+2023-05-23 08:45:55.158 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000316
+2023-05-23 08:46:04.060 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000025
+2023-05-23 08:46:12.957 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000533
+2023-05-23 08:46:21.852 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000489
+2023-05-23 08:46:30.746 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000014
+2023-05-23 08:46:39.646 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000833
+2023-05-23 08:46:42.452 | INFO     | trainer_not_inception:fit:33 - Epoch: 13/50. Train set: Average loss: 0.000459
+2023-05-23 08:46:51.421 | INFO     | trainer_not_inception:fit:43 - Epoch: 13/50. Validation set: Average loss: 0.013981
+2023-05-23 08:46:52.671 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000002
+2023-05-23 08:47:01.569 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000021
+2023-05-23 08:47:10.469 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.001613
+2023-05-23 08:47:19.370 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000169
+2023-05-23 08:47:28.269 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000669
+2023-05-23 08:47:37.168 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000418
+2023-05-23 08:47:46.068 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000378
+2023-05-23 08:47:54.966 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000175
+2023-05-23 08:48:03.867 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000146
+2023-05-23 08:48:12.773 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000207
+2023-05-23 08:48:21.674 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.001112
+2023-05-23 08:48:30.577 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.001655
+2023-05-23 08:48:39.477 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000008
+2023-05-23 08:48:42.280 | INFO     | trainer_not_inception:fit:33 - Epoch: 14/50. Train set: Average loss: 0.000539
+2023-05-23 08:48:51.237 | INFO     | trainer_not_inception:fit:43 - Epoch: 14/50. Validation set: Average loss: 0.005354
+2023-05-23 08:48:52.483 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000052
+2023-05-23 08:49:01.381 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.001201
+2023-05-23 08:49:10.286 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000297
+2023-05-23 08:49:19.185 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000138
+2023-05-23 08:49:28.079 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000071
+2023-05-23 08:49:36.978 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000004
+2023-05-23 08:49:45.875 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000402
+2023-05-23 08:49:54.773 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000336
+2023-05-23 08:50:03.674 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000191
+2023-05-23 08:50:12.577 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000038
+2023-05-23 08:50:21.477 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000053
+2023-05-23 08:50:30.372 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000380
+2023-05-23 08:50:39.270 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000224
+2023-05-23 08:50:42.074 | INFO     | trainer_not_inception:fit:33 - Epoch: 15/50. Train set: Average loss: 0.000270
+2023-05-23 08:50:51.052 | INFO     | trainer_not_inception:fit:43 - Epoch: 15/50. Validation set: Average loss: 0.005936
+2023-05-23 08:50:52.310 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-23 08:51:01.208 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000346
+2023-05-23 08:51:10.110 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000831
+2023-05-23 08:51:19.006 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000386
+2023-05-23 08:51:27.904 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000321
+2023-05-23 08:51:36.801 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000329
+2023-05-23 08:51:45.698 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000258
+2023-05-23 08:51:54.593 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000037
+2023-05-23 08:52:03.500 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000095
+2023-05-23 08:52:12.406 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000603
+2023-05-23 08:52:21.306 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000028
+2023-05-23 08:52:30.205 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000004
+2023-05-23 08:52:39.106 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.002351
+2023-05-23 08:52:41.910 | INFO     | trainer_not_inception:fit:33 - Epoch: 16/50. Train set: Average loss: 0.000452
+2023-05-23 08:52:50.926 | INFO     | trainer_not_inception:fit:43 - Epoch: 16/50. Validation set: Average loss: 0.007372
+2023-05-23 08:52:52.195 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000004
+2023-05-23 08:53:01.088 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000064
+2023-05-23 08:53:09.989 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000269
+2023-05-23 08:53:18.889 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000409
+2023-05-23 08:53:27.788 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000122
+2023-05-23 08:53:36.688 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000604
+2023-05-23 08:53:45.589 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000008
+2023-05-23 08:53:54.489 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000119
+2023-05-23 08:54:03.394 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000382
+2023-05-23 08:54:12.298 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000771
+2023-05-23 08:54:21.196 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000482
+2023-05-23 08:54:30.092 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000170
+2023-05-23 08:54:38.993 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000082
+2023-05-23 08:54:41.800 | INFO     | trainer_not_inception:fit:33 - Epoch: 17/50. Train set: Average loss: 0.000281
+2023-05-23 08:54:50.754 | INFO     | trainer_not_inception:fit:43 - Epoch: 17/50. Validation set: Average loss: 0.008157
+2023-05-23 08:54:52.021 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-23 08:55:00.918 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000235
+2023-05-23 08:55:09.822 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000130
+2023-05-23 08:55:18.721 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000034
+2023-05-23 08:55:27.618 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000227
+2023-05-23 08:55:36.517 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000239
+2023-05-23 08:55:45.413 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000172
+2023-05-23 08:55:54.314 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000001
+2023-05-23 08:56:03.214 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000021
+2023-05-23 08:56:12.114 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000083
+2023-05-23 08:56:21.012 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000120
+2023-05-23 08:56:29.908 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000350
+2023-05-23 08:56:38.805 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000102
+2023-05-23 08:56:41.613 | INFO     | trainer_not_inception:fit:33 - Epoch: 18/50. Train set: Average loss: 0.000138
+2023-05-23 08:56:50.621 | INFO     | trainer_not_inception:fit:43 - Epoch: 18/50. Validation set: Average loss: 0.008050
+2023-05-23 08:56:51.894 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000002
+2023-05-23 08:57:00.796 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000024
+2023-05-23 08:57:09.701 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000036
+2023-05-23 08:57:18.600 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000034
+2023-05-23 08:57:27.506 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000091
+2023-05-23 08:57:36.406 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000001
+2023-05-23 08:57:45.308 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000132
+2023-05-23 08:57:54.210 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000102
+2023-05-23 08:58:03.118 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000036
+2023-05-23 08:58:12.029 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000167
+2023-05-23 08:58:20.928 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000060
+2023-05-23 08:58:29.834 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000182
+2023-05-23 08:58:38.741 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000004
+2023-05-23 08:58:41.545 | INFO     | trainer_not_inception:fit:33 - Epoch: 19/50. Train set: Average loss: 0.000070
+2023-05-23 08:58:50.546 | INFO     | trainer_not_inception:fit:43 - Epoch: 19/50. Validation set: Average loss: 0.028973
+2023-05-23 08:58:51.817 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000001
+2023-05-23 08:59:00.715 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000002
+2023-05-23 08:59:09.618 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000299
+2023-05-23 08:59:18.516 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000039
+2023-05-23 08:59:27.413 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.001039
+2023-05-23 08:59:36.312 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000011
+2023-05-23 08:59:45.212 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000038
+2023-05-23 08:59:54.114 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000323
+2023-05-23 09:00:03.024 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000252
+2023-05-23 09:00:11.931 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000822
+2023-05-23 09:00:20.894 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000146
+2023-05-23 09:00:29.796 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000431
+2023-05-23 09:00:38.698 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000281
+2023-05-23 09:00:41.505 | INFO     | trainer_not_inception:fit:33 - Epoch: 20/50. Train set: Average loss: 0.000297
+2023-05-23 09:00:50.468 | INFO     | trainer_not_inception:fit:43 - Epoch: 20/50. Validation set: Average loss: 0.011135
+2023-05-23 09:00:52.057 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000126
+2023-05-23 09:01:00.958 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000006
+2023-05-23 09:01:09.866 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000126
+2023-05-23 09:01:18.770 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000107
+2023-05-23 09:01:27.671 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000028
+2023-05-23 09:01:36.582 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000040
+2023-05-23 09:01:45.485 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000028
+2023-05-23 09:01:54.391 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000147
+2023-05-23 09:02:03.303 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000222
+2023-05-23 09:02:12.207 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000286
+2023-05-23 09:02:21.115 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000034
+2023-05-23 09:02:30.020 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000073
+2023-05-23 09:02:38.928 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000014
+2023-05-23 09:02:41.728 | INFO     | trainer_not_inception:fit:33 - Epoch: 21/50. Train set: Average loss: 0.000095
+2023-05-23 09:02:50.724 | INFO     | trainer_not_inception:fit:43 - Epoch: 21/50. Validation set: Average loss: 0.009544
+2023-05-23 09:02:52.007 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000006
+2023-05-23 09:03:00.902 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000007
+2023-05-23 09:03:09.809 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000219
+2023-05-23 09:03:18.710 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000041
+2023-05-23 09:03:27.609 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000003
+2023-05-23 09:03:36.506 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000112
+2023-05-23 09:03:45.404 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000846
+2023-05-23 09:03:54.305 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000096
+2023-05-23 09:04:03.212 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000009
+2023-05-23 09:04:12.122 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000117
+2023-05-23 09:04:21.018 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000041
+2023-05-23 09:04:29.919 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000309
+2023-05-23 09:04:38.814 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000036
+2023-05-23 09:04:41.622 | INFO     | trainer_not_inception:fit:33 - Epoch: 22/50. Train set: Average loss: 0.000148
+2023-05-23 09:04:50.585 | INFO     | trainer_not_inception:fit:43 - Epoch: 22/50. Validation set: Average loss: 0.007578
+2023-05-23 09:04:51.839 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-23 09:05:00.737 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000107
+2023-05-23 09:05:09.648 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000018
+2023-05-23 09:05:18.550 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000044
+2023-05-23 09:05:27.450 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000033
+2023-05-23 09:05:36.350 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000021
+2023-05-23 09:05:45.247 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000137
+2023-05-23 09:05:54.154 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000076
+2023-05-23 09:06:03.063 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000213
+2023-05-23 09:06:11.965 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000040
+2023-05-23 09:06:20.874 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000090
+2023-05-23 09:06:29.777 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000046
+2023-05-23 09:06:38.683 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000024
+2023-05-23 09:06:41.490 | INFO     | trainer_not_inception:fit:33 - Epoch: 23/50. Train set: Average loss: 0.000078
+2023-05-23 09:06:50.465 | INFO     | trainer_not_inception:fit:43 - Epoch: 23/50. Validation set: Average loss: 0.007800
+2023-05-23 09:06:51.727 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.001146
+2023-05-23 09:07:00.637 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000599
+2023-05-23 09:07:09.545 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000053
+2023-05-23 09:07:18.448 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000017
+2023-05-23 09:07:27.356 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000032
+2023-05-23 09:07:36.258 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000031
+2023-05-23 09:07:45.164 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.001072
+2023-05-23 09:07:54.068 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000137
+2023-05-23 09:08:02.977 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000416
+2023-05-23 09:08:11.889 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000041
+2023-05-23 09:08:20.797 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000028
+2023-05-23 09:08:29.704 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000104
+2023-05-23 09:08:38.613 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000005
+2023-05-23 09:08:41.424 | INFO     | trainer_not_inception:fit:33 - Epoch: 24/50. Train set: Average loss: 0.000214
+2023-05-23 09:08:50.395 | INFO     | trainer_not_inception:fit:43 - Epoch: 24/50. Validation set: Average loss: 0.010150
+2023-05-23 09:08:51.649 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-23 09:09:00.549 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000073
+2023-05-23 09:09:09.462 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000347
+2023-05-23 09:09:18.365 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000031
+2023-05-23 09:09:27.265 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000303
+2023-05-23 09:09:36.168 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000576
+2023-05-23 09:09:45.066 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000936
+2023-05-23 09:09:53.968 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000223
+2023-05-23 09:10:02.869 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000091
+2023-05-23 09:10:11.780 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000072
+2023-05-23 09:10:20.677 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000004
+2023-05-23 09:10:29.578 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000148
+2023-05-23 09:10:38.482 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000004
+2023-05-23 09:10:41.287 | INFO     | trainer_not_inception:fit:33 - Epoch: 25/50. Train set: Average loss: 0.000226
+2023-05-23 09:10:50.264 | INFO     | trainer_not_inception:fit:43 - Epoch: 25/50. Validation set: Average loss: 0.005703
+2023-05-23 09:10:51.535 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000012
+2023-05-23 09:11:00.441 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000154
+2023-05-23 09:11:09.350 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000002
+2023-05-23 09:11:18.253 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000061
+2023-05-23 09:11:27.158 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000070
+2023-05-23 09:11:36.064 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000004
+2023-05-23 09:11:45.491 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000041
+2023-05-23 09:11:54.898 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000393
+2023-05-23 09:12:03.814 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000055
+2023-05-23 09:12:13.025 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000039
+2023-05-23 09:12:21.928 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000309
+2023-05-23 09:12:30.830 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000250
+2023-05-23 09:12:39.731 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000010
+2023-05-23 09:12:42.533 | INFO     | trainer_not_inception:fit:33 - Epoch: 26/50. Train set: Average loss: 0.000116
+2023-05-23 09:12:51.512 | INFO     | trainer_not_inception:fit:43 - Epoch: 26/50. Validation set: Average loss: 0.009691
+2023-05-23 09:12:52.771 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000012
+2023-05-23 09:13:01.666 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.002374
+2023-05-23 09:13:10.569 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000031
+2023-05-23 09:13:19.467 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000188
+2023-05-23 09:13:28.373 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000001
+2023-05-23 09:13:37.277 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000340
+2023-05-23 09:13:46.184 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000016
+2023-05-23 09:13:55.082 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.001604
+2023-05-23 09:14:03.987 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000194
+2023-05-23 09:14:12.889 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000043
+2023-05-23 09:14:21.785 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000022
+2023-05-23 09:14:30.678 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000163
+2023-05-23 09:14:39.582 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000029
+2023-05-23 09:14:42.391 | INFO     | trainer_not_inception:fit:33 - Epoch: 27/50. Train set: Average loss: 0.000413
+2023-05-23 09:14:51.410 | INFO     | trainer_not_inception:fit:43 - Epoch: 27/50. Validation set: Average loss: 0.006198
+2023-05-23 09:14:52.666 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-23 09:15:01.569 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000211
+2023-05-23 09:15:10.542 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000010
+2023-05-23 09:15:19.444 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000037
+2023-05-23 09:15:28.345 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000096
+2023-05-23 09:15:37.248 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000135
+2023-05-23 09:15:46.149 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000061
+2023-05-23 09:15:55.053 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000020
+2023-05-23 09:16:03.961 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000264
+2023-05-23 09:16:12.860 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000006
+2023-05-23 09:16:21.766 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000086
+2023-05-23 09:16:30.663 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000004
+2023-05-23 09:16:39.565 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000004
+2023-05-23 09:16:42.373 | INFO     | trainer_not_inception:fit:33 - Epoch: 28/50. Train set: Average loss: 0.000075
+2023-05-23 09:16:51.367 | INFO     | trainer_not_inception:fit:43 - Epoch: 28/50. Validation set: Average loss: 0.011216
+2023-05-23 09:16:52.633 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-23 09:17:01.530 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000116
+2023-05-23 09:17:10.434 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000045
+2023-05-23 09:17:19.329 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000058
+2023-05-23 09:17:28.230 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000068
+2023-05-23 09:17:37.132 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000081
+2023-05-23 09:17:46.028 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000116
+2023-05-23 09:17:54.924 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000218
+2023-05-23 09:18:03.830 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000159
+2023-05-23 09:18:12.733 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000038
+2023-05-23 09:18:21.637 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000001
+2023-05-23 09:18:30.536 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000014
+2023-05-23 09:18:39.441 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000148
+2023-05-23 09:18:42.251 | INFO     | trainer_not_inception:fit:33 - Epoch: 29/50. Train set: Average loss: 0.000086
+2023-05-23 09:18:51.255 | INFO     | trainer_not_inception:fit:43 - Epoch: 29/50. Validation set: Average loss: 0.017286
+2023-05-23 09:18:52.521 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000018
+2023-05-23 09:19:01.414 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000064
+2023-05-23 09:19:10.309 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000292
+2023-05-23 09:19:19.206 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000018
+2023-05-23 09:19:28.102 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000217
+2023-05-23 09:19:36.998 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000255
+2023-05-23 09:19:45.897 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000121
+2023-05-23 09:19:54.794 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000025
+2023-05-23 09:20:03.701 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000015
+2023-05-23 09:20:12.598 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000008
+2023-05-23 09:20:21.497 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000024
+2023-05-23 09:20:30.391 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000198
+2023-05-23 09:20:39.289 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000244
+2023-05-23 09:20:42.099 | INFO     | trainer_not_inception:fit:33 - Epoch: 30/50. Train set: Average loss: 0.000140
+2023-05-23 09:20:51.083 | INFO     | trainer_not_inception:fit:43 - Epoch: 30/50. Validation set: Average loss: 0.022036
+2023-05-23 09:20:52.659 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-23 09:21:01.565 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000176
+2023-05-23 09:21:10.471 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000074
+2023-05-23 09:21:19.367 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000036
+2023-05-23 09:21:28.268 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000074
+2023-05-23 09:21:37.170 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000039
+2023-05-23 09:21:46.073 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000045
+2023-05-23 09:21:54.977 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000070
+2023-05-23 09:22:03.881 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000006
+2023-05-23 09:22:12.790 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000022
+2023-05-23 09:22:21.694 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000010
+2023-05-23 09:22:30.596 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000214
+2023-05-23 09:22:39.498 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000215
+2023-05-23 09:22:42.302 | INFO     | trainer_not_inception:fit:33 - Epoch: 31/50. Train set: Average loss: 0.000091
+2023-05-23 09:22:51.249 | INFO     | trainer_not_inception:fit:43 - Epoch: 31/50. Validation set: Average loss: 0.011935
+2023-05-23 09:22:52.497 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000018
+2023-05-23 09:23:01.397 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000052
+2023-05-23 09:23:10.305 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000168
+2023-05-23 09:23:19.202 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000168
+2023-05-23 09:23:28.096 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000279
+2023-05-23 09:23:36.994 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000091
+2023-05-23 09:23:45.893 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000120
+2023-05-23 09:23:54.788 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000427
+2023-05-23 09:24:03.691 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000006
+2023-05-23 09:24:12.592 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000018
+2023-05-23 09:24:21.490 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000279
+2023-05-23 09:24:30.388 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000045
+2023-05-23 09:24:39.285 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000118
+2023-05-23 09:24:42.093 | INFO     | trainer_not_inception:fit:33 - Epoch: 32/50. Train set: Average loss: 0.000207
+2023-05-23 09:24:51.072 | INFO     | trainer_not_inception:fit:43 - Epoch: 32/50. Validation set: Average loss: 0.008493
+2023-05-23 09:24:52.330 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-23 09:25:01.228 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000047
+2023-05-23 09:25:10.134 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000012
+2023-05-23 09:25:19.033 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000004
+2023-05-23 09:25:27.934 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000040
+2023-05-23 09:25:36.841 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000005
+2023-05-23 09:25:45.743 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000207
+2023-05-23 09:25:54.648 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000349
+2023-05-23 09:26:03.552 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000077
+2023-05-23 09:26:12.456 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000015
+2023-05-23 09:26:21.357 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000110
+2023-05-23 09:26:30.261 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000052
+2023-05-23 09:26:39.161 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000564
+2023-05-23 09:26:41.957 | INFO     | trainer_not_inception:fit:33 - Epoch: 33/50. Train set: Average loss: 0.000120
+2023-05-23 09:26:50.921 | INFO     | trainer_not_inception:fit:43 - Epoch: 33/50. Validation set: Average loss: 0.021242
+2023-05-23 09:26:52.177 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000001
+2023-05-23 09:27:01.074 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000127
+2023-05-23 09:27:09.978 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000008
+2023-05-23 09:27:18.877 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000012
+2023-05-23 09:27:27.774 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000165
+2023-05-23 09:27:36.672 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000243
+2023-05-23 09:27:45.570 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000141
+2023-05-23 09:27:54.468 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000050
+2023-05-23 09:28:03.370 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000048
+2023-05-23 09:28:12.276 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000004
+2023-05-23 09:28:21.176 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000002
+2023-05-23 09:28:30.074 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000101
+2023-05-23 09:28:38.977 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000020
+2023-05-23 09:28:41.785 | INFO     | trainer_not_inception:fit:33 - Epoch: 34/50. Train set: Average loss: 0.000074
+2023-05-23 09:28:50.762 | INFO     | trainer_not_inception:fit:43 - Epoch: 34/50. Validation set: Average loss: 0.017068
+2023-05-23 09:28:52.025 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000004
+2023-05-23 09:29:00.928 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000006
+2023-05-23 09:29:09.834 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000028
+2023-05-23 09:29:18.735 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000015
+2023-05-23 09:29:27.633 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000036
+2023-05-23 09:29:36.533 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000036
+2023-05-23 09:29:45.430 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000531
+2023-05-23 09:29:54.333 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000151
+2023-05-23 09:30:03.233 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000011
+2023-05-23 09:30:12.137 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000007
+2023-05-23 09:30:21.132 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000089
+2023-05-23 09:30:30.004 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000259
+2023-05-23 09:30:38.901 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000076
+2023-05-23 09:30:41.710 | INFO     | trainer_not_inception:fit:33 - Epoch: 35/50. Train set: Average loss: 0.000112
+2023-05-23 09:30:50.678 | INFO     | trainer_not_inception:fit:43 - Epoch: 35/50. Validation set: Average loss: 0.010630
+2023-05-23 09:30:51.924 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-23 09:31:00.812 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000340
+2023-05-23 09:31:09.718 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000029
+2023-05-23 09:31:18.618 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000254
+2023-05-23 09:31:27.514 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000150
+2023-05-23 09:31:36.410 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000593
+2023-05-23 09:31:45.309 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000009
+2023-05-23 09:31:54.210 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000001
+2023-05-23 09:32:03.111 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000002
+2023-05-23 09:32:12.018 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000141
+2023-05-23 09:32:20.918 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000056
+2023-05-23 09:32:29.818 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000147
+2023-05-23 09:32:38.718 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000117
+2023-05-23 09:32:41.526 | INFO     | trainer_not_inception:fit:33 - Epoch: 36/50. Train set: Average loss: 0.000149
+2023-05-23 09:32:50.543 | INFO     | trainer_not_inception:fit:43 - Epoch: 36/50. Validation set: Average loss: 0.013141
+2023-05-23 09:32:51.809 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-23 09:33:00.704 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000014
+2023-05-23 09:33:09.613 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000077
+2023-05-23 09:33:18.512 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000052
+2023-05-23 09:33:27.408 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000052
+2023-05-23 09:33:36.304 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000085
+2023-05-23 09:33:45.201 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000148
+2023-05-23 09:33:54.097 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000006
+2023-05-23 09:34:02.996 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000553
+2023-05-23 09:34:11.902 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000009
+2023-05-23 09:34:20.801 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000032
+2023-05-23 09:34:29.697 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000599
+2023-05-23 09:34:38.593 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000008
+2023-05-23 09:34:41.399 | INFO     | trainer_not_inception:fit:33 - Epoch: 37/50. Train set: Average loss: 0.000137
+2023-05-23 09:34:50.376 | INFO     | trainer_not_inception:fit:43 - Epoch: 37/50. Validation set: Average loss: 0.012027
+2023-05-23 09:34:51.650 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-23 09:35:00.548 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000294
+2023-05-23 09:35:09.449 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000043
+2023-05-23 09:35:18.345 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000010
+2023-05-23 09:35:27.245 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000199
+2023-05-23 09:35:36.146 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000248
+2023-05-23 09:35:45.046 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000204
+2023-05-23 09:35:53.945 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000089
+2023-05-23 09:36:02.844 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000142
+2023-05-23 09:36:11.746 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000006
+2023-05-23 09:36:20.645 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000269
+2023-05-23 09:36:29.542 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000109
+2023-05-23 09:36:38.441 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000121
+2023-05-23 09:36:41.247 | INFO     | trainer_not_inception:fit:33 - Epoch: 38/50. Train set: Average loss: 0.000140
+2023-05-23 09:36:50.257 | INFO     | trainer_not_inception:fit:43 - Epoch: 38/50. Validation set: Average loss: 0.011514
+2023-05-23 09:36:51.526 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000001
+2023-05-23 09:37:00.420 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000005
+2023-05-23 09:37:09.329 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000098
+2023-05-23 09:37:18.229 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000010
+2023-05-23 09:37:27.130 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000656
+2023-05-23 09:37:36.033 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000050
+2023-05-23 09:37:44.933 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000160
+2023-05-23 09:37:53.833 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000030
+2023-05-23 09:38:02.738 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000117
+2023-05-23 09:38:11.646 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000421
+2023-05-23 09:38:20.544 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000008
+2023-05-23 09:38:29.446 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000141
+2023-05-23 09:38:38.347 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000052
+2023-05-23 09:38:41.152 | INFO     | trainer_not_inception:fit:33 - Epoch: 39/50. Train set: Average loss: 0.000141
+2023-05-23 09:38:50.110 | INFO     | trainer_not_inception:fit:43 - Epoch: 39/50. Validation set: Average loss: 0.008668
+2023-05-23 09:38:51.371 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-23 09:39:00.269 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.001396
+2023-05-23 09:39:09.173 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000046
+2023-05-23 09:39:18.072 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000066
+2023-05-23 09:39:26.968 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000161
+2023-05-23 09:39:35.865 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.001267
+2023-05-23 09:39:44.765 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000007
+2023-05-23 09:39:53.660 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000405
+2023-05-23 09:40:02.564 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000037
+2023-05-23 09:40:11.469 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000002
+2023-05-23 09:40:20.369 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000036
+2023-05-23 09:40:29.269 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000018
+2023-05-23 09:40:38.168 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000022
+2023-05-23 09:40:40.972 | INFO     | trainer_not_inception:fit:33 - Epoch: 40/50. Train set: Average loss: 0.000280
+2023-05-23 09:40:49.922 | INFO     | trainer_not_inception:fit:43 - Epoch: 40/50. Validation set: Average loss: 0.007022
+2023-05-23 09:40:51.506 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-23 09:41:00.408 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000391
+2023-05-23 09:41:09.311 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000012
+2023-05-23 09:41:18.211 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000018
+2023-05-23 09:41:27.109 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000023
+2023-05-23 09:41:36.007 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000059
+2023-05-23 09:41:44.911 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000018
+2023-05-23 09:41:53.813 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000020
+2023-05-23 09:42:02.721 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000012
+2023-05-23 09:42:11.629 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000005
+2023-05-23 09:42:20.535 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000014
+2023-05-23 09:42:29.437 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000084
+2023-05-23 09:42:38.342 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000119
+2023-05-23 09:42:41.149 | INFO     | trainer_not_inception:fit:33 - Epoch: 41/50. Train set: Average loss: 0.000064
+2023-05-23 09:42:50.130 | INFO     | trainer_not_inception:fit:43 - Epoch: 41/50. Validation set: Average loss: 0.008842
+2023-05-23 09:42:51.389 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000026
+2023-05-23 09:43:00.286 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000059
+2023-05-23 09:43:09.188 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000524
+2023-05-23 09:43:18.089 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000027
+2023-05-23 09:43:26.989 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000015
+2023-05-23 09:43:35.882 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000152
+2023-05-23 09:43:44.780 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000299
+2023-05-23 09:43:53.678 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000103
+2023-05-23 09:44:02.581 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000005
+2023-05-23 09:44:11.489 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000040
+2023-05-23 09:44:20.391 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000161
+2023-05-23 09:44:29.290 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000187
+2023-05-23 09:44:38.190 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000013
+2023-05-23 09:44:40.986 | INFO     | trainer_not_inception:fit:33 - Epoch: 42/50. Train set: Average loss: 0.000129
+2023-05-23 09:44:49.960 | INFO     | trainer_not_inception:fit:43 - Epoch: 42/50. Validation set: Average loss: 0.007798
+2023-05-23 09:44:51.230 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-23 09:45:00.126 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000010
+2023-05-23 09:45:09.030 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000199
+2023-05-23 09:45:17.933 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000132
+2023-05-23 09:45:26.830 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000290
+2023-05-23 09:45:35.729 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000098
+2023-05-23 09:45:44.626 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000022
+2023-05-23 09:45:53.528 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000651
+2023-05-23 09:46:02.434 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000018
+2023-05-23 09:46:11.342 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000003
+2023-05-23 09:46:20.316 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000233
+2023-05-23 09:46:29.214 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000086
+2023-05-23 09:46:38.113 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000001
+2023-05-23 09:46:40.923 | INFO     | trainer_not_inception:fit:33 - Epoch: 43/50. Train set: Average loss: 0.000141
+2023-05-23 09:46:49.882 | INFO     | trainer_not_inception:fit:43 - Epoch: 43/50. Validation set: Average loss: 0.009554
+2023-05-23 09:46:51.149 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000000
+2023-05-23 09:47:00.045 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000106
+2023-05-23 09:47:08.946 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000363
+2023-05-23 09:47:17.848 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000013
+2023-05-23 09:47:26.747 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000014
+2023-05-23 09:47:35.645 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000007
+2023-05-23 09:47:44.545 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000015
+2023-05-23 09:47:53.442 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000090
+2023-05-23 09:48:02.344 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000007
+2023-05-23 09:48:11.253 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000028
+2023-05-23 09:48:20.157 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000122
+2023-05-23 09:48:29.057 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000010
+2023-05-23 09:48:37.958 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000017
+2023-05-23 09:48:40.766 | INFO     | trainer_not_inception:fit:33 - Epoch: 44/50. Train set: Average loss: 0.000064
+2023-05-23 09:48:49.711 | INFO     | trainer_not_inception:fit:43 - Epoch: 44/50. Validation set: Average loss: 0.013615
+2023-05-23 09:48:50.969 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.001080
+2023-05-23 09:48:59.866 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000191
+2023-05-23 09:49:08.769 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000130
+2023-05-23 09:49:17.672 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000053
+2023-05-23 09:49:26.569 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000271
+2023-05-23 09:49:35.465 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000084
+2023-05-23 09:49:44.361 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000009
+2023-05-23 09:49:53.261 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000086
+2023-05-23 09:50:02.166 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000103
+2023-05-23 09:50:11.073 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000226
+2023-05-23 09:50:19.974 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000031
+2023-05-23 09:50:28.877 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000210
+2023-05-23 09:50:37.777 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000013
+2023-05-23 09:50:40.582 | INFO     | trainer_not_inception:fit:33 - Epoch: 45/50. Train set: Average loss: 0.000122
+2023-05-23 09:50:49.587 | INFO     | trainer_not_inception:fit:43 - Epoch: 45/50. Validation set: Average loss: 0.010829
+2023-05-23 09:50:50.861 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000146
+2023-05-23 09:50:59.758 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000046
+2023-05-23 09:51:08.661 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000039
+2023-05-23 09:51:17.561 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000028
+2023-05-23 09:51:26.457 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000236
+2023-05-23 09:51:35.354 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000035
+2023-05-23 09:51:44.252 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000014
+2023-05-23 09:51:53.149 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000052
+2023-05-23 09:52:02.048 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000078
+2023-05-23 09:52:10.953 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000006
+2023-05-23 09:52:19.856 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000005
+2023-05-23 09:52:28.754 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000002
+2023-05-23 09:52:37.654 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000121
+2023-05-23 09:52:40.459 | INFO     | trainer_not_inception:fit:33 - Epoch: 46/50. Train set: Average loss: 0.000055
+2023-05-23 09:52:49.464 | INFO     | trainer_not_inception:fit:43 - Epoch: 46/50. Validation set: Average loss: 0.004638
+2023-05-23 09:52:50.730 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000015
+2023-05-23 09:52:59.630 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000273
+2023-05-23 09:53:08.534 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000188
+2023-05-23 09:53:17.434 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000018
+2023-05-23 09:53:26.329 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000159
+2023-05-23 09:53:35.226 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000168
+2023-05-23 09:53:44.125 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000564
+2023-05-23 09:53:53.021 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000347
+2023-05-23 09:54:01.917 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000005
+2023-05-23 09:54:10.822 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000043
+2023-05-23 09:54:19.724 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000006
+2023-05-23 09:54:28.625 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000241
+2023-05-23 09:54:37.521 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000189
+2023-05-23 09:54:40.328 | INFO     | trainer_not_inception:fit:33 - Epoch: 47/50. Train set: Average loss: 0.000179
+2023-05-23 09:54:49.325 | INFO     | trainer_not_inception:fit:43 - Epoch: 47/50. Validation set: Average loss: 0.014018
+2023-05-23 09:54:50.588 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000026
+2023-05-23 09:54:59.478 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000114
+2023-05-23 09:55:08.381 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000005
+2023-05-23 09:55:17.282 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000007
+2023-05-23 09:55:26.180 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000076
+2023-05-23 09:55:35.077 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000333
+2023-05-23 09:55:43.977 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000072
+2023-05-23 09:55:52.881 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000061
+2023-05-23 09:56:01.782 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000033
+2023-05-23 09:56:10.688 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000024
+2023-05-23 09:56:19.586 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000003
+2023-05-23 09:56:28.492 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000006
+2023-05-23 09:56:37.392 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000068
+2023-05-23 09:56:40.199 | INFO     | trainer_not_inception:fit:33 - Epoch: 48/50. Train set: Average loss: 0.000065
+2023-05-23 09:56:49.202 | INFO     | trainer_not_inception:fit:43 - Epoch: 48/50. Validation set: Average loss: 0.006471
+2023-05-23 09:56:50.465 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000001
+2023-05-23 09:56:59.367 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000035
+2023-05-23 09:57:08.270 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000019
+2023-05-23 09:57:17.175 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000009
+2023-05-23 09:57:26.076 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000052
+2023-05-23 09:57:34.976 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000034
+2023-05-23 09:57:43.874 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000276
+2023-05-23 09:57:52.772 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000202
+2023-05-23 09:58:01.672 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000009
+2023-05-23 09:58:10.576 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000325
+2023-05-23 09:58:19.476 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000034
+2023-05-23 09:58:28.377 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000315
+2023-05-23 09:58:37.281 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000012
+2023-05-23 09:58:40.085 | INFO     | trainer_not_inception:fit:33 - Epoch: 49/50. Train set: Average loss: 0.000107
+2023-05-23 09:58:49.076 | INFO     | trainer_not_inception:fit:43 - Epoch: 49/50. Validation set: Average loss: 0.016548
+2023-05-23 09:58:50.359 | INFO     | trainer_not_inception:train_epoch:136 - Train: [0/7970 (0%)]	Loss: 0.000002
+2023-05-23 09:58:59.254 | INFO     | trainer_not_inception:train_epoch:136 - Train: [640/7970 (8%)]	Loss: 0.000062
+2023-05-23 09:59:08.165 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1280/7970 (16%)]	Loss: 0.000049
+2023-05-23 09:59:17.073 | INFO     | trainer_not_inception:train_epoch:136 - Train: [1920/7970 (24%)]	Loss: 0.000006
+2023-05-23 09:59:25.974 | INFO     | trainer_not_inception:train_epoch:136 - Train: [2560/7970 (32%)]	Loss: 0.000017
+2023-05-23 09:59:34.879 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3200/7970 (40%)]	Loss: 0.000046
+2023-05-23 09:59:43.781 | INFO     | trainer_not_inception:train_epoch:136 - Train: [3840/7970 (48%)]	Loss: 0.000045
+2023-05-23 09:59:52.686 | INFO     | trainer_not_inception:train_epoch:136 - Train: [4480/7970 (56%)]	Loss: 0.000010
+2023-05-23 10:00:01.592 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5120/7970 (65%)]	Loss: 0.000059
+2023-05-23 10:00:10.506 | INFO     | trainer_not_inception:train_epoch:136 - Train: [5760/7970 (73%)]	Loss: 0.000965
+2023-05-23 10:00:19.413 | INFO     | trainer_not_inception:train_epoch:136 - Train: [6400/7970 (81%)]	Loss: 0.000148
+2023-05-23 10:00:28.314 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7040/7970 (89%)]	Loss: 0.000015
+2023-05-23 10:00:37.217 | INFO     | trainer_not_inception:train_epoch:136 - Train: [7680/7970 (97%)]	Loss: 0.000246
+2023-05-23 10:00:40.026 | INFO     | trainer_not_inception:fit:33 - Epoch: 50/50. Train set: Average loss: 0.000135
+2023-05-23 10:00:49.000 | INFO     | trainer_not_inception:fit:43 - Epoch: 50/50. Validation set: Average loss: 0.012529
