@@ -13,6 +13,7 @@ from Encoder.Stacked_BiLSTM import classifier_Stacked_BiLSTM
 from Encoder.LSTM import classifier_LSTM
 from Encoder.LSTM_Dropout import classifier_LSTM_Dropout
 from Encoder.Stacked_BiLSTM_Dropout import classifier_Stacked_BiLSTM_Dropout
+from Encoder.EEGWaveNet import EEGWaveNet_Encoder   
 
 def load_eeg_encoder(encoder, embedding_dim, device):
     if encoder=="EEGChannelNet":
@@ -21,6 +22,8 @@ def load_eeg_encoder(encoder, embedding_dim, device):
         net = EEGChannelNet_Encoder_Mod(embedding_size=embedding_dim)
     elif encoder=="EEGNet":
         net = classifier_EEGNet(embedding_size=embedding_dim)
+    elif encoder=="EEGWaveNet":
+        net = EEGWaveNet_Encoder(embedding_size=embedding_dim)
     elif encoder=="Stacked_BiLSTM":
         net = classifier_Stacked_BiLSTM(embedding_size=embedding_dim, device=device)
     elif encoder=="LSTM":
