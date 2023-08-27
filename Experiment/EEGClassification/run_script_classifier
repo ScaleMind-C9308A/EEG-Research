@@ -1,11 +1,11 @@
 python3 run_classification.py --dataset CVPR2017 \
---eeg-path /media/mountHDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth \
+--eeg-path /media/mountHDD1/LanxHuyen/CVPR2017/eeg_5_95_std.pth \
 --img-path /home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet \
 --splits-path /media/mountHDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth \
 --log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/results \
 --weight-path None \
 --classifier-mode classic \
---info SyncNet_embed_128_batch64_55_95 \
+--info EEGChannelNet_embed_128_batch64_5_95 \
 --max-epoch 100 \
 --lr 1e-3 \
 --lr-step 10 \
@@ -14,7 +14,7 @@ python3 run_classification.py --dataset CVPR2017 \
 --log-interval 50 \
 --gpu 0 \
 --num-classes 40 \
---eeg-encoder SyncNet \
+--eeg-encoder EEGChannelNet \
 --img-encoder efficientnet_b0 \
 --embedding-size 128 \
 --img-feature-extract 0
