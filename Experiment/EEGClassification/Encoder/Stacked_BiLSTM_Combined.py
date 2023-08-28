@@ -35,8 +35,8 @@ class Encoder_Stacked_BiLSTM_Combined(nn.Module):
         # h0, c0 size are: (D*num_layers, batch, lstm_size); with D=2 for bidirectional RNN
         lstm_init1 = (torch.zeros(2*self.bilstm_layers, batch_size, self.lstm_size).to(self.device),
                      torch.zeros(2*self.bilstm_layers, batch_size, self.lstm_size).to(self.device))
-        lstm_init2 = (torch.zeros(self.lstm_layers_1, batch_size, self.lstm_size_2).to(self.device),
-                     torch.zeros(self.lstm_layers_1, batch_size, self.lstm_size_2).to(self.device))
+        lstm_init2 = (torch.zeros(self.lstm_layers_1, batch_size, self.lstm_size).to(self.device),
+                     torch.zeros(self.lstm_layers_1, batch_size, self.lstm_size).to(self.device))
         #Output size: (N, Sequence, D*output_size); with D=2 for bidirectional RNN
         x = self.stacked_bilstm(x, lstm_init1)[0] 
         x = self.stacked_lstm_1(x, lstm_init2)[0]
