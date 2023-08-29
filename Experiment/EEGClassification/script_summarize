@@ -1,10 +1,10 @@
 python3 summary_models.py \
 --log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/summary_models/ \
 --classifier-mode classic \
---info EEGChannelNet \
+--info EEGChannelNet_Modified \
 --batch-size 64 \
 --gpu 0 \
 --num-classes 40 \
---eeg-encoder EEGChannelNet \
+--eeg-encoder EEGChannelNet_Modified \
 --img-encoder efficientnet_b0 \
 --embedding-size 128 

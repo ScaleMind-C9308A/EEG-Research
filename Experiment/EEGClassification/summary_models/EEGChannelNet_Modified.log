@@ -1,0 +1,28 @@
+2023-08-29 09:40:41.627 | INFO     | __main__:run:24 - Namespace(embedding_size=128, classifier_mode='classic', weight_path=None, log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/summary_models/', info='EEGChannelNet_Modified', img_encoder='efficientnet_b0', eeg_encoder='EEGChannelNet_Modified', batch_size=64, num_classes=40, gpu=0, device=device(type='cuda', index=0))
+2023-08-29 09:40:42.827 | INFO     | __main__:run:29 - ====================================================================================================
+Layer (type:depth-idx)                             Output Shape              Param #
+====================================================================================================
+EEGClassificationNet                               [64, 40]                  --
+├─EEGChannelNet_Encoder_Mod: 1-1                   [64, 128]                 --
+│    └─FeaturesExtractor: 2-1                      [64, 50, 1, 10]           --
+│    │    └─TemporalBlock: 3-1                     [64, 40, 128, 220]        1,368
+│    │    └─SpatialBlock: 3-2                      [64, 200, 64, 220]        532,520
+│    │    └─ModuleList: 3-3                        --                        4,325,600
+│    │    └─ConvLayer2D: 3-4                       [64, 50, 1, 10]           90,450
+│    └─Sequential: 2-2                             [64, 128]                 --
+│    │    └─Dropout: 3-5                           [64, 500]                 --
+│    │    └─Linear: 3-6                            [64, 128]                 64,128
+│    │    └─ReLU: 3-7                              [64, 128]                 --
+├─Sequential: 1-2                                  [64, 40]                  --
+│    └─Linear: 2-3                                 [64, 40]                  5,160
+====================================================================================================
+Total params: 5,019,226
+Trainable params: 5,019,226
+Non-trainable params: 0
+Total mult-adds (T): 1.43
+====================================================================================================
+Input size (MB): 14.42
+Forward/backward pass size (MB): 14342.94
+Params size (MB): 20.08
+Estimated Total Size (MB): 14377.43
+====================================================================================================
