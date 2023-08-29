@@ -1,0 +1,1 @@
+2023-08-29 14:26:52.748 | INFO     | __main__:run:24 - Namespace(embedding_size=128, classifier_mode='classic', weight_path=None, log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/summary_models/', info='EEGWaveNet', img_encoder='efficientnet_b0', eeg_encoder='EEGWaveNet', batch_size=64, num_classes=40, gpu=0, device=device(type='cuda', index=0))

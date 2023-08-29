@@ -1,0 +1,21 @@
+2023-08-29 14:31:31.089 | INFO     | __main__:run:24 - Namespace(embedding_size=128, classifier_mode='classic', weight_path=None, log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/summary_models/', info='Stacked_BiLSTM', img_encoder='efficientnet_b0', eeg_encoder='Stacked_BiLSTM', batch_size=64, num_classes=40, gpu=0, device=device(type='cuda', index=0))
+2023-08-29 14:31:31.874 | INFO     | __main__:run:29 - ==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+EEGClassificationNet                     [64, 40]                  --
+├─classifier_Stacked_BiLSTM: 1-1         [64, 128]                 --
+│    └─LSTM: 2-1                         [64, 440, 256]            659,456
+│    └─Linear: 2-2                       [64, 128]                 32,896
+├─Sequential: 1-2                        [64, 40]                  --
+│    └─Linear: 2-3                       [64, 40]                  5,160
+==========================================================================================
+Total params: 697,512
+Trainable params: 697,512
+Non-trainable params: 0
+Total mult-adds (G): 18.57
+==========================================================================================
+Input size (MB): 14.42
+Forward/backward pass size (MB): 57.76
+Params size (MB): 2.79
+Estimated Total Size (MB): 74.97
+==========================================================================================

@@ -1,0 +1,22 @@
+2023-08-29 14:27:42.923 | INFO     | __main__:run:24 - Namespace(embedding_size=128, classifier_mode='classic', weight_path=None, log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/summary_models/', info='LSTM', img_encoder='efficientnet_b0', eeg_encoder='LSTM', batch_size=64, num_classes=40, gpu=0, device=device(type='cuda', index=0))
+2023-08-29 14:27:43.711 | INFO     | __main__:run:29 - ==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+EEGClassificationNet                     [64, 40]                  --
+├─classifier_LSTM: 1-1                   [64, 128]                 --
+│    └─LSTM: 2-1                         [64, 440, 128]            132,096
+│    └─Linear: 2-2                       [64, 128]                 16,512
+│    └─ReLU: 2-3                         [64, 128]                 --
+├─Sequential: 1-2                        [64, 40]                  --
+│    └─Linear: 2-4                       [64, 40]                  5,160
+==========================================================================================
+Total params: 153,768
+Trainable params: 153,768
+Non-trainable params: 0
+Total mult-adds (G): 3.72
+==========================================================================================
+Input size (MB): 14.42
+Forward/backward pass size (MB): 28.92
+Params size (MB): 0.62
+Estimated Total Size (MB): 43.95
+==========================================================================================
