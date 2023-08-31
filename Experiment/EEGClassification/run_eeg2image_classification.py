@@ -40,7 +40,7 @@ def run():
     # Step 1: Set DataLoaders
     train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path,  args.splits_path, args.device,  args)
     # Step 2: Set model
-    model = load_image_encoder(args.img_encoder, args.num_classes, args.img_feature_extract, args.use_pretrained)
+    model = load_image_encoder(args.img_encoder, args.num_classes, args.img_feature_extract, pretrained=True)
     model.to(args.device)
     # Step 3: Set loss_fn
     loss_fn = nn.CrossEntropyLoss()
@@ -120,6 +120,7 @@ def load_config():
                         help='classic | triplet | online_triplet')
     parser.add_argument('--weight-path', default=None, 
                         help='Path of pretrained weight of the model')
+    parser.add_argument('--use-pretrained', default=True, type=bool)
     
     # Model training configurations
     parser.add_argument('--batch-size', default=128, type=int,
