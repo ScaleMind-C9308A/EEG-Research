@@ -1,10 +1,16 @@
 import os
 import numpy as np
+import random
 import argparse
 from loguru import logger
 
 import torch
-from torch.utils.data import Dataset, DataLoader
+import torch.nn as nn
+import torch.optim as optim
+import torch.optim.lr_scheduler as lr_scheduler
+
+from data_loader_eeg2image import load_data
+from trainer_eeg2image import fit
 
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
@@ -12,127 +18,49 @@ from sklearn.model_selection import train_test_split
 
 from Encoder.image_encoder import load_image_encoder
 
+def seed_everything(seed):
+    random.seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = True
 def run():
+    # Step 0: Setup
+    seed_everything(271)
     args = load_config()
+    if args.arch != 'test':
+        log_path_dir = os.path.join(args.log_path, args.info)
+        if not os.path.exists(log_path_dir):
+            os.makedirs(log_path_dir)
+        logger.add(os.path.join(log_path_dir, 'train.log'))
+        logger.info(args)
+    is_inception = True if (args.img_encoder == "inception_v3") else False
+    # Step 1: Set DataLoaders
+    train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path,  args.splits_path, args.device,  args)
+    # Step 2: Set model
+    model = load_image_encoder(args.img_encoder, args.num_classes, args.img_feature_extract, args.use_pretrained)
+    model.to(args.device)
+    # Step 3: Set loss_fn
+    loss_fn = nn.CrossEntropyLoss()
+    # Step 4: Set optimizer
+    print("Params to learn:")
+    params_to_update = []
+    for name,param in model.named_parameters():
+        if param.requires_grad == True:
+            params_to_update.append(param)
+            print("\t",name)
+    if (args.optim == "Adam"):
+        optimizer = optim.Adam(params_to_update, lr=args.lr, weight_decay=args.wd)
+    elif (args.optim == "SGD"):
+        optimizer = optim.SGD(params_to_update, lr=args.lr, weight_decay=args.wd, momentum=args.momen, nesterov=args.nesterov)
 
-    log_path_dir = os.path.join(args.log_path, args.info)
-    if not os.path.exists(log_path_dir):
-        os.makedirs(log_path_dir)
-    logger.add(os.path.join(log_path_dir, 'train.log'))
-    logger.info(args)
-    # Step 1: Prepare your CNN model (e.g., ResNet18)
-    cnn_model = load_image_encoder(args.img_encoder, args.embedding_size, True, args.pretrained)
-    cnn_model = cnn_model.eval()  # Set the model to evaluation mode
+    scheduler = lr_scheduler.StepLR(optimizer, args.lr_step, gamma=0.1, last_epoch=-1)
+    #Step 5: Put all to net_trainer()
+    fit(train_dataloader, val_dataloader, model, loss_fn, optimizer, scheduler, args.max_epoch, args.device, args.log_interval, log_path_dir, is_inception)
 
-    # Step 2: Extract features using the CNN model
-    train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path, args.splits_path, args.device, args)
-    cnn_features, targets = cnn_feature_extractor(train_dataloader, cnn_model, args.device)
 
-    # # Flatten the features if needed
-    # flattened_features = cnn_features.view(cnn_features.size(0), -1).numpy()
-
-    # Step 3: Split data and train SVM classifier
-    X_train, X_test, y_train, y_test = train_test_split(cnn_features, targets, test_size=0.2, random_state=42)
-
-    # Create an SVM classifier with RBF kernel
-    svm_classifier = SVC(kernel='rbf', C=1.0, gamma='auto')  # Adjust hyperparameters as needed
-
-    # Train the SVM classifier
-    svm_classifier.fit(X_train, y_train)
-
-    # Make predictions on the test data
-    y_pred = svm_classifier.predict(X_test)
-
-    # Calculate accuracy
-    accuracy = accuracy_score(y_test, y_pred)
-    logger.info(f"Accuracy: {accuracy:.2f}")
-
-class EEG2Image_Dataset(Dataset):
-    """
-    Train: For each sample (anchor) randomly chooses a positive and negative samples
-    Test: Creates fixed triplets for testing
-    """
-    def __init__(self, loaded_eeg_heatmaps, loaded_splits, mode="train", transform=None):
-        """
-        Args:
-            img_dir_path: directory path of imagenet images,
-            loaded_eeg: eeg dataset loaded from torch.load(),
-            loaded_splits: cross-validation splits loaded from torch.load(),
-        All arrays and data are returned as torch Tensors
-        """
-        self.mode = mode
-        self.transform = transform
-        self.splits = loaded_splits
-        dataset, classes, img_filenames = [loaded_eeg_heatmaps[k] for k in ['dataset', 'labels', 'images']]
-        self.classes = classes
-        self.img_filenames = img_filenames
-
-        self.eeg_dataset = dataset
-        """We use only split 0, no cross-validation"""
-        self.split_chosen = loaded_splits[0]
-        self.split_train = self.split_chosen['train']
-        self.split_val = self.split_chosen['val']
-        self.split_test = self.split_chosen['test']
-
-        if self.mode == "train":
-            self.labels = [self.eeg_dataset[sample_idx]['label'] for sample_idx in self.split_train]
-        elif self.mode == "val":
-            self.labels = [self.eeg_dataset[sample_idx]['label'] for sample_idx in self.split_val]
-        elif self.mode == "test":
-            self.labels = [self.eeg_dataset[sample_idx]['label'] for sample_idx in self.split_test]
-        else:
-            raise ValueError()
-
-        self.labels = torch.tensor(self.labels)
-    def __getitem__(self, index):
-        """
-        Return: (eeg, img), []
-            - eeg: Tensor()
-            - image: Tensor()
-        """
-        if self.mode == "train":
-            dataset_idx = self.split_train[index]
-        elif self.mode == "val":
-            dataset_idx = self.split_val[index]
-        elif self.mode == "test":
-            dataset_idx = self.split_test[index]
-        else:
-            raise ValueError()
-        eeg,_, label = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
-
-        return eeg, label
-
-    def __len__(self):
-        if self.mode == "train":
-            return len(self.split_train)
-        elif self.mode == "val":
-            return len(self.split_val)
-        elif self.mode == "test":
-            return len(self.split_test)
-        else:
-            raise ValueError()
-
-def load_data(eeg_heatmap_path, splits_path, device, args):
-    """
-    Args:
-        is_inception: True | False
-    """
-    loaded_eeg_heatmaps = torch.load(eeg_heatmap_path)
-    loaded_splits = torch.load(splits_path)['splits']
-    
-    train_dataset = EEG2Image_Dataset(loaded_eeg_heatmaps, loaded_splits, mode="train")
-    val_dataset = EEG2Image_Dataset(loaded_eeg_heatmaps, loaded_splits, mode="val")
-    test_dataset = EEG2Image_Dataset(loaded_eeg_heatmaps, loaded_splits, mode="test")
-
-    # train_batch_sampler = BalancedBatchSampler(train_dataset.labels, n_classes=8, n_samples=8)
-    # val_batch_sampler = BalancedBatchSampler(val_dataset.labels, n_classes=8, n_samples=8)
-    # test_batch_sampler = BalancedBatchSampler(test_dataset.labels, n_classes=8, n_samples=8)
-
-    kwargs = {'num_workers': 4, 'pin_memory': True} if device else {}
-    train_dataloader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, **kwargs)
-    val_dataloader = DataLoader(val_dataset, batch_size=args.batch_size, shuffle=True, **kwargs)
-    test_dataloader = DataLoader(test_dataset, batch_size=args.batch_size, shuffle=True, **kwargs)
-    return train_dataloader, val_dataloader, test_dataloader
 
 def cnn_feature_extractor(data_loader, model, device):
     input_features = []  # Collect model outputs for SVM input
@@ -180,7 +108,7 @@ def load_config():
     ##################################
     parser.add_argument('--dataset',
                         help='Dataset name.')
-    parser.add_argument('--eeg-heatmap-path',
+    parser.add_argument('--eeg-path',
                         help='Path of eeg dataset')
     parser.add_argument('--img-path',
                         help='Path of image dataset')
