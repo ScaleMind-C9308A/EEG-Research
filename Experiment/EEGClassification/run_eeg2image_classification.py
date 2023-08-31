@@ -93,7 +93,13 @@ def load_config():
     Returns
         args(argparse.ArgumentParser): Configuration.
     """
-    parser = argparse.ArgumentParser(description='Online Triplet Training of EEG and image')
+    parser = argparse.ArgumentParser(description='EEG2Image classification')
+    ############################
+    parser.add_argument('--img-feature-extract', default=0, type=int,
+                        help='(1|0: Option to turn on feature extraction of image encoder')
+    parser.add_argument('--embedding-size', default=1000, type=int,
+                        help="Embedding size for training")
+    ############################
     parser.add_argument('--dataset',
                         help='Dataset name.')
     parser.add_argument('--eeg-path',
