@@ -55,7 +55,7 @@ class EEG2Image_Dataset(Dataset):
             raise ValueError()
         eeg_heatmap,_, label = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
 
-        eeg_heatmap = eeg_heatmap.unsqueeze(0).repeat(3, 1, 1)
+        eeg_heatmap = eeg_heatmap.unsqueeze(0).repeat(3,  1, 1)
 
         eeg_heatmap_resize = transforms.Resize(224)(eeg_heatmap)
         return eeg_heatmap_resize, label
