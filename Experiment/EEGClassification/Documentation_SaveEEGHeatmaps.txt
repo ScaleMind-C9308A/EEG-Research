@@ -1,0 +1,17 @@
+Extract EEG Heatmaps to .pth file format
+*Folder saving dataset:
+/media/mountHDD1/LanxHuyen/CVPR2017
+
+*How to save:
+torch.save(dataset, "f{path}/eeg_heatmaps.pth")
+*How to load:
+dataset = torch.load("f{path}/eeg_heatmaps.pth")
+
+*Details:
+dataset = <list[11682]>
++)each item in list: dataset[i] = {
+	"eeg": torch.Tensor size (512, 440, 3),
+	"label": <class label of image>,
+	"subject": <subject of the trial>,
+	"image": <index of image class name (e.g. n11023), stored separately in a different list>	
+}

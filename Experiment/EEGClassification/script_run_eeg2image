@@ -1,0 +1,21 @@
+python3 run_classification.py --dataset CVPR2017 \
+--eeg-path /media/mountHDD1/LanxHuyen/CVPR2017/eeg_55_95_std.pth \
+--img-path /home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet \
+--splits-path /media/mountHDD1/LanxHuyen/CVPR2017/block_splits_by_image_all.pth \
+--log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/results \
+--weight-path None \
+--classifier-mode classic \
+--info StackedBiLSTMCombined_embed_128_batch64_55_95 \
+--max-epoch 100 \
+--lr 1e-3 \
+--lr-step 10 \
+--optim Adam \
+--batch-size 64 \
+--log-interval 50 \
+--gpu 1 \
+--num-classes 40 \
+--eeg-encoder Stacked_BiLSTM_Combined \
+--img-encoder efficientnet_b0 \
+--embedding-size 128 \
+--img-feature-extract 0
+
