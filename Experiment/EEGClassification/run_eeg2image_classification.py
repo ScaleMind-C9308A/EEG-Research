@@ -93,19 +93,7 @@ def load_config():
     Returns
         args(argparse.ArgumentParser): Configuration.
     """
-    parser = argparse.ArgumentParser(description='EEG-to-Image Based Model')
-    ### Specific to Contrastive Learning
-    # From argparse document: The bool() function is not recommended as a type converter. All it does is convert 
-    # empty strings to False and non-empty strings to True
-    parser.add_argument('--img-feature-extract', default=0, type=int,
-                        help='(1|0: Option to turn on feature extraction of image encoder')
-    parser.add_argument('--embedding-size', default=1000, type=int,
-                        help="Embedding size for training")
-    parser.add_argument('--classifier-mode', default='classic', type=str,
-                        help='classic | triplet | online_triplet')
-    parser.add_argument('--weight-path', default=None, 
-                        help='Path of pretrained weight of the model')
-    ##################################
+    parser = argparse.ArgumentParser(description='Online Triplet Training of EEG and image')
     parser.add_argument('--dataset',
                         help='Dataset name.')
     parser.add_argument('--eeg-path',
@@ -120,14 +108,20 @@ def load_config():
                         help='Train info')
     parser.add_argument('--img-encoder', default="inception_v3", type=str,
                         help='inception_v3 | resnet50')
-
+    parser.add_argument('--eeg-encoder', default="EEGChannelNet", type=str,
+                        help='eeg encoder')
+    parser.add_argument('--classifier-mode', default='classic', type=str,
+                        help='classic | triplet | online_triplet')
+    parser.add_argument('--weight-path', default=None, 
+                        help='Path of pretrained weight of the model')
     
     # Model training configurations
     parser.add_argument('--batch-size', default=128, type=int,
                         help='Batch size.(default: 128)')
     parser.add_argument('--max-epoch', default=100, type=int,
                         help='Number of epochs.(default: 30)')
-
+    parser.add_argument('--log-interval', default=10, type=int,
+                        help='Log interval during training.(default: 10)')
     parser.add_argument('--arch', default='train',
                         help='Net arch')
     parser.add_argument('--save_ckpt', default='checkpoints/',
@@ -141,7 +135,23 @@ def load_config():
     parser.add_argument('--gpu', default=None, type=int,
                         help='Using gpu.(default: False)')    
     
-
+    # Training Optim Settings
+    parser.add_argument('--lr', default=2.5e-4, type=float,
+                    help='Learning rate.(default: 2.5e-4)')
+    parser.add_argument('--wd', default=1e-4, type=float,
+                        help='Weight Decay.(default: 1e-4)')
+    parser.add_argument('--optim', default='Adam', type=str,
+                        help='Optimizer')
+    parser.add_argument('--gamma', default=200, type=float,
+                        help='Hyper-parameter.(default: 200)')
+    parser.add_argument('--lr-step', default=40, type=int,
+                        help='lr decrease step.(default: 40)')
+    parser.add_argument('--pretrain', action='store_true',
+                        help='Using image net pretrain')
+    parser.add_argument('--momen', default=0.9, type=float,
+                        help='Hyper-parameter.(default: 0.9)')
+    parser.add_argument('--nesterov', action='store_true',
+                        help='Using SGD nesterov')
     
     args = parser.parse_args()
 
@@ -153,7 +163,5 @@ def load_config():
 
     return args
 
-
 if __name__ == '__main__':
     run()
-
