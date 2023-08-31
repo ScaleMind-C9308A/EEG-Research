@@ -17,12 +17,12 @@ class EEG2Image_Dataset(Dataset):
         """
         self.mode = mode
         self.transform = transform
-        self.splits = loaded_splits
-        dataset, classes, img_filenames = [loaded_eeg_heatmaps[k] for k in ['dataset', 'labels', 'images']]
-        self.classes = classes
-        self.img_filenames = img_filenames
+        # self.splits = loaded_splits
+        # dataset, classes, img_filenames = [loaded_eeg_heatmaps[k] for k in ['dataset', 'labels', 'images']]
+        # self.classes = classes
+        # self.img_filenames = img_filenames
 
-        self.eeg_dataset = dataset
+        self.eeg_dataset = loaded_eeg_heatmaps
 
         self.split_chosen = loaded_splits
         self.split_train = self.split_chosen['train']
