@@ -13,7 +13,7 @@ python3 run_eeg2image_classification.py --dataset CVPR2017 \
 --batch-size 64 \
 --log-interval 50 \
 --gpu 1 \
---num-classes 40 \
+--num-classes 39 \
 --eeg-encoder Stacked_BiLSTM_Combined \
 --img-encoder efficientnet_b0 \
 --embedding-size 128 \

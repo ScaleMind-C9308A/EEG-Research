@@ -57,7 +57,7 @@ class EEG2Image_Dataset(Dataset):
 
         eeg_heatmap = eeg_heatmap.unsqueeze(0).repeat(3,  1, 1)
 
-        eeg_heatmap_resize = transforms.Resize(224)(eeg_heatmap)
+        eeg_heatmap_resize = transforms.Resize((224, 224), antialias=None)(eeg_heatmap)
         return eeg_heatmap_resize, label
 
     def __len__(self):
