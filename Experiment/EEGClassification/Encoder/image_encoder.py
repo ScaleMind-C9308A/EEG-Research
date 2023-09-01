@@ -1,7 +1,43 @@
 from torchvision import models
 import torch.nn as nn
 import torch.nn.functional as F
+import torch
 from Encoder.efficientnet_b0_lite import get_model
+
+def load_image_encoder_eeg2image(backbone, output_dim, feature_extract, splits_by_subject, pretrained):
+    """
+    Load image encoder as CNN models
+
+    Args:
+        backbone: "inception_v3" | "resnet50" | "efficientnet_b0" | "efficientnet_b1" |
+        output_dim: (default: 40) 
+        pretrained: True | False
+        feature_extract: True | False
+        splits_by_subject: True | False
+    """
+    return ImageEncoder_EEG2Image(backbone, output_dim, feature_extract, splits_by_subject, pretrained)
+
+class ImageEncoder_EEG2Image(nn.Module):
+    def __init__(self, backbone="inception_v3", output_dim=1000, feature_extract=False, splits_by_subject=True, pretrained=True):
+        """
+        backbone: "inception_v3" | "resnet50" | "efficientnet_b0" | "efficientnet_b1" |
+        output_dim: (default: 40) 
+        pretrained: True | False
+        """
+        super().__init__()
+        self.backbone = initialize_model(backbone, output_dim, feature_extract, use_pretrained=pretrained)
+        if splits_by_subject:
+            self.backbone._conv_stem.in_channels = 6
+            self.backbone._conv_stem.weight = torch.nn.Parameter(torch.cat([self.backbone._conv_stem.weight, self.backbone._conv_stem.weight], axis=1))
+    def forward(self, x):
+        output = self.backbone(x)
+        output = F.relu(output)
+        return output
+
+def set_parameter_requires_grad(model, feature_extracting):
+    if feature_extracting:
+        for param in model.parameters():
+            param.requires_grad = False
 
 def load_image_encoder(backbone, output_dim, feature_extract, pretrained):
     """
