@@ -41,6 +41,9 @@ def run():
     train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path,  args.splits_path, args.splits_by_subject, args.device,  args)
     # Step 2: Set model
     model = load_image_encoder(args.img_encoder, args.num_classes, args.img_feature_extract, pretrained=True)
+    if args.splits_by_subject:
+        model._conv_stem.in_channels = 6
+        model._conv_stem.weight = torch.nn.Parameter(torch.cat([model._conv_stem.weight, model._conv_stem.weight], axis=1))
     model.to(args.device)
     # Step 3: Set loss_fn
     loss_fn = nn.CrossEntropyLoss()
