@@ -1,5 +1,5 @@
 python3 run_eeg2image_classification.py --dataset CVPR2017 \
---eeg-path /media/mountHDD1/LanxHuyen/CVPR2017/eeg_heatmaps_55_95.pth \
+--eeg-path /media/mountHDD1/LanxHuyen/CVPR2017/eeg_heatmaps_5_95.pth \
 --img-path /home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet \
 --splits-path /media/mountHDD1/LanxHuyen/CVPR2017/splits_by_image_removed_33.pth \
 --log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/results/eeg2image \
@@ -12,8 +12,8 @@ python3 run_eeg2image_classification.py --dataset CVPR2017 \
 --optim Adam \
 --batch-size 64 \
 --log-interval 50 \
---gpu 1 \
---num-classes 40 \
+--gpu 0 \
+--num-classes 39 \
 --eeg-encoder Stacked_BiLSTM_Combined \
 --img-encoder efficientnet_b0 \
 --embedding-size 128 \
