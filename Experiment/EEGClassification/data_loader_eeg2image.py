@@ -107,7 +107,7 @@ class EEG2Image_GroupSubject_Dataset(Dataset):
         # else:
         #     raise ValueError()
 
-        self.labels = torch.tensor(self.labels)
+        # self.labels = torch.tensor(self.labels)
     def __getitem__(self, img_index):
         """
         Return: (eeg, img), []
