@@ -22,9 +22,9 @@ def run(mode="classic", eeg_encoder_name="LSTM", img_encoder_name="inception_v3"
     
     logger.add(os.path.join(args.log_path, f"{args.info}.log"))
     logger.info(args)
-        
-    classifier_model = load_model(args.classifier_mode, args.weight_path, args.num_classes, args.eeg_encoder, 
-                                  args.img_encoder, args.embedding_size,False, args.device)
+    classifier_model = load_image_encoder(args.img_encoder, args.embedding_size, True, args.use_pretrained)
+    # classifier_model = load_model(args.classifier_mode, args.weight_path, args.num_classes, args.eeg_encoder, 
+                                #   args.img_encoder, args.embedding_size,False, args.device)
     classifier_model.to(args.device)
     logger.info(summary(classifier_model, input_size=(args.batch_size, 128, 440)))
 

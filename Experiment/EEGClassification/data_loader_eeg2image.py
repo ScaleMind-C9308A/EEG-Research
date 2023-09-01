@@ -69,18 +69,93 @@ class EEG2Image_Dataset(Dataset):
             return len(self.split_test)
         else:
             raise ValueError()
+        
+class EEG2Image_GroupSubject_Dataset(Dataset):
+    """
+    Train: For each sample (anchor) randomly chooses a positive and negative samples
+    Test: Creates fixed triplets for testing
+    """
+    def __init__(self, loaded_eeg_heatmaps, loaded_splits, mode="train", transform=None):
+        """
+        Args:
+            img_dir_path: directory path of imagenet images,
+            loaded_eeg: eeg dataset loaded from torch.load(),
+            loaded_splits: cross-validation splits loaded from torch.load(),
+        All arrays and data are returned as torch Tensors
+        """
+        self.mode = mode
+        self.transform = transform
+        self.num_subjects = 6
+        # self.splits = loaded_splits
+        # dataset, classes, img_filenames = [loaded_eeg_heatmaps[k] for k in ['dataset', 'labels', 'images']]
+        # self.classes = classes
+        # self.img_filenames = img_filenames
 
-def load_data(eeg_heatmap_path, splits_path, device, args):
+        self.eeg_dataset = loaded_eeg_heatmaps
+
+        self.split_chosen = loaded_splits
+        self.split_train = self.split_chosen['train']
+        self.split_val = self.split_chosen['val']
+        self.split_test = self.split_chosen['test']
+
+        # if self.mode == "train":
+        #     self.labels = [self.eeg_dataset[sample_idx]['label'] for sample_idx in self.split_train]
+        # elif self.mode == "val":
+        #     self.labels = [self.eeg_dataset[sample_idx]['label'] for sample_idx in self.split_val]
+        # elif self.mode == "test":
+        #     self.labels = [self.eeg_dataset[sample_idx]['label'] for sample_idx in self.split_test]
+        # else:
+        #     raise ValueError()
+
+        self.labels = torch.tensor(self.labels)
+    def __getitem__(self, img_index):
+        """
+        Return: (eeg, img), []
+            - eeg: Tensor()
+            - image: Tensor()
+        """
+        if self.mode == "train":
+            indices = self.split_train[img_index]
+        elif self.mode == "val":
+            indices = self.split_val[img_index]
+        elif self.mode == "test":
+            indices = self.split_test[img_index]
+        else:
+            raise ValueError()
+        eeg_tensors = [self.eeg_dataset[dataset_idx]['eeg'] for dataset_idx in indices] # (512, 440)
+        labels = [self.eeg_dataset[dataset_idx]['label'] for dataset_idx in indices]
+        eeg_stacked = torch.stack(eeg_tensors, dim=0) # (6, 512, 440)
+        # eeg_heatmap,_, label = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
+
+        eeg_heatmap_resize = transforms.Resize((224, 224), antialias=None)(eeg_stacked)
+        return eeg_heatmap_resize, labels[0]
+
+    def __len__(self):
+        if self.mode == "train":
+            return len(self.split_train)
+        elif self.mode == "val":
+            return len(self.split_val)
+        elif self.mode == "test":
+            return len(self.split_test)
+        else:
+            raise ValueError()
+
+def load_data(eeg_heatmap_path, splits_path, splits_by_subject, device, args):
     """
     Args:
-        is_inception: True | False
+        splits_by_subject: bool, whether to use splits by subject or not
     """
     loaded_eeg_heatmaps = torch.load(eeg_heatmap_path)
     loaded_splits = torch.load(splits_path)
     
-    train_dataset = EEG2Image_Dataset(loaded_eeg_heatmaps, loaded_splits, mode="train")
-    val_dataset = EEG2Image_Dataset(loaded_eeg_heatmaps, loaded_splits, mode="val")
-    test_dataset = EEG2Image_Dataset(loaded_eeg_heatmaps, loaded_splits, mode="test")
+    if splits_by_subject:
+        train_dataset = EEG2Image_GroupSubject_Dataset(loaded_eeg_heatmaps, loaded_splits, mode="train")
+        val_dataset = EEG2Image_GroupSubject_Dataset(loaded_eeg_heatmaps, loaded_splits, mode="val")
+        test_dataset = EEG2Image_GroupSubject_Dataset(loaded_eeg_heatmaps, loaded_splits, mode="test")
+    else:
+        train_dataset = EEG2Image_Dataset(loaded_eeg_heatmaps, loaded_splits, mode="train")
+        val_dataset = EEG2Image_Dataset(loaded_eeg_heatmaps, loaded_splits, mode="val")
+        test_dataset = EEG2Image_Dataset(loaded_eeg_heatmaps, loaded_splits, mode="test")
 
     kwargs = {'num_workers': 4, 'pin_memory': True} if device else {}
     train_dataloader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, **kwargs)
