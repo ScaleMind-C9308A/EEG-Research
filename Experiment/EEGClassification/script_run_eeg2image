@@ -1,7 +1,7 @@
 python3 run_eeg2image_classification.py --dataset CVPR2017 \
 --eeg-path /media/mountHDD1/LanxHuyen/CVPR2017/eeg_heatmaps_5_95.pth \
 --img-path /home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet \
---splits-path /media/mountHDD1/LanxHuyen/CVPR2017/splits_by_subject.pth \
+--splits-path /media/mountHDD1/LanxHuyen/CVPR2017/splits_by_subject_2.pth \
 --log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/results/eeg2image \
 --weight-path None \
 --classifier-mode classic \
