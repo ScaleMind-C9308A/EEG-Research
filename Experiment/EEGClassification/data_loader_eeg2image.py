@@ -122,8 +122,23 @@ class EEG2Image_GroupSubject_Dataset(Dataset):
             indices = self.split_test[img_index]
         else:
             raise ValueError()
-        eeg_tensors = [self.eeg_dataset[dataset_idx]['eeg'] for dataset_idx in indices] # (512, 440)
-        labels = [self.eeg_dataset[dataset_idx]['label'] for dataset_idx in indices]
+        subjects_indices = [self.eeg_dataset[dataset_idx]['subject'] for dataset_idx in indices]
+        # Use enumerate to get (index, value) pairs
+        indexed_list = list(enumerate(subjects_indices))
+        # Sort the indexed list by the values
+        sorted_list = sorted(indexed_list, key=lambda x: x[1])
+        # Extract the sorted indices
+        sorted_indices = [index for index, value in sorted_list]
+        # Extract dataset indices by subject sorted indices
+        dataset_indices = [indices[index] for index in sorted_indices]
+
+        if (img_index == 0):
+            print(f"subjects_indices: {subjects_indices}")
+            print(f"sorted_indices: {sorted_indices}")
+            print(f"dataset_indices: {dataset_indices}")
+
+        eeg_tensors = [self.eeg_dataset[dataset_idx]['eeg'] for dataset_idx in dataset_indices] # (512, 440)
+        labels = [self.eeg_dataset[dataset_idx]['label'] for dataset_idx in dataset_indices]
         eeg_stacked = torch.stack(eeg_tensors, dim=0) # (6, 512, 440)
         # eeg_heatmap,_, label = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
 
