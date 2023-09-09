@@ -32,7 +32,11 @@ def group_splits_by_subject(dataset, splits):
         images_idx = np.array([dataset[idx]['image'] for idx in split]) # => len(images_idx) = len(split)
         grouped_images_idx = np.array([np.where(images_idx == image)[0] for image in np.unique(images_idx)]) #(split_len, 6)
         result_splits[key] = grouped_images_idx
-    torch.save(result_splits, os.path.join(output_path_dir, "splits_by_subject.pth"))
+    torch.save(result_splits, os.path.join(output_path_dir, "splits_by_subject_1.pth"))
+
+if __name__ == "__main__":
+    # remove_label_from_splits(dataset, splits_all, 33)
+    group_splits_by_subject(dataset, splits_all)
 
 
 
