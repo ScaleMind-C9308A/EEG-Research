@@ -27,8 +27,11 @@ class ImageEncoder_EEG2Image(nn.Module):
         super().__init__()
         self.backbone = initialize_model(backbone, output_dim, feature_extract, use_pretrained=pretrained)
         if splits_by_subject:
-            self.backbone._conv_stem.in_channels = 6
-            self.backbone._conv_stem.weight = torch.nn.Parameter(torch.cat([self.backbone._conv_stem.weight, self.backbone._conv_stem.weight], axis=1))
+            param_origin = list(self.backbone.features[0][0].parameters())[0]
+            self.backbone.features[0][0] = nn.Conv2d(6, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1,1), bias=False)
+            for param in self.backbone.features[0][0].parameters():
+                param = torch.cat((param_origin, param_origin), dim=1)
+            
     def forward(self, x):
         output = self.backbone(x)
         output = F.relu(output)
