@@ -44,7 +44,8 @@ def run():
     model = load_image_encoder_eeg2image(args.img_encoder, args.num_classes, args.img_feature_extract, args.splits_by_subject, pretrained=True)
     model.to(args.device)
     # Step 3: Set loss_fn
-    loss_fn = nn.CrossEntropyLoss()
+    # loss_fn = nn.CrossEntropyLoss()
+    loss_fn = nn.MultiMarginLoss()
     # Step 4: Set optimizer
     print("Params to learn:")
     params_to_update = []

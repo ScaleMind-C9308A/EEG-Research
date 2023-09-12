@@ -5,8 +5,8 @@ python3 run_eeg2image_classification.py --dataset CVPR2017 \
 --log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/results/eeg2image \
 --weight-path None \
 --classifier-mode classic \
---info EEG2Image_BySubject_efficientnet_b0_5_95_200epoch \
---max-epoch 200 \
+--info EEG2Image_BySubject_efficientnet_b0_5_95_MultiMarginLoss \
+--max-epoch 100 \
 --lr 1e-3 \
 --lr-step 10 \
 --optim Adam \
