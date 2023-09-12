@@ -24,7 +24,7 @@ class EEG2Image_Dataset(Dataset):
 
         self.eeg_dataset = loaded_eeg_heatmaps
 
-        self.split_chosen = loaded_splits['splits'][0]
+        self.split_chosen = loaded_splits
         self.split_train = self.split_chosen['train']
         self.split_val = self.split_chosen['val']
         self.split_test = self.split_chosen['test']
