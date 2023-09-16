@@ -45,7 +45,7 @@ def run():
     model.to(args.device)
     # Step 3: Set loss_fn
     # loss_fn = nn.CrossEntropyLoss()
-    loss_fn = nn.MultiMarginLoss()
+    loss_fn = nn.MultiMarginLoss(margin=0.5)
     # Step 4: Set optimizer
     print("Params to learn:")
     params_to_update = []
