@@ -2,6 +2,8 @@ import torch
 from torch.utils.data import Dataset, DataLoader
 import torchvision.transforms as transforms
 import torch.nn.functional as F
+from audiomentations import Compose, AddGaussianNoise, TimeStretch, PitchShift, Shift
+import numpy as np
 
 class EEG2Image_Augment_Dataset(Dataset):
     """
@@ -36,6 +38,11 @@ class EEG2Image_Augment_Dataset(Dataset):
         self.split_val = self.split_chosen['val']
         self.split_test = self.split_chosen['test']
 
+        self.augment = Compose([
+            AddGaussianNoise(min_amplitude=0.001, max_amplitude=0.015, p=0.5),
+            Shift(p=0.5),
+        ])
+
         if self.mode == "train":
             self.labels = [self.eeg_dataset[sample_idx]['label'] for sample_idx in self.split_train]
         elif self.mode == "val":
@@ -62,8 +69,12 @@ class EEG2Image_Augment_Dataset(Dataset):
             raise ValueError()
         eeg,_, label = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
         eeg = eeg.float()[:, self.time_low:self.time_high]
-        # Add noise to eeg
-        eeg = eeg + torch.randn(eeg.size()) * 0.01
+        # # Add noise to eeg
+        # eeg = eeg + torch.randn(eeg.size()) * 0.01
+        # Augment eeg using audiomentations (must convert to numpy first)
+        eeg = eeg.numpy()
+        eeg = self.augment(eeg)
+        eeg = torch.tensor(eeg, dtype=torch.float32)
         # Convert eeg to heatmap
         normalized_data = (eeg - eeg.min()) / (eeg.max() - eeg.min())
         grayscale_images = (normalized_data * 255).to(torch.uint8)
