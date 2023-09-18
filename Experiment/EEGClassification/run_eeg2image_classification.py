@@ -39,13 +39,13 @@ def run():
         logger.info(args)
     is_inception = True if (args.img_encoder == "inception_v3") else False
     # Step 1: Set DataLoaders
-    train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path,  args.splits_path, args.splits_by_subject, args.device,  args)
+    train_dataloader, val_dataloader, test_dataloader = load_data(args.eeg_path, args.eeg_heatmap_path, args.splits_path, args.time_low, args.time_high, args.splits_by_subject, args.device, args)
     # Step 2: Set model
     model = load_image_encoder_eeg2image(args.img_encoder, args.num_classes, args.img_feature_extract, args.splits_by_subject, pretrained=True)
     model.to(args.device)
     # Step 3: Set loss_fn
-    # loss_fn = nn.CrossEntropyLoss()
-    loss_fn = nn.MultiMarginLoss(margin=0.5)
+    loss_fn = nn.CrossEntropyLoss()
+    # loss_fn = nn.MultiMarginLoss()
     # Step 4: Set optimizer
     print("Params to learn:")
     params_to_update = []
@@ -106,8 +106,14 @@ def load_config():
     ############################
     parser.add_argument('--dataset',
                         help='Dataset name.')
+    parser.add_argument('--eeg-heatmap-path',
+                        help='Path of eeg heatmap dataset')
     parser.add_argument('--eeg-path',
                         help='Path of eeg dataset')
+    parser.add_argument('--time-low', type=float, default=20,
+                        help='Lowest time value of eeg segment')
+    parser.add_argument('--time-high', type=float, default=460,
+                        help='highest time value of eeg segment')
     parser.add_argument('--img-path',
                         help='Path of image dataset')
     parser.add_argument('--splits-path',

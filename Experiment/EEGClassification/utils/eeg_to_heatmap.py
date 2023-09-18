@@ -18,6 +18,9 @@ dataset, labels, images = [eeg_loaded[k] for k in eeg_loaded.keys()]
 
 # Method 1: Creating grayscale heatmaps for each trial
 def process_method_1(eeg_data, time_low=20, time_high=460, output_shape=(512, 440)):
+    """
+    
+    """
     eeg_data = eeg_data[:, time_low:time_high]
     normalized_data = (eeg_data - eeg_data.min()) / (eeg_data.max() - eeg_data.min())
     grayscale_images = (normalized_data * 255).to(torch.uint8)
