@@ -3,6 +3,8 @@ import numpy as np
 import random
 import argparse
 from loguru import logger
+import warnings
+warnings.filterwarnings("ignore")
 
 import torch
 import torch.nn as nn
