@@ -6,6 +6,7 @@ Experiment/EEGClassification/results/*/*/model*
 Experiment/EEGClassification/*/model*
 Experiment/Generative_Models/*/*/*.pth
 Experiment/*.pth
+Experiment/io/*
 
 # Others
 *.swp
