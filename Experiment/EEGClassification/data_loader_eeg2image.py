@@ -73,7 +73,7 @@ class EEG2Image_Augment_Dataset(Dataset):
         # eeg = eeg + torch.randn(eeg.size()) * 0.01
         # Augment eeg using audiomentations (must convert to numpy first)
         eeg = eeg.numpy()
-        eeg = np.array([self.augment(eeg[i]) for i in range(eeg.shape[0])])
+        eeg = np.array([self.augment(samples=eeg[i], sample_rate=440) for i in range(eeg.shape[0])])
         eeg = torch.tensor(eeg, dtype=torch.float32)
         # Convert eeg to heatmap
         normalized_data = (eeg - eeg.min()) / (eeg.max() - eeg.min())
