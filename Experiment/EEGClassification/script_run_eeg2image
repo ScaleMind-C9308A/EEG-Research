@@ -6,7 +6,7 @@ python3 run_eeg2image_classification.py --dataset CVPR2017 \
 --log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/results/eeg2image \
 --weight-path None \
 --classifier-mode classic \
---info EEG2Image_efficientnet_b0_5_95_gaussian_noise \
+--info EEG2Image_efficientnet_b0_5_95_audimentations \
 --max-epoch 100 \
 --lr 5e-4 \
 --lr-step 10 \
