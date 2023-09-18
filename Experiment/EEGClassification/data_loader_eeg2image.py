@@ -68,12 +68,12 @@ class EEG2Image_Augment_Dataset(Dataset):
         else:
             raise ValueError()
         eeg,_, label = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
-        eeg = eeg.float()[:, self.time_low:self.time_high]
+        eeg = eeg.float()[:, self.time_low:self.time_high] # (channels, time_steps) => (128, 440)
         # # Add noise to eeg
         # eeg = eeg + torch.randn(eeg.size()) * 0.01
         # Augment eeg using audiomentations (must convert to numpy first)
         eeg = eeg.numpy()
-        eeg = self.augment(eeg)
+        eeg = np.array([self.augment(eeg[i]) for i in range(eeg.shape[0])])
         eeg = torch.tensor(eeg, dtype=torch.float32)
         # Convert eeg to heatmap
         normalized_data = (eeg - eeg.min()) / (eeg.max() - eeg.min())
