@@ -6,7 +6,7 @@ import copy
 import time
 import os 
 
-def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs, device, log_interval, log_path_dir, is_inception, metrics=[],
+def fit(train_loader, val_loader, test_loader, model, loss_fn, optimizer, scheduler, n_epochs, device, log_interval, log_path_dir, is_inception, metrics=[],
         start_epoch=0):
     """
     Loaders, model, loss function and metrics should work together for a given task,
@@ -59,8 +59,13 @@ def fit(train_loader, val_loader, model, loss_fn, optimizer, scheduler, n_epochs
             plot_losses(train_losses, val_losses, train_accs, val_accs, epoch + 1, log_path_dir)
 
     time_elapsed = time.time() - start
+    logger.info('=====================================')
     logger.info('Training complete in {:.0f}m {:.0f}s'.format(time_elapsed // 60, time_elapsed % 60))
     logger.info(f"Best Val Accuracy: {best_val_acc:.4f}")
+    logger.info('***********')
+    test_loss, test_acc = test_epoch(test_loader, model, loss_fn, device, is_inception, metrics)
+    logger.info(f"Test Accuracy: {test_acc:.4f}")
+    logger.info('=====================================')
 
     model.load_state_dict(best_model_weights)
     model_path = os.path.join(log_path_dir, f"model.pth")

@@ -7,8 +7,8 @@ python3 run_eeg2image_classification.py --dataset CVPR2017 \
 --weight-path None \
 --classifier-mode classic \
 --info EEG2Image_efficientnet_b0_5_95_audimentations \
---max-epoch 100 \
---lr 8e-4 \
+--max-epoch 150 \
+--lr 1e-3 \
 --lr-step 10 \
 --optim Adam \
 --batch-size 64 \
