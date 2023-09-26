@@ -79,7 +79,7 @@ class EEG2Image_Augment_Dataset(Dataset):
         normalized_data = (eeg - eeg.min()) / (eeg.max() - eeg.min())
         grayscale_images = (normalized_data * 255).to(torch.uint8)
         grayscale_images = grayscale_images.unsqueeze(0).unsqueeze(0) # (1, 1, h, w)
-        eeg_heatmap = F.interpolate(grayscale_images, size=(512, 440), mode='bilinear', align_corners=True)
+        eeg_heatmap = F.interpolate(grayscale_images, size=(512, 440), mode='bicubic', align_corners=True)
         eeg_heatmap = eeg_heatmap.squeeze(0).squeeze(0)
         # Can try this to avoid UserWarning
         # eeg_heatmap = eeg_heatmap.clone().detach().requires_grad_(True) 
