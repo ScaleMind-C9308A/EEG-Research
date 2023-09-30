@@ -76,11 +76,11 @@ class EEG2Image_Augment_Dataset(Dataset):
         # Augment eeg using audiomentations (must convert to numpy first)
         eeg = eeg.numpy()
         eeg = np.array([self.augment(samples=eeg[i], sample_rate=440) for i in range(eeg.shape[0])])
-        eeg = torch.tensor(eeg, dtype=torch.float32)
         # Normalize eeg to range [-1, 1]
-        normalized_eeg = ((eeg - eeg.min()) / (eeg.max() - eeg.min())) * 2 - 1
+        normalized_eeg = ((eeg - np.min(eeg)) / (np.max(eeg) - np.min(eeg))) * 2 - 1
         # Convert eeg to GAF image
         eeg_gaf = self.gasf.fit_transform(normalized_eeg) # (128, 224, 224)
+        eeg_gaf = torch.tensor(eeg_gaf, dtype=torch.float32)
         return eeg_gaf, label
 
     def __len__(self):
