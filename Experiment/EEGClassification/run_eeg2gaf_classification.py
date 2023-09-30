@@ -11,7 +11,7 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.optim.lr_scheduler as lr_scheduler
 
-from data_loader_eeg2image import load_data
+from data_loader_gaf import load_data
 from trainer_eeg2image import fit
 
 from sklearn.svm import SVC
