@@ -4,6 +4,8 @@ import torch.nn.functional as F
 import torch
 from Encoder.efficientnet_b0_lite import get_model
 
+def load_image_encoder_gaf(backbone, output_dim, feature_extract, pretrained):
+    return ImageEncoder_GAF(backbone, output_dim, feature_extract, pretrained)
 def load_image_encoder_eeg2image(backbone, output_dim, feature_extract, splits_by_subject, pretrained):
     """
     Load image encoder as CNN models
@@ -16,6 +18,26 @@ def load_image_encoder_eeg2image(backbone, output_dim, feature_extract, splits_b
         splits_by_subject: True | False
     """
     return ImageEncoder_EEG2Image(backbone, output_dim, feature_extract, splits_by_subject, pretrained)
+
+class ImageEncoder_GAF(nn.Module):
+    def __init__(self, backbone="inception_v3", output_dim=1000, feature_extract=False,  pretrained=True):
+        """
+        backbone: "inception_v3" | "resnet50" | "efficientnet_b0" | "efficientnet_b1" |
+        output_dim: (default: 40) 
+        pretrained: True | False
+        """
+        super().__init__()
+        self.backbone = initialize_model(backbone, output_dim, feature_extract, use_pretrained=pretrained)
+        # Change model to take in 128 channels
+        param_origin = list(self.backbone.features[0][0].parameters())[0]
+        self.backbone.features[0][0] = nn.Conv2d(128, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1,1), bias=False)
+        for param in self.backbone.features[0][0].parameters():
+            param = torch.cat((param_origin, param_origin), dim=1)
+    
+    def forward(self, x):
+        output = self.backbone(x)
+        output = F.relu(output)
+        return output
 
 class ImageEncoder_EEG2Image(nn.Module):
     def __init__(self, backbone="inception_v3", output_dim=1000, feature_extract=False, splits_by_subject=True, pretrained=True):
