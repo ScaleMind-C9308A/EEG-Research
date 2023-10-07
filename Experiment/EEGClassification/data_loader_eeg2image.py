@@ -77,7 +77,9 @@ class EEG2Image_Augment_Dataset(Dataset):
         eeg = torch.tensor(eeg, dtype=torch.float32)
         # Convert eeg to heatmap
         normalized_data = (eeg - eeg.min()) / (eeg.max() - eeg.min())
-        grayscale_images = (normalized_data * 255).to(torch.uint8)
+        # normalized_data = (eeg - eeg.mean()) / (eeg.std()) # Standard scaler
+        # grayscale_images = (normalized_data * 255).to(torch.uint8)
+        grayscale_images = (normalized_data).to(torch.uint8)
         grayscale_images = grayscale_images.unsqueeze(0).unsqueeze(0) # (1, 1, h, w)
         # eeg_heatmap = F.interpolate(grayscale_images, size=(512, 440), mode='nearest', align_corners=False)
         eeg_heatmap = F.interpolate(grayscale_images, size=(512, 440), mode='nearest')
