@@ -53,7 +53,7 @@ class EEG2Image_Augment_Dataset(Dataset):
         else:
             raise ValueError()
         
-        self.gasf = GramianAngularField(method='summation', image_size=224, overlapping=False)
+        self.gasf = GramianAngularField(method='difference', image_size=224, overlapping=False)
 
         self.labels = torch.tensor(self.labels)
     def __getitem__(self, index):
