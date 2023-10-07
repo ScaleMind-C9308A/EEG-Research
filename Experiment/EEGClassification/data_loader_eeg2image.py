@@ -43,6 +43,14 @@ class EEG2Image_Augment_Dataset(Dataset):
             Shift(p=0.5),
         ])
 
+        normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                     std=[0.229, 0.224, 0.225])
+        self.transform = transforms.Compose([
+            transforms.Resize((224, 224), antialias=None),
+            transforms.ToTensor(),
+            normalize
+        ])
+
         if self.mode == "train":
             self.labels = [self.eeg_dataset[sample_idx]['label'] for sample_idx in self.split_train]
         elif self.mode == "val":
@@ -72,9 +80,10 @@ class EEG2Image_Augment_Dataset(Dataset):
         # # Add noise to eeg
         # eeg = eeg + torch.randn(eeg.size()) * 0.01
         # Augment eeg using audiomentations (must convert to numpy first)
-        eeg = eeg.numpy()
-        eeg = np.array([self.augment(samples=eeg[i], sample_rate=440) for i in range(eeg.shape[0])])
-        eeg = torch.tensor(eeg, dtype=torch.float32)
+        if (self.mode == "train"):
+            eeg = eeg.numpy()
+            eeg = np.array([self.augment(samples=eeg[i], sample_rate=440) for i in range(eeg.shape[0])])
+            eeg = torch.tensor(eeg, dtype=torch.float32)
         # Convert eeg to heatmap
         normalized_data = (eeg - eeg.min()) / (eeg.max() - eeg.min())
         # normalized_data = (eeg - eeg.mean()) / (eeg.std()) # Standard scaler
@@ -90,7 +99,7 @@ class EEG2Image_Augment_Dataset(Dataset):
 
         eeg_heatmap = eeg_heatmap.unsqueeze(0).repeat(3,  1, 1)
 
-        eeg_heatmap_resize = transforms.Resize((224, 224), antialias=None)(eeg_heatmap)
+        eeg_heatmap_resize = self.transform(eeg_heatmap)
         return eeg_heatmap_resize, label
 
     def __len__(self):
