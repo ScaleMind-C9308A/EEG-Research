@@ -53,7 +53,7 @@ class EEG2Image_Augment_Dataset(Dataset):
                         p = 0.2),
             TimeStretch(min_rate=0.8, max_rate=1.25, p=0.2),
             PitchShift(min_semitones=-4, max_semitones=4, p=0.2),
-            Shift(min_fraction=-0.5, max_fraction=0.5, p=0.2),
+            Shift(min_shift=-0.5, max_shift=0.5, shift_unit="fraction", fade_duration=0.01)
         ])
 
         normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
