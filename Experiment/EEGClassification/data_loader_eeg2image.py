@@ -38,23 +38,23 @@ class EEG2Image_Augment_Dataset(Dataset):
         self.split_val = self.split_chosen['val']
         self.split_test = self.split_chosen['test']
 
-        # self.augment = Compose([
-        #     AddGaussianNoise(min_amplitude=0.001, max_amplitude=0.015, p=0.5),
-        #     Shift(p=0.5),
-        # ])
-
-        # LinhThao's version
         self.augment = Compose([
-            AddGaussianNoise(min_amplitude=0.001, max_amplitude=0.015, p=0.2),
-            AddGaussianSNR(min_snr_db=5.0, max_snr_db=20.0, p=0.2),
-            Gain(min_gain_db = -15.0, max_gain_db = 15.0, p =0.2),
-            GainTransition(min_gain_db = -15.0, max_gain_db = 15.0, 
-                        min_duration = 50, max_duration = 200, duration_unit = "samples", 
-                        p = 0.2),
-            TimeStretch(min_rate=0.8, max_rate=1.25, p=0.2),
-            PitchShift(min_semitones=-4, max_semitones=4, p=0.2),
-            Shift(min_shift=-0.5, max_shift=0.5, shift_unit="fraction", fade_duration=0.01)
+            AddGaussianNoise(min_amplitude=0.0005, max_amplitude=0.05, p=0.5),
+            Shift(p=0.5)
         ])
+
+        # # LinhThao's version
+        # self.augment = Compose([
+        #     AddGaussianNoise(min_amplitude=0.001, max_amplitude=0.015, p=0.2),
+        #     AddGaussianSNR(min_snr_db=5.0, max_snr_db=20.0, p=0.2),
+        #     Gain(min_gain_db = -15.0, max_gain_db = 15.0, p =0.2),
+        #     GainTransition(min_gain_db = -15.0, max_gain_db = 15.0, 
+        #                 min_duration = 50, max_duration = 200, duration_unit = "samples", 
+        #                 p = 0.2),
+        #     TimeStretch(min_rate=0.8, max_rate=1.25, p=0.2),
+        #     PitchShift(min_semitones=-4, max_semitones=4, p=0.2),
+        #     Shift(min_shift=-0.5, max_shift=0.5, shift_unit="fraction", fade_duration=0.01)
+        # ])
 
         normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                      std=[0.229, 0.224, 0.225])
