@@ -39,7 +39,7 @@ class EEG2Image_Augment_Dataset(Dataset):
         self.split_test = self.split_chosen['test']
 
         self.augment = Compose([
-            AddGaussianNoise(min_amplitude=0.0009, max_amplitude=0.02, p=0.5),
+            AddGaussianNoise(min_amplitude=0.0009, max_amplitude=0.05, p=0.5),
             Shift(p=0.5)
         ])
 
