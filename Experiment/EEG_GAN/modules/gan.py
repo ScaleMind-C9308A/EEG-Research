@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 from torch.autograd import Variable
 from torch import optim
-import util as utils
+import Experiment.EEG_GAN.util as utils
 import torch.autograd as autograd
 import torch.nn.functional as F
 import numpy as np
