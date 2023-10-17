@@ -2,7 +2,7 @@ import torch
 from torch.utils.data import Dataset, DataLoader
 import torchvision.transforms as transforms
 import torch.nn.functional as F
-from audiomentations import Compose, AddGaussianNoise, TimeStretch, PitchShift, Shift, AddGaussianSNR, Gain, GainTransition
+from audiomentations import Compose, AddGaussianSNR, AddGaussianNoise, TimeStretch, PitchShift, Shift, AddGaussianSNR, Gain, GainTransition
 import numpy as np
 
 class EEG2Image_Augment_Dataset(Dataset):
@@ -38,8 +38,13 @@ class EEG2Image_Augment_Dataset(Dataset):
         self.split_val = self.split_chosen['val']
         self.split_test = self.split_chosen['test']
 
+        # self.augment = Compose([
+        #     AddGaussianNoise(min_amplitude=0.001, max_amplitude=0.015, p=1),
+        #     Shift(p=0.5)
+        # ])
+
         self.augment = Compose([
-            AddGaussianNoise(min_amplitude=0.0005, max_amplitude=0.05, p=0.5),
+            AddGaussianSNR(min_snr_db=5.0, max_snr_db=40.0, p = 0.5),
             Shift(p=0.5)
         ])
 
