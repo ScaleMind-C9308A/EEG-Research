@@ -46,7 +46,7 @@ def load_config():
                         help='conv_cub | conv_lin')
     ##################################
     
-    parser.add_argument('--log-path', 
+    parser.add_argument('--log-path', default='summary_models', type=str,
                         help="Directory path to save log files during training")
     parser.add_argument('--info', default='Trivial',
                         help='Train info')
