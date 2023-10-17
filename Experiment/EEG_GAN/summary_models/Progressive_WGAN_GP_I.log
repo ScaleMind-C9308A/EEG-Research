@@ -1,0 +1,22 @@
+2023-10-17 22:12:47.652 | INFO     | __main__:run:24 - Namespace(model_name='conv_cub', log_path='summary_models', info='Progressive_WGAN_GP_I', img_encoder='inception_v3', eeg_encoder='EEGChannelNet', batch_size=64, num_classes=40, gpu=0, device=device(type='cuda', index=0))
+2023-10-17 22:13:36.812 | INFO     | __main__:run:24 - Namespace(model_name='conv_cub', log_path='summary_models', info='Progressive_WGAN_GP_I', img_encoder='inception_v3', eeg_encoder='EEGChannelNet', batch_size=64, num_classes=40, gpu=0, device=device(type='cuda', index=0))
+2023-10-17 22:15:09.744 | INFO     | __main__:run:24 - Namespace(model_name='conv_cub', log_path='summary_models', info='Progressive_WGAN_GP_I', img_encoder='inception_v3', eeg_encoder='EEGChannelNet', batch_size=64, num_classes=40, gpu=0, device=device(type='cuda', index=0))
+2023-10-17 22:17:06.023 | INFO     | __main__:run:24 - Namespace(model_name='conv_cub', log_path='summary_models', info='Progressive_WGAN_GP_I', img_encoder='inception_v3', eeg_encoder='EEGChannelNet', batch_size=64, num_classes=40, gpu=None, device=device(type='cpu'))
+2023-10-17 22:17:06.123 | INFO     | __main__:run:29 - =========================================================================================================
+Layer (type:depth-idx)                                  Output Shape              Param #
+=========================================================================================================
+Generator                                               [64, 1, 24, 128]          --
+├─ProgressiveGenerator: 1-1                             [64, 1, 24, 128]          --
+│    └─ModuleList: 2-1                                  --                        258,140
+│    │    └─ProgressiveGeneratorBlock: 3-1              [64, 1, 24, 128]          172,228
+=========================================================================================================
+Total params: 430,368
+Trainable params: 430,368
+Non-trainable params: 0
+Total mult-adds (G): 4.80
+=========================================================================================================
+Input size (MB): 0.05
+Forward/backward pass size (MB): 3.11
+Params size (MB): 0.69
+Estimated Total Size (MB): 3.85
+=========================================================================================================

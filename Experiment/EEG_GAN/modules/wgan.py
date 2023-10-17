@@ -6,11 +6,13 @@ from torch import optim
 import torch.autograd as autograd
 import torch.nn.functional as F
 import numpy as np
-import Experiment.EEG_GAN.util as utils
 from modules.gan import GAN_Discriminator
 from modules.gan import GAN_Generator
 # from my_utils import functions
 # from skimage.measure import block_reduce
+import sys
+sys.path.append('../')
+import util as utils
 
 class WGAN_Discriminator(GAN_Discriminator):
 	"""

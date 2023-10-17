@@ -101,7 +101,7 @@ class ProgressiveGenerator(nn.Module):
 	blocks : int
 		Number of progression stages
 	"""
-	def __init__(self,blocks,conditional):
+	def __init__(self,blocks,conditional=False):
 		super(ProgressiveGenerator,self).__init__()
 		self.blocks = nn.ModuleList(blocks)
 		self.cur_block = 0

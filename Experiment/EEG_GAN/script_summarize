@@ -1,7 +1,7 @@
-python3 summary_models.py \
+python summary_models.py \
 --model-name conv_cub \
 --log-path "summary_models" \
 --info Progressive_WGAN_GP_I \
 --batch-size 64 \
---gpu 0 \
 --num-classes 40 \
+# --gpu 0 \

@@ -12,7 +12,7 @@ from modules import conv_cub, conv_lin
 ### Define Model 
 # conv_lin/conv_cub
 
-def load_model(model_name, weight_path, args):
+def load_model(model_name, weight_path=None, args=None):
     """
     model_name: "conv_cub" | "conv_lin"
     """

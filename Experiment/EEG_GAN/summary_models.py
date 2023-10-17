@@ -22,9 +22,10 @@ def run():
     
     logger.add(os.path.join(args.log_path, f"{args.info}.log"))
     logger.info(args)
-    generator, discriminator = load_model(model_name=args.model_name)
-    generator = generator.to(args.device)
-    discriminator = discriminator.to(args.device)
+    generator, discriminator = load_model(model_name=args.model_name, weight_path=None, args=args)
+    if args.device != None:
+        generator = generator.to(args.device)
+        discriminator = discriminator.to(args.device)
     logger.info(summary(generator, input_size=(args.batch_size, n_z)))
     logger.info(summary(discriminator, input_size=(args.batch_size, 128, 440)))
 
