@@ -102,8 +102,8 @@ class EEG2Image_Augment_Dataset(Dataset):
             eeg = np.array([self.augment(samples=eeg[i], sample_rate=440) for i in range(eeg.shape[0])])
             eeg = torch.tensor(eeg, dtype=torch.float32)
         # Convert eeg to heatmap
-        normalized_data = (eeg - eeg.min()) / (eeg.max() - eeg.min())
-        # normalized_data = (eeg - eeg.mean()) / (eeg.std()) # Standard scaler
+        # normalized_data = (eeg - eeg.min()) / (eeg.max() - eeg.min())
+        normalized_data = (eeg - eeg.mean()) / (eeg.std()) # Standard scaler
         # grayscale_images = (normalized_data * 255).to(torch.uint8)
         grayscale_images = (normalized_data * 255)
         grayscale_images = grayscale_images.unsqueeze(0).unsqueeze(0) # (1, 1, h, w)
