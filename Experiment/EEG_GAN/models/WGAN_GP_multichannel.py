@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from models.custom_layers import Deconv2D_Linear_Weight, ClipLayer, MeanZeroLayer, gaussian_layer
+from models.custom_layers import Deconv2D_Linear_Weight, ClipLayer, MeanZeroLayer, gaussian_layer, Conv2dSamePadding
 
 class EEGGenerator(nn.Module):
     def __init__(self, n_channels=64, n_time_steps=64, n_z=120):
@@ -42,7 +42,7 @@ class EEGGenerator(nn.Module):
         
         # Define the final layer
         self.conv_layer2 = nn.Sequential(
-            nn.Conv2d(in_channels=128, out_channels=n_channels, kernel_size=(3, 3), padding='same'),
+            Conv2dSamePadding(in_channels=128, out_channels=n_channels, kernel_size=(3, 3), padding='same'),
             nn.Tanh(),
         )
 
@@ -69,11 +69,11 @@ class EEGDiscriminator(nn.Module):
             nn.LeakyReLU(),
         )
         self.conv_layer2 = nn.Sequential(
-            nn.Conv2d(in_channels=64, out_channels=128, kernel_size=(3, 3), stride=2, padding='same'),
+            Conv2dSamePadding(in_channels=64, out_channels=128, kernel_size=(3, 3), stride=2, padding='same'),
             nn.LeakyReLU(),
         )
         self.conv_layer3 = nn.Sequential(
-            nn.Conv2d(in_channels=128, out_channels=128, kernel_size=(3, 3), stride=2, padding='same'),
+            Conv2dSamePadding(in_channels=128, out_channels=128, kernel_size=(3, 3), stride=2, padding='same'),
             nn.LeakyReLU(),
         )
         ###
