@@ -7,8 +7,8 @@ import numpy as np
 
 class EEG2Image_Augment_Dataset(Dataset):
     """
-    Train: For each sample (anchor) randomly chooses a positive and negative samples
-    Test: Creates fixed triplets for testing
+    EEG2Image_Augment_Dataset
+    
     """
     def __init__(self, loaded_eeg, loaded_splits,time_low, time_high, mode="train", transform=None):
         """
@@ -20,10 +20,6 @@ class EEG2Image_Augment_Dataset(Dataset):
         """
         self.mode = mode
         self.transform = transform
-        # self.splits = loaded_splits
-        # dataset, classes, img_filenames = [loaded_eeg_heatmaps[k] for k in ['dataset', 'labels', 'images']]
-        # self.classes = classes
-        # self.img_filenames = img_filenames
 
         self.time_low = time_low
         self.time_high = time_high
@@ -38,13 +34,8 @@ class EEG2Image_Augment_Dataset(Dataset):
         self.split_val = self.split_chosen['val']
         self.split_test = self.split_chosen['test']
 
-        # self.augment = Compose([
-        #     AddGaussianNoise(min_amplitude=0.001, max_amplitude=0.015, p=1),
-        #     Shift(p=0.5)
-        # ])
-
         self.augment = Compose([
-            AddGaussianSNR(min_snr_db=5.0, max_snr_db=40.0, p = 0.5),
+            AddGaussianNoise(min_amplitude=0.001, max_amplitude=0.015, p=1),
             Shift(p=0.5)
         ])
 
@@ -93,13 +84,20 @@ class EEG2Image_Augment_Dataset(Dataset):
         else:
             raise ValueError()
         eeg,_, label = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
-        eeg = eeg.float()[:, self.time_low:self.time_high] # (channels, time_steps) => (128, 440)
+
+        ### If EEG is not downsampled, uncomment below line. For downsample eeg, size is already (128, 128)
+        # eeg = eeg.float()[:, self.time_low:self.time_high] # (channels, time_steps) => (128, 440)
+        ### 
+
         # # Add noise to eeg
         # eeg = eeg + torch.randn(eeg.size()) * 0.01
         # Augment eeg using audiomentations (must convert to numpy first)
         if (self.mode == "train"):
             eeg = eeg.numpy()
-            eeg = np.array([self.augment(samples=eeg[i], sample_rate=440) for i in range(eeg.shape[0])])
+            ### If EEG is not downsampled, uncomment below line. For downsample eeg, size is already (128, 128)
+            # eeg = np.array([self.augment(samples=eeg[i], sample_rate=440) for i in range(eeg.shape[0])])
+            ###
+            eeg = np.array([self.augment(samples=eeg[i], sample_rate=128) for i in range(eeg.shape[0])])
             eeg = torch.tensor(eeg, dtype=torch.float32)
         # Convert eeg to heatmap
         # normalized_data = (eeg - eeg.min()) / (eeg.max() - eeg.min())
@@ -109,7 +107,7 @@ class EEG2Image_Augment_Dataset(Dataset):
         grayscale_images = (normalized_data * 255)
         grayscale_images = grayscale_images.unsqueeze(0).unsqueeze(0) # (1, 1, h, w)
         # eeg_heatmap = F.interpolate(grayscale_images, size=(512, 440), mode='nearest', align_corners=False)
-        eeg_heatmap = F.interpolate(grayscale_images, size=(512, 440), mode='bilinear')
+        eeg_heatmap = F.interpolate(grayscale_images, size=(4*128, 128), mode='bilinear')
         eeg_heatmap = eeg_heatmap.squeeze(0).squeeze(0)
         # Can try this to avoid UserWarning
         # eeg_heatmap = eeg_heatmap.clone().detach().requires_grad_(True) 
