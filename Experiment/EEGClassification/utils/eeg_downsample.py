@@ -19,9 +19,11 @@ def eeg_downsample(eeg_data, time_low=20, time_high=460):
     Downsample EEG data from 440Hz to 128Hz.
     """
     eeg_data = eeg_data[:, time_low:time_high] # (128, 440) => cut eeg signal to 440 time steps
-    
+    eeg_data = np.array(eeg_data) # (128, 440)
     # Resample from 440Hz to 128Hz
     eeg_data = signal.resample_poly(eeg_data, up=128, down=440, axis=1, padtype='line') # (128, 128)
+    # Convert to torch tensor
+    eeg_data = torch.tensor(eeg_data, dtype=torch.float32) # (128, 128)
     return eeg_data
 
 for sample in eeg_dataset:
