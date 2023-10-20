@@ -26,8 +26,10 @@ def eeg_downsample(eeg_data, time_low=20, time_high=460):
     eeg_data = torch.tensor(eeg_data, dtype=torch.float32) # (128, 128)
     return eeg_data
 
+print(f"Before downsample: Size of an EEG sample (tensor): {eeg_dataset[0]['eeg'].size()}")
 for sample in eeg_dataset:
     sample['eeg'] = eeg_downsample(sample['eeg'])
 eeg_loaded['dataset'] = eeg_dataset
+print(f"After downsample: Size of an EEG sample (tensor): {eeg_dataset[0]['eeg'].size()}")
 torch.save(eeg_loaded, os.path.join(output_path_dir, output_filename))
 
