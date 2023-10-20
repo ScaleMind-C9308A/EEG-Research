@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from custom_layers import Deconv2D_Linear_Weight, ClipLayer, MeanZeroLayer, gaussian_layer
+from models.custom_layers import Deconv2D_Linear_Weight, ClipLayer, MeanZeroLayer, gaussian_layer
 
 class EEGGenerator(nn.Module):
     def __init__(self, n_channels=64, n_time_steps=64, n_z=120):
