@@ -42,7 +42,7 @@ class EEGGenerator(nn.Module):
         
         # Define the final layer
         self.conv_layer2 = nn.Sequential(
-            Conv2dSamePadding(in_channels=128, out_channels=n_channels, kernel_size=(3, 3)),
+            Conv2dSamePadding(in_channels=128, out_channels=1, kernel_size=(3, 3)),
             nn.Tanh(),
         )
 
@@ -88,6 +88,9 @@ class EEGDiscriminator(nn.Module):
         self.leaky_relu = nn.LeakyReLU()
 
     def forward(self, x):
+        # firstly reshape the input from (batch_size, 64, 64) to (batch_size, 1, 64, 64)
+        x = x.view(-1, 1, 64, 64)
+        # add gaussian noise to the input for regularization (only in training mode)
         x = gaussian_layer(x, self.training, 0, 0.05)
         x = self.conv_layer1(x)
         x = self.conv_layer2(x)
