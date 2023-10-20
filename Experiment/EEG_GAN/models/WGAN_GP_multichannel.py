@@ -22,7 +22,7 @@ class EEGGenerator(nn.Module):
         ###
         self.upsample_layer1 = nn.Sequential(
             nn.Upsample(scale_factor=2, mode='bicubic', align_corners=False),
-            nn.BatchNorm2d(64),
+            nn.BatchNorm2d(128),
             nn.LeakyReLU(),
         )
         self.conv_layer1 = nn.Sequential(
