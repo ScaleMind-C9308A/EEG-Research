@@ -26,7 +26,7 @@ class EEGGenerator(nn.Module):
             nn.LeakyReLU(),
         )
         self.conv_layer1 = nn.Sequential(
-            nn.Conv2d(in_channels=128, out_channels=64, kernel_size=(3, 3), padding='same'),
+            nn.Conv2d(in_channels=128, out_channels=64, kernel_size=(3, 3)),
             nn.BatchNorm2d(64),
             nn.LeakyReLU(),
         )
@@ -42,7 +42,7 @@ class EEGGenerator(nn.Module):
         
         # Define the final layer
         self.conv_layer2 = nn.Sequential(
-            Conv2dSamePadding(in_channels=128, out_channels=n_channels, kernel_size=(3, 3), padding='same'),
+            Conv2dSamePadding(in_channels=128, out_channels=n_channels, kernel_size=(3, 3)),
             nn.Tanh(),
         )
 
@@ -69,11 +69,11 @@ class EEGDiscriminator(nn.Module):
             nn.LeakyReLU(),
         )
         self.conv_layer2 = nn.Sequential(
-            Conv2dSamePadding(in_channels=64, out_channels=128, kernel_size=(3, 3), stride=2, padding='same'),
+            Conv2dSamePadding(in_channels=64, out_channels=128, kernel_size=(3, 3), stride=2),
             nn.LeakyReLU(),
         )
         self.conv_layer3 = nn.Sequential(
-            Conv2dSamePadding(in_channels=128, out_channels=128, kernel_size=(3, 3), stride=2, padding='same'),
+            Conv2dSamePadding(in_channels=128, out_channels=128, kernel_size=(3, 3), stride=2),
             nn.LeakyReLU(),
         )
         ###
