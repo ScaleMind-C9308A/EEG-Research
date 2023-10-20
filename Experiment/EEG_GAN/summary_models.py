@@ -18,7 +18,7 @@ def run():
     
     args = load_config()
 
-    n_z = 200
+    n_z = 120
     
     logger.add(os.path.join(args.log_path, f"{args.info}.log"))
     logger.info(args)
@@ -27,7 +27,7 @@ def run():
         generator = generator.to(args.device)
         discriminator = discriminator.to(args.device)
     logger.info(summary(generator, input_size=(args.batch_size, n_z)))
-    logger.info(summary(discriminator, input_size=(args.batch_size, 128, 440)))
+    logger.info(summary(discriminator, input_size=(args.batch_size, 64, 64)))
 
 def load_config():
     """
@@ -43,8 +43,8 @@ def load_config():
     ### Specific to Contrastive Learning
     # From argparse document: The bool() function is not recommended as a type converter. All it does is convert 
     # empty strings to False and non-empty strings to True
-    parser.add_argument('--model-name', default='conv_cub', type=str,
-                        help='conv_cub | conv_lin')
+    parser.add_argument('--model-name', default='wgan_multi_channel', type=str,
+                        help='wgan_1_channel | wgan_multi_channel | cc_wgan')
     ##################################
     
     parser.add_argument('--log-path', default='summary_models', type=str,

@@ -3,7 +3,7 @@ import torch.nn.functional as F
 import torch
 
 
-from modules import conv_cub, conv_lin
+from models import WGAN_GP_multichannel
 
 ### Class for training:
 # GAN_Module => GAN_Discriminator, GAN_Generator => WGAN_*
@@ -14,14 +14,14 @@ from modules import conv_cub, conv_lin
 
 def load_model(model_name, weight_path=None, args=None):
     """
-    model_name: "conv_cub" | "conv_lin"
+    model_name: "wgan_1_channel" | "wgan_multi_channel" | "cc_wgan"
     """
-    n_z = 200
-    n_blocks = 6
-    if (model_name == "conv_cub"):
-        generator = conv_cub.Generator(128, n_z)
-        discriminator = conv_cub.Discriminator(128)
-    elif (model_name == "conv_lin"):
-        generator = conv_lin.Generator(128, n_z)
-        discriminator = conv_lin.Discriminator(128)        
+    if model_name == "wgan_1_channel":
+        generator, discriminator = WGAN_GP_multichannel.GAN_Generator(), WGAN_GP_multichannel.GAN_Discriminator()
+    elif model_name == "wgan_multi_channel":
+        generator, discriminator = WGAN_GP_multichannel.GAN_Generator(), WGAN_GP_multichannel.GAN_Discriminator()
+    elif model_name == "cc_wgan":
+        generator, discriminator = WGAN_GP_multichannel.GAN_Generator(), WGAN_GP_multichannel.GAN_Discriminator()
+    else:
+        raise ValueError("model_name must be 'wgan_1_channel' | 'wgan_multi_channel' | 'cc_wgan'")        
     return generator, discriminator

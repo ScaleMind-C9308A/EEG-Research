@@ -1,7 +1,7 @@
 python summary_models.py \
---model-name conv_cub \
+--model-name wgan_multi_channel \
 --log-path "summary_models" \
---info Progressive_WGAN_GP_I \
+--info WGAN_GP_Multichannel \
 --batch-size 64 \
 --num-classes 40 \
-# --gpu 0 \
+--gpu 0 \
