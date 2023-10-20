@@ -66,26 +66,26 @@ class EEGDiscriminator(nn.Module):
         ###
         self.conv_layer1 = nn.Sequential(
             nn.Conv2d(in_channels=1, out_channels=64, kernel_size=(3, 3), padding='same'),
-            nn.LeakyReLU(),
+            nn.LeakyReLU(0.2),
         )
         self.conv_layer2 = nn.Sequential(
             Conv2dSamePadding(in_channels=64, out_channels=128, kernel_size=(3, 3), stride=2),
-            nn.LeakyReLU(),
+            nn.LeakyReLU(0.2),
         )
         self.conv_layer3 = nn.Sequential(
             Conv2dSamePadding(in_channels=128, out_channels=128, kernel_size=(3, 3), stride=2),
-            nn.LeakyReLU(),
+            nn.LeakyReLU(0.2),
         )
         ###
         # Fully connected layers
         ###
-        self.fc_layer1 = nn.Linear(128 * 8 * 8, 1024)
+        self.fc_layer1 = nn.Linear(128 * 16 * 16, 1024)
         self.fc_layer2 = nn.Linear(1024, 1)
         ###
         # Other layers
         ###
         self.flatten = nn.Flatten()
-        self.leaky_relu = nn.LeakyReLU()
+        self.leaky_relu = nn.LeakyReLU(0.2)
 
     def forward(self, x):
         # firstly reshape the input from (batch_size, 64, 64) to (batch_size, 1, 64, 64)
