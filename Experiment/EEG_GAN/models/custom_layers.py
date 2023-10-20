@@ -34,7 +34,7 @@ class Deconv2D_Linear_Weight(torch.nn.Module):
         self.layer = nn.ConvTranspose2d(in_channels, out_channels, kernel_size, stride=stride)
         self.stride = stride
         # Define the weight initializer
-        nn.init.constant_(self.layer.weight, linear_kernel(stride, in_channels, out_channels))
+        self.layer.weight = nn.Parameter(linear_kernel(stride=stride, in_channels=in_channels, out_channels=out_channels), requires_grad=True)
     
     def forward(self, x):
         # Apply the convolution operation
