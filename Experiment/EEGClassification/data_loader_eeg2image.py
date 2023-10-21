@@ -55,7 +55,7 @@ class EEG2Image_Augment_Dataset(Dataset):
         normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                      std=[0.229, 0.224, 0.225])
         self.transform = transforms.Compose([
-            transforms.Resize((224, 224), antialias=None),
+            # transforms.Resize((224, 224), antialias=None),
             normalize
         ])
 
