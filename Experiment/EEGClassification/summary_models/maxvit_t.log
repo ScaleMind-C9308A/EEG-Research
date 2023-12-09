@@ -1,0 +1,37 @@
+2023-11-09 21:03:49.678 | INFO     | __main__:run:25 - Namespace(embedding_size=128, classifier_mode='classic', weight_path=None, log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/summary_models/', info='maxvit_t', img_encoder='maxvit_t', eeg_encoder='Stacked_BiLSTM', batch_size=64, num_classes=40, gpu=0, device=device(type='cuda', index=0))
+2023-11-09 21:14:53.434 | INFO     | __main__:run:25 - Namespace(embedding_size=128, classifier_mode='classic', weight_path=None, log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/summary_models/', info='maxvit_t', img_encoder='maxvit_t', eeg_encoder='Stacked_BiLSTM', batch_size=64, num_classes=40, gpu=0, device=device(type='cuda', index=0))
+2023-11-09 21:19:32.881 | INFO     | __main__:run:25 - Namespace(embedding_size=128, classifier_mode='classic', weight_path=None, log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/summary_models/', info='maxvit_t', img_encoder='maxvit_t', eeg_encoder='Stacked_BiLSTM', batch_size=64, num_classes=40, gpu=0, device=device(type='cuda', index=0))
+2023-11-09 21:19:51.114 | INFO     | __main__:run:25 - Namespace(embedding_size=128, classifier_mode='classic', weight_path=None, log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/summary_models/', info='maxvit_t', img_encoder='maxvit_t', eeg_encoder='Stacked_BiLSTM', batch_size=64, num_classes=40, gpu=0, device=device(type='cuda', index=0))
+2023-11-09 21:20:05.242 | INFO     | __main__:run:25 - Namespace(embedding_size=128, classifier_mode='classic', weight_path=None, log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/summary_models/', info='maxvit_t', img_encoder='maxvit_t', eeg_encoder='Stacked_BiLSTM', batch_size=64, num_classes=40, gpu=0, device=device(type='cuda', index=0))
+2023-11-09 21:20:11.565 | INFO     | __main__:run:31 - ============================================================================================================================================
+Layer (type:depth-idx)                                                                     Output Shape              Param #
+============================================================================================================================================
+ImageEncoder_EEG2Image                                                                     [64, 40]                  --
+├─MaxVit: 1-1                                                                              [64, 40]                  --
+│    └─Sequential: 2-1                                                                     [64, 64, 112, 112]        --
+│    │    └─Conv2dNormActivation: 3-1                                                      [64, 64, 112, 112]        1,856
+│    │    └─Conv2dNormActivation: 3-2                                                      [64, 64, 112, 112]        36,928
+│    └─ModuleList: 2-2                                                                     --                        --
+│    │    └─MaxVitBlock: 3-3                                                               [64, 64, 56, 56]          294,952
+│    │    └─MaxVitBlock: 3-4                                                               [64, 128, 28, 28]         1,114,064
+│    │    └─MaxVitBlock: 3-5                                                               [64, 256, 14, 14]         11,165,456
+│    │    └─MaxVitBlock: 3-6                                                               [64, 512, 7, 7]           17,530,688
+│    └─Sequential: 2-3                                                                     [64, 40]                  --
+│    │    └─AdaptiveAvgPool2d: 3-7                                                         [64, 512, 1, 1]           --
+│    │    └─Flatten: 3-8                                                                   [64, 512]                 --
+│    │    └─LayerNorm: 3-9                                                                 [64, 512]                 1,024
+│    │    └─Linear: 3-10                                                                   [64, 512]                 262,656
+│    │    └─Tanh: 3-11                                                                     [64, 512]                 --
+│    │    └─Linear: 3-12                                                                   [64, 40]                  20,520
+============================================================================================================================================
+Total params: 30,428,144
+Trainable params: 30,428,144
+Non-trainable params: 0
+Total mult-adds (G): 128.84
+============================================================================================================================================
+Input size (MB): 38.54
+Forward/backward pass size (MB): 24951.49
+Params size (MB): 121.60
+Estimated Total Size (MB): 25111.63
+============================================================================================================================================
+2023-11-09 21:21:30.828 | INFO     | __main__:run:25 - Namespace(embedding_size=128, classifier_mode='classic', weight_path=None, log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/summary_models/', info='maxvit_t', img_encoder='maxvit_t', eeg_encoder='Stacked_BiLSTM', batch_size=64, num_classes=40, gpu=0, device=device(type='cuda', index=0))

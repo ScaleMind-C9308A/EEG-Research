@@ -1,0 +1,42 @@
+2023-11-09 21:27:18.658 | INFO     | __main__:run:25 - Namespace(embedding_size=128, classifier_mode='classic', weight_path=None, log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/summary_models/', info='mobilenet_v3_large', img_encoder='mobilenet_v3_large', eeg_encoder='Stacked_BiLSTM', batch_size=64, num_classes=40, gpu=0, device=device(type='cuda', index=0))
+2023-11-09 21:27:57.025 | INFO     | __main__:run:25 - Namespace(embedding_size=128, classifier_mode='classic', weight_path=None, log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/summary_models/', info='mobilenet_v3_large', img_encoder='mobilenet_v3_large', eeg_encoder='Stacked_BiLSTM', batch_size=64, num_classes=40, gpu=0, device=device(type='cuda', index=0))
+2023-11-09 21:28:03.798 | INFO     | __main__:run:31 - =========================================================================================================
+Layer (type:depth-idx)                                  Output Shape              Param #
+=========================================================================================================
+ImageEncoder_EEG2Image                                  [64, 40]                  --
+├─MobileNetV3: 1-1                                      [64, 40]                  --
+│    └─Sequential: 2-1                                  [64, 960, 7, 7]           --
+│    │    └─Conv2dNormActivation: 3-1                   [64, 16, 112, 112]        464
+│    │    └─InvertedResidual: 3-2                       [64, 16, 112, 112]        464
+│    │    └─InvertedResidual: 3-3                       [64, 24, 56, 56]          3,440
+│    │    └─InvertedResidual: 3-4                       [64, 24, 56, 56]          4,440
+│    │    └─InvertedResidual: 3-5                       [64, 40, 28, 28]          10,328
+│    │    └─InvertedResidual: 3-6                       [64, 40, 28, 28]          20,992
+│    │    └─InvertedResidual: 3-7                       [64, 40, 28, 28]          20,992
+│    │    └─InvertedResidual: 3-8                       [64, 80, 14, 14]          32,080
+│    │    └─InvertedResidual: 3-9                       [64, 80, 14, 14]          34,760
+│    │    └─InvertedResidual: 3-10                      [64, 80, 14, 14]          31,992
+│    │    └─InvertedResidual: 3-11                      [64, 80, 14, 14]          31,992
+│    │    └─InvertedResidual: 3-12                      [64, 112, 14, 14]         214,424
+│    │    └─InvertedResidual: 3-13                      [64, 112, 14, 14]         386,120
+│    │    └─InvertedResidual: 3-14                      [64, 160, 7, 7]           429,224
+│    │    └─InvertedResidual: 3-15                      [64, 160, 7, 7]           797,360
+│    │    └─InvertedResidual: 3-16                      [64, 160, 7, 7]           797,360
+│    │    └─Conv2dNormActivation: 3-17                  [64, 960, 7, 7]           155,520
+│    └─AdaptiveAvgPool2d: 2-2                           [64, 960, 1, 1]           --
+│    └─Sequential: 2-3                                  [64, 40]                  --
+│    │    └─Linear: 3-18                                [64, 1280]                1,230,080
+│    │    └─Hardswish: 3-19                             [64, 1280]                --
+│    │    └─Dropout: 3-20                               [64, 1280]                --
+│    │    └─Linear: 3-21                                [64, 40]                  51,240
+=========================================================================================================
+Total params: 4,253,272
+Trainable params: 4,253,272
+Non-trainable params: 0
+Total mult-adds (G): 13.79
+=========================================================================================================
+Input size (MB): 38.54
+Forward/backward pass size (MB): 4508.68
+Params size (MB): 17.01
+Estimated Total Size (MB): 4564.23
+=========================================================================================================

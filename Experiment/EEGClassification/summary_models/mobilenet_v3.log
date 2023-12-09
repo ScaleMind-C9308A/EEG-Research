@@ -1,0 +1,1 @@
+2023-11-09 21:23:32.693 | INFO     | __main__:run:25 - Namespace(embedding_size=128, classifier_mode='classic', weight_path=None, log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/summary_models/', info='mobilenet_v3', img_encoder='mobilenet_v3', eeg_encoder='Stacked_BiLSTM', batch_size=64, num_classes=40, gpu=0, device=device(type='cuda', index=0))

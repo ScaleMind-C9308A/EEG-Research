@@ -1,0 +1,31 @@
+2023-11-09 20:40:33.097 | INFO     | __main__:run:25 - Namespace(embedding_size=128, classifier_mode='classic', weight_path=None, log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/summary_models/', info='efficientnet_v2_l', img_encoder='efficientnet_v2_l', eeg_encoder='Stacked_BiLSTM', batch_size=64, num_classes=40, gpu=0, device=device(type='cuda', index=0))
+2023-11-09 20:47:14.866 | INFO     | __main__:run:31 - ==============================================================================================================
+Layer (type:depth-idx)                                       Output Shape              Param #
+==============================================================================================================
+ImageEncoder_EEG2Image                                       [64, 40]                  --
+├─EfficientNet: 1-1                                          [64, 40]                  --
+│    └─Sequential: 2-1                                       [64, 1280, 7, 7]          --
+│    │    └─Conv2dNormActivation: 3-1                        [64, 32, 112, 112]        928
+│    │    └─Sequential: 3-2                                  [64, 32, 112, 112]        37,120
+│    │    └─Sequential: 3-3                                  [64, 64, 56, 56]          1,032,320
+│    │    └─Sequential: 3-4                                  [64, 96, 28, 28]          2,390,336
+│    │    └─Sequential: 3-5                                  [64, 192, 14, 14]         3,553,224
+│    │    └─Sequential: 3-6                                  [64, 224, 14, 14]         14,501,728
+│    │    └─Sequential: 3-7                                  [64, 384, 7, 7]           54,866,360
+│    │    └─Sequential: 3-8                                  [64, 640, 7, 7]           40,030,496
+│    │    └─Conv2dNormActivation: 3-9                        [64, 1280, 7, 7]          821,760
+│    └─AdaptiveAvgPool2d: 2-2                                [64, 1280, 1, 1]          --
+│    └─Sequential: 2-3                                       [64, 40]                  --
+│    │    └─Dropout: 3-10                                    [64, 1280]                --
+│    │    └─Linear: 3-11                                     [64, 40]                  51,240
+==============================================================================================================
+Total params: 117,285,512
+Trainable params: 117,285,512
+Non-trainable params: 0
+Total mult-adds (G): 782.76
+==============================================================================================================
+Input size (MB): 38.54
+Forward/backward pass size (MB): 35266.32
+Params size (MB): 469.14
+Estimated Total Size (MB): 35774.00
+==============================================================================================================

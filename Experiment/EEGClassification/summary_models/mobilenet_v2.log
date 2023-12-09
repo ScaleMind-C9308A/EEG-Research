@@ -1,0 +1,42 @@
+2023-11-09 21:10:30.466 | INFO     | __main__:run:25 - Namespace(embedding_size=128, classifier_mode='classic', weight_path=None, log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/summary_models/', info='mobilenet_v2', img_encoder='mobilenet_v2', eeg_encoder='Stacked_BiLSTM', batch_size=64, num_classes=40, gpu=0, device=device(type='cuda', index=0))
+2023-11-09 21:22:35.732 | INFO     | __main__:run:25 - Namespace(embedding_size=128, classifier_mode='classic', weight_path=None, log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/summary_models/', info='mobilenet_v2', img_encoder='mobilenet_v2', eeg_encoder='Stacked_BiLSTM', batch_size=64, num_classes=40, gpu=0, device=device(type='cuda', index=0))
+2023-11-09 21:22:51.298 | INFO     | __main__:run:25 - Namespace(embedding_size=128, classifier_mode='classic', weight_path=None, log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/summary_models/', info='mobilenet_v2', img_encoder='mobilenet_v2', eeg_encoder='Stacked_BiLSTM', batch_size=64, num_classes=40, gpu=0, device=device(type='cuda', index=0))
+2023-11-09 21:22:56.979 | INFO     | __main__:run:31 - =========================================================================================================
+Layer (type:depth-idx)                                  Output Shape              Param #
+=========================================================================================================
+ImageEncoder_EEG2Image                                  [64, 40]                  --
+├─MobileNetV2: 1-1                                      [64, 40]                  --
+│    └─Sequential: 2-1                                  [64, 1280, 7, 7]          --
+│    │    └─Conv2dNormActivation: 3-1                   [64, 32, 112, 112]        928
+│    │    └─InvertedResidual: 3-2                       [64, 16, 112, 112]        896
+│    │    └─InvertedResidual: 3-3                       [64, 24, 56, 56]          5,136
+│    │    └─InvertedResidual: 3-4                       [64, 24, 56, 56]          8,832
+│    │    └─InvertedResidual: 3-5                       [64, 32, 28, 28]          10,000
+│    │    └─InvertedResidual: 3-6                       [64, 32, 28, 28]          14,848
+│    │    └─InvertedResidual: 3-7                       [64, 32, 28, 28]          14,848
+│    │    └─InvertedResidual: 3-8                       [64, 64, 14, 14]          21,056
+│    │    └─InvertedResidual: 3-9                       [64, 64, 14, 14]          54,272
+│    │    └─InvertedResidual: 3-10                      [64, 64, 14, 14]          54,272
+│    │    └─InvertedResidual: 3-11                      [64, 64, 14, 14]          54,272
+│    │    └─InvertedResidual: 3-12                      [64, 96, 14, 14]          66,624
+│    │    └─InvertedResidual: 3-13                      [64, 96, 14, 14]          118,272
+│    │    └─InvertedResidual: 3-14                      [64, 96, 14, 14]          118,272
+│    │    └─InvertedResidual: 3-15                      [64, 160, 7, 7]           155,264
+│    │    └─InvertedResidual: 3-16                      [64, 160, 7, 7]           320,000
+│    │    └─InvertedResidual: 3-17                      [64, 160, 7, 7]           320,000
+│    │    └─InvertedResidual: 3-18                      [64, 320, 7, 7]           473,920
+│    │    └─Conv2dNormActivation: 3-19                  [64, 1280, 7, 7]          412,160
+│    └─Sequential: 2-2                                  [64, 40]                  --
+│    │    └─Dropout: 3-20                               [64, 1280]                --
+│    │    └─Linear: 3-21                                [64, 40]                  51,240
+=========================================================================================================
+Total params: 2,275,112
+Trainable params: 2,275,112
+Non-trainable params: 0
+Total mult-adds (G): 19.17
+=========================================================================================================
+Input size (MB): 38.54
+Forward/backward pass size (MB): 6838.41
+Params size (MB): 9.10
+Estimated Total Size (MB): 6886.04
+=========================================================================================================

@@ -136,6 +136,40 @@ def initialize_model(model_name, output_dim, feature_extract, use_pretrained=Tru
         num_ftrs = model_ft.classifier[1].in_features
         model_ft.classifier[1] = nn.Linear(num_ftrs,output_dim)
         input_size = 224
+        
+    elif model_name == "efficientnet_b1":
+        """ Efficientnet B1
+        """
+        model_ft = models.efficientnet_b1(pretrained=use_pretrained)
+        set_parameter_requires_grad(model_ft, feature_extract)
+        num_ftrs = model_ft.classifier[1].in_features
+        model_ft.classifier[1] = nn.Linear(num_ftrs,output_dim)
+        input_size = 224
+        
+    elif model_name == "efficientnet_v2_s":
+        """ Efficientnet V2-S
+        """
+        model_ft = models.efficientnet_v2_s(pretrained=use_pretrained)
+        set_parameter_requires_grad(model_ft, feature_extract)
+        num_ftrs = model_ft.classifier[1].in_features
+        model_ft.classifier[1] = nn.Linear(num_ftrs,output_dim)
+        input_size = 224
+    elif model_name == "efficientnet_v2_m":
+        """ Efficientnet V2-m
+        """
+        model_ft = models.efficientnet_v2_m(pretrained=use_pretrained)
+        set_parameter_requires_grad(model_ft, feature_extract)
+        num_ftrs = model_ft.classifier[1].in_features
+        model_ft.classifier[1] = nn.Linear(num_ftrs,output_dim)
+        input_size = 224
+    elif model_name == "efficientnet_v2_l":
+        """ Efficientnet V2-L
+        """
+        model_ft = models.efficientnet_v2_l(pretrained=use_pretrained)
+        set_parameter_requires_grad(model_ft, feature_extract)
+        num_ftrs = model_ft.classifier[1].in_features
+        model_ft.classifier[1] = nn.Linear(num_ftrs,output_dim)
+        input_size = 224
 
     elif model_name == "densenet_121":
         """ Densenet
@@ -145,6 +179,43 @@ def initialize_model(model_name, output_dim, feature_extract, use_pretrained=Tru
         num_ftrs = model_ft.classifier.in_features
         model_ft.classifier = nn.Linear(num_ftrs, output_dim)
         input_size = 224
+        
+    elif model_name == "maxvit_t":
+        """ maxvit_t
+        """
+        model_ft = models.maxvit_t(pretrained=use_pretrained)
+        set_parameter_requires_grad(model_ft, feature_extract)
+        num_ftrs = model_ft.classifier[5].in_features
+        model_ft.classifier[5] = nn.Linear(num_ftrs, output_dim)
+        input_size = 224
+        
+    elif model_name == "mobilenet_v2":
+        """ mobilenet_v2
+        """
+        model_ft = models.mobilenet_v2(pretrained=use_pretrained)
+        set_parameter_requires_grad(model_ft, feature_extract)
+        num_ftrs = model_ft.classifier[1].in_features
+        model_ft.classifier[1] = nn.Linear(num_ftrs, output_dim)
+        input_size = 224
+        
+    elif model_name == "mobilenet_v3_small":
+        """ mobilenet_v3_small
+        """
+        model_ft = models.mobilenet_v3_small(pretrained=use_pretrained)
+        set_parameter_requires_grad(model_ft, feature_extract)
+        num_ftrs = model_ft.classifier[3].in_features
+        model_ft.classifier[3] = nn.Linear(num_ftrs, output_dim)
+        input_size = 224
+        
+    elif model_name == "mobilenet_v3_large":
+        """ mobilenet_v3_large
+        """
+        model_ft = models.mobilenet_v3_large(pretrained=use_pretrained)
+        set_parameter_requires_grad(model_ft, feature_extract)
+        num_ftrs = model_ft.classifier[3].in_features
+        model_ft.classifier[3] = nn.Linear(num_ftrs, output_dim)
+        input_size = 224
+    
 
     elif model_name == "inception_v3":
         """ Inception v3

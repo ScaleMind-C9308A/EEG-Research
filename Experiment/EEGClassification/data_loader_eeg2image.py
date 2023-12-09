@@ -4,6 +4,7 @@ import torchvision.transforms as transforms
 import torch.nn.functional as F
 from audiomentations import Compose, AddGaussianSNR, AddGaussianNoise, TimeStretch, PitchShift, Shift, AddGaussianSNR, Gain, GainTransition
 import numpy as np
+import cv2
 
 class EEG2Image_Augment_Dataset(Dataset):
     """
@@ -55,7 +56,7 @@ class EEG2Image_Augment_Dataset(Dataset):
         normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                      std=[0.229, 0.224, 0.225])
         self.transform = transforms.Compose([
-            # transforms.Resize((224, 224), antialias=None),
+            transforms.Resize((224, 224), antialias=None),
             normalize
         ])
 
@@ -85,37 +86,51 @@ class EEG2Image_Augment_Dataset(Dataset):
             raise ValueError()
         eeg,_, label = [self.eeg_dataset[dataset_idx][key] for key in ['eeg', 'image', 'label']]
 
-        ### If EEG is not downsampled, uncomment below line. For downsample eeg, size is already (128, 128)
-        # eeg = eeg.float()[:, self.time_low:self.time_high] # (channels, time_steps) => (128, 440)
-        ### 
+        ## If EEG is not downsampled, uncomment below line. For downsample eeg, size is already (128, 128)
+        eeg = eeg.float()[:, self.time_low:self.time_high] # (channels, time_steps) => (128, 440)
+        ## 
 
         # # Add noise to eeg
         # eeg = eeg + torch.randn(eeg.size()) * 0.01
         # Augment eeg using audiomentations (must convert to numpy first)
         if (self.mode == "train"):
             eeg = eeg.numpy()
-            ### If EEG is not downsampled, uncomment below line. For downsample eeg, size is already (128, 128)
-            # eeg = np.array([self.augment(samples=eeg[i], sample_rate=440) for i in range(eeg.shape[0])])
-            ###
-            eeg = np.array([self.augment(samples=eeg[i], sample_rate=128) for i in range(eeg.shape[0])])
+            ## If EEG is not downsampled, uncomment below line. For downsample eeg, size is already (128, 128)
+            eeg = np.array([self.augment(samples=eeg[i], sample_rate=440) for i in range(eeg.shape[0])])
+            ##
+            # eeg = np.array([self.augment(samples=eeg[i], sample_rate=128) for i in range(eeg.shape[0])])
             eeg = torch.tensor(eeg, dtype=torch.float32)
         # Convert eeg to heatmap
-        # normalized_data = (eeg - eeg.min()) / (eeg.max() - eeg.min())
+        normalized_data = (eeg - eeg.min()) / (eeg.max() - eeg.min())
         # normalized_data = (eeg - eeg.mean()) / (eeg.std()) # Standard scaler
-        normalized_data = F.normalize(input=eeg, p=1, dim=1)
-        # grayscale_images = (normalized_data * 255).to(torch.uint8)
-        grayscale_images = (normalized_data * 255)
+        # normalized_data = F.normalize(input=eeg, p=1, dim=1)
+        grayscale_images = (normalized_data * 255).to(torch.uint8)
+        # grayscale_images = (normalized_data * 255)
         grayscale_images = grayscale_images.unsqueeze(0).unsqueeze(0) # (1, 1, h, w)
-        # eeg_heatmap = F.interpolate(grayscale_images, size=(512, 440), mode='nearest', align_corners=False)
-        eeg_heatmap = F.interpolate(grayscale_images, size=(4*128, 128), mode='bilinear')
-        eeg_heatmap = eeg_heatmap.squeeze(0).squeeze(0)
+        ## If EEG is not downsampled, uncomment below line.
+        eeg_heatmap = F.interpolate(grayscale_images, size=(4*128, 440), mode='bilinear').squeeze(0).squeeze(0)
+        ##
+        ## If EEG is downsampled 128Hz, uncomment below line.
+        # eeg_heatmap = F.interpolate(grayscale_images, size=(4*128, 128), mode='bilinear')
+
+        #Add edge detection to heatmap image
+        eeg_heatmap = eeg_heatmap.numpy()
+        # Convert heatmap to grayscale
+        eeg_heatmap = cv2.GaussianBlur(eeg_heatmap, (3,3), 0)    
+        # edges = cv2.adaptiveThreshold(eeg_heatmap, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 5, 2)
+        edges = cv2.Canny(eeg_heatmap, 50, 140)
+        eeg_heatmap = eeg_heatmap + edges
+        
+        
         # Can try this to avoid UserWarning
         # eeg_heatmap = eeg_heatmap.clone().detach().requires_grad_(True) 
         eeg_heatmap = torch.tensor(eeg_heatmap, dtype=torch.float32)
 
+        eeg_heatmap = eeg_heatmap.squeeze(0).squeeze(0)
         eeg_heatmap = eeg_heatmap.unsqueeze(0).repeat(3,  1, 1)
-
+        
         eeg_heatmap_resize = self.transform(eeg_heatmap)
+        
         return eeg_heatmap_resize, label
 
     def __len__(self):
@@ -287,7 +302,8 @@ def load_data(eeg_path, eeg_heatmap_path, splits_path, time_low, time_high, spli
         splits_by_subject: bool, whether to use splits by subject or not
     """
     loaded_eeg = torch.load(eeg_path)
-    loaded_eeg_heatmaps = torch.load(eeg_heatmap_path)
+    if splits_by_subject:
+        loaded_eeg_heatmaps = torch.load(eeg_heatmap_path)
     loaded_splits = torch.load(splits_path)
     
     if splits_by_subject:

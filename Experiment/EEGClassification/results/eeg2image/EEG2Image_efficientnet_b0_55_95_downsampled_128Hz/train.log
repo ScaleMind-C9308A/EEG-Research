@@ -286,3 +286,14 @@
 2023-10-21 16:20:37.520 | INFO     | trainer_eeg2image:fit:65 - ***********
 2023-10-21 16:20:39.737 | INFO     | trainer_eeg2image:fit:67 - Test Accuracy: 0.1042
 2023-10-21 16:20:39.738 | INFO     | trainer_eeg2image:fit:68 - =====================================
+2023-11-08 19:03:35.267 | INFO     | __main__:run:41 - Namespace(img_feature_extract=0, splits_by_subject=0, dataset='CVPR2017', eeg_heatmap_path='/media/mountHDD1/LanxHuyen/CVPR2017/eeg_heatmaps_5_95.pth', eeg_path='/media/mountHDD1/LanxHuyen/CVPR2017/eeg_55_95_std_downsampled_128Hz.pth', time_low=20, time_high=460, img_path='/home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet', splits_path='/media/mountHDD1/LanxHuyen/CVPR2017/splits_by_image_removed_33.pth', log_path='/home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/results/eeg2image', info='EEG2Image_efficientnet_b0_55_95_downsampled_128Hz', img_encoder='efficientnet_b0', eeg_encoder='Stacked_BiLSTM_Combined', classifier_mode='classic', weight_path='None', use_pretrained=True, batch_size=64, max_epoch=100, log_interval=50, arch='train', save_ckpt='checkpoints/', num_classes=40, num_workers=2, gpu=0, lr=0.0009, wd=0.0001, optim='Adam', gamma=200, lr_step=10, pretrain=False, momen=0.9, nesterov=False, device=device(type='cuda', index=0))
+2023-11-08 19:05:09.274 | INFO     | trainer_eeg2image:fit:49 - Epoch: 1/100. Train set: Average loss: 3.692693. Accuracy: 0.0265
+	Validation set: Average loss: 3.693437. Accuracy: 0.0242
+2023-11-08 19:05:29.847 | INFO     | trainer_eeg2image:fit:49 - Epoch: 2/100. Train set: Average loss: 3.689682. Accuracy: 0.0296
+	Validation set: Average loss: 3.725649. Accuracy: 0.0217
+2023-11-08 19:05:50.168 | INFO     | trainer_eeg2image:fit:49 - Epoch: 3/100. Train set: Average loss: 3.691906. Accuracy: 0.0286
+	Validation set: Average loss: 3.694609. Accuracy: 0.0145
+2023-11-08 19:06:10.705 | INFO     | trainer_eeg2image:fit:49 - Epoch: 4/100. Train set: Average loss: 3.689209. Accuracy: 0.0287
+	Validation set: Average loss: 4.473289. Accuracy: 0.0216
+2023-11-08 19:06:31.125 | INFO     | trainer_eeg2image:fit:49 - Epoch: 5/100. Train set: Average loss: 3.691105. Accuracy: 0.0273
+	Validation set: Average loss: 3.688881. Accuracy: 0.0216

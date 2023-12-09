@@ -114,7 +114,7 @@ def train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, i
         # print(f"Image size: {data[1].size()}")
         # print(target)
         data, targets = data.to(device), targets.to(device)
-
+        # print(f"data: {data.size()}, target: {targets.size()}")
         optimizer.zero_grad()
 
         # # WARNING: For inception_v3
