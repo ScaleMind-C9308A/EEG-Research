@@ -1,12 +1,12 @@
-python3 run_eeg2image_classification.py --dataset CVPR2017 \
+python3 SEED_run_eeg2image_classification.py --dataset CVPR2017 \
 --eeg-path /media/mountHDD1/LanxHuyen/CVPR2017/eeg_5_95_std.pth \
 --eeg-heatmap-path /media/mountHDD1/LanxHuyen/CVPR2017/eeg_heatmaps_5_95.pth \
 --img-path /home/exx/GithubClonedRepo/EEG-Research/Dataset/imagenet \
 --splits-path /media/mountHDD1/LanxHuyen/CVPR2017/splits_by_image_removed_33.pth \
---log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/results/eeg2image \
+--log-path /home/exx/GithubClonedRepo/EEG-Research/Experiment/EEGClassification/results/SEED/eeg2image \
 --weight-path None \
 --classifier-mode classic \
---info EEG2Image_efficientnet_v2_s_5_95_canny_50_120 \
+--info EEG2Image_efficientnet_v2_s_5_95_canny_50_100 \
 --max-epoch 150 \
 --lr 9e-4 \
 --lr-step 10 \
