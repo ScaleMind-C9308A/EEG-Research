@@ -6,6 +6,8 @@ import copy
 import time
 import os 
 
+from sklearn.metrics import roc_curve, auc, f1_score, confusion_matrix
+
 def fit(train_loader, val_loader, test_loader, model, loss_fn, optimizer, scheduler, n_epochs, device, log_interval, log_path_dir, is_inception, metrics=[],
         start_epoch=0):
     """
@@ -24,6 +26,8 @@ def fit(train_loader, val_loader, test_loader, model, loss_fn, optimizer, schedu
     val_accs = []
     best_val_acc = 0.0
     best_model_weights = copy.deepcopy(model.state_dict())
+
+    best_val_metrics = {'f1': 0, 'sensitivity': 0, 'specificity': 0}
     
     for epoch in range(0, start_epoch):
         scheduler.step()
@@ -39,7 +43,9 @@ def fit(train_loader, val_loader, test_loader, model, loss_fn, optimizer, schedu
         #     message += '\t{}: {}'.format(metric.name(), metric.value())
         # logger.info(message)
 
-        val_loss, val_acc = test_epoch(val_loader, model, loss_fn, device, is_inception, metrics)
+        val_loss, val_acc, val_f1, val_sensitivity, val_specificity, val_targets, val_outputs = test_epoch(val_loader, model, loss_fn, device, is_inception, metrics)
+
+        
         # val_loss /= len(val_loader)
 
         message += '\n\tValidation set: Average loss: {:.6f}. Accuracy: {:.4f}'.format(val_loss, val_acc)
@@ -51,9 +57,11 @@ def fit(train_loader, val_loader, test_loader, model, loss_fn, optimizer, schedu
         val_losses.append(val_loss)  # Append validation loss to list for plotting
         train_accs.append(train_acc)
         val_accs.append(val_acc)
-        if (val_acc > best_val_acc):
+        # Update best validation metrics
+        if val_acc > best_val_acc:
             best_val_acc = val_acc
             best_model_weights = copy.deepcopy(model.state_dict())
+            best_val_metrics = {'f1': val_f1, 'sensitivity': val_sensitivity, 'specificity': val_specificity}
         if (epoch + 1) % 10 == 0 and (epoch+1) != n_epochs: # Epoch 10, 20, 30, 40, 50
             logger.info(f"Best val accuracy: {best_val_acc:.4f}")
             plot_losses(train_losses, val_losses, train_accs, val_accs, epoch + 1, log_path_dir)
@@ -63,15 +71,21 @@ def fit(train_loader, val_loader, test_loader, model, loss_fn, optimizer, schedu
     logger.info('Training complete in {:.0f}m {:.0f}s'.format(time_elapsed // 60, time_elapsed % 60))
     logger.info(f"Best Val Accuracy: {best_val_acc:.4f}")
     logger.info('***********')
-    test_loss, test_acc = test_epoch(test_loader, model, loss_fn, device, is_inception, metrics)
-    logger.info(f"Test Accuracy: {test_acc:.4f}")
+    test_loss, test_acc, test_f1, test_sensitivity, test_specificity, test_targets, test_outputs = test_epoch(test_loader, model, loss_fn, device, is_inception, metrics)
+    logger.info(f"Test Metrics - Accuracy: {test_acc:.4f}, F1-Score: {test_f1:.4f}, Sensitivity: {test_sensitivity:.4f}, Specificity: {test_specificity:.4f}")
     logger.info('=====================================')
 
+    # Save best model
     model.load_state_dict(best_model_weights)
     model_path = os.path.join(log_path_dir, f"model.pth")
-    torch.save(model.state_dict(), model_path)    
+    torch.save(model.state_dict(), model_path)
 
-    plot_losses(train_losses, val_losses, train_accs, val_accs, n_epochs, log_path_dir)  # Plot losses after the final 
+    # Plot ROC curve and save metrics report
+    plot_roc_curve(test_targets, test_outputs, n_epochs, log_path_dir)
+    save_metrics_report(best_val_metrics, test_f1, test_sensitivity, test_specificity, log_path_dir)
+
+    # Plot losses and accuracies
+    plot_losses(train_losses, val_losses, train_accs, val_accs, n_epochs, log_path_dir)
 
     
 def plot_losses(train_losses, val_losses, train_accs, val_accs, n_epochs, save_path_dir):
@@ -96,6 +110,40 @@ def plot_losses(train_losses, val_losses, train_accs, val_accs, n_epochs, save_p
     plt.legend()
     plt.savefig(save_fig_accs)
 
+def plot_roc_curve(targets, outputs, epoch, save_path_dir):
+    fpr, tpr, _ = roc_curve(targets, outputs)
+    roc_auc = auc(fpr, tpr)
+
+    plt.figure()
+    plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC curve (area = %0.2f)' % roc_auc)
+    plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Receiver Operating Characteristic')
+    plt.legend(loc="lower right")
+    save_fig_roc = os.path.join(save_path_dir, f'plot_roc_epoch_{epoch}.png')
+    plt.savefig(save_fig_roc)
+
+def calculate_additional_metrics(targets, preds):
+    f1 = f1_score(targets, preds)
+    tn, fp, fn, tp = confusion_matrix(targets, preds).ravel()
+    sensitivity = tp / (tp + fn)
+    specificity = tn / (tn + fp)
+    return f1, sensitivity, specificity
+
+def save_metrics_report(best_val_metrics, test_f1, test_sensitivity, test_specificity, save_path_dir):
+    report_path = os.path.join(save_path_dir, 'metrics_report.txt')
+    with open(report_path, 'w') as file:
+        file.write("Best Validation Metrics\n")
+        file.write(f"F1-Score: {best_val_metrics['f1']:.4f}\n")
+        file.write(f"Sensitivity: {best_val_metrics['sensitivity']:.4f}\n")
+        file.write(f"Specificity: {best_val_metrics['specificity']:.4f}\n")
+        file.write("\nTest Metrics\n")
+        file.write(f"F1-Score: {test_f1:.4f}\n")
+        file.write(f"Sensitivity: {test_sensitivity:.4f}\n")
+        file.write(f"Specificity: {test_specificity:.4f}\n")
 
 def train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, is_inception, metrics):
     # for metric in metrics:
@@ -114,7 +162,7 @@ def train_epoch(train_loader, model, loss_fn, optimizer, device, log_interval, i
         # print(f"Image size: {data[1].size()}")
         # print(target)
         data, targets = data.to(device), targets.to(device)
-
+        # print(f"data: {data.size()}, target: {targets.size()}")
         optimizer.zero_grad()
 
         # # WARNING: For inception_v3
@@ -163,6 +211,8 @@ def test_epoch(data_loader, model, loss_fn, device, is_inception, metrics):
         model.eval()
         running_loss = 0
         running_acc = 0
+        all_targets = []
+        all_outputs = []
         for batch_idx, (data, targets) in enumerate(data_loader):
             # print(f"Batch {batch_idx}, batch_size: {len(target)}")
             # print(f"EEG size: {data[0].size()}")
@@ -188,7 +238,10 @@ def test_epoch(data_loader, model, loss_fn, device, is_inception, metrics):
 
             # for metric in metrics:
             #     metric(outputs, target, loss_outputs)
+            all_targets.extend(targets.cpu().numpy())
+            all_outputs.extend(outputs.cpu().numpy())
         epoch_loss = running_loss / len(data_loader)
         epoch_acc = running_acc / len(data_loader)
+        f1, sensitivity, specificity = calculate_additional_metrics(np.array(all_targets), np.array(all_outputs))
 
-    return epoch_loss, epoch_acc
+    return epoch_loss, epoch_acc, f1, sensitivity, specificity, all_targets, all_outputs
